@@ -5,11 +5,13 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+
+import Header from "../sharedComponents/Header";
+import Botones from "../sharedComponents/Botones";
 
 import { createJornal, jornalConstructor } from "../Managers/JornalManajer";
 
@@ -17,8 +19,6 @@ const CrearJornal = () => {
   const [obra, setObra] = useState("");
   const [rubro, setRubro] = useState("");
   const [cantidadDias, setCantidadDias] = useState("");
-
-  const [nuevoJornal, setNuevojornal] = useState(null);
 
   const navigation = useNavigation();
   const navigateBack = () => {
@@ -29,24 +29,13 @@ const CrearJornal = () => {
     //validar que este todo lleno
     let Jornal = jornalConstructor(obra, rubro, cantidadDias);
 
-    setNuevojornal(Jornal);
-
     console.log(Jornal);
-    console.log(nuevoJornal);
     createJornal(Jornal, navigateBack);
-
-    //createJornal(nuevoJornal, navigateBack);
   };
 
   return (
     <View style={styles.container}>
-      {/*Header  reutilizar componente header*/}
-      <SafeAreaView>
-        <View style={styles.headerWrapper}>
-          <View style={styles.profileImage}></View>
-          <AntDesign name="back" size={24} color="black" />
-        </View>
-      </SafeAreaView>
+      <Header />
 
       {/* form container*/}
       <View style={styles.body}>
@@ -57,7 +46,6 @@ const CrearJornal = () => {
             <View style={styles.detailTitleCreate}>
               <TouchableOpacity
                 onPress={() => {
-                  //console.log(obra);
                   crearJornal();
                 }}
               >
@@ -73,7 +61,6 @@ const CrearJornal = () => {
               value={obra}
               onChangeText={(text) => {
                 setObra(text);
-                //console.log("el texto agregado en obra es" + obra);
               }}
               style={styles.input}
             />
@@ -93,14 +80,13 @@ const CrearJornal = () => {
             />
           </View>
         </KeyboardAvoidingView>
-
-        {/*Back button */}
-        <View style={styles.backButtonWrapper}>
-          <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
-            <Text style={styles.backButtonText}>Volver</Text>
-          </TouchableOpacity>
-        </View>
       </View>
+
+      <Botones
+        onOkFunction={crearJornal}
+        onOkText={"Crear Jornal"}
+        onCancelFunction={navigateBack}
+      />
     </View>
   );
 };
