@@ -21,7 +21,7 @@ import {
   obraConstructor,
   getAllObras,
   deleteObra,
-} from "../Managers/ObraManager";
+} from "../Managers/DatosMaestros/ObraManager";
 import { TestUpdateModal } from "./TestUpdateModal";
 
 const TestVerObrasYUpdateScreen = () => {

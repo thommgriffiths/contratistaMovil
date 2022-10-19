@@ -15,7 +15,7 @@ import {
   createObra,
   obraConstructor,
   updateObra,
-} from "../../Managers/ObraManager";
+} from "../../Managers/DatosMaestros/ObraManager";
 
 const TestUpdateScreen = ({ route, navigation }) => {
   const { id, Nombre, Propietario, Direccion } = route.params;

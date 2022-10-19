@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import Globalstyles from "../../assets/globalStyle";
-import { getAllObras } from "../../Managers/ObraManager";
+import { getAllObras } from "../../Managers/DatosMaestros/ObraManager";
 
 const TestVerObras = () => {
   const navigation = useNavigation();

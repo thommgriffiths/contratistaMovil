@@ -10,7 +10,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-import { userSignOut } from "../Managers/FirebaseAuthManager";
+import { userSignOut } from "../Managers/Firebase/FirebaseAuthManager";
 
 const HomeScreen = () => {
   const navigation = useNavigation();

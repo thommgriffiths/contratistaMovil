@@ -13,7 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import Globalstyles from "../../assets/globalStyle";
-import { createObra, obraConstructor } from "../../Managers/ObraManager";
+import {
+  createObra,
+  obraConstructor,
+} from "../../Managers/DatosMaestros/ObraManager";
 
 const TestCrearObra = () => {
   const navigation = useNavigation();

@@ -15,7 +15,10 @@ import Botones from "../../sharedComponents/Botones";
 import FormComun from "../../sharedComponents/FormComun";
 import { palette } from "../../assets/colors";
 
-import { createJornal, jornalConstructor } from "../../Managers/JornalManajer";
+import {
+  createJornal,
+  jornalConstructor,
+} from "../../Managers/EntidadesFinales/JornalManager";
 
 const CrearJornal = () => {
   const [context, SetContext] = useState({});

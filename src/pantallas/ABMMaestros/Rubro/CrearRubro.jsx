@@ -5,7 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../../../sharedComponents/Header";
 import Botones from "../../../sharedComponents/Botones";
 import { createStylesDatosMaestros } from "../stylesheetMaestros";
-import { rubroConstructor, createRubro } from "../../../Managers/RubroManager";
+import {
+  rubroConstructor,
+  createRubro,
+} from "../../../Managers/DatosMaestros/RubroManager";
 
 const CrearRubro = () => {
   const [nombre, setNombre] = useState("");

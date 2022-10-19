@@ -19,7 +19,7 @@ import { palette } from "../../assets/colors";
 import {
   createPedidoReintegro,
   PedidoReintegroConstructor,
-} from "../../Managers/PedidosReintegroManager";
+} from "../../Managers/EntidadesFinales/PedidosReintegroManager";
 
 const PedidoReintegro = () => {
   const [context, SetContext] = useState({});

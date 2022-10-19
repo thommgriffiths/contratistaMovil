@@ -20,7 +20,7 @@ import {
   obraConstructor,
   getAllObras,
   deleteObra,
-} from "../Managers/ObraManager";
+} from "../Managers/DatosMaestros/ObraManager";
 
 const TestObrasWithDelete = () => {
   const navigation = useNavigation();

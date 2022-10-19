@@ -3,9 +3,9 @@ import {
   getFSCollection,
   deleteFSElement,
   updateFSElement,
-} from "./FirebaseFirestoreManager";
+} from "../Firebase/FirebaseFirestoreManager";
 
-import { entities } from "../Core/types";
+import { entities } from "../../Core/types";
 
 const currentType = entities.jornal;
 

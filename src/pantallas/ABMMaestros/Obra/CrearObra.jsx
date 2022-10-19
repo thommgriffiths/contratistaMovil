@@ -5,7 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../../../sharedComponents/Header";
 import Botones from "../../../sharedComponents/Botones";
 import { createStylesDatosMaestros } from "../stylesheetMaestros";
-import { obraConstructor, createObra } from "../../../Managers/ObraManager";
+import {
+  obraConstructor,
+  createObra,
+} from "../../../Managers/DatosMaestros/ObraManager";
 
 const CrearObra = () => {
   const [nombre, setNombre] = useState("");

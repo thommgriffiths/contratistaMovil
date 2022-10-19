@@ -20,7 +20,7 @@ import { palette } from "../../assets/colors";
 import {
   PedidoDeObraConstructor,
   createPedidoDeObra,
-} from "../../Managers/PedidoObraManager";
+} from "../../Managers/EntidadesFinales/PedidoObraManager";
 
 const PedidoObra = () => {
   const [context, SetContext] = useState({});

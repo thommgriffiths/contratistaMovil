@@ -15,7 +15,7 @@ import {
   createObra,
   obraConstructor,
   updateObra,
-} from "../../Managers/ObraManager";
+} from "../../Managers/DatosMaestros/ObraManager";
 
 const TestUpdateModal = (props) => {
   const navigation = useNavigation();
