@@ -7,61 +7,55 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import Header from "../../sharedComponents/Header";
+import Botones from "../../sharedComponents/Botones";
+import { palette } from "../../assets/colors";
 
-import Globalstyles from "../assets/globalStyle";
-import { createObra, obraConstructor } from "../Managers/ObraManager";
+import {
+  createPedidoReintegro,
+  PedidoReintegroConstructor,
+} from "../../Managers/PedidosReintegroManager";
 
-const TestCrearObra = () => {
+const PedidoReintegro = () => {
+  const [obra, setObra] = useState("");
+  const [rubro, setRubro] = useState("");
+  const [descripcion, setdescripcion] = useState("");
+
   const navigation = useNavigation();
-
-  //Hooks
-  const [nombreObra, setNombreObra] = useState("");
-  const [propietarioObra, setPropietarioObra] = useState("");
-  const [direccionObra, setDireccionObra] = useState("");
-
-  const [obra, setObra] = useState(null);
-  /*
-    useEffect(() => {
-    }, [])*/
-
-  const crearObra = () => {
-    //validar que este todo lleno
-    let newObra = obraConstructor(nombreObra, direccionObra, propietarioObra);
-    setObra(newObra);
-    console.log(newObra);
-
-    createObra(newObra, navigateBack);
-  };
-
   const navigateBack = () => {
     navigation.replace("Home");
   };
 
+  const handleCrearPedido = () => {
+    let nuevoPedidoReintegro = PedidoReintegroConstructor(
+      obra,
+      rubro,
+      descripcion
+    );
+
+    console.log("pedido creado");
+    console.log(nuevoPedidoReintegro);
+    createPedidoReintegro(nuevoPedidoReintegro, navigateBack);
+  };
+
   return (
     <View style={styles.container}>
-      {/*Header*/}
-      <SafeAreaView>
-        <View style={styles.headerWrapper}>
-          <View style={styles.profileImage}></View>
-          <AntDesign name="back" size={24} color="black" />
-        </View>
-      </SafeAreaView>
+      <Header />
 
+      {/* form container*/}
       <View style={styles.body}>
         <KeyboardAvoidingView behavior="height">
           {/*Section title*/}
           <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>Crear Obra</Text>
+            <Text style={styles.detailTitlesTitle}>
+              Crear Pedido de Reintegro
+            </Text>
             <View style={styles.detailTitleCreate}>
-              <TouchableOpacity
-                onPress={() => {
-                  handleUpdate();
-                }}
-              >
+              <TouchableOpacity onPress={() => {}}>
                 <MaterialIcons name="update" size={24} color="black" />
               </TouchableOpacity>
             </View>
@@ -70,56 +64,46 @@ const TestCrearObra = () => {
           {/*Form */}
           <View style={styles.formWrapper}>
             <TextInput
-              placeholder="Nombre Nueva Obra"
-              value={nombreObra}
-              onChangeText={(text) => setNombreObra(text)}
+              placeholder="Obra del pedido"
+              value={obra}
+              onChangeText={(text) => {
+                setObra(text);
+              }}
               style={styles.input}
             />
             <TextInput
-              placeholder="Propietario Obra"
-              value={propietarioObra}
-              onChangeText={(text) => setPropietarioObra(text)}
+              placeholder="Rubro trabajado"
+              value={rubro}
+              onChangeText={(text) => setRubro(text)}
               style={styles.input}
             />
             <TextInput
-              placeholder="Direccion Obra"
-              value={direccionObra}
-              onChangeText={(text) => setDireccionObra(text)}
+              placeholder="Detalle del pedido"
+              value={descripcion}
+              onChangeText={(text) => {
+                setdescripcion(text);
+              }}
               style={styles.input}
             />
           </View>
         </KeyboardAvoidingView>
-
-        {/*Back button */}
-        <View style={styles.backButtonWrapper}>
-          <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
-            <Text style={styles.backButtonText}>Volver</Text>
-          </TouchableOpacity>
-        </View>
       </View>
+
+      <Botones
+        onOkFunction={handleCrearPedido}
+        onOkText={"Crear pedido reintegro"}
+        onCancelFunction={navigateBack}
+      />
     </View>
   );
 };
 
-export default TestCrearObra;
-
-const colors = {
-  B1: "#1984c5",
-  B2: "#22a7f0",
-  B3: "#63bff0",
-  B4: "#a7d5ed",
-  neutral: "#e2e2e2",
-  R1: "#e1a692",
-  R2: "#de6e56",
-  R3: "#e14b31",
-  R4: "#c23728",
-  white: "white",
-};
+export default PedidoReintegro;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.neutral,
+    backgroundColor: palette.neutral,
     //justifyContent: 'center',
     //alignItems: 'center'
   },
@@ -127,7 +111,7 @@ const styles = StyleSheet.create({
   //HEader
   headerWrapper: {
     flexDirection: "row",
-    backgroundColor: colors.R1,
+    backgroundColor: palette.R1,
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 60,
@@ -136,7 +120,7 @@ const styles = StyleSheet.create({
   },
 
   profileImage: {
-    backgroundColor: colors.B1,
+    backgroundColor: palette.B1,
     width: 40,
     height: 40,
     borderRadius: 40,
@@ -164,25 +148,25 @@ const styles = StyleSheet.create({
   detailTitlesTitle: {
     //fontFamily: 'MBold',
     fontSize: 32,
-    color: colors.textDark,
+    color: palette.textDark,
     marginTop: 5,
   },
   detailTitleCreate: {
     width: "20%",
     //flexDirection: 'row',
-    //backgroundColor: colors.B1,
+    //backgroundColor: palette.B1,
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
 
   input: {
-    backgroundColor: colors.white,
+    backgroundColor: palette.white,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
     borderWidth: 2,
-    borderColor: colors.B1,
+    borderColor: palette.B1,
   },
 
   //Detail
@@ -194,7 +178,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: colors.B1,
+    borderColor: palette.B1,
     marginTop: 10,
     borderRadius: 10,
     padding: 10,
@@ -206,7 +190,7 @@ const styles = StyleSheet.create({
   itemDetailInfoText: {
     paddingVertical: 10,
     fontSize: 20,
-    color: colors.textDark,
+    color: palette.textDark,
   },
 
   //Back button
@@ -215,14 +199,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   backButton: {
-    backgroundColor: colors.B1,
+    backgroundColor: palette.B1,
     width: "100%",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
   },
   backButtonText: {
-    color: colors.white,
+    color: palette.white,
     fontWeight: "700",
     fontSize: 16,
   },

@@ -5,39 +5,33 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import Header from "../sharedComponents/Header";
-import Botones from "../sharedComponents/Botones";
-
+import Header from "../../sharedComponents/Header";
+import Botones from "../../sharedComponents/Botones";
 import { palette } from "../../assets/colors";
 
-import {
-  PedidoDeObraConstructor,
-  createPedidoDeObra,
-} from "../Managers/PedidoObraManager";
+import { createJornal, jornalConstructor } from "../../Managers/JornalManajer";
 
-const PedidoObra = () => {
+const CrearJornal = () => {
   const [obra, setObra] = useState("");
   const [rubro, setRubro] = useState("");
-  const [descripcion, setdescripcion] = useState("");
+  const [cantidadDias, setCantidadDias] = useState("");
 
   const navigation = useNavigation();
   const navigateBack = () => {
     navigation.replace("Home");
   };
 
-  const handleCrearPedidoObra = () => {
-    let nuevoPedidoDeObra = PedidoDeObraConstructor(obra, rubro, descripcion);
+  const crearJornal = () => {
+    //validar que este todo lleno
+    let Jornal = jornalConstructor(obra, rubro, cantidadDias);
 
-    console.log("pedido de obra creado");
-
-    console.log(nuevoPedidoDeObra);
-    createPedidoDeObra(nuevoPedidoDeObra, navigateBack);
+    console.log(Jornal);
+    createJornal(Jornal, navigateBack);
   };
 
   return (
@@ -49,7 +43,7 @@ const PedidoObra = () => {
         <KeyboardAvoidingView behavior="height">
           {/*Section title*/}
           <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>Crear Obra</Text>
+            <Text style={styles.detailTitlesTitle}>Crear Jornal</Text>
             <View style={styles.detailTitleCreate}>
               <TouchableOpacity onPress={() => {}}>
                 <MaterialIcons name="update" size={24} color="black" />
@@ -60,7 +54,7 @@ const PedidoObra = () => {
           {/*Form */}
           <View style={styles.formWrapper}>
             <TextInput
-              placeholder="Obra del pedido"
+              placeholder="Obra trabajada"
               value={obra}
               onChangeText={(text) => {
                 setObra(text);
@@ -74,10 +68,10 @@ const PedidoObra = () => {
               style={styles.input}
             />
             <TextInput
-              placeholder="Detalle del pedido"
-              value={descripcion}
+              placeholder="Dias trabajados"
+              value={cantidadDias}
               onChangeText={(text) => {
-                setdescripcion(text);
+                setCantidadDias(text);
               }}
               style={styles.input}
             />
@@ -86,15 +80,15 @@ const PedidoObra = () => {
       </View>
 
       <Botones
-        onOkFunction={handleCrearPedidoObra}
-        onOkText={"Crear pedido de obra"}
+        onOkFunction={crearJornal}
+        onOkText={"Crear Jornal"}
         onCancelFunction={navigateBack}
       />
     </View>
   );
 };
 
-export default PedidoObra;
+export default CrearJornal;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,16 +5,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./src/pantallas/LoginScreen";
 import HomeScreen from "./src/pantallas/HomeScreen";
-import TestComponentScreen from "./src/testScreens/TestComponentScreen";
-import TestVerObras from "./src/testScreens/TestVerObras";
-import TestCrearObra from "./src/testScreens/TestCrearObra";
-import TestUpdateScreen from "./src/testScreens/TestUpdateScreen";
-import ObraDetailScreen from "./src/testScreens/ObraDetailScreen";
-import CrearJornal from "./src/testScreens/CrearJornal";
-import PedidoReintegro from "./src/testScreens/PedidoReintegro";
-import PedidoObra from "./src/testScreens/PedidoObra";
+import TestComponentScreen from "./src/pantallas/testScreens/TestComponentScreen";
+import TestVerObras from "./src/pantallas/testScreens/TestVerObras";
+import TestCrearObra from "./src/pantallas/testScreens/TestCrearObra";
+import TestUpdateScreen from "./src/pantallas/testScreens/TestUpdateScreen";
+import ObraDetailScreen from "./src/pantallas/testScreens/ObraDetailScreen";
 
-import MockLoginScreen from "./src/testScreens/MockLoginScreen";
+import CrearJornal from "./src/pantallas/ABMMain/CrearJornal";
+import PedidoReintegro from "./src/pantallas/ABMMain/PedidoReintegro";
+import PedidoObra from "./src/pantallas/ABMMain/PedidoObra";
+
+import MockLoginScreen from "./src/pantallas/testScreens/MockLoginScreen";
 
 const Stack = createStackNavigator();
 
