@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
+import FormComun from "../../sharedComponents/FormComun";
 
 import { palette } from "../../assets/colors";
 
@@ -22,8 +23,7 @@ import {
 } from "../../Managers/PedidoObraManager";
 
 const PedidoObra = () => {
-  const [obra, setObra] = useState("");
-  const [rubro, setRubro] = useState("");
+  const [context, SetContext] = useState({});
   const [descripcion, setdescripcion] = useState("");
 
   const navigation = useNavigation();
@@ -32,10 +32,12 @@ const PedidoObra = () => {
   };
 
   const handleCrearPedidoObra = () => {
-    let nuevoPedidoDeObra = PedidoDeObraConstructor(obra, rubro, descripcion);
-
+    let nuevoPedidoDeObra = PedidoDeObraConstructor(
+      context.obra,
+      context.rubro,
+      descripcion
+    );
     console.log("pedido de obra creado");
-
     console.log(nuevoPedidoDeObra);
     createPedidoDeObra(nuevoPedidoDeObra, navigateBack);
   };
@@ -59,20 +61,10 @@ const PedidoObra = () => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <TextInput
-              placeholder="Obra del pedido"
-              value={obra}
-              onChangeText={(text) => {
-                setObra(text);
-              }}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Rubro trabajado"
-              value={rubro}
-              onChangeText={(text) => setRubro(text)}
-              style={styles.input}
-            />
+            <FormComun action={SetContext} />
+
+            {/* formulario especifico */}
+
             <TextInput
               placeholder="Detalle del pedido"
               value={descripcion}

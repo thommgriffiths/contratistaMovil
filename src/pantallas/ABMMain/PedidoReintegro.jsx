@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
+import FormComun from "../../sharedComponents/FormComun";
 import { palette } from "../../assets/colors";
 
 import {
@@ -21,8 +22,7 @@ import {
 } from "../../Managers/PedidosReintegroManager";
 
 const PedidoReintegro = () => {
-  const [obra, setObra] = useState("");
-  const [rubro, setRubro] = useState("");
+  const [context, SetContext] = useState({});
   const [descripcion, setdescripcion] = useState("");
 
   const navigation = useNavigation();
@@ -32,11 +32,10 @@ const PedidoReintegro = () => {
 
   const handleCrearPedido = () => {
     let nuevoPedidoReintegro = PedidoReintegroConstructor(
-      obra,
-      rubro,
+      context.obra,
+      context.rubro,
       descripcion
     );
-
     console.log("pedido creado");
     console.log(nuevoPedidoReintegro);
     createPedidoReintegro(nuevoPedidoReintegro, navigateBack);
@@ -63,20 +62,9 @@ const PedidoReintegro = () => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <TextInput
-              placeholder="Obra del pedido"
-              value={obra}
-              onChangeText={(text) => {
-                setObra(text);
-              }}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Rubro trabajado"
-              value={rubro}
-              onChangeText={(text) => setRubro(text)}
-              style={styles.input}
-            />
+            <FormComun action={SetContext} />
+
+            {/*Form especifico*/}
             <TextInput
               placeholder="Detalle del pedido"
               value={descripcion}

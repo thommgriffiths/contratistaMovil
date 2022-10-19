@@ -12,13 +12,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
+import FormComun from "../../sharedComponents/FormComun";
 import { palette } from "../../assets/colors";
 
 import { createJornal, jornalConstructor } from "../../Managers/JornalManajer";
 
 const CrearJornal = () => {
-  const [obra, setObra] = useState("");
-  const [rubro, setRubro] = useState("");
+  const [context, SetContext] = useState({});
   const [cantidadDias, setCantidadDias] = useState("");
 
   const navigation = useNavigation();
@@ -28,7 +28,7 @@ const CrearJornal = () => {
 
   const crearJornal = () => {
     //validar que este todo lleno
-    let Jornal = jornalConstructor(obra, rubro, cantidadDias);
+    let Jornal = jornalConstructor(context.obra, context.rubro, cantidadDias);
 
     console.log(Jornal);
     createJornal(Jornal, navigateBack);
@@ -53,20 +53,9 @@ const CrearJornal = () => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <TextInput
-              placeholder="Obra trabajada"
-              value={obra}
-              onChangeText={(text) => {
-                setObra(text);
-              }}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Rubro trabajado"
-              value={rubro}
-              onChangeText={(text) => setRubro(text)}
-              style={styles.input}
-            />
+            <FormComun action={SetContext} />
+
+            {/*Formulario especifico */}
             <TextInput
               placeholder="Dias trabajados"
               value={cantidadDias}
