@@ -18,6 +18,7 @@ import PedidoObra from "./src/pantallas/ABMMain/PedidoObra";
 
 //Componentes carga datos maestros
 import CrearObra from "./src/pantallas/ABMMaestros/Obra/CrearObra";
+import CrearRubro from "./src/pantallas/ABMMaestros/Rubro/CrearRubro";
 
 import MockLoginScreen from "./src/pantallas/testScreens/MockLoginScreen";
 
@@ -77,6 +78,11 @@ export default function App() {
             options={{ headerShown: false }}
             name="CrearObraScreen"
             component={CrearObra}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="CrearRubroScreen"
+            component={CrearRubro}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>

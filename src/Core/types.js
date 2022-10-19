@@ -1,5 +1,6 @@
 export const entities = {
   obra: "obra",
+  rubro: "rubro",
   jornal: "jornal",
   pedidoReintegro: "pedidoReintegro",
   pedidoDeObra: "pedidoDeObra",

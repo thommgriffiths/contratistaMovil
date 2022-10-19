@@ -44,6 +44,10 @@ const HomeScreen = () => {
     navigation.navigate("CrearObraScreen");
   };
 
+  const navigateToCrearRubro = () => {
+    navigation.navigate("CrearRubroScreen");
+  };
+
   const handleSignOut = () => {
     userSignOut(navigateLogIn);
   };
@@ -115,6 +119,12 @@ const HomeScreen = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Crear Obra</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={navigateToCrearRubro}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Crear Rubro</Text>
           </TouchableOpacity>
         </View>
 
