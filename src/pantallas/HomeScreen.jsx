@@ -36,6 +36,10 @@ const HomeScreen = () => {
     navigation.navigate("PedidoReintegroScreen");
   };
 
+  const navigateToPedidoObra = () => {
+    navigation.navigate("PedidoDeObraScreen");
+  };
+
   const handleSignOut = () => {
     userSignOut(navigateLogIn);
   };
@@ -94,6 +98,12 @@ const HomeScreen = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedido Reintegro</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={navigateToPedidoObra}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Pedido de Obra</Text>
           </TouchableOpacity>
         </View>
 

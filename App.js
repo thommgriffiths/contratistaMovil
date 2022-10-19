@@ -12,6 +12,7 @@ import TestUpdateScreen from "./src/testScreens/TestUpdateScreen";
 import ObraDetailScreen from "./src/testScreens/ObraDetailScreen";
 import CrearJornal from "./src/testScreens/CrearJornal";
 import PedidoReintegro from "./src/testScreens/PedidoReintegro";
+import PedidoObra from "./src/testScreens/PedidoObra";
 
 import MockLoginScreen from "./src/testScreens/MockLoginScreen";
 
@@ -61,6 +62,11 @@ export default function App() {
             options={{ headerShown: false }}
             name="PedidoReintegroScreen"
             component={PedidoReintegro}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="PedidoDeObraScreen"
+            component={PedidoObra}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>

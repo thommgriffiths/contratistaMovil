@@ -2,6 +2,7 @@ export const entities = {
   obra: "obra",
   jornal: "jornal",
   pedidoReintegro: "pedidoReintegro",
+  pedidoDeObra: "pedidoDeObra",
 };
 
 export const emptyConstructor = (type) => {
