@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../sharedComponents/Header";
 import Botones from "../sharedComponents/Botones";
+import { palette } from "../../assets/colors";
 
 import {
   createPedidoReintegro,
@@ -97,23 +98,10 @@ const PedidoReintegro = () => {
 
 export default PedidoReintegro;
 
-const colors = {
-  B1: "#1984c5",
-  B2: "#22a7f0",
-  B3: "#63bff0",
-  B4: "#a7d5ed",
-  neutral: "#e2e2e2",
-  R1: "#e1a692",
-  R2: "#de6e56",
-  R3: "#e14b31",
-  R4: "#c23728",
-  white: "white",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.neutral,
+    backgroundColor: palette.neutral,
     //justifyContent: 'center',
     //alignItems: 'center'
   },
@@ -121,7 +109,7 @@ const styles = StyleSheet.create({
   //HEader
   headerWrapper: {
     flexDirection: "row",
-    backgroundColor: colors.R1,
+    backgroundColor: palette.R1,
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 60,
@@ -130,7 +118,7 @@ const styles = StyleSheet.create({
   },
 
   profileImage: {
-    backgroundColor: colors.B1,
+    backgroundColor: palette.B1,
     width: 40,
     height: 40,
     borderRadius: 40,
@@ -158,25 +146,25 @@ const styles = StyleSheet.create({
   detailTitlesTitle: {
     //fontFamily: 'MBold',
     fontSize: 32,
-    color: colors.textDark,
+    color: palette.textDark,
     marginTop: 5,
   },
   detailTitleCreate: {
     width: "20%",
     //flexDirection: 'row',
-    //backgroundColor: colors.B1,
+    //backgroundColor: palette.B1,
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
 
   input: {
-    backgroundColor: colors.white,
+    backgroundColor: palette.white,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
     borderWidth: 2,
-    borderColor: colors.B1,
+    borderColor: palette.B1,
   },
 
   //Detail
@@ -188,7 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     borderWidth: 2,
-    borderColor: colors.B1,
+    borderColor: palette.B1,
     marginTop: 10,
     borderRadius: 10,
     padding: 10,
@@ -200,7 +188,7 @@ const styles = StyleSheet.create({
   itemDetailInfoText: {
     paddingVertical: 10,
     fontSize: 20,
-    color: colors.textDark,
+    color: palette.textDark,
   },
 
   //Back button
@@ -209,14 +197,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   backButton: {
-    backgroundColor: colors.B1,
+    backgroundColor: palette.B1,
     width: "100%",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
   },
   backButtonText: {
-    color: colors.white,
+    color: palette.white,
     fontWeight: "700",
     fontSize: 16,
   },
