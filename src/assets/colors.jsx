@@ -9,4 +9,5 @@ export const palette = {
   R3: "#e14b31",
   R4: "#c23728",
   white: "white",
+  textDark: "#5A5A5A",
 };

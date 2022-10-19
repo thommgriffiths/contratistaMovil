@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 *.jpg
+*.png
 web-build/
 
 # macOS

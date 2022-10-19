@@ -40,6 +40,10 @@ const HomeScreen = () => {
     navigation.navigate("PedidoDeObraScreen");
   };
 
+  const navigateToCrearObra = () => {
+    navigation.navigate("CrearObraScreen");
+  };
+
   const handleSignOut = () => {
     userSignOut(navigateLogIn);
   };
@@ -66,6 +70,7 @@ const HomeScreen = () => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
+          {/*
           <TouchableOpacity
             onPress={navigateToTestCrearObra}
             style={styles.menuItem}
@@ -86,7 +91,7 @@ const HomeScreen = () => {
           >
             <Text style={styles.menuItemText}>------------------------</Text>
           </TouchableOpacity>
-
+          */}
           <TouchableOpacity
             onPress={navigateToCrearJornal}
             style={styles.menuItem}
@@ -104,6 +109,12 @@ const HomeScreen = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedido de Obra</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={navigateToCrearObra}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Crear Obra</Text>
           </TouchableOpacity>
         </View>
 
