@@ -24,8 +24,8 @@ const HomeScreen = () => {
   const navigateToTestCrearObra = () => {
     navigation.navigate("TestCrearObra");
   };
-  const navigateToTestVerObras = () => {
-    navigation.navigate("TestVerObras");
+  const navigateToListarObras = () => {
+    navigation.navigate("ListarObrasScreen");
   };
 
   const navigateToCrearJornal = () => {
@@ -83,7 +83,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={navigateToTestVerObras}
+            onPress={navigateToListarObras}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver Obras</Text>
@@ -125,6 +125,12 @@ const HomeScreen = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Crear Rubro</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={navigateToListarObras}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Ver Obras</Text>
           </TouchableOpacity>
         </View>
 

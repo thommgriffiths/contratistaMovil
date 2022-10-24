@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./src/pantallas/LoginScreen";
 import HomeScreen from "./src/pantallas/HomeScreen";
 import TestComponentScreen from "./src/pantallas/testScreens/TestComponentScreen";
-import TestVerObras from "./src/pantallas/testScreens/TestVerObras";
 import TestCrearObra from "./src/pantallas/testScreens/TestCrearObra";
 import TestUpdateScreen from "./src/pantallas/testScreens/TestUpdateScreen";
 import ObraDetailScreen from "./src/pantallas/testScreens/ObraDetailScreen";
@@ -16,8 +15,9 @@ import CrearJornal from "./src/pantallas/ABMMain/CrearJornal";
 import PedidoReintegro from "./src/pantallas/ABMMain/PedidoReintegro";
 import PedidoObra from "./src/pantallas/ABMMain/PedidoObra";
 
-//Componentes carga datos maestros
+//Componentes ABM datos maestros
 import CrearObra from "./src/pantallas/ABMMaestros/Obra/CrearObra";
+import ListarObras from "./src/pantallas/ABMMaestros/Obra/ListarObras";
 import CrearRubro from "./src/pantallas/ABMMaestros/Rubro/CrearRubro";
 
 import MockLoginScreen from "./src/pantallas/testScreens/MockLoginScreen";
@@ -46,8 +46,8 @@ export default function App() {
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="TestVerObras"
-            component={TestVerObras}
+            name="ListarObrasScreen"
+            component={ListarObras}
           />
           <Stack.Screen
             options={{ headerShown: false }}
