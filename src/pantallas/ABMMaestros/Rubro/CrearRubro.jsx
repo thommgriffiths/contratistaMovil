@@ -1,6 +1,5 @@
 import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../../sharedComponents/Header";
 import Botones from "../../../sharedComponents/Botones";
@@ -10,21 +9,16 @@ import {
   createRubro,
 } from "../../../Managers/DatosMaestros/RubroManager";
 
-const CrearRubro = () => {
+const CrearRubro = ({ navigation }) => {
   const [nombre, setNombre] = useState("");
   const styles = createStylesDatosMaestros();
-
-  const navigation = useNavigation();
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
 
   const handleCrearRubro = () => {
     const nuevoRubro = rubroConstructor(nombre);
     console.log("el rubro creado es: ");
     console.log(nuevoRubro);
 
-    createRubro(nuevoRubro, navigateBack);
+    createRubro(nuevoRubro, () => navigation.navigate("Home"));
   };
 
   return (
@@ -54,7 +48,7 @@ const CrearRubro = () => {
       <Botones
         onOkFunction={handleCrearRubro}
         onOkText={"Crear nuevo rubro"}
-        onCancelFunction={navigateBack}
+        onCancelFunction={() => navigation.navigate("Home")}
       />
     </View>
   );

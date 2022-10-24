@@ -8,7 +8,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
@@ -21,14 +20,9 @@ import {
   PedidoReintegroConstructor,
 } from "../../Managers/EntidadesFinales/PedidosReintegroManager";
 
-const PedidoReintegro = () => {
+const PedidoReintegro = ({ navigation }) => {
   const [context, SetContext] = useState({});
   const [descripcion, setdescripcion] = useState("");
-
-  const navigation = useNavigation();
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
 
   const handleCrearPedido = () => {
     let nuevoPedidoReintegro = PedidoReintegroConstructor(
@@ -38,7 +32,9 @@ const PedidoReintegro = () => {
     );
     console.log("pedido creado");
     console.log(nuevoPedidoReintegro);
-    createPedidoReintegro(nuevoPedidoReintegro, navigateBack);
+    createPedidoReintegro(nuevoPedidoReintegro, () =>
+      navigation.navigate("Home")
+    );
   };
 
   return (
@@ -80,7 +76,7 @@ const PedidoReintegro = () => {
       <Botones
         onOkFunction={handleCrearPedido}
         onOkText={"Crear pedido reintegro"}
-        onCancelFunction={navigateBack}
+        onCancelFunction={() => navigation.navigate("Home")}
       />
     </View>
   );

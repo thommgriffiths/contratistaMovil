@@ -7,15 +7,12 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Globalstyles from "../../assets/globalStyle";
 
-const MockLoginScreen = () => {
+const MockLoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigation = useNavigation();
 
   useEffect(() => {
     /*

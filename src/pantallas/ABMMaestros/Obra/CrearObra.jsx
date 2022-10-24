@@ -1,6 +1,5 @@
 import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../../sharedComponents/Header";
 import Botones from "../../../sharedComponents/Botones";
@@ -10,23 +9,18 @@ import {
   createObra,
 } from "../../../Managers/DatosMaestros/ObraManager";
 
-const CrearObra = () => {
+const CrearObra = ({ navigation }) => {
   const [nombre, setNombre] = useState("");
   const [direccion, setDireccion] = useState("");
   const [propietario, setPropietario] = useState("");
   const styles = createStylesDatosMaestros();
-
-  const navigation = useNavigation();
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
 
   const handleCrearObra = () => {
     const nuevaObra = obraConstructor(nombre, direccion, propietario);
     console.log("la obra creada es: ");
     console.log(nuevaObra);
 
-    createObra(nuevaObra, navigateBack);
+    createObra(nuevaObra, () => navigation.navigate("Home"));
   };
 
   return (
@@ -68,7 +62,7 @@ const CrearObra = () => {
       <Botones
         onOkFunction={handleCrearObra}
         onOkText={"Crear nueva obra"}
-        onCancelFunction={navigateBack}
+        onCancelFunction={() => navigation.navigate("Home")}
       />
     </View>
   );

@@ -8,7 +8,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
@@ -22,14 +21,9 @@ import {
   createPedidoDeObra,
 } from "../../Managers/EntidadesFinales/PedidoObraManager";
 
-const PedidoObra = () => {
+const PedidoObra = ({ navigation }) => {
   const [context, SetContext] = useState({});
   const [descripcion, setdescripcion] = useState("");
-
-  const navigation = useNavigation();
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
 
   const handleCrearPedidoObra = () => {
     let nuevoPedidoDeObra = PedidoDeObraConstructor(
@@ -39,7 +33,7 @@ const PedidoObra = () => {
     );
     console.log("pedido de obra creado");
     console.log(nuevoPedidoDeObra);
-    createPedidoDeObra(nuevoPedidoDeObra, navigateBack);
+    createPedidoDeObra(nuevoPedidoDeObra, () => navigation.navigate("Home"));
   };
 
   return (
@@ -80,7 +74,7 @@ const PedidoObra = () => {
       <Botones
         onOkFunction={handleCrearPedidoObra}
         onOkText={"Crear pedido de obra"}
-        onCancelFunction={navigateBack}
+        onCancelFunction={() => navigation.navigate("Home")}
       />
     </View>
   );

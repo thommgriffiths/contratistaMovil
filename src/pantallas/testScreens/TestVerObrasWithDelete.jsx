@@ -9,7 +9,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -22,10 +21,7 @@ import {
   deleteObra,
 } from "../Managers/DatosMaestros/ObraManager";
 
-const TestObrasWithDelete = () => {
-  const navigation = useNavigation();
-
-  //Hooks
+const TestObrasWithDelete = ({ navigation }) => {
   const [obras, setObras] = useState([]);
 
   const renderObra = ({ item }) => {
@@ -65,10 +61,6 @@ const TestObrasWithDelete = () => {
     obtenerObras();
   }, []);
 
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
-
   return (
     <SafeAreaView style={Globalstyles.container}>
       <FlatList
@@ -78,7 +70,7 @@ const TestObrasWithDelete = () => {
         style={Globalstyles.List}
       />
       <TouchableOpacity
-        onPress={navigateBack}
+        onPress={() => navigation.navigate("Home")}
         style={[Globalstyles.button, Globalstyles.buttonOutline]}
       >
         <Text style={Globalstyles.buttonOutlineText}>Volver</Text>

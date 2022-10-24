@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
@@ -36,11 +35,7 @@ const ObraDetailScreen = ({ route, navigation }) => {
 
   const handleDelete = (id) => {
     console.log("elemento a eliminar: " + id);
-    deleteObra(id, navigateBack);
-  };
-
-  const navigateBack = () => {
-    navigation.goBack();
+    deleteObra(id, () => navigation.navigate("Home"));
   };
 
   return (
@@ -99,7 +94,10 @@ const ObraDetailScreen = ({ route, navigation }) => {
 
       {/*Back button */}
       <View style={styles.backButtonWrapper}>
-        <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={styles.backButton}
+        >
           <Text style={styles.backButtonText}>Volver</Text>
         </TouchableOpacity>
       </View>

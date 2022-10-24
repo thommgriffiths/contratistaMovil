@@ -10,7 +10,6 @@ import {
   Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
@@ -24,10 +23,7 @@ import {
 } from "../Managers/DatosMaestros/ObraManager";
 import { TestUpdateModal } from "./TestUpdateModal";
 
-const TestVerObrasYUpdateScreen = () => {
-  const navigation = useNavigation();
-
-  //Hooks
+const TestVerObrasYUpdateScreen = ({ navigation }) => {
   const [obras, setObras] = useState([]);
   const [itemToUpdate, setItemToUpdate] = useState(null);
 
@@ -68,10 +64,6 @@ const TestVerObrasYUpdateScreen = () => {
     obtenerObras();
   }, []);
 
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-
   return (
     <SafeAreaView style={Globalstyles.container}>
       <FlatList
@@ -81,7 +73,7 @@ const TestVerObrasYUpdateScreen = () => {
         style={Globalstyles.List}
       />
       <TouchableOpacity
-        onPress={navigateBack}
+        onPress={() => navigation.navigate("Home")}
         style={[Globalstyles.button, Globalstyles.buttonOutline]}
       >
         <Text style={Globalstyles.buttonOutlineText}>Volver</Text>

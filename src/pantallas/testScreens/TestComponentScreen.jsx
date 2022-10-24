@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
@@ -25,10 +24,7 @@ import {
 } from "../../Managers/DatosMaestros/ObraManager";
 import { TestUpdateModal } from "./TestUpdateModal";
 
-const TestComponentScreen = () => {
-  const navigation = useNavigation();
-
-  //Hooks
+const TestComponentScreen = ({ navigation }) => {
   const [obras, setObras] = useState([]);
   const [itemToUpdate, setItemToUpdate] = useState(null);
 
@@ -74,10 +70,6 @@ const TestComponentScreen = () => {
     obtenerObras();
   }, []);
 
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-
   return (
     <View style={styles.container}>
       {/*Header*/}
@@ -111,7 +103,10 @@ const TestComponentScreen = () => {
 
       {/*Back button */}
       <View style={styles.backButtonWrapper}>
-        <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={styles.backButton}
+        >
           <Text style={styles.backButtonText}>Volver</Text>
         </TouchableOpacity>
       </View>

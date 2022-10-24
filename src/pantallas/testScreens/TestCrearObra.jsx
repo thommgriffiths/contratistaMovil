@@ -8,7 +8,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
@@ -18,10 +17,7 @@ import {
   obraConstructor,
 } from "../../Managers/DatosMaestros/ObraManager";
 
-const TestCrearObra = () => {
-  const navigation = useNavigation();
-
-  //Hooks
+const TestCrearObra = ({ navigation }) => {
   const [nombreObra, setNombreObra] = useState("");
   const [propietarioObra, setPropietarioObra] = useState("");
   const [direccionObra, setDireccionObra] = useState("");
@@ -37,11 +33,7 @@ const TestCrearObra = () => {
     setObra(newObra);
     console.log(newObra);
 
-    createObra(newObra, navigateBack);
-  };
-
-  const navigateBack = () => {
-    navigation.replace("Home");
+    createObra(newObra, () => navigation.navigate("Home"));
   };
 
   return (
@@ -95,7 +87,10 @@ const TestCrearObra = () => {
 
         {/*Back button */}
         <View style={styles.backButtonWrapper}>
-          <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Home")}
+            style={styles.backButton}
+          >
             <Text style={styles.backButtonText}>Volver</Text>
           </TouchableOpacity>
         </View>

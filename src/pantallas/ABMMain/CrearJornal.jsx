@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
@@ -20,21 +19,16 @@ import {
   jornalConstructor,
 } from "../../Managers/EntidadesFinales/JornalManager";
 
-const CrearJornal = () => {
+const CrearJornal = ({ navigation }) => {
   const [context, SetContext] = useState({});
   const [cantidadDias, setCantidadDias] = useState("");
-
-  const navigation = useNavigation();
-  const navigateBack = () => {
-    navigation.replace("Home");
-  };
 
   const crearJornal = () => {
     //validar que este todo lleno
     let Jornal = jornalConstructor(context.obra, context.rubro, cantidadDias);
 
     console.log(Jornal);
-    createJornal(Jornal, navigateBack);
+    createJornal(Jornal, () => navigation.navigate("Home"));
   };
 
   return (
@@ -74,7 +68,7 @@ const CrearJornal = () => {
       <Botones
         onOkFunction={crearJornal}
         onOkText={"Crear Jornal"}
-        onCancelFunction={navigateBack}
+        onCancelFunction={() => navigation.navigate("Home")}
       />
     </View>
   );

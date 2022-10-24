@@ -15,43 +15,6 @@ import { userSignOut } from "../Managers/Firebase/FirebaseAuthManager";
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const navigateLogIn = () => {
-    navigation.replace("Login");
-  };
-  const navigateToTestComponent = () => {
-    navigation.navigate("TestComponent");
-  };
-  const navigateToTestCrearObra = () => {
-    navigation.navigate("TestCrearObra");
-  };
-  const navigateToListarObras = () => {
-    navigation.navigate("ListarObrasScreen");
-  };
-
-  const navigateToCrearJornal = () => {
-    navigation.navigate("CrearJornalScreen");
-  };
-
-  const navigateToPedidoReintegro = () => {
-    navigation.navigate("PedidoReintegroScreen");
-  };
-
-  const navigateToPedidoObra = () => {
-    navigation.navigate("PedidoDeObraScreen");
-  };
-
-  const navigateToCrearObra = () => {
-    navigation.navigate("CrearObraScreen");
-  };
-
-  const navigateToCrearRubro = () => {
-    navigation.navigate("CrearRubroScreen");
-  };
-
-  const handleSignOut = () => {
-    userSignOut(navigateLogIn);
-  };
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -74,73 +37,49 @@ const HomeScreen = () => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          {/*
           <TouchableOpacity
-            onPress={navigateToTestCrearObra}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Crear Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={navigateToListarObras}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Ver Obras</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={navigateToTestComponent}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>------------------------</Text>
-          </TouchableOpacity>
-          */}
-          <TouchableOpacity
-            onPress={navigateToCrearJornal}
+            onPress={() => navigation.navigate("CrearJornalScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Crear Jornal</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            onPress={navigateToPedidoReintegro}
+            onPress={() => navigation.navigate("PedidoReintegroScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedido Reintegro</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            onPress={navigateToPedidoObra}
+            onPress={() => navigation.navigate("PedidoDeObraScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedido de Obra</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            onPress={navigateToCrearObra}
+            onPress={() => navigation.navigate("CrearObraScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Crear Obra</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            onPress={navigateToCrearRubro}
+            onPress={() => navigation.navigate("CrearRubroScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Crear Rubro</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            onPress={navigateToListarObras}
+            onPress={() => navigation.navigate("ListarObrasScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver Obras</Text>
           </TouchableOpacity>
         </View>
 
-        {/*}
-      <TouchableOpacity
-        onPress={handleSignOut}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity> */}
         <View style={styles.buttonContainer}></View>
       </ScrollView>
     </View>
@@ -165,8 +104,6 @@ const colors = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center'
   },
 
   headerWrapper: {

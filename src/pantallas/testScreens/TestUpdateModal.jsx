@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Globalstyles from "../../assets/globalStyle";
 import {
@@ -17,9 +16,8 @@ import {
   updateObra,
 } from "../../Managers/DatosMaestros/ObraManager";
 
-const TestUpdateModal = (props) => {
-  const navigation = useNavigation();
-
+const TestUpdateModal = ({ navigation }) => {
+  //Refactor
   //Hooks
   const [idObra, setIdObra] = useState(props.id);
   const [nombreObra, setNombreObra] = useState(props.Nombre);

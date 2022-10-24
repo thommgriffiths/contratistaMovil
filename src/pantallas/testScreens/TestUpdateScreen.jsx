@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Globalstyles from "../../assets/globalStyle";
 import {
@@ -19,7 +18,6 @@ import {
 
 const TestUpdateScreen = ({ route, navigation }) => {
   const { id, Nombre, Propietario, Direccion } = route.params;
-  //const navigation = useNavigation()
 
   //Hooks
   const [idObra, setIdObra] = useState(id);
@@ -29,15 +27,11 @@ const TestUpdateScreen = ({ route, navigation }) => {
 
   useEffect(() => {}, []);
 
-  const navigateBack = () => {
-    navigation.replace("TestComponent");
-  };
-
   const actualizarObra = () => {
     //validar que este todo lleno
 
     let newObra = obraConstructor(nombreObra, direccionObra, propietarioObra);
-    updateObra(idObra, newObra, navigateBack);
+    updateObra(idObra, newObra, () => navigation.navigate("Home"));
   };
 
   return (
@@ -69,7 +63,7 @@ const TestUpdateScreen = ({ route, navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={navigateBack}
+          onPress={() => navigation.navigate("Home")}
           style={[Globalstyles.button, Globalstyles.buttonOutline]}
         >
           <Text style={Globalstyles.buttonOutlineText}>Volver</Text>

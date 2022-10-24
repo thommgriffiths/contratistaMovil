@@ -23,7 +23,7 @@ const LoginScreen = () => {
   useEffect(() => {}, []);
 
   const navigateHome = () => {
-    navigation.replace("Home");
+    navigation.navigate("Home");
   };
 
   const handleSignUp = () => {
