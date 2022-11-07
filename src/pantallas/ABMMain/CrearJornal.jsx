@@ -11,7 +11,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
-import FormComun from "../../sharedComponents/FormComun";
+import SetContextoForm from "../../sharedComponents/SetContextoForm";
 import { palette } from "../../assets/colors";
 
 import {
@@ -50,7 +50,7 @@ const CrearJornal = ({ navigation }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <FormComun action={SetContext} />
+            <SetContextoForm action={SetContext} />
 
             {/*Formulario especifico */}
             <TextInput

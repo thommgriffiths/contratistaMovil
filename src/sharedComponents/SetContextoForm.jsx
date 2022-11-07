@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import { palette } from "../assets/colors";
 
-const FormComun = ({ action }) => {
+const SetContextoForm = ({ action }) => {
   const [obra, setObra] = useState("");
   const [rubro, setRubro] = useState("");
   const [tarea, setTarea] = useState("");
@@ -41,7 +41,7 @@ const FormComun = ({ action }) => {
   );
 };
 
-export default FormComun;
+export default SetContextoForm;
 
 const styles = StyleSheet.create({
   container: {
