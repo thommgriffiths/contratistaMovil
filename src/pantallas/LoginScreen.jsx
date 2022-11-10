@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
+import { setLoggedUser } from "../Core/util/globalStore";
 import {
   userSignUp,
   userLogin,
@@ -22,16 +23,17 @@ const LoginScreen = () => {
 
   useEffect(() => {}, []);
 
-  const navigateHome = () => {
+  const initiateApp = (user) => {
+    setLoggedUser(user);
     navigation.navigate("Home");
   };
 
   const handleSignUp = () => {
-    userSignUp(email, password, navigateHome);
+    userSignUp(email, password, initiateApp);
   };
 
   const handleLogin = async () => {
-    userLogin(email, password, navigateHome);
+    userLogin(email, password, initiateApp);
   };
 
   return (

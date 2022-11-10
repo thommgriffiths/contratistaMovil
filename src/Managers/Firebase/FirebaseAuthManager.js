@@ -15,7 +15,7 @@ export const userSignUp = (email, password, onSuccess) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((credential) => {
       console.log("user created:", credential.user);
-      onSuccess();
+      onSuccess(credential.user);
     })
     .catch((err) => {
       console.log(err.message);
@@ -27,7 +27,7 @@ export const userLogin = (email, password, onSuccess) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((credential) => {
       console.log("user logged in:", credential.user);
-      onSuccess();
+      onSuccess(credential.user);
     })
     .catch((err) => {
       console.log(err.message);
