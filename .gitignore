@@ -11,6 +11,7 @@ npm-debug.*
 *.jpg
 *.png
 web-build/
+yarn.lock
 
 # macOS
 .DS_Store
