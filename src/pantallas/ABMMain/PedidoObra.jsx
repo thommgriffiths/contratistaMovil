@@ -3,16 +3,21 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
-  SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
+
+import { getCurrentDateTime } from "../../Core/util/functions";
+import {
+  obtenerStatus,
+  obtenerTiposDePedidosObra,
+} from "../../Core/util/mockFunctions";
+import { getLoggedUser } from "../../Core/util/globalStore";
 
 import { palette } from "../../assets/colors";
 
@@ -23,14 +28,33 @@ import {
 
 const PedidoObra = ({ navigation }) => {
   const [context, SetContext] = useState({});
-  const [descripcion, setdescripcion] = useState("");
+  const [tipoDePedido, setTipoDePedido] = useState(null);
+  const [descripcion, setDescripcion] = useState("");
+
+  //Data
+  const [tipoDePedidoOpen, setTipoDePedidoOpen] = useState(false);
+  const [tiposDePedidos, setTiposDePedido] = useState([]);
+
+  useEffect(() => {
+    setTiposDePedido(obtenerTiposDePedidosObra());
+  }, []);
 
   const handleCrearPedidoObra = () => {
-    let nuevoPedidoDeObra = PedidoDeObraConstructor(
+    /*let nuevoPedidoDeObra = PedidoDeObraConstructor(
       context.obra,
       context.rubro,
       descripcion
-    );
+    );*/
+
+    let nuevoPedidoDeObra = {
+      Obra: context.obra,
+      Rubro: context.rubro,
+      Descripcion: descripcion,
+      Fecha: getCurrentDateTime(),
+      Status: obtenerStatus().pedido,
+      User: getLoggedUser().email,
+      TipoDePedido: tipoDePedido,
+    };
     console.log("pedido de obra creado");
     console.log(nuevoPedidoDeObra);
     createPedidoDeObra(nuevoPedidoDeObra, () => navigation.navigate("Home"));
@@ -38,7 +62,7 @@ const PedidoObra = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header style={styles.header} />
 
       {/* form container*/}
       <View style={styles.body}>
@@ -46,11 +70,6 @@ const PedidoObra = ({ navigation }) => {
           {/*Section title*/}
           <View style={styles.detailTitlesWrapper}>
             <Text style={styles.detailTitlesTitle}>Crear Pedido de Obra</Text>
-            <View style={styles.detailTitleCreate}>
-              <TouchableOpacity onPress={() => {}}>
-                <MaterialIcons name="update" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
           </View>
 
           {/*Form */}
@@ -58,12 +77,29 @@ const PedidoObra = ({ navigation }) => {
             <SetContextoForm action={SetContext} />
 
             {/* formulario especifico */}
+            <View style={{}}>
+              <DropDownPicker
+                open={tipoDePedidoOpen}
+                setOpen={setTipoDePedidoOpen}
+                value={tipoDePedido}
+                setValue={setTipoDePedido}
+                items={tiposDePedidos}
+                setItems={setTipoDePedido}
+                placeholder="Seleccione el tipo de pedido"
+                showTickIcon={false}
+                style={[styles.input, styles.inputDropdown]}
+                dropDownContainerStyle={styles.dropdown}
+                placeholderStyle={styles.placeholderStyles}
+                listItemLabelStyle={styles.dropdownListItemLabel}
+                selectedItemLabelStyle={styles.dropdownSelectedItemLabel}
+              />
+            </View>
 
             <TextInput
               placeholder="Detalle del pedido"
               value={descripcion}
               onChangeText={(text) => {
-                setdescripcion(text);
+                setDescripcion(text);
               }}
               style={styles.input}
             />
@@ -75,6 +111,7 @@ const PedidoObra = ({ navigation }) => {
         onOkFunction={handleCrearPedidoObra}
         onOkText={"Crear pedido de obra"}
         onCancelFunction={() => navigation.navigate("Home")}
+        style={styles.botonera}
       />
     </View>
   );
@@ -83,64 +120,30 @@ const PedidoObra = ({ navigation }) => {
 export default PedidoObra;
 
 const styles = StyleSheet.create({
+  //Pantalla
   container: {
     flex: 1,
     backgroundColor: palette.neutral,
-    //justifyContent: 'center',
-    //alignItems: 'center'
   },
-
-  //HEader
-  headerWrapper: {
-    flexDirection: "row",
-    backgroundColor: palette.R1,
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    alignItems: "center",
-    paddingBottom: 30,
-  },
-
-  profileImage: {
-    backgroundColor: palette.B1,
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-  },
-
+  header: {},
   body: {
-    justifyContent: "space-between",
-    flex: 1,
+    marginTop: 30,
+    paddingHorizontal: 20,
   },
+  botonera: {},
 
   // Form Section
 
-  formWrapper: {
-    paddingHorizontal: 20,
-  },
-
-  //Detail title
-  detailTitlesWrapper: {
-    marginTop: 30,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
+  //Form Section - Titulos
+  detailTitlesWrapper: {},
   detailTitlesTitle: {
-    //fontFamily: 'MBold',
     fontSize: 32,
     color: palette.textDark,
-    marginTop: 5,
-  },
-  detailTitleCreate: {
-    width: "20%",
-    //flexDirection: 'row',
-    //backgroundColor: palette.B1,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
+    paddingVertical: 5,
   },
 
+  //Form Section - Cuerpo
+  formWrapper: {},
   input: {
     backgroundColor: palette.white,
     paddingHorizontal: 15,
@@ -151,45 +154,26 @@ const styles = StyleSheet.create({
     borderColor: palette.B1,
   },
 
-  //Detail
-  itemContainer: {
-    paddingHorizontal: 20,
-  },
-
-  itemDetail: {
+  //Form Section - Cuerpo - DropdownSelect
+  inputDropdown: {
     flexDirection: "row",
-    backgroundColor: "white",
+  },
+  dropdown: {
+    backgroundColor: palette.white,
+    borderRadius: 10,
     borderWidth: 2,
     borderColor: palette.B1,
-    marginTop: 10,
-    borderRadius: 10,
-    padding: 10,
-    justifyContent: "space-between",
   },
-  itemDetailInfo: {
-    //width: '70%',
+  placeholderStyles: {
+    color: "grey",
   },
-  itemDetailInfoText: {
-    paddingVertical: 10,
-    fontSize: 20,
-    color: palette.textDark,
+  dropdownListItemLabel: {
+    color: "grey",
+    paddingHorizontal: 15,
+    paddingVertical: 2,
   },
-
-  //Back button
-  backButtonWrapper: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  backButton: {
-    backgroundColor: palette.B1,
-    width: "100%",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  backButtonText: {
-    color: palette.white,
-    fontWeight: "700",
-    fontSize: 16,
+  dropdownSelectedItemLabel: {
+    fontWeight: "bold",
+    color: "black",
   },
 });
