@@ -6,46 +6,26 @@ import {
   View,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import DropDownPicker from "react-native-dropdown-picker";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
 
 import { getCurrentDateTime } from "../../Core/util/functions";
-import {
-  obtenerStatus,
-  obtenerTiposDePedidosObra,
-} from "../../Core/util/mockFunctions";
+import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
+import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 import { palette } from "../../assets/colors";
 
-import {
-  PedidoDeObraConstructor,
-  createPedidoDeObra,
-} from "../../Managers/EntidadesFinales/PedidoObraManager";
+import { createPedidoDeObra } from "../../Managers/EntidadesFinales/PedidoObraManager";
 
 const PedidoObra = ({ navigation }) => {
   const [context, SetContext] = useState({});
   const [tipoDePedido, setTipoDePedido] = useState(null);
   const [descripcion, setDescripcion] = useState("");
 
-  //Data
-  const [tipoDePedidoOpen, setTipoDePedidoOpen] = useState(false);
-  const [tiposDePedidos, setTiposDePedido] = useState([]);
-
-  useEffect(() => {
-    setTiposDePedido(obtenerTiposDePedidosObra());
-  }, []);
-
   const handleCrearPedidoObra = () => {
-    /*let nuevoPedidoDeObra = PedidoDeObraConstructor(
-      context.obra,
-      context.rubro,
-      descripcion
-    );*/
-
     let nuevoPedidoDeObra = {
       Obra: context.obra,
       Rubro: context.rubro,
@@ -77,23 +57,11 @@ const PedidoObra = ({ navigation }) => {
             <SetContextoForm action={SetContext} />
 
             {/* formulario especifico */}
-            <View style={{}}>
-              <DropDownPicker
-                open={tipoDePedidoOpen}
-                setOpen={setTipoDePedidoOpen}
-                value={tipoDePedido}
-                setValue={setTipoDePedido}
-                items={tiposDePedidos}
-                setItems={setTipoDePedido}
-                placeholder="Seleccione el tipo de pedido"
-                showTickIcon={false}
-                style={[styles.input, styles.inputDropdown]}
-                dropDownContainerStyle={styles.dropdown}
-                placeholderStyle={styles.placeholderStyles}
-                listItemLabelStyle={styles.dropdownListItemLabel}
-                selectedItemLabelStyle={styles.dropdownSelectedItemLabel}
-              />
-            </View>
+            <DropdownSelect
+              placeholder="Seleccione otro valor"
+              action={setTipoDePedido}
+              category="tiposPedidosDePedidosObra"
+            />
 
             <TextInput
               placeholder="Detalle del pedido"
@@ -129,6 +97,7 @@ const styles = StyleSheet.create({
   body: {
     marginTop: 30,
     paddingHorizontal: 20,
+    marginBottom: 20,
   },
   botonera: {},
 
@@ -152,28 +121,5 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderWidth: 2,
     borderColor: palette.B1,
-  },
-
-  //Form Section - Cuerpo - DropdownSelect
-  inputDropdown: {
-    flexDirection: "row",
-  },
-  dropdown: {
-    backgroundColor: palette.white,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: palette.B1,
-  },
-  placeholderStyles: {
-    color: "grey",
-  },
-  dropdownListItemLabel: {
-    color: "grey",
-    paddingHorizontal: 15,
-    paddingVertical: 2,
-  },
-  dropdownSelectedItemLabel: {
-    fontWeight: "bold",
-    color: "black",
   },
 });
