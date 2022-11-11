@@ -21,7 +21,7 @@ import { palette } from "../../assets/colors";
 import { createPedidoDeObra } from "../../Managers/EntidadesFinales/PedidoObraManager";
 
 const PedidoObra = ({ navigation }) => {
-  const [context, SetContext] = useState({});
+  const [context, SetContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
   const [descripcion, setDescripcion] = useState("");
 
@@ -61,6 +61,7 @@ const PedidoObra = ({ navigation }) => {
               placeholder="Seleccione tipo de pedido"
               action={setTipoDePedido}
               category="tiposPedidosDePedidosObra"
+              props={{ stackOrder: 10000 }}
             />
 
             <TextInput
@@ -69,7 +70,7 @@ const PedidoObra = ({ navigation }) => {
               onChangeText={(text) => {
                 setDescripcion(text);
               }}
-              style={styles.input}
+              style={[styles.input, { zIndex: 9000 }]}
             />
           </View>
         </KeyboardAvoidingView>

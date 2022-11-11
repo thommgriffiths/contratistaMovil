@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 
+import DropdownSelect from "./DropdownSelect";
 import { palette } from "../assets/colors";
 
 const SetContextoForm = ({ action }) => {
@@ -18,21 +19,21 @@ const SetContextoForm = ({ action }) => {
   }, [obra, rubro, tarea]);
 
   return (
-    <View style={styles.formWrapper}>
-      <TextInput
-        placeholder="Obra"
-        value={obra}
-        onChangeText={(text) => setObra(text)}
-        style={styles.input}
+    <View style={styles.container}>
+      <DropdownSelect
+        placeholder="Seleccione Obra"
+        action={setObra}
+        category="obras"
+        props={{ stackOrder: 15000 }}
+      />
+      <DropdownSelect
+        placeholder="Seleccione rubro"
+        action={setRubro}
+        category="rubros"
+        props={{ stackOrder: 14000 }}
       />
       <TextInput
-        placeholder="Rubro"
-        value={rubro}
-        onChangeText={(text) => setRubro(text)}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Tarea"
+        placeholder="Seleccione una Tarea"
         value={tarea}
         onChangeText={(text) => setTarea(text)}
         style={styles.input}
@@ -45,8 +46,7 @@ export default SetContextoForm;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: palette.neutral,
+    zIndex: 100000,
   },
 
   input: {

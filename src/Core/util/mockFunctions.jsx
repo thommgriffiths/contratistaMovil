@@ -7,15 +7,8 @@ export const obtenerStatus = () => ({
 });
 
 //Dropdown items
-const tiposPedidosDeObra = [
+export const tiposPedidosDeObra = [
   { value: "pedidoMateriales", label: "Pedido de Materiales" },
   { value: "pedidoDefiniciones", label: "Pedido de Definicion" },
   { value: "pedidoPlanos", label: "Pedido plano detalle" },
 ];
-
-export const obtenerDropdownItems = (type) => {
-  switch (type) {
-    case "tiposPedidosDePedidosObra":
-      return tiposPedidosDeObra;
-  }
-};

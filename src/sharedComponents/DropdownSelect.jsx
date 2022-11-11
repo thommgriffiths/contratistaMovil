@@ -2,27 +2,24 @@ import { StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import { obtenerDropdownItems } from "../Core/util/mockFunctions";
+import { obtenerDropdownItems } from "../Core/util/functions";
+import BlankInput from "./BlankInput";
 import { palette } from "../assets/colors";
 
-const DropdownSelect = ({
-  category,
-  placeholder = "Seleccione",
-  action = () => {},
-}) => {
+const DropdownSelect = ({ category, placeholder, action, props }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
 
   useEffect(() => {
-    setItems(obtenerDropdownItems(category));
+    setItems(obtenerDropdownItems(category, setItems));
   }, []);
 
   useEffect(() => {
     action(value);
   }, [value]);
 
-  return (
+  return items ? (
     <DropDownPicker
       open={open}
       setOpen={setOpen}
@@ -37,7 +34,10 @@ const DropdownSelect = ({
       placeholderStyle={styles.placeholderStyles}
       listItemLabelStyle={styles.dropdownListItemLabel}
       selectedItemLabelStyle={styles.dropdownSelectedItemLabel}
+      zIndex={props.stackOrder}
     />
+  ) : (
+    <BlankInput />
   );
 };
 
