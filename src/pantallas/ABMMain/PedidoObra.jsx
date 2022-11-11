@@ -58,7 +58,7 @@ const PedidoObra = ({ navigation }) => {
 
             {/* formulario especifico */}
             <DropdownSelect
-              placeholder="Seleccione otro valor"
+              placeholder="Seleccione tipo de pedido"
               action={setTipoDePedido}
               category="tiposPedidosDePedidosObra"
             />
