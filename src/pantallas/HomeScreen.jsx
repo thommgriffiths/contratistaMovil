@@ -4,12 +4,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
 
+import Header from "../sharedComponents/Header";
+import { palette } from "../assets/colors";
 import { userSignOut } from "../Managers/Firebase/FirebaseAuthManager";
 
 const HomeScreen = () => {
@@ -17,18 +17,11 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
       >
-        {/*Header*/}
-        <SafeAreaView>
-          <View style={styles.headerWrapper}>
-            <View style={styles.profileImage}></View>
-            <AntDesign name="back" size={24} color="black" />
-          </View>
-        </SafeAreaView>
-
         {/*titulos*/}
         <View style={styles.titlesWrapper}>
           <Text style={styles.titlesSubtitle}>Contratista</Text>
@@ -79,8 +72,6 @@ const HomeScreen = () => {
             <Text style={styles.menuItemText}>Ver Obras</Text>
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonContainer}></View>
       </ScrollView>
     </View>
   );
@@ -88,56 +79,19 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const colors = {
-  B1: "#1984c5",
-  B2: "#22a7f0",
-  B3: "#63bff0",
-  B4: "#a7d5ed",
-  neutral: "#e2e2e2",
-  R1: "#e1a692",
-  R2: "#de6e56",
-  R3: "#e14b31",
-  R4: "#c23728",
-  white: "white",
-};
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  headerWrapper: {
-    flexDirection: "row",
-    backgroundColor: colors.R1,
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    alignItems: "center",
-    paddingBottom: 30,
-  },
-
-  profileImage: {
-    backgroundColor: colors.B1,
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-  },
+  container: {},
 
   //Titulos
-
   titlesWrapper: {
     marginTop: 30,
     paddingHorizontal: 20,
   },
   titlesSubtitle: {
-    //fontFamily: 'MRegular',
     fontSize: 16,
-    color: colors.textDark,
   },
   titlesTitle: {
-    //fontFamily: 'MBold',
     fontSize: 32,
-    color: colors.textDark,
     marginTop: 5,
   },
 
