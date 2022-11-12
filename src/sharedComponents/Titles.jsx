@@ -4,16 +4,12 @@ import React from "react";
 const Titles = ({ titleText = null, subTitleText = null }) => {
   return (
     <View style={styles.titlesWrapper}>
-      {titleText ? (
-        <Text style={styles.titlesSubtitle}>{titleText}</Text>
-      ) : (
-        <></>
-      )}
       {subTitleText ? (
-        <Text style={styles.titlesTitle}>{subTitleText}</Text>
+        <Text style={styles.titlesSubtitle}>{subTitleText}</Text>
       ) : (
         <></>
       )}
+      {titleText ? <Text style={styles.titlesTitle}>{titleText}</Text> : <></>}
     </View>
   );
 };
@@ -23,7 +19,7 @@ export default Titles;
 const styles = StyleSheet.create({
   titlesWrapper: {
     marginTop: 30,
-    paddingHorizontal: 20,
+    marginBottom: 15,
   },
   titlesSubtitle: {
     fontSize: 16,
