@@ -10,11 +10,12 @@ import React, { useState, useEffect } from "react";
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
+import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 import { getCurrentDateTime } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import DropdownSelect from "../../sharedComponents/DropdownSelect";
+import { entities } from "../../Core/types";
 
 import { palette } from "../../assets/colors";
 
@@ -27,14 +28,14 @@ const PedidoObra = ({ navigation }) => {
 
   const handleCrearPedidoObra = () => {
     let nuevoPedidoDeObra = {
-      Obra: context.obra,
-      Rubro: context.rubro,
       Descripcion: descripcion,
       Fecha: getCurrentDateTime(),
       Status: obtenerStatus().pedido,
       User: getLoggedUser().email,
       TipoDePedido: tipoDePedido,
     };
+    nuevoPedidoDeObra[entities.obra] = context.obra;
+    nuevoPedidoDeObra[entities.rubro] = context.rubro;
     console.log("pedido de obra creado");
     console.log(nuevoPedidoDeObra);
     createPedidoDeObra(nuevoPedidoDeObra, () => navigation.navigate("Home"));
