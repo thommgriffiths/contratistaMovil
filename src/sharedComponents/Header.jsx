@@ -1,15 +1,23 @@
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import React from "react";
 
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const Header = () => {
+const Header = (backButton = false) => {
+  const navigation = useNavigation();
   return (
     <>
       <SafeAreaView>
         <View style={styles.headerWrapper}>
           <View style={styles.profileImage}></View>
-          <AntDesign name="back" size={24} color="black" />
+          {backButton ? (
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <AntDesign name="back" size={24} color="black" />
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
         </View>
       </SafeAreaView>
     </>
