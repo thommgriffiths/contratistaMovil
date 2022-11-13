@@ -1,6 +1,8 @@
 import { getAllObras } from "../../Managers/DatosMaestros/ObraManager";
 import { getAllRubros } from "../../Managers/DatosMaestros/RubroManager";
 import { tiposPedidosDeObra } from "./mockFunctions";
+import { getFSElementById } from "../../Managers/Firebase/FirebaseFirestoreManager";
+import { entities } from "../types";
 
 export const getCurrentDateTime = () => {
   const date = new Date();
@@ -10,6 +12,22 @@ export const getCurrentDateTime = () => {
     date.getFullYear(),
   ];
   return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;
+};
+
+export const completeElements = async (elements = []) => {
+  let result = [];
+  for (let i = 0; i < elements.length; i++) {
+    let element = elements[i];
+
+    for (const key in element) {
+      if (entities[key]) {
+        const object = await getFSElementById(key, element[key]);
+        element[key + "Object"] = object;
+      }
+    }
+    result.push(element);
+  }
+  return result;
 };
 
 export const obtenerDropdownItems = (type, setItems = () => {}) => {

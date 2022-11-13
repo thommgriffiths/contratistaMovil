@@ -3,6 +3,7 @@ import {
   getFSCollection,
   deleteFSElement,
   updateFSElement,
+  getFSCollectionAsync,
 } from "../Firebase/FirebaseFirestoreManager";
 
 import { entities } from "../../Core/types";
@@ -23,6 +24,11 @@ export const createPedidoDeObra = (element, onSuccess) => {
 
 export const getAllPedidosDeObras = (onSuccess) => {
   getFSCollection(currentType, onSuccess);
+};
+
+export const getAllPedidosObraAsync = async () => {
+  const result = await getFSCollectionAsync(currentType);
+  return result;
 };
 
 export const deletePedidoDeObra = (id, onSuccess) => {

@@ -5,6 +5,7 @@ import {
   collection,
   onSnapshot,
   addDoc,
+  getDoc,
   deleteDoc,
   doc,
   query,
@@ -86,4 +87,24 @@ export const queryFSElements = (type) => {
     console.log("Se obtuvieron los resultados de la coleccion: " + type);
     onSuccess(elements);
   });
+};
+
+export const getFSElementById = async (type, id) => {
+  const docRef = doc(db, type, id);
+  const result = await getDoc(docRef);
+
+  return result.data();
+};
+
+export const getFSCollectionAsync = async (type) => {
+  let elements = [];
+  const colRef = collection(db, type);
+
+  const snapshot = await getDocs(colRef);
+
+  snapshot.docs.forEach((element) => {
+    elements.push({ ...element.data(), id: element.id });
+  });
+
+  return elements;
 };

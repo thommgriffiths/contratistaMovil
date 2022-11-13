@@ -14,6 +14,7 @@ import ObraDetailScreen from "./src/pantallas/testScreens/ObraDetailScreen";
 import CrearJornal from "./src/pantallas/ABMMain/CrearJornal";
 import PedidoReintegro from "./src/pantallas/ABMMain/PedidoReintegro";
 import PedidoObra from "./src/pantallas/ABMMain/PedidoObra";
+import VerPedidosObra from "./src/pantallas/ABMMain/VerPedidosObra";
 
 //Componentes ABM datos maestros
 import CrearObra from "./src/pantallas/ABMMaestros/Obra/CrearObra";
@@ -83,6 +84,11 @@ export default function App() {
             options={{ headerShown: false }}
             name="CrearRubroScreen"
             component={CrearRubro}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="VerPedidosDeObraScreen"
+            component={VerPedidosObra}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
