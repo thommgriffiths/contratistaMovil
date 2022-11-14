@@ -1,7 +1,10 @@
 import { getAllObras } from "../../Managers/DatosMaestros/ObraManager";
 import { getAllRubros } from "../../Managers/DatosMaestros/RubroManager";
 import { tiposPedidosDeObra } from "./mockFunctions";
-import { getFSElementById } from "../../Managers/Firebase/FirebaseFirestoreManager";
+import {
+  getFSElementById,
+  deleteFSElement,
+} from "../../Managers/Firebase/FirebaseFirestoreManager";
 import { entities } from "../types";
 
 export const getCurrentDateTime = () => {
@@ -12,6 +15,10 @@ export const getCurrentDateTime = () => {
     date.getFullYear(),
   ];
   return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;
+};
+
+export const deleteElement = (item, onSuccess) => {
+  deleteFSElement(item.type, item.id, onSuccess);
 };
 
 export const completeElements = async (elements = []) => {
