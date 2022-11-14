@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import DropdownSelect from "./DropdownSelect";
 import { palette } from "../assets/colors";
+import { entities } from "../Core/types";
 
 const SetContextoForm = ({ action }) => {
   const [obra, setObra] = useState("");
@@ -11,10 +12,10 @@ const SetContextoForm = ({ action }) => {
 
   useEffect(() => {
     let contexto = {
-      obra: obra,
-      rubro: rubro,
       tarea: tarea,
     };
+    contexto[entities.obra] = obra;
+    contexto[entities.rubro] = rubro;
     action(contexto);
   }, [obra, rubro, tarea]);
 
