@@ -21,6 +21,8 @@ const db = getFirestore(firebase);
 export const createFSElement = (type, element, onSuccess) => {
   const colRef = collection(db, type);
 
+  element["type"] = type;
+
   addDoc(colRef, element)
     .then(() => {
       console.log("New element added to " + type);
