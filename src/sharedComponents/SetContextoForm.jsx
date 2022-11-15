@@ -1,11 +1,11 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import DropdownSelect from "./DropdownSelect";
 import { palette } from "../assets/colors";
 import { entities } from "../Core/types";
 
-const SetContextoForm = ({ action }) => {
+const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [obra, setObra] = useState("");
   const [rubro, setRubro] = useState("");
   const [tarea, setTarea] = useState("");
@@ -21,24 +21,49 @@ const SetContextoForm = ({ action }) => {
 
   return (
     <View style={styles.container}>
+      {isEdit && <Text style={styles.fieldTitle}>Seleccione Obra</Text>}
       <DropdownSelect
-        placeholder="Seleccione Obra"
+        placeholder={
+          isEdit && initialValues
+            ? initialValues[entities.obra + "Object"]["Nombre"]
+            : "Seleccione Obra"
+        }
         action={setObra}
         category="obras"
         props={{ stackOrder: 15000 }}
+        initialValue={initialValues?.obra}
       />
+      {isEdit && <Text style={styles.fieldTitle}>Seleccione rubro</Text>}
       <DropdownSelect
-        placeholder="Seleccione rubro"
+        placeholder={
+          isEdit && initialValues
+            ? initialValues[entities.rubro + "Object"]["Nombre"]
+            : "Seleccione rubro"
+        }
         action={setRubro}
         category="rubros"
         props={{ stackOrder: 14000 }}
+        initialValue={initialValues?.rubro}
       />
-      <TextInput
-        placeholder="Seleccione una Tarea"
-        value={tarea}
-        onChangeText={(text) => setTarea(text)}
-        style={styles.input}
-      />
+      {isEdit ? (
+        <>
+          <Text style={styles.fieldTitle}>Seleccione una tarea</Text>
+          <TextInput
+            placeholder="Seleccione una Tarea"
+            //Agregar aca para busque en objeto
+            defaultValue={tarea}
+            onChangeText={(text) => setTarea(text)}
+            style={styles.input}
+          />
+        </>
+      ) : (
+        <TextInput
+          placeholder="Seleccione una Tarea"
+          value={tarea}
+          onChangeText={(text) => setTarea(text)}
+          style={styles.input}
+        />
+      )}
     </View>
   );
 };
@@ -48,6 +73,10 @@ export default SetContextoForm;
 const styles = StyleSheet.create({
   container: {
     zIndex: 100000,
+  },
+
+  fieldTitle: {
+    marginTop: 10,
   },
 
   input: {

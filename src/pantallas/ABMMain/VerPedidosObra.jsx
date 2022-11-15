@@ -8,6 +8,7 @@ import { entities } from "../../Core/types";
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
+import EditModal from "../../sharedComponents/EditModal";
 import style from "./VerPedidosObra.style";
 
 const VerPedidosObra = () => {
@@ -33,6 +34,10 @@ const VerPedidosObra = () => {
       );
       setPedidosObra(newList);
       setModalParams({ visible: false });
+    }
+    if (modalParams["EditedItem"] != undefined) {
+      setModalParams({ visible: false });
+      console.log("Editado el elemento");
     }
   }, [modalParams]);
 
@@ -86,7 +91,12 @@ const VerPedidosObra = () => {
           />
         </View>
       </View>
-      <DeleteModal modalParams={modalParams} setParams={setModalParams} />
+      {modalParams?.actionLabel == "Eliminar" && (
+        <DeleteModal modalParams={modalParams} setParams={setModalParams} />
+      )}
+      {modalParams?.actionLabel == "Editar" && (
+        <EditModal modalParams={modalParams} setParams={setModalParams} />
+      )}
     </View>
   );
 };
