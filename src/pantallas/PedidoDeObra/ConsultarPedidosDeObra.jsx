@@ -34,16 +34,10 @@ const ConsultarPedidosDeObra = () => {
   useEffect(() => {
     console.log(modalParams);
     if (modalParams["deletedItem"] != undefined) {
-      /*
-      let newList = pedidosObra.filter(
-        (e) => e.id !== modalParams[deletedItem]
-      );
-      setPedidosObra(newList);*/
       setModalParams({ visible: false });
     }
     if (modalParams["EditedItem"] != undefined) {
       setModalParams({ visible: false });
-      console.log("Editado el elemento");
     }
   }, [modalParams]);
 
