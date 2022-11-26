@@ -17,7 +17,7 @@ const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
 
   useEffect(() => {
     const newItem = buildPO(context, tipoDePedido, descripcion);
-    const itemToBeSet = fuseItems(newItem, currentItem);
+    const itemToBeSet = fuseItems(newItem, currentItem, entities.pedidoDeObra);
     setNewItem(itemToBeSet);
   }, [context, tipoDePedido, descripcion]);
 

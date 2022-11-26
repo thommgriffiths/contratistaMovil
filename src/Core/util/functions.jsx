@@ -6,7 +6,7 @@ import {
   deleteFSElement,
   updateFSElement,
 } from "../../Managers/Firebase/FirebaseFirestoreManager";
-import { entities } from "./entities";
+import { entities, getEmptyConstructor } from "./entities";
 
 export const getCurrentDateTime = () => {
   const date = new Date();
@@ -71,27 +71,12 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
   }
 };
 
-//desarrollar esto...
-//una funcion global que me de los constructores vacios
-//esto deberia ir en entities...
-export const emptyObjectConstructor = (type) => {
-  let result = {};
-
-  return result;
-};
-
-export const fuseItems = (newItem, oldItem) => {
-  let fusedItem = {};
-  //Aca el objeto vacio se deberia crear con el constructor correspondiente.... y recorrer el fused item ante todo
-
-  for (const key in newItem) {
+export const fuseItems = (newItem, oldItem, type) => {
+  let fusedItem = getEmptyConstructor(type);
+  for (const key in fusedItem) {
     newItem[key]
       ? (fusedItem[key] = newItem[key])
       : (fusedItem[key] = oldItem[key]);
   }
-
-  //parche temporal hasta que agregue constructor vacio
-  fusedItem["type"] = oldItem?.type;
-  fusedItem["id"] = oldItem?.id;
   return fusedItem;
 };
