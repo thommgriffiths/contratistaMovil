@@ -1,10 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
@@ -13,9 +7,10 @@ import { getCurrentDateTime, fuseItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { entities } from "../../Core/types";
-import { palette } from "../../assets/colors";
 
-const EditPedidoObra = ({ currentItem, setNewItem }) => {
+import styles from "./EditarPedidoDeObra.style";
+
+const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
   const [descripcion, setDescripcion] = useState(null);
@@ -68,7 +63,7 @@ const EditPedidoObra = ({ currentItem, setNewItem }) => {
   );
 };
 
-export default EditPedidoObra;
+export default EditarPedidoDeObra;
 
 const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   let pedidoObra = {
@@ -83,35 +78,3 @@ const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
 
   return pedidoObra;
 };
-
-const styles = StyleSheet.create({
-  //Pantalla
-  container: {},
-  header: {},
-  body: {
-    marginBottom: 20,
-  },
-
-  //Form Section - Titulos
-  detailTitlesWrapper: {},
-  detailTitlesTitle: {
-    fontSize: 32,
-    color: palette.textDark,
-    paddingVertical: 5,
-  },
-
-  //Form Section - Cuerpo
-  formWrapper: {},
-  fieldTitle: {
-    marginTop: 10,
-  },
-  input: {
-    backgroundColor: palette.white,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-    borderWidth: 2,
-    borderColor: palette.B1,
-  },
-});

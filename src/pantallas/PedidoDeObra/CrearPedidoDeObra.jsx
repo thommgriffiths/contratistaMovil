@@ -1,11 +1,5 @@
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
@@ -16,12 +10,11 @@ import { getCurrentDateTime } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { entities } from "../../Core/types";
-
-import { palette } from "../../assets/colors";
-
 import { createPedidoDeObra } from "../../Managers/EntidadesFinales/PedidoObraManager";
 
-const PedidoObra = ({ navigation }) => {
+import styles from "./CrearPedidoDeObra.style";
+
+const CrearPedidoDeObra = ({ navigation }) => {
   const [context, SetContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
   const [descripcion, setDescripcion] = useState("");
@@ -87,41 +80,4 @@ const PedidoObra = ({ navigation }) => {
   );
 };
 
-export default PedidoObra;
-
-const styles = StyleSheet.create({
-  //Pantalla
-  container: {
-    flex: 1,
-    backgroundColor: palette.neutral,
-  },
-  header: {},
-  body: {
-    marginTop: 30,
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
-  botonera: {},
-
-  // Form Section
-
-  //Form Section - Titulos
-  detailTitlesWrapper: {},
-  detailTitlesTitle: {
-    fontSize: 32,
-    color: palette.textDark,
-    paddingVertical: 5,
-  },
-
-  //Form Section - Cuerpo
-  formWrapper: {},
-  input: {
-    backgroundColor: palette.white,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-    borderWidth: 2,
-    borderColor: palette.B1,
-  },
-});
+export default CrearPedidoDeObra;

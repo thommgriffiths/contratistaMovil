@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
-import EditPedidoObra from "../pantallas/ABMMain/PedidoObraEdit";
+import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
 import { updateElement } from "../Core/util/functions";
 
 const EditModal = ({ modalParams, setParams }) => {
@@ -25,7 +25,7 @@ const EditModal = ({ modalParams, setParams }) => {
       <View style={style.centeredView}>
         <View style={style.modalView}>
           {modalParams.visible && Object.keys(modalParams.item).length != 0 && (
-            <EditPedidoObra
+            <EditarPedidoDeObra
               currentItem={modalParams.item}
               setNewItem={setItem}
             />

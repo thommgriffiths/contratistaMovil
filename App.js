@@ -11,10 +11,10 @@ import TestUpdateScreen from "./src/pantallas/testScreens/TestUpdateScreen";
 import ObraDetailScreen from "./src/pantallas/testScreens/ObraDetailScreen";
 
 //Componentes principales
-import CrearJornal from "./src/pantallas/ABMMain/CrearJornal";
-import PedidoReintegro from "./src/pantallas/ABMMain/PedidoReintegro";
-import PedidoObra from "./src/pantallas/ABMMain/PedidoObra";
-import VerPedidosObra from "./src/pantallas/ABMMain/VerPedidosObra";
+import CrearJornal from "./src/pantallas/testScreens/CrearJornal";
+import PedidoReintegro from "./src/pantallas/testScreens/PedidoReintegro";
+import CrearPedidoDeObra from "./src/pantallas/PedidoDeObra/CrearPedidoDeObra";
+import ConsultarPedidosDeObra from "./src/pantallas/PedidoDeObra/ConsultarPedidosDeObra";
 
 //Componentes ABM datos maestros
 import CrearObra from "./src/pantallas/ABMMaestros/Obra/CrearObra";
@@ -73,7 +73,7 @@ export default function App() {
           <Stack.Screen
             options={{ headerShown: false }}
             name="PedidoDeObraScreen"
-            component={PedidoObra}
+            component={CrearPedidoDeObra}
           />
           <Stack.Screen
             options={{ headerShown: false }}
@@ -88,7 +88,7 @@ export default function App() {
           <Stack.Screen
             options={{ headerShown: false }}
             name="VerPedidosDeObraScreen"
-            component={VerPedidosObra}
+            component={ConsultarPedidosDeObra}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>

@@ -9,9 +9,9 @@ import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
-import style from "./VerPedidosObra.style";
+import style from "./ConsultarPedidosDeObra.style";
 
-const VerPedidosObra = () => {
+const ConsultarPedidosDeObra = () => {
   const [pedidosObra, setPedidosObra] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
@@ -107,4 +107,4 @@ const VerPedidosObra = () => {
   );
 };
 
-export default VerPedidosObra;
+export default ConsultarPedidosDeObra;
