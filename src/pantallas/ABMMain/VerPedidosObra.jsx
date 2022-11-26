@@ -16,6 +16,11 @@ const VerPedidosObra = () => {
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
 
+  //evitar cargar todos los elementos cada vez que realizo alguna accion, deberia hacerlo local
+  //para eso el use effect deberia ser un component did mount para que no se actualice cada vez que cambia
+  //el estado de modal params, y hacer la accion especifica en cada caso para el use effect de
+  //modal params
+
   useEffect(() => {
     const loadItems = async () => {
       const rawElements = await getAllPedidosObraAsync();
@@ -29,10 +34,11 @@ const VerPedidosObra = () => {
   useEffect(() => {
     console.log(modalParams);
     if (modalParams["deletedItem"] != undefined) {
+      /*
       let newList = pedidosObra.filter(
         (e) => e.id !== modalParams[deletedItem]
       );
-      setPedidosObra(newList);
+      setPedidosObra(newList);*/
       setModalParams({ visible: false });
     }
     if (modalParams["EditedItem"] != undefined) {

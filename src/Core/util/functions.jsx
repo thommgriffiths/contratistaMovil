@@ -4,6 +4,7 @@ import { tiposPedidosDeObra } from "./mockFunctions";
 import {
   getFSElementById,
   deleteFSElement,
+  updateFSElement,
 } from "../../Managers/Firebase/FirebaseFirestoreManager";
 import { entities } from "../types";
 
@@ -19,6 +20,10 @@ export const getCurrentDateTime = () => {
 
 export const deleteElement = (item, onSuccess) => {
   deleteFSElement(item.type, item.id, onSuccess);
+};
+
+export const updateElement = (item, onSuccess) => {
+  updateFSElement(item.type, item.id, item, onSuccess);
 };
 
 export const completeElements = async (elements = []) => {
@@ -84,7 +89,9 @@ export const fuseItems = (newItem, oldItem) => {
       ? (fusedItem[key] = newItem[key])
       : (fusedItem[key] = oldItem[key]);
   }
-  console.log("fused item: ");
-  console.log(fusedItem);
+
+  //parche temporal hasta que agregue constructor vacio
+  fusedItem["type"] = oldItem?.type;
+  fusedItem["id"] = oldItem?.id;
   return fusedItem;
 };
