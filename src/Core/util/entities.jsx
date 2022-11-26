@@ -6,6 +6,11 @@ export const entities = {
   pedidoDeObra: "pedidoDeObra",
 };
 
+const contextConstructor = {
+  obra: null,
+  rubro: null,
+};
+
 export const getEmptyConstructor = (type) => {
   switch (type) {
     case entities.obra:
@@ -18,13 +23,12 @@ export const getEmptyConstructor = (type) => {
       return {
         id: null,
         type: entities.pedidoDeObra,
-        obra: null,
-        rubro: null,
         TipoDePedido: null,
         User: null,
         Status: null,
         Fecha: null,
         Descripcion: null,
+        ...contextConstructor,
       };
     case entities.rubro:
       return {
