@@ -6,9 +6,9 @@ import { palette } from "../assets/colors";
 import { entities } from "../Core/types";
 
 const SetContextoForm = ({ action, initialValues, isEdit }) => {
-  const [obra, setObra] = useState("");
-  const [rubro, setRubro] = useState("");
-  const [tarea, setTarea] = useState("");
+  const [obra, setObra] = useState(null);
+  const [rubro, setRubro] = useState(null);
+  const [tarea, setTarea] = useState(null);
 
   useEffect(() => {
     let contexto = {

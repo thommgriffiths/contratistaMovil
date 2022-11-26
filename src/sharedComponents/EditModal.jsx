@@ -3,8 +3,11 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 import EditPedidoObra from "../pantallas/ABMMain/PedidoObraEdit";
 
 const EditModal = ({ modalParams, setParams }) => {
-  const onEditSuccess = () => {
+  const onEdit = () => {
+    console.log("pseudo edited item ...");
+    console.log(item);
     setParams({ visible: false, EditedItem: modalParams.item.id });
+    //setParams({ visible: false, EditedItem: modalParams.item.id });
   };
 
   const [item, setItem] = useState({});
@@ -40,11 +43,7 @@ const EditModal = ({ modalParams, setParams }) => {
             </Pressable>
             <Pressable
               style={[style.button, style.buttonDelete]}
-              onPress={() => {
-                console.log("pseudo edited item ...");
-                console.log(item);
-                setParams({ visible: false, EditedItem: modalParams.item.id });
-              }}
+              onPress={onEdit}
             >
               <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
             </Pressable>

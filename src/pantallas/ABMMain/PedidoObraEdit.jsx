@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import { getCurrentDateTime } from "../../Core/util/functions";
+import { getCurrentDateTime, fuseItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { entities } from "../../Core/types";
@@ -18,11 +18,12 @@ import { palette } from "../../assets/colors";
 const EditPedidoObra = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
-  const [descripcion, setDescripcion] = useState("");
+  const [descripcion, setDescripcion] = useState(null);
 
   useEffect(() => {
-    let nuevoPedidoDeObra = buildPO(context, tipoDePedido, descripcion);
-    setNewItem(nuevoPedidoDeObra);
+    const newItem = buildPO(context, tipoDePedido, descripcion);
+    const itemToBeSet = fuseItems(newItem, currentItem);
+    setNewItem(itemToBeSet);
   }, [context, tipoDePedido, descripcion]);
 
   return (

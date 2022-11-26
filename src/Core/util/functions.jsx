@@ -65,3 +65,26 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
       return [];
   }
 };
+
+//desarrollar esto...
+//una funcion global que me de los constructores vacios
+//esto deberia ir en entities...
+export const emptyObjectConstructor = (type) => {
+  let result = {};
+
+  return result;
+};
+
+export const fuseItems = (newItem, oldItem) => {
+  let fusedItem = {};
+  //Aca el objeto vacio se deberia crear con el constructor correspondiente.... y recorrer el fused item ante todo
+
+  for (const key in newItem) {
+    newItem[key]
+      ? (fusedItem[key] = newItem[key])
+      : (fusedItem[key] = oldItem[key]);
+  }
+  console.log("fused item: ");
+  console.log(fusedItem);
+  return fusedItem;
+};
