@@ -20,7 +20,7 @@ export const getEmptyConstructor = (type) => {
         type: entities.pedidoDeObra,
         obra: null,
         rubro: null,
-        tarea: null,
+        TipoDePedido: null,
         User: null,
         Status: null,
         Fecha: null,
