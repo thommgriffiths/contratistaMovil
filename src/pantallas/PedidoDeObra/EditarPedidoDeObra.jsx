@@ -6,7 +6,7 @@ import DropdownSelect from "../../sharedComponents/DropdownSelect";
 import { getCurrentDateTime, fuseItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import { entities } from "../../Core/types";
+import { entities } from "../../Core/util/entities";
 
 import styles from "./EditarPedidoDeObra.style";
 

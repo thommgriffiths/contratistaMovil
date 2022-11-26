@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import DropdownSelect from "./DropdownSelect";
 import { palette } from "../assets/colors";
-import { entities } from "../Core/types";
+import { entities } from "../Core/util/entities";
 
 const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [obra, setObra] = useState(null);

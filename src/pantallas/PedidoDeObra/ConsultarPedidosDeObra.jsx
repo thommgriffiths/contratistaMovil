@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { getAllPedidosObraAsync } from "../../Managers/EntidadesFinales/PedidoObraManager";
 import { completeElements } from "../../Core/util/functions";
-import { entities } from "../../Core/types";
+import { entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
