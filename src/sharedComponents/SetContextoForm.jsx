@@ -8,7 +8,7 @@ import { entities } from "../Core/util/entities";
 const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [obra, setObra] = useState(null);
   const [rubro, setRubro] = useState(null);
-  const [tarea, setTarea] = useState(null);
+  const [tarea, setTarea] = useState("");
 
   useEffect(() => {
     let contexto = {

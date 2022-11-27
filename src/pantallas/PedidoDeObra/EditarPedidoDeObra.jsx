@@ -13,7 +13,7 @@ import styles from "./EditarPedidoDeObra.style";
 const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
-  const [descripcion, setDescripcion] = useState(null);
+  const [descripcion, setDescripcion] = useState("");
 
   useEffect(() => {
     const newItem = buildPO(context, tipoDePedido, descripcion);

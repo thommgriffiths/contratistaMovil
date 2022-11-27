@@ -74,9 +74,10 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
 export const fuseItems = (newItem, oldItem, type) => {
   let fusedItem = getEmptyConstructor(type);
   for (const key in fusedItem) {
-    newItem[key]
+    newItem[key] && !(newItem[key] == "" || newItem[key] == {})
       ? (fusedItem[key] = newItem[key])
       : (fusedItem[key] = oldItem[key]);
   }
+  console.log(fusedItem);
   return fusedItem;
 };
