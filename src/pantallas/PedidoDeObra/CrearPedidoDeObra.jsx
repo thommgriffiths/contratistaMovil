@@ -14,7 +14,7 @@ import {
   getEmptyConstructor,
   commonVariables,
 } from "../../Core/util/entities";
-import { createPedidoDeObra } from "../../Managers/EntidadesFinales/PedidoObraManager";
+import { createFSElementAsync } from "../../Managers/Firebase/FirebaseFirestoreManager";
 
 import styles from "./CrearPedidoDeObra.style";
 
@@ -23,7 +23,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
   const [tipoDePedido, setTipoDePedido] = useState(null);
   const [descripcion, setDescripcion] = useState("");
 
-  const handleCrearPedidoObra = () => {
+  const handleCrearPedidoObra = async () => {
     let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
 
     nuevoPedidoDeObra[commonVariables.fecha] = getCurrentDateTime();
@@ -36,7 +36,8 @@ const CrearPedidoDeObra = ({ navigation }) => {
     nuevoPedidoDeObra[entities.rubro] = context.rubro;
 
     console.log(nuevoPedidoDeObra);
-    createPedidoDeObra(nuevoPedidoDeObra, () => navigation.navigate("Home"));
+    await createFSElementAsync(nuevoPedidoDeObra);
+    navigation.navigate("Home");
   };
 
   return (

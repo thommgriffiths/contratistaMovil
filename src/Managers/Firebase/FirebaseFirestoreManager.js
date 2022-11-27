@@ -1,5 +1,5 @@
 import { firebase } from "../../Core/firebaseConfig";
-
+import { commonVariables } from "../../Core/util/entities";
 import {
   getFirestore,
   collection,
@@ -109,4 +109,11 @@ export const getFSCollectionAsync = async (type) => {
   });
 
   return elements;
+};
+
+export const createFSElementAsync = async (element) => {
+  const colRef = collection(db, element[commonVariables.type]);
+  const result = await addDoc(colRef, element);
+  console.log("New element added to " + element[commonVariables.type]);
+  return result;
 };
