@@ -1,7 +1,7 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { getAllPedidosObraAsync } from "../../Managers/EntidadesFinales/PedidoObraManager";
+import { getFSCollectionAsync } from "../../Managers/Firebase/FirebaseFirestoreManager";
 import { completeElements } from "../../Core/util/functions";
 import { entities } from "../../Core/util/entities";
 
@@ -23,7 +23,7 @@ const ConsultarPedidosDeObra = () => {
 
   useEffect(() => {
     const loadItems = async () => {
-      const rawElements = await getAllPedidosObraAsync();
+      const rawElements = await getFSCollectionAsync(entities.pedidoDeObra);
       const finalElements = await completeElements(rawElements);
       setPedidosObra(finalElements);
       setLoading(false);
