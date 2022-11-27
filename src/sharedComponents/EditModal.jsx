@@ -36,9 +36,7 @@ const EditModal = ({ modalParams, setParams }) => {
             <Pressable
               style={[style.button, style.buttonClose]}
               onPress={() => {
-                console.log("presionado cancelar");
                 setParams({ ...modalParams, visible: false });
-                console.log(modalParams);
               }}
             >
               <Text style={style.textStyle}>Cancelar</Text>

@@ -31,20 +31,6 @@ const HomeScreen = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("CrearJornalScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Crear Jornal</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("PedidoReintegroScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Pedido Reintegro</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("PedidoDeObraScreen")}
             style={styles.menuItem}
           >
@@ -66,17 +52,17 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("CrearRubroScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Crear Rubro</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("ListarObrasScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver Obras</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CrearRubroScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Crear Rubro</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
