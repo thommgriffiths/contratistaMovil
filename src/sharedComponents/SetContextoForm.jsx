@@ -11,11 +11,6 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [tarea, setTarea] = useState("");
 
   useEffect(() => {
-    console.log("Set contexto form did mount. initial values: ");
-    console.log(initialValues);
-  }, []);
-
-  useEffect(() => {
     let contexto = {
       tarea: tarea,
     };
