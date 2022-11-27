@@ -34,6 +34,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
 
     nuevoPedidoDeObra[entities.obra] = context.obra;
     nuevoPedidoDeObra[entities.rubro] = context.rubro;
+    nuevoPedidoDeObra[commonVariables.tarea] = context.tarea;
 
     console.log(nuevoPedidoDeObra);
     await createFSElementAsync(nuevoPedidoDeObra);

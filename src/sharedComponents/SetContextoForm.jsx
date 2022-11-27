@@ -49,8 +49,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
         <>
           <Text style={styles.fieldTitle}>Seleccione una tarea</Text>
           <TextInput
-            placeholder="Seleccione una Tarea"
-            //Agregar aca para busque en objeto
+            placeholder={initialValues?.tarea}
             defaultValue={tarea}
             onChangeText={(text) => setTarea(text)}
             style={styles.input}

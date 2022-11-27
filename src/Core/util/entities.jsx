@@ -13,11 +13,13 @@ export const commonVariables = {
   user: "User",
   status: "Status",
   descripcion: "Descripcion",
+  tarea: "tarea",
 };
 
 const contextConstructor = {
   obra: null,
   rubro: null,
+  tarea: null,
 };
 
 export const getEmptyConstructor = (type) => {

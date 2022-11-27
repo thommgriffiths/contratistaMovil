@@ -6,7 +6,7 @@ import DropdownSelect from "../../sharedComponents/DropdownSelect";
 import { getCurrentDateTime, fuseItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import { entities } from "../../Core/util/entities";
+import { entities, commonVariables } from "../../Core/util/entities";
 
 import styles from "./EditarPedidoDeObra.style";
 
@@ -75,6 +75,7 @@ const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   };
   pedidoObra[entities.obra] = context?.obra;
   pedidoObra[entities.rubro] = context?.rubro;
+  pedidoObra[commonVariables.tarea] = context?.tarea;
 
   return pedidoObra;
 };
