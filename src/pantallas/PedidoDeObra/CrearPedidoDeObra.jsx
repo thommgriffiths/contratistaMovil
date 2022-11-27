@@ -9,7 +9,11 @@ import DropdownSelect from "../../sharedComponents/DropdownSelect";
 import { getCurrentDateTime } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import { entities } from "../../Core/util/entities";
+import {
+  entities,
+  getEmptyConstructor,
+  commonVariables,
+} from "../../Core/util/entities";
 import { createPedidoDeObra } from "../../Managers/EntidadesFinales/PedidoObraManager";
 
 import styles from "./CrearPedidoDeObra.style";
@@ -20,16 +24,17 @@ const CrearPedidoDeObra = ({ navigation }) => {
   const [descripcion, setDescripcion] = useState("");
 
   const handleCrearPedidoObra = () => {
-    let nuevoPedidoDeObra = {
-      Descripcion: descripcion,
-      Fecha: getCurrentDateTime(),
-      Status: obtenerStatus().pedido,
-      User: getLoggedUser().email,
-      TipoDePedido: tipoDePedido,
-    };
+    let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
+
+    nuevoPedidoDeObra[commonVariables.fecha] = getCurrentDateTime();
+    nuevoPedidoDeObra[commonVariables.status] = obtenerStatus().pedido;
+    nuevoPedidoDeObra[commonVariables.user] = getLoggedUser().email;
+    nuevoPedidoDeObra[commonVariables.descripcion] = descripcion;
+    nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
+
     nuevoPedidoDeObra[entities.obra] = context.obra;
     nuevoPedidoDeObra[entities.rubro] = context.rubro;
-    console.log("pedido de obra creado");
+
     console.log(nuevoPedidoDeObra);
     createPedidoDeObra(nuevoPedidoDeObra, () => navigation.navigate("Home"));
   };

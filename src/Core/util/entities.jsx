@@ -6,6 +6,15 @@ export const entities = {
   pedidoDeObra: "pedidoDeObra",
 };
 
+export const commonVariables = {
+  fecha: "Fecha",
+  id: "id",
+  type: "type",
+  user: "User",
+  status: "Status",
+  descripcion: "Descripcion",
+};
+
 const contextConstructor = {
   obra: null,
   rubro: null,
