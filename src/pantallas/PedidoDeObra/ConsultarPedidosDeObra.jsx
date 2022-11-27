@@ -28,16 +28,18 @@ const ConsultarPedidosDeObra = () => {
       setPedidosObra(finalElements);
       setLoading(false);
     };
-    loadItems();
-  });
+    loading ? loadItems() : {};
+  }, [loading]);
 
   useEffect(() => {
     console.log(modalParams);
     if (modalParams["deletedItem"] != undefined) {
       setModalParams({ visible: false });
+      setLoading(true);
     }
     if (modalParams["EditedItem"] != undefined) {
       setModalParams({ visible: false });
+      setLoading(true);
     }
   }, [modalParams]);
 
