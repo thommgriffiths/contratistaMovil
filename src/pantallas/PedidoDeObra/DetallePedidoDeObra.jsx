@@ -17,11 +17,9 @@ const DetallePedidoDeObra = ({ item }) => {
   }, []);
 
   const displayProperty = ({ item }) => {
-    console.log("displaying item...");
-    console.log(item);
     return (
       <View style={styles.propertyContainer}>
-        <Text style={styles.label}>{label(item.ID)}</Text>
+        <Text style={styles.label}>{label(item.key)}</Text>
         <Text style={styles.content}>{item.value}</Text>
         <View style={styles.separator}></View>
       </View>
@@ -33,7 +31,7 @@ const DetallePedidoDeObra = ({ item }) => {
       <FlatList
         data={itemProperties}
         renderItem={displayProperty}
-        keyExtractor={(item) => item.ID}
+        keyExtractor={(item) => item.key}
         style={styles.List}
       />
     </View>

@@ -109,7 +109,7 @@ export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
 
     entities[key]
       ? result.push({ key: key, value: item[key][entitiesAttr.label] })
-      : result.push({ key: key, value: JSON.stringify(item[key]) });
+      : result.push({ key: key, value: item[key] });
   });
 
   return result;

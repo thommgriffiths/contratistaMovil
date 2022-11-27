@@ -25,9 +25,7 @@ const DetailModal = ({ modalParams, setParams }) => {
             <Pressable
               style={[style.button, style.buttonClose]}
               onPress={() => {
-                console.log("presionado volver");
                 setParams({ ...modalParams, visible: false });
-                console.log(modalParams);
               }}
             >
               <Text style={style.textStyle}>Volver</Text>
