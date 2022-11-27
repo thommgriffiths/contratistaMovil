@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
-import { updateElement } from "../Core/util/functions";
+import { updateElement, cleanElement } from "../Core/util/functions";
 
 const EditModal = ({ modalParams, setParams }) => {
   const onEdit = () => {
     const onSuccess = () => {
       setParams({ visible: false, EditedItem: modalParams.item.id });
     };
-    updateElement(item, onSuccess);
+    const finalItem = cleanElement(item);
+    updateElement(finalItem, onSuccess);
   };
 
   const [item, setItem] = useState({});

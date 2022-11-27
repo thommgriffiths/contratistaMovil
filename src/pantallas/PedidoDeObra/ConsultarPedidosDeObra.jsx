@@ -17,10 +17,8 @@ const ConsultarPedidosDeObra = () => {
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
 
-  //evitar cargar todos los elementos cada vez que realizo alguna accion, deberia hacerlo local
-  //para eso el use effect deberia ser un component did mount para que no se actualice cada vez que cambia
-  //el estado de modal params, y hacer la accion especifica en cada caso para el use effect de
-  //modal params
+  //ver si puedo evitar que recargue todo cada vez que hago un cambio, aunque por otro lado
+  //garantiza que el usuario este viendo la informacion real... pensar
 
   useEffect(() => {
     const loadItems = async () => {
@@ -59,8 +57,8 @@ const ConsultarPedidosDeObra = () => {
           >
             <Text>Tipo de pedido: {item.TipoDePedido}</Text>
             <Text>id: {item.id}</Text>
-            <Text>obra: {item.obraObject?.Nombre}</Text>
-            <Text>rubro: {item.rubroObject?.Nombre}</Text>
+            <Text>obra: {item.obra?.Nombre}</Text>
+            <Text>rubro: {item.rubro?.Nombre}</Text>
           </Pressable>
         </View>
         <View style={style.ListItemActions}>
@@ -70,7 +68,7 @@ const ConsultarPedidosDeObra = () => {
               setModalParams({
                 visible: true,
                 actionLabel: "Editar",
-                item: { ...item, type: entities.pedidoDeObra },
+                item: item,
               });
             }}
           />
@@ -80,7 +78,7 @@ const ConsultarPedidosDeObra = () => {
               setModalParams({
                 visible: true,
                 actionLabel: "Eliminar",
-                item: { ...item, type: entities.pedidoDeObra },
+                item: item,
               });
             }}
           />

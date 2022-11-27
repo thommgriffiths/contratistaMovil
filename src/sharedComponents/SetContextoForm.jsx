@@ -11,6 +11,11 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [tarea, setTarea] = useState("");
 
   useEffect(() => {
+    console.log("Set contexto form did mount. initial values: ");
+    console.log(initialValues);
+  }, []);
+
+  useEffect(() => {
     let contexto = {
       tarea: tarea,
     };
@@ -25,7 +30,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
       <DropdownSelect
         placeholder={
           isEdit && initialValues
-            ? initialValues[entities.obra + "Object"]["Nombre"]
+            ? initialValues[entities.obra]?.Nombre
             : "Seleccione Obra"
         }
         action={setObra}
@@ -37,7 +42,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
       <DropdownSelect
         placeholder={
           isEdit && initialValues
-            ? initialValues[entities.rubro + "Object"]["Nombre"]
+            ? initialValues[entities.rubro]?.Nombre
             : "Seleccione rubro"
         }
         action={setRubro}

@@ -1,3 +1,5 @@
+//Los entities deben ser si o si un objeto definido comun en mi modelo de datos.
+//.Todos deben tener los atributos obligatorios especificados abajo
 export const entities = {
   obra: "obra",
   rubro: "rubro",
@@ -5,6 +7,7 @@ export const entities = {
   pedidoReintegro: "pedidoReintegro",
   pedidoDeObra: "pedidoDeObra",
 };
+export const entitiesAttr = { id: "id", label: "Nombre", type: "type" };
 
 export const commonVariables = {
   fecha: "Fecha",
@@ -16,6 +19,7 @@ export const commonVariables = {
   tarea: "tarea",
 };
 
+//Constructors
 const contextConstructor = {
   obra: null,
   rubro: null,

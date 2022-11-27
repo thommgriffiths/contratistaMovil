@@ -32,8 +32,9 @@ const CrearPedidoDeObra = ({ navigation }) => {
     nuevoPedidoDeObra[commonVariables.descripcion] = descripcion;
     nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
 
-    nuevoPedidoDeObra[entities.obra] = context.obra;
-    nuevoPedidoDeObra[entities.rubro] = context.rubro;
+    //entities values must be objects
+    nuevoPedidoDeObra[entities.obra] = { id: context.obra };
+    nuevoPedidoDeObra[entities.rubro] = { id: context.rubro };
     nuevoPedidoDeObra[commonVariables.tarea] = context.tarea;
 
     console.log(nuevoPedidoDeObra);

@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 
 import SetContextoForm from "../../sharedComponents/SetContextoForm";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import { getCurrentDateTime, fuseItems } from "../../Core/util/functions";
+import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import { entities, commonVariables } from "../../Core/util/entities";
+import {
+  entities,
+  getEmptyConstructor,
+  commonVariables,
+} from "../../Core/util/entities";
 
 import styles from "./EditarPedidoDeObra.style";
 
@@ -17,8 +21,8 @@ const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
 
   useEffect(() => {
     const newItem = buildPO(context, tipoDePedido, descripcion);
-    const itemToBeSet = fuseItems(newItem, currentItem, entities.pedidoDeObra);
-    setNewItem(itemToBeSet);
+    const fuzedItem = fuzeItems(newItem, currentItem);
+    setNewItem(fuzedItem);
   }, [context, tipoDePedido, descripcion]);
 
   return (
@@ -66,16 +70,18 @@ const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
 export default EditarPedidoDeObra;
 
 const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
-  let pedidoObra = {
-    Descripcion: descripcion,
-    Fecha: getCurrentDateTime(),
-    Status: obtenerStatus().pedido,
-    User: getLoggedUser().email,
-    TipoDePedido: tipoDePedido,
-  };
-  pedidoObra[entities.obra] = context?.obra;
-  pedidoObra[entities.rubro] = context?.rubro;
+  let pedidoObra = getEmptyConstructor(entities.pedidoDeObra);
+
+  pedidoObra[commonVariables.fecha] = getCurrentDateTime();
+  pedidoObra[commonVariables.status] = obtenerStatus().pedido;
+  pedidoObra[commonVariables.user] = getLoggedUser().email;
+  pedidoObra[commonVariables.descripcion] = descripcion;
+  pedidoObra["TipoDePedido"] = tipoDePedido;
   pedidoObra[commonVariables.tarea] = context?.tarea;
+
+  //entities values must be objects
+  pedidoObra[entities.obra] = context?.obra ? { id: context.obra } : null;
+  pedidoObra[entities.rubro] = context?.rubro ? { id: context.rubro } : null;
 
   return pedidoObra;
 };

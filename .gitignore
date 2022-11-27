@@ -12,6 +12,7 @@ npm-debug.*
 *.png
 web-build/
 *yarn.lock
+*draft.jsx
 
 # macOS
 .DS_Store

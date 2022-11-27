@@ -6,7 +6,7 @@ import {
   deleteFSElement,
   updateFSElement,
 } from "../../Managers/Firebase/FirebaseFirestoreManager";
-import { entities, getEmptyConstructor } from "./entities";
+import { entities, entitiesAttr, getEmptyConstructor } from "./entities";
 
 export const getCurrentDateTime = () => {
   const date = new Date();
@@ -33,8 +33,14 @@ export const completeElements = async (elements = []) => {
 
     for (const key in element) {
       if (entities[key]) {
-        const object = await getFSElementById(key, element[key]);
-        element[key + "Object"] = object;
+        const object = await getFSElementById(
+          key,
+          element[key][entitiesAttr.id]
+        );
+        element[key] = {
+          [entitiesAttr.id]: element[key][entitiesAttr.id],
+          ...object,
+        };
       }
     }
     result.push(element);
@@ -71,13 +77,40 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
   }
 };
 
-export const fuseItems = (newItem, oldItem, type) => {
-  let fusedItem = getEmptyConstructor(type);
-  for (const key in fusedItem) {
+export const fuzeItems = (newItem, oldItem) => {
+  let fuzedItem = getEmptyConstructor(oldItem.type);
+  for (const key in fuzedItem) {
     newItem[key] && !(newItem[key] == "" || newItem[key] == {})
-      ? (fusedItem[key] = newItem[key])
-      : (fusedItem[key] = oldItem[key]);
+      ? (fuzedItem[key] = newItem[key])
+      : (fuzedItem[key] = oldItem[key]);
   }
-  console.log(fusedItem);
-  return fusedItem;
+  console.log(fuzedItem);
+  return fuzedItem;
+};
+
+// elimina los objetos internos dejando solo el id
+export const cleanElement = (element) => {
+  for (const key in entities) {
+    element[entities[key]]
+      ? (element[entities[key]] = {
+          [entitiesAttr.id]: element[entities[key]][entitiesAttr.id],
+        })
+      : {};
+  }
+  return element;
+};
+
+//Formatea un objeto como {key y value} para ser mostrado
+//devuelve solo con las propiedades pedidas y en ese orden
+export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
+  let result = [];
+  propertiesToDisplay.forEach((key) => {
+    if (!item[key]) return;
+
+    entities[key]
+      ? result.push({ key: key, value: item[key][entitiesAttr.label] })
+      : result.push({ key: key, value: JSON.stringify(item[key]) });
+  });
+
+  return result;
 };
