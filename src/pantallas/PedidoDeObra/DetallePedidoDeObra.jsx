@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { label } from "../../Core/util/labels";
 import { formatToDisplay } from "../../Core/util/functions";
-import styles from "./DetallePedidoDeObra.style";
+import styles from "./styles/DetallePedidoDeObra.style";
 
 const propertiesToDisplay = ["Status", "User", "Descripcion", "obra", "rubro"];
 

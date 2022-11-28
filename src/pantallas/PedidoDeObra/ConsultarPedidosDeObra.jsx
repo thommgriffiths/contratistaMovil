@@ -10,7 +10,7 @@ import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
-import style from "./ConsultarPedidosDeObra.style";
+import style from "./styles/ConsultarPedidosDeObra.style";
 
 const ConsultarPedidosDeObra = () => {
   const [pedidosObra, setPedidosObra] = useState([]);

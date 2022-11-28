@@ -12,7 +12,7 @@ import {
   commonVariables,
 } from "../../Core/util/entities";
 
-import styles from "./EditarPedidoDeObra.style";
+import styles from "./styles/EditarPedidoDeObra.style";
 
 const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);

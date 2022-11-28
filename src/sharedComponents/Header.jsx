@@ -4,7 +4,7 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-import { palette } from "../assets/colors";
+import { palette } from "../Core/colors";
 
 const Header = ({ backButton }) => {
   const navigation = useNavigation();

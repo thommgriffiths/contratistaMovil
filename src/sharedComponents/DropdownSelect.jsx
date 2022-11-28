@@ -4,7 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 import { obtenerDropdownItems } from "../Core/util/functions";
 import BlankInput from "./BlankInput";
-import { palette } from "../assets/colors";
+import { palette } from "../Core/colors";
 
 const DropdownSelect = ({ category, placeholder, action, props }) => {
   const [open, setOpen] = useState(false);

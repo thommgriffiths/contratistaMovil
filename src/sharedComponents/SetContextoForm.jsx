@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import DropdownSelect from "./DropdownSelect";
-import { palette } from "../assets/colors";
+import { palette } from "../Core/colors";
 import { entities } from "../Core/util/entities";
 
 const SetContextoForm = ({ action, initialValues, isEdit }) => {

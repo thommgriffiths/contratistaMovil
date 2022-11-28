@@ -9,7 +9,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
-import { palette } from "../assets/colors";
+import { palette } from "../Core/colors";
 import { userSignOut } from "../Managers/Firebase/FirebaseAuthManager";
 
 const HomeScreen = () => {
