@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { palette } from "../../../Core/colors";
+import { palette } from "../../Core/colors";
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: palette.white,
     flex: 1,
@@ -67,4 +67,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default style;
+export default styles;

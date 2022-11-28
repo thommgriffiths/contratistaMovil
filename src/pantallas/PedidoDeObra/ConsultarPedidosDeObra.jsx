@@ -10,7 +10,7 @@ import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
-import style from "./styles/ConsultarPedidosDeObra.style";
+import styles from "../styles/Consultar.style";
 
 const ConsultarPedidosDeObra = ({ navigation }) => {
   const [pedidosObra, setPedidosObra] = useState([]);
@@ -41,8 +41,8 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
 
   const renderPedidoObra = ({ item }) => {
     return (
-      <View style={style.ListItem}>
-        <View style={style.ListItemText}>
+      <View style={styles.ListItem}>
+        <View style={styles.ListItemText}>
           <Pressable
             onPress={() => {
               setModalParams({
@@ -55,9 +55,9 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
             <ShortInfo item={item} />
           </Pressable>
         </View>
-        <View style={style.ListItemActions}>
+        <View style={styles.ListItemActions}>
           <Pressable
-            style={style.ListItemEdit}
+            style={styles.ListItemEdit}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -67,7 +67,7 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
             }}
           />
           <Pressable
-            style={style.ListItemDelete}
+            style={styles.ListItemDelete}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -82,28 +82,28 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
   };
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Header backButton />
-      <View style={style.body}>
-        <View style={style.titlesAndActions}>
+      <View style={styles.body}>
+        <View style={styles.titlesAndActions}>
           <Titles titleText="Pedidos de obra" />
-          <View style={style.actions}>
+          <View style={styles.actions}>
             <Pressable
-              style={style.actionsAdd}
+              style={styles.actionsAdd}
               onPress={() => navigation.replace("CrearPedidoDeObraScreen")}
             >
-              <Text style={style.actionsAddText}>+ nuevo</Text>
+              <Text style={styles.actionsAddText}>+ nuevo</Text>
             </Pressable>
           </View>
         </View>
 
-        <View style={style.listContainer}>
+        <View style={styles.listContainer}>
           {loading && <Text>Loading</Text>}
           <FlatList
             data={pedidosObra}
             renderItem={renderPedidoObra}
             keyExtractor={(item) => item.id}
-            style={style.List}
+            style={styles.List}
           />
         </View>
       </View>

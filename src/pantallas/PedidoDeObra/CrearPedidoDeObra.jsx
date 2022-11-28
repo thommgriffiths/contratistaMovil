@@ -16,7 +16,7 @@ import {
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
-import styles from "./styles/CrearPedidoDeObra.style";
+import styles from "../styles/Crear.style";
 
 const CrearPedidoDeObra = ({ navigation }) => {
   const [context, SetContext] = useState(null);
