@@ -63,6 +63,7 @@ const CrearObra = ({ navigation }) => {
         onOkFunction={handleCrearObra}
         onOkText={"Crear nueva obra"}
         onCancelFunction={() => navigation.navigate("Home")}
+        onCancelText={"Volver"}
       />
     </View>
   );

@@ -82,6 +82,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
         onOkFunction={handleCrearPedidoObra}
         onOkText={"Crear pedido de obra"}
         onCancelFunction={() => navigation.navigate("VerPedidosDeObraScreen")}
+        onCancelText={"Volver"}
         style={styles.botonera}
       />
     </View>

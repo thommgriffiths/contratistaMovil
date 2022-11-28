@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import DropdownSelect from "./DropdownSelect";
 import { palette } from "../Core/colors";
-import { entities } from "../Core/util/entities";
+import { entities, commonVariables } from "../Core/util/entities";
 
 const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [obra, setObra] = useState(null);
@@ -11,11 +11,11 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
   const [tarea, setTarea] = useState("");
 
   useEffect(() => {
-    let contexto = {
-      tarea: tarea,
-    };
+    let contexto = {};
+    contexto[commonVariables.tarea] = tarea;
     contexto[entities.obra] = obra;
     contexto[entities.rubro] = rubro;
+
     action(contexto);
   }, [obra, rubro, tarea]);
 

@@ -49,6 +49,7 @@ const CrearRubro = ({ navigation }) => {
         onOkFunction={handleCrearRubro}
         onOkText={"Crear nuevo rubro"}
         onCancelFunction={() => navigation.navigate("Home")}
+        onCancelText={"Volver"}
       />
     </View>
   );

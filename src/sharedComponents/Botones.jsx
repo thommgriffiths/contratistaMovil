@@ -1,7 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-const Botones = ({ onOkFunction, onOkText, onCancelFunction }) => {
+const Botones = ({
+  onOkFunction,
+  onOkText,
+  onCancelFunction,
+  onCancelText,
+}) => {
   return (
     <View style={styles.botonera}>
       <View style={styles.botonOkWrapper}>
@@ -11,7 +16,7 @@ const Botones = ({ onOkFunction, onOkText, onCancelFunction }) => {
       </View>
       <View style={styles.botonCancelWrapper}>
         <TouchableOpacity onPress={onCancelFunction} style={styles.botonCancel}>
-          <Text style={styles.botonCancelText}>Volver</Text>
+          <Text style={styles.botonCancelText}>{onCancelText}</Text>
         </TouchableOpacity>
       </View>
     </View>

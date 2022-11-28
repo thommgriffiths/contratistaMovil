@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
+
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
 import { updateElement, cleanElement } from "../Core/util/functions";
+import { entities } from "../Core/util/entities";
 
 const EditModal = ({ modalParams, setParams }) => {
   const onEdit = () => {
@@ -14,6 +16,22 @@ const EditModal = ({ modalParams, setParams }) => {
 
   const [item, setItem] = useState({});
 
+  const editItem = (type) => {
+    switch (type) {
+      case entities.pedidoDeObra:
+        return (
+          <EditarPedidoDeObra
+            currentItem={modalParams.item}
+            setNewItem={setItem}
+          />
+        );
+      default:
+        console.log("No se encontro la categoria" + type);
+        setParams({ ...modalParams, visible: false });
+        return false;
+    }
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -25,12 +43,18 @@ const EditModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          {modalParams.visible && Object.keys(modalParams.item).length != 0 && (
+          {
+            modalParams.visible &&
+              Object.keys(modalParams.item).length != 0 &&
+              editItem(modalParams.item.type)
+
+            /*(
             <EditarPedidoDeObra
               currentItem={modalParams.item}
               setNewItem={setItem}
             />
-          )}
+          )*/
+          }
 
           <View style={style.buttonContainer}>
             <Pressable

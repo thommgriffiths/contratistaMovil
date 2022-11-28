@@ -2,11 +2,23 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
 import DetallePedidoDeObra from "../pantallas/PedidoDeObra/DetallePedidoDeObra";
+import { entities } from "../Core/util/entities";
 
 const DetailModal = ({ modalParams, setParams }) => {
   useEffect(() => {
     console.log(modalParams);
   }, []);
+
+  const showDetails = (type) => {
+    switch (type) {
+      case entities.pedidoDeObra:
+        return <DetallePedidoDeObra item={modalParams.item} />;
+      default:
+        console.log("No se encontro la categoria" + type);
+        setParams({ ...modalParams, visible: false });
+        return false;
+    }
+  };
 
   return (
     <Modal
@@ -19,7 +31,7 @@ const DetailModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          <DetallePedidoDeObra item={modalParams.item} />
+          {modalParams.item.type && showDetails(modalParams.item.type)}
 
           <View style={style.buttonContainer}>
             <Pressable
