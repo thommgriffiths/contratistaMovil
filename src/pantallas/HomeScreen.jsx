@@ -31,17 +31,10 @@ const HomeScreen = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("PedidoDeObraScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Nuevo pedido de Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("VerPedidosDeObraScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Ver Pedidos de Obra</Text>
+            <Text style={styles.menuItemText}>Pedidos de Obra</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

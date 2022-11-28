@@ -6,7 +6,7 @@ import { updateElement, cleanElement } from "../Core/util/functions";
 const EditModal = ({ modalParams, setParams }) => {
   const onEdit = () => {
     const onSuccess = () => {
-      setParams({ visible: false, EditedItem: modalParams.item.id });
+      setParams({ visible: false, editedItem: modalParams.item.id });
     };
     const finalItem = cleanElement(item);
     updateElement(finalItem, onSuccess);

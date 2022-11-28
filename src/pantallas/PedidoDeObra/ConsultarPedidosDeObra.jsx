@@ -12,13 +12,10 @@ import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import style from "./styles/ConsultarPedidosDeObra.style";
 
-const ConsultarPedidosDeObra = () => {
+const ConsultarPedidosDeObra = ({ navigation }) => {
   const [pedidosObra, setPedidosObra] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
-
-  //ver si puedo evitar que recargue todo cada vez que hago un cambio, aunque por otro lado
-  //garantiza que el usuario este viendo la informacion real... pensar
 
   useEffect(() => {
     const loadItems = async () => {
@@ -36,7 +33,7 @@ const ConsultarPedidosDeObra = () => {
       setModalParams({ visible: false });
       setLoading(true);
     }
-    if (modalParams["EditedItem"] != undefined) {
+    if (modalParams["editedItem"] != undefined) {
       setModalParams({ visible: false });
       setLoading(true);
     }
@@ -55,10 +52,7 @@ const ConsultarPedidosDeObra = () => {
               });
             }}
           >
-            <Text>Tipo de pedido: {item.TipoDePedido}</Text>
-            <Text>id: {item.id}</Text>
-            <Text>obra: {item.obra?.Nombre}</Text>
-            <Text>rubro: {item.rubro?.Nombre}</Text>
+            <ShortInfo item={item} />
           </Pressable>
         </View>
         <View style={style.ListItemActions}>
@@ -91,7 +85,18 @@ const ConsultarPedidosDeObra = () => {
     <View style={style.container}>
       <Header backButton />
       <View style={style.body}>
-        <Titles titleText="Ver pedidos de obra" />
+        <View style={style.titlesAndActions}>
+          <Titles titleText="Pedidos de obra" />
+          <View style={style.actions}>
+            <Pressable
+              style={style.actionsAdd}
+              onPress={() => navigation.replace("CrearPedidoDeObraScreen")}
+            >
+              <Text style={style.actionsAddText}>+ nuevo</Text>
+            </Pressable>
+          </View>
+        </View>
+
         <View style={style.listContainer}>
           {loading && <Text>Loading</Text>}
           <FlatList
@@ -116,3 +121,14 @@ const ConsultarPedidosDeObra = () => {
 };
 
 export default ConsultarPedidosDeObra;
+
+const ShortInfo = ({ item }) => {
+  return (
+    <>
+      <Text>Tipo de pedido: {item.TipoDePedido}</Text>
+      <Text>id: {item.id}</Text>
+      <Text>obra: {item.obra?.Nombre}</Text>
+      <Text>rubro: {item.rubro?.Nombre}</Text>
+    </>
+  );
+};

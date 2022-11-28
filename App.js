@@ -39,7 +39,7 @@ export default function App() {
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="PedidoDeObraScreen"
+            name="CrearPedidoDeObraScreen"
             component={CrearPedidoDeObra}
           />
           <Stack.Screen

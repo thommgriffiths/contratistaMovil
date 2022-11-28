@@ -39,7 +39,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
 
     console.log(nuevoPedidoDeObra);
     await createFSElementAsync(nuevoPedidoDeObra);
-    navigation.navigate("Home");
+    navigation.navigate("VerPedidosDeObraScreen");
   };
 
   return (
@@ -81,7 +81,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
       <Botones
         onOkFunction={handleCrearPedidoObra}
         onOkText={"Crear pedido de obra"}
-        onCancelFunction={() => navigation.navigate("Home")}
+        onCancelFunction={() => navigation.navigate("VerPedidosDeObraScreen")}
         style={styles.botonera}
       />
     </View>

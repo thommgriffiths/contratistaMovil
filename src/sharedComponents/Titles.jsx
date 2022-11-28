@@ -18,8 +18,7 @@ export default Titles;
 
 const styles = StyleSheet.create({
   titlesWrapper: {
-    marginTop: 30,
-    marginBottom: 15,
+    marginVertical: 20,
   },
   titlesSubtitle: {
     fontSize: 16,
