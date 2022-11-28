@@ -1,7 +1,7 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { getFSCollectionAsync } from "../../Managers/Firebase/FirebaseFirestoreManager";
+import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { completeElements } from "../../Core/util/functions";
 import { entities } from "../../Core/util/entities";
 

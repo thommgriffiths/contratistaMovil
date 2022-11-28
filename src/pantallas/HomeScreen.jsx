@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 import { palette } from "../Core/colors";
-import { userSignOut } from "../Managers/Firebase/FirebaseAuthManager";
+import { userSignOut } from "../Core/Firebase/FirebaseAuthManager";
 
 const HomeScreen = () => {
   const navigation = useNavigation();

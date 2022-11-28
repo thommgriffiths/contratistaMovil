@@ -3,7 +3,7 @@ import {
   getFSCollection,
   deleteFSElement,
   updateFSElement,
-} from "../Firebase/FirebaseFirestoreManager";
+} from "../../Core/Firebase/FirebaseFirestoreManager";
 
 import { entities } from "../../Core/util/entities";
 

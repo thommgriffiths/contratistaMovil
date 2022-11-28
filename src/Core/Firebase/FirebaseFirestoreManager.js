@@ -1,5 +1,5 @@
-import { firebase } from "../../Core/firebaseConfig";
-import { commonVariables } from "../../Core/util/entities";
+import { firebase } from "./firebaseConfig";
+import { commonVariables } from "../util/entities";
 import {
   getFirestore,
   collection,

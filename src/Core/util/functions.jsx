@@ -5,7 +5,7 @@ import {
   getFSElementById,
   deleteFSElement,
   updateFSElement,
-} from "../../Managers/Firebase/FirebaseFirestoreManager";
+} from "../Firebase/FirebaseFirestoreManager";
 import { entities, entitiesAttr, getEmptyConstructor } from "./entities";
 
 export const getCurrentDateTime = () => {

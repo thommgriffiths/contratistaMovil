@@ -1,4 +1,4 @@
-import { firebase } from "../../Core/firebaseConfig";
+import { firebase } from "./firebaseConfig";
 
 import {
   getAuth,

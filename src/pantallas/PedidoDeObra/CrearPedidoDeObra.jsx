@@ -14,7 +14,7 @@ import {
   getEmptyConstructor,
   commonVariables,
 } from "../../Core/util/entities";
-import { createFSElementAsync } from "../../Managers/Firebase/FirebaseFirestoreManager";
+import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
 import styles from "./styles/CrearPedidoDeObra.style";
 

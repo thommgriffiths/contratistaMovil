@@ -10,10 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { setLoggedUser } from "../Core/util/globalStore";
-import {
-  userSignUp,
-  userLogin,
-} from "../Managers/Firebase/FirebaseAuthManager";
+import { userSignUp, userLogin } from "../Core/Firebase/FirebaseAuthManager";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
