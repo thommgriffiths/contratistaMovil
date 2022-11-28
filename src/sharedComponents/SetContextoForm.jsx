@@ -29,7 +29,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
             : "Seleccione Obra"
         }
         action={setObra}
-        category="obras"
+        category={entities.obra}
         props={{ stackOrder: 15000 }}
         initialValue={initialValues?.obra}
       />
@@ -41,7 +41,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
             : "Seleccione rubro"
         }
         action={setRubro}
-        category="rubros"
+        category={entities.rubro}
         props={{ stackOrder: 14000 }}
         initialValue={initialValues?.rubro}
       />

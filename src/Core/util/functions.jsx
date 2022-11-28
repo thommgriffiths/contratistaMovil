@@ -8,6 +8,7 @@ import {
 } from "../Firebase/FirebaseFirestoreManager";
 import { entities, entitiesAttr, getEmptyConstructor } from "./entities";
 
+//Obtengo fecha y hora en un formato legible y comun
 export const getCurrentDateTime = () => {
   const date = new Date();
   const [month, day, year] = [
@@ -18,14 +19,19 @@ export const getCurrentDateTime = () => {
   return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;
 };
 
+//------------------------------------------------------------------------
+//Firestore CRUD - Delete
 export const deleteElement = (item, onSuccess) => {
   deleteFSElement(item.type, item.id, onSuccess);
 };
-
+//Firestore CRUD - Update
 export const updateElement = (item, onSuccess) => {
   updateFSElement(item.type, item.id, item, onSuccess);
 };
 
+//------------------------------------------------------------------------
+//Revisa un array de items traidos desde la base
+//Si alguna propiedad es entity, la completa con sus datos
 export const completeElements = async (elements = []) => {
   let result = [];
   for (let i = 0; i < elements.length; i++) {
@@ -48,6 +54,23 @@ export const completeElements = async (elements = []) => {
   return result;
 };
 
+//Funcion opuesta a completeElements
+//Si alguna propiedad del item es entity, deja solo su id
+export const cleanElement = (element) => {
+  for (const key in entities) {
+    element[entities[key]]
+      ? (element[entities[key]] = {
+          [entitiesAttr.id]: element[entities[key]][entitiesAttr.id],
+        })
+      : {};
+  }
+  return element;
+};
+
+//------------------------------------------------------------------------
+
+//Dado un tipo de elemento, lo busca en firestore y los prepara para
+//ser desplegados en un dropdown
 export const obtenerDropdownItems = (type, setItems = () => {}) => {
   const prepareForDropdown = (element) => ({
     value: element.id,
@@ -65,10 +88,10 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
   switch (type) {
     case "tiposPedidosDePedidosObra":
       return tiposPedidosDeObra;
-    case "obras":
+    case entities.obra:
       getAllObras(onSuccess);
       break;
-    case "rubros":
+    case entities.rubro:
       getAllRubros(onSuccess);
       break;
     default:
@@ -77,31 +100,9 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
   }
 };
 
-export const fuzeItems = (newItem, oldItem) => {
-  let fuzedItem = getEmptyConstructor(oldItem.type);
-  for (const key in fuzedItem) {
-    newItem[key] && !(newItem[key] == "" || newItem[key] == {})
-      ? (fuzedItem[key] = newItem[key])
-      : (fuzedItem[key] = oldItem[key]);
-  }
-  console.log(fuzedItem);
-  return fuzedItem;
-};
-
-// elimina los objetos internos dejando solo el id
-export const cleanElement = (element) => {
-  for (const key in entities) {
-    element[entities[key]]
-      ? (element[entities[key]] = {
-          [entitiesAttr.id]: element[entities[key]][entitiesAttr.id],
-        })
-      : {};
-  }
-  return element;
-};
-
-//Formatea un objeto como {key y value} para ser mostrado
-//devuelve solo con las propiedades pedidas y en ese orden
+//Dado un item y las propiedades que quiero desplegar
+//lo prepara como {key - value} para desplegar en detalles.
+//Devuelve solo con las propiedades pedidas y en ese orden.
 export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
   let result = [];
   propertiesToDisplay.forEach((key) => {
@@ -113,4 +114,18 @@ export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
   });
 
   return result;
+};
+
+//------------------------------------------------------------------------
+
+//Dados dos objetos, uno editado y uno original, los fusiona
+export const fuzeItems = (newItem, oldItem) => {
+  let fuzedItem = getEmptyConstructor(oldItem.type);
+  for (const key in fuzedItem) {
+    newItem[key] && !(newItem[key] == "" || newItem[key] == {})
+      ? (fuzedItem[key] = newItem[key])
+      : (fuzedItem[key] = oldItem[key]);
+  }
+  console.log(fuzedItem);
+  return fuzedItem;
 };
