@@ -2,7 +2,6 @@ import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements } from "../../Core/util/functions";
 import { entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
@@ -98,12 +97,14 @@ const ConsultarObras = ({ navigation }) => {
 
         <View style={styles.listContainer}>
           {loading && <Text>Loading</Text>}
-          <FlatList
-            data={obras}
-            renderItem={renderObra}
-            keyExtractor={(item) => item.id}
-            style={styles.List}
-          />
+          {!loading && (
+            <FlatList
+              data={obras}
+              renderItem={renderObra}
+              keyExtractor={(item) => item.id}
+              style={styles.List}
+            />
+          )}
         </View>
       </View>
       {modalParams?.actionLabel == "Eliminar" && (

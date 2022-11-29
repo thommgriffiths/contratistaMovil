@@ -99,12 +99,14 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
 
         <View style={styles.listContainer}>
           {loading && <Text>Loading</Text>}
-          <FlatList
-            data={pedidosObra}
-            renderItem={renderPedidoObra}
-            keyExtractor={(item) => item.id}
-            style={styles.List}
-          />
+          {!loading && (
+            <FlatList
+              data={pedidosObra}
+              renderItem={renderPedidoObra}
+              keyExtractor={(item) => item.id}
+              style={styles.List}
+            />
+          )}
         </View>
       </View>
       {modalParams?.actionLabel == "Eliminar" && (
