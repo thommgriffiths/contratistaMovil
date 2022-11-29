@@ -28,6 +28,7 @@ export const commonAttrs = {
   tarea: "tarea",
   propietario: "Propietario",
   direccion: "Direccion",
+  diasHombre: "DiasHombre",
 };
 
 //Constructors
@@ -56,6 +57,12 @@ export const getEmptyConstructor = (type) => {
         ...attrsObligatorios(entities.obra),
         Propietario: null,
         Direccion: null,
+      };
+    case entities.jornal:
+      return {
+        ...attrsObligatorios(entities.jornal),
+        ...contextConstructor,
+        DiasHombre: null,
       };
     case entities.rubro:
       return {

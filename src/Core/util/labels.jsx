@@ -13,6 +13,9 @@ spanishLabels["Nombre"] = "Nombre";
 spanishLabels["Direccion"] = "Dirección";
 spanishLabels["Propietario"] = "Propietario";
 
+//Jornal
+spanishLabels["DiasHombre"] = "Dias hombre";
+
 export const label = (key) => {
   return spanishLabels[key];
 };

@@ -36,6 +36,13 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={() => navigation.navigate("VerJornalesScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Jornales</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() => navigation.navigate("VerObrasScreen")}
             style={styles.menuItem}
           >

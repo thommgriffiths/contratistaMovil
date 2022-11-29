@@ -7,6 +7,8 @@ import HomeScreen from "./src/pantallas/HomeScreen";
 //Componentes principales
 import CrearPedidoDeObra from "./src/pantallas/PedidoDeObra/CrearPedidoDeObra";
 import ConsultarPedidosDeObra from "./src/pantallas/PedidoDeObra/ConsultarPedidosDeObra";
+import ConsultarJornales from "./src/pantallas/Jornal/ConsultarJornales";
+import CrearJornal from "./src/pantallas/Jornal/CrearJornal";
 
 //Componentes ABM datos maestros
 import ConsultarObras from "./src/pantallas/Obra/ConsultarObras";
@@ -40,6 +42,17 @@ export default function App() {
             options={{ headerShown: false }}
             name="VerPedidosDeObraScreen"
             component={ConsultarPedidosDeObra}
+          />
+
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="CrearJornalScreen"
+            component={CrearJornal}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="VerJornalesScreen"
+            component={ConsultarJornales}
           />
 
           <Stack.Screen

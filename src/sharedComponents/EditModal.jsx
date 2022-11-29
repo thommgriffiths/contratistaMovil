@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
+import EditarJornal from "../pantallas/Jornal/EditarJornal";
 import EditarObra from "../pantallas/Obra/EditarObra";
 import EditarRubro from "../pantallas/Rubro/EditarRubro";
 import { updateElement, cleanElement } from "../Core/util/functions";
@@ -28,6 +29,10 @@ const EditModal = ({ modalParams, setParams }) => {
             currentItem={modalParams.item}
             setNewItem={setItem}
           />
+        );
+      case entities.jornal:
+        return (
+          <EditarJornal currentItem={modalParams.item} setNewItem={setItem} />
         );
       case entities.obra:
         return (
