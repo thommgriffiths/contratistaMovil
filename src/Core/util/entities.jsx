@@ -13,13 +13,13 @@ export const commonAttrs = {
   id: "id",
   type: "type",
   nombre: "Nombre",
-
-  //Otros
-  fecha: "Fecha",
   fechaCreacion: "FechaCreacion",
   fechaEdicion: "FechaEdicion",
   creadoPor: "CreadoPor",
   editadoPor: "EditadoPor",
+
+  //Otros
+  fecha: "Fecha",
   id: "id",
   type: "type",
   user: "User",
