@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
+import EditarObra from "../pantallas/Obra/EditarObra";
 import { updateElement, cleanElement } from "../Core/util/functions";
 import { entities } from "../Core/util/entities";
 
@@ -24,6 +25,10 @@ const EditModal = ({ modalParams, setParams }) => {
             currentItem={modalParams.item}
             setNewItem={setItem}
           />
+        );
+      case entities.obra:
+        return (
+          <EditarObra currentItem={modalParams.item} setNewItem={setItem} />
         );
       default:
         console.log("No se encontro la categoria" + type);

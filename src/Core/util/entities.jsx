@@ -11,12 +11,18 @@ export const entitiesAttr = { id: "id", label: "Nombre", type: "type" };
 
 export const commonVariables = {
   fecha: "Fecha",
+  fechaCreacion: "FechaCreacion",
+  fechaEdicion: "FechaEdicion",
+  creadoPor: "CreadoPor",
+  editadoPor: "EditadoPor",
   id: "id",
   type: "type",
   user: "User",
   status: "Status",
   descripcion: "Descripcion",
   tarea: "tarea",
+  propietario: "Propietario",
+  direccion: "Direccion",
 };
 
 //Constructors
@@ -30,6 +36,8 @@ export const getEmptyConstructor = (type) => {
   switch (type) {
     case entities.obra:
       return {
+        id: null,
+        type: entities.obra,
         Nombre: null,
         Propietario: null,
         Direccion: null,

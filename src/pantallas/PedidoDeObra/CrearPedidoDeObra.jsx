@@ -26,9 +26,9 @@ const CrearPedidoDeObra = ({ navigation }) => {
   const handleCrearPedidoObra = async () => {
     let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
 
-    nuevoPedidoDeObra[commonVariables.fecha] = getCurrentDateTime();
+    nuevoPedidoDeObra[commonVariables.fechaCreacion] = getCurrentDateTime();
     nuevoPedidoDeObra[commonVariables.status] = obtenerStatus().pedido;
-    nuevoPedidoDeObra[commonVariables.user] = getLoggedUser().email;
+    nuevoPedidoDeObra[commonVariables.creadoPor] = getLoggedUser().email;
     nuevoPedidoDeObra[commonVariables.descripcion] = descripcion;
     nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
 

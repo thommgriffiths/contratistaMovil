@@ -72,9 +72,9 @@ export default EditarPedidoDeObra;
 const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   let pedidoObra = getEmptyConstructor(entities.pedidoDeObra);
 
-  pedidoObra[commonVariables.fecha] = getCurrentDateTime();
+  pedidoObra[commonVariables.fechaEdicion] = getCurrentDateTime();
   pedidoObra[commonVariables.status] = obtenerStatus().pedido;
-  pedidoObra[commonVariables.user] = getLoggedUser().email;
+  pedidoObra[commonVariables.editadoPor] = getLoggedUser().email;
   pedidoObra[commonVariables.descripcion] = descripcion;
   pedidoObra["TipoDePedido"] = tipoDePedido;
   pedidoObra[commonVariables.tarea] = context?.tarea;

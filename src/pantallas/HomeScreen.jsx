@@ -38,6 +38,14 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={() => navigation.navigate("VerObrasScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Obras</Text>
+          </TouchableOpacity>
+
+          {/*}
+          <TouchableOpacity
             onPress={() => navigation.navigate("CrearObraScreen")}
             style={styles.menuItem}
           >
@@ -49,7 +57,7 @@ const HomeScreen = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver Obras</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
 
           <TouchableOpacity
             onPress={() => navigation.navigate("CrearRubroScreen")}

@@ -11,8 +11,9 @@ import CrearPedidoDeObra from "./src/pantallas/PedidoDeObra/CrearPedidoDeObra";
 import ConsultarPedidosDeObra from "./src/pantallas/PedidoDeObra/ConsultarPedidosDeObra";
 
 //Componentes ABM datos maestros
-import CrearObra from "./src/pantallas/ABMMaestros/Obra/CrearObra";
-import ListarObras from "./src/pantallas/ABMMaestros/Obra/ListarObras";
+import ConsultarObras from "./src/pantallas/Obra/ConsultarObras";
+import CrearObra from "./src/pantallas/Obra/CrearObra";
+
 import CrearRubro from "./src/pantallas/ABMMaestros/Rubro/CrearRubro";
 
 const Stack = createStackNavigator();
@@ -34,14 +35,15 @@ export default function App() {
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="ListarObrasScreen"
-            component={ListarObras}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
             name="CrearPedidoDeObraScreen"
             component={CrearPedidoDeObra}
           />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="VerPedidosDeObraScreen"
+            component={ConsultarPedidosDeObra}
+          />
+
           <Stack.Screen
             options={{ headerShown: false }}
             name="CrearObraScreen"
@@ -49,13 +51,13 @@ export default function App() {
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="CrearRubroScreen"
-            component={CrearRubro}
+            name="VerObrasScreen"
+            component={ConsultarObras}
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="VerPedidosDeObraScreen"
-            component={ConsultarPedidosDeObra}
+            name="CrearRubroScreen"
+            component={CrearRubro}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}></Stack.Group>
