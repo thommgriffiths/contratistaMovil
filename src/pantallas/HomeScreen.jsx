@@ -9,8 +9,6 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
-import { palette } from "../Core/colors";
-import { userSignOut } from "../Core/Firebase/FirebaseAuthManager";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -44,26 +42,11 @@ const HomeScreen = () => {
             <Text style={styles.menuItemText}>Obras</Text>
           </TouchableOpacity>
 
-          {/*}
           <TouchableOpacity
-            onPress={() => navigation.navigate("CrearObraScreen")}
+            onPress={() => navigation.navigate("VerRubrosScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Crear Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ListarObrasScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Ver Obras</Text>
-          </TouchableOpacity>*/}
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CrearRubroScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Crear Rubro</Text>
+            <Text style={styles.menuItemText}>Rubros</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

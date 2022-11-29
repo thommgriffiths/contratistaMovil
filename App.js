@@ -13,8 +13,8 @@ import ConsultarPedidosDeObra from "./src/pantallas/PedidoDeObra/ConsultarPedido
 //Componentes ABM datos maestros
 import ConsultarObras from "./src/pantallas/Obra/ConsultarObras";
 import CrearObra from "./src/pantallas/Obra/CrearObra";
-
-import CrearRubro from "./src/pantallas/ABMMaestros/Rubro/CrearRubro";
+import ConsultarRubros from "./src/pantallas/Rubro/ConsultarRubros";
+import CrearRubro from "./src/pantallas/Rubro/CrearRubro";
 
 const Stack = createStackNavigator();
 
@@ -54,10 +54,16 @@ export default function App() {
             name="VerObrasScreen"
             component={ConsultarObras}
           />
+
           <Stack.Screen
             options={{ headerShown: false }}
             name="CrearRubroScreen"
             component={CrearRubro}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="VerRubrosScreen"
+            component={ConsultarRubros}
           />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}></Stack.Group>

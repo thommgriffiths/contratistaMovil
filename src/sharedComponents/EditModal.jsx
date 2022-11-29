@@ -3,6 +3,7 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
 import EditarObra from "../pantallas/Obra/EditarObra";
+import EditarRubro from "../pantallas/Rubro/EditarRubro";
 import { updateElement, cleanElement } from "../Core/util/functions";
 import { entities } from "../Core/util/entities";
 
@@ -30,6 +31,11 @@ const EditModal = ({ modalParams, setParams }) => {
         return (
           <EditarObra currentItem={modalParams.item} setNewItem={setItem} />
         );
+
+      case entities.rubro:
+        return (
+          <EditarRubro currentItem={modalParams.item} setNewItem={setItem} />
+        );
       default:
         console.log("No se encontro la categoria" + type);
         setParams({ ...modalParams, visible: false });
@@ -48,18 +54,9 @@ const EditModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          {
-            modalParams.visible &&
-              Object.keys(modalParams.item).length != 0 &&
-              editItem(modalParams.item.type)
-
-            /*(
-            <EditarPedidoDeObra
-              currentItem={modalParams.item}
-              setNewItem={setItem}
-            />
-          )*/
-          }
+          {modalParams.visible &&
+            Object.keys(modalParams.item).length != 0 &&
+            editItem(modalParams.item.type)}
 
           <View style={style.buttonContainer}>
             <Pressable

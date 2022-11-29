@@ -55,7 +55,9 @@ export const getEmptyConstructor = (type) => {
       };
     case entities.rubro:
       return {
+        id: null,
         Nombre: null,
+        type: entities.rubro,
       };
   }
 };
