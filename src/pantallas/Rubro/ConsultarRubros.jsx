@@ -2,7 +2,7 @@ import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { entities, entitiesAttr } from "../../Core/util/entities";
+import { entities, commonAttrs } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -125,8 +125,8 @@ export default ConsultarRubros;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>id: {item?.[entitiesAttr.id]}</Text>
-      <Text>Nombre: {item?.[entitiesAttr.label]}</Text>
+      <Text>id: {item?.[commonAttrs.id]}</Text>
+      <Text>Nombre: {item?.[commonAttrs.nombre]}</Text>
     </>
   );
 };

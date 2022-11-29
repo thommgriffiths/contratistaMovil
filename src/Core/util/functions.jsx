@@ -5,7 +5,7 @@ import {
   updateFSElement,
   getFSCollection,
 } from "../Firebase/FirebaseFirestoreManager";
-import { entities, entitiesAttr, getEmptyConstructor } from "./entities";
+import { entities, commonAttrs, getEmptyConstructor } from "./entities";
 
 //Obtengo fecha y hora en un formato legible y comun
 export const getCurrentDateTime = () => {
@@ -37,16 +37,12 @@ export const completeElements = async (elements = []) => {
     let element = elements[i];
 
     for (const key in element) {
-      if (entities[key]) {
-        const object = await getFSElementById(
-          key,
-          element[key][entitiesAttr.id]
-        );
-        element[key] = {
-          [entitiesAttr.id]: element[key][entitiesAttr.id],
-          ...object,
-        };
-      }
+      if (!entities[key]) continue;
+      if (!element?.[key]?.[commonAttrs.id]) continue;
+
+      const object = await getFSElementById(key, element[key][commonAttrs.id]);
+      object[commonAttrs.id] = element[key][commonAttrs.id];
+      element[key] = object;
     }
     result.push(element);
   }
@@ -59,7 +55,7 @@ export const cleanElement = (element) => {
   for (const key in entities) {
     element[entities[key]]
       ? (element[entities[key]] = {
-          [entitiesAttr.id]: element[entities[key]][entitiesAttr.id],
+          [commonAttrs.id]: element[entities[key]][commonAttrs.id],
         })
       : {};
   }
@@ -108,7 +104,7 @@ export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
     if (!item[key]) return;
 
     entities[key]
-      ? result.push({ key: key, value: item[key][entitiesAttr.label] })
+      ? result.push({ key: key, value: item[key][commonAttrs.nombre] })
       : result.push({ key: key, value: item[key] });
   });
 

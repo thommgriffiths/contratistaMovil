@@ -6,8 +6,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
-  entitiesAttr,
+  commonAttrs,
 } from "../../Core/util/entities";
 
 import styles from "../styles/Editar.style";
@@ -39,21 +38,21 @@ const EditarObra = ({ currentItem, setNewItem }) => {
               placeholder="Nombre de la obra"
               onChangeText={(text) => setNombre(text)}
               style={styles.input}
-              defaultValue={currentItem?.[entitiesAttr.label]}
+              defaultValue={currentItem?.[commonAttrs.nombre]}
             />
             <Text style={styles.fieldTitle}>Direccion de la obra</Text>
             <TextInput
               placeholder="Direccion de la obra"
               onChangeText={(text) => setDireccion(text)}
               style={styles.input}
-              defaultValue={currentItem?.[commonVariables.direccion]}
+              defaultValue={currentItem?.[commonAttrs.direccion]}
             />
             <Text style={styles.fieldTitle}>Propietario de la obra</Text>
             <TextInput
               placeholder="Propietario de la obra"
               onChangeText={(text) => setPropietario(text)}
               style={styles.input}
-              defaultValue={currentItem?.[commonVariables.propietario]}
+              defaultValue={currentItem?.[commonAttrs.propietario]}
             />
           </View>
         </KeyboardAvoidingView>
@@ -67,12 +66,12 @@ export default EditarObra;
 const buildObra = (nombre = null, propietario = null, direccion = null) => {
   let obra = getEmptyConstructor(entities.obra);
 
-  obra[commonVariables.fechaEdicion] = getCurrentDateTime();
-  obra[commonVariables.editadoPor] = getLoggedUser().email;
+  obra[commonAttrs.fechaEdicion] = getCurrentDateTime();
+  obra[commonAttrs.editadoPor] = getLoggedUser().email;
 
-  obra[entitiesAttr.label] = nombre;
-  obra[commonVariables.propietario] = propietario;
-  obra[commonVariables.direccion] = direccion;
+  obra[commonAttrs.nombre] = nombre;
+  obra[commonAttrs.propietario] = propietario;
+  obra[commonAttrs.direccion] = direccion;
 
   return obra;
 };

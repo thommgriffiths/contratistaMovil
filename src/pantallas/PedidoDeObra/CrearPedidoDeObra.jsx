@@ -12,7 +12,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
+  commonAttrs,
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
@@ -26,16 +26,19 @@ const CrearPedidoDeObra = ({ navigation }) => {
   const handleCrearPedidoObra = async () => {
     let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
 
-    nuevoPedidoDeObra[commonVariables.fechaCreacion] = getCurrentDateTime();
-    nuevoPedidoDeObra[commonVariables.status] = obtenerStatus().pedido;
-    nuevoPedidoDeObra[commonVariables.creadoPor] = getLoggedUser().email;
-    nuevoPedidoDeObra[commonVariables.descripcion] = descripcion;
+    console.log("pedido de obra creado con el empty constructor: ");
+    console.log(nuevoPedidoDeObra);
+
+    nuevoPedidoDeObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
+    nuevoPedidoDeObra[commonAttrs.status] = obtenerStatus().pedido;
+    nuevoPedidoDeObra[commonAttrs.creadoPor] = getLoggedUser().email;
+    nuevoPedidoDeObra[commonAttrs.descripcion] = descripcion;
     nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
 
     //entities values must be objects
     nuevoPedidoDeObra[entities.obra] = { id: context.obra };
     nuevoPedidoDeObra[entities.rubro] = { id: context.rubro };
-    nuevoPedidoDeObra[commonVariables.tarea] = context.tarea;
+    nuevoPedidoDeObra[commonAttrs.tarea] = context.tarea;
 
     console.log(nuevoPedidoDeObra);
     await createFSElementAsync(nuevoPedidoDeObra);

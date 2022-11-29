@@ -7,9 +7,14 @@ export const entities = {
   pedidoReintegro: "pedidoReintegro",
   pedidoDeObra: "pedidoDeObra",
 };
-export const entitiesAttr = { id: "id", label: "Nombre", type: "type" };
 
-export const commonVariables = {
+export const commonAttrs = {
+  //Obligarios
+  id: "id",
+  type: "type",
+  nombre: "Nombre",
+
+  //Otros
   fecha: "Fecha",
   fechaCreacion: "FechaCreacion",
   fechaEdicion: "FechaEdicion",
@@ -32,32 +37,37 @@ const contextConstructor = {
   tarea: null,
 };
 
+const attrsObligatorios = (type) => {
+  return {
+    [commonAttrs.type]: type,
+    [commonAttrs.id]: null,
+    [commonAttrs.nombre]: null,
+    [commonAttrs.fechaCreacion]: null,
+    [commonAttrs.fechaEdicion]: null,
+    [commonAttrs.creadoPor]: null,
+    [commonAttrs.editadoPor]: null,
+  };
+};
+
 export const getEmptyConstructor = (type) => {
   switch (type) {
     case entities.obra:
       return {
-        id: null,
-        type: entities.obra,
-        Nombre: null,
+        ...attrsObligatorios(entities.obra),
         Propietario: null,
         Direccion: null,
       };
-    case entities.pedidoDeObra:
-      return {
-        id: null,
-        type: entities.pedidoDeObra,
-        TipoDePedido: null,
-        User: null,
-        Status: null,
-        Fecha: null,
-        Descripcion: null,
-        ...contextConstructor,
-      };
     case entities.rubro:
       return {
-        id: null,
-        Nombre: null,
-        type: entities.rubro,
+        ...attrsObligatorios(entities.rubro),
+      };
+    case entities.pedidoDeObra:
+      return {
+        ...attrsObligatorios(entities.pedidoDeObra),
+        ...contextConstructor,
+        TipoDePedido: null,
+        Status: null,
+        Descripcion: null,
       };
   }
 };

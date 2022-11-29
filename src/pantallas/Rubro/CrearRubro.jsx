@@ -9,8 +9,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
-  entitiesAttr,
+  commonAttrs,
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
@@ -22,10 +21,10 @@ const CrearRubro = ({ navigation }) => {
   const handleCrearRubro = async () => {
     let newRubro = getEmptyConstructor(entities.rubro);
 
-    newRubro[entitiesAttr.label] = nombre;
+    newRubro[commonAttrs.nombre] = nombre;
 
-    newRubro[commonVariables.fechaCreacion] = getCurrentDateTime();
-    newRubro[commonVariables.creadoPor] = getLoggedUser().email;
+    newRubro[commonAttrs.fechaCreacion] = getCurrentDateTime();
+    newRubro[commonAttrs.creadoPor] = getLoggedUser().email;
 
     console.log(newRubro);
     await createFSElementAsync(newRubro);

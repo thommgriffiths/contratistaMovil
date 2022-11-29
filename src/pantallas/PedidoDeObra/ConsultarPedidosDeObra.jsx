@@ -20,7 +20,11 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.pedidoDeObra);
+      console.log("Los raw elements son: ");
+      console.log(rawElements);
       const finalElements = await completeElements(rawElements);
+      console.log("Los final elements son: ");
+      console.log(finalElements);
       setPedidosObra(finalElements);
       setLoading(false);
     };
@@ -99,14 +103,12 @@ const ConsultarPedidosDeObra = ({ navigation }) => {
 
         <View style={styles.listContainer}>
           {loading && <Text>Loading</Text>}
-          {!loading && (
-            <FlatList
-              data={pedidosObra}
-              renderItem={renderPedidoObra}
-              keyExtractor={(item) => item.id}
-              style={styles.List}
-            />
-          )}
+          <FlatList
+            data={pedidosObra}
+            renderItem={renderPedidoObra}
+            keyExtractor={(item) => item.id}
+            style={styles.List}
+          />
         </View>
       </View>
       {modalParams?.actionLabel == "Eliminar" && (

@@ -9,7 +9,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
+  commonAttrs,
 } from "../../Core/util/entities";
 
 import styles from "../styles/Editar.style";
@@ -72,12 +72,12 @@ export default EditarPedidoDeObra;
 const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   let pedidoObra = getEmptyConstructor(entities.pedidoDeObra);
 
-  pedidoObra[commonVariables.fechaEdicion] = getCurrentDateTime();
-  pedidoObra[commonVariables.status] = obtenerStatus().pedido;
-  pedidoObra[commonVariables.editadoPor] = getLoggedUser().email;
-  pedidoObra[commonVariables.descripcion] = descripcion;
+  pedidoObra[commonAttrs.fechaEdicion] = getCurrentDateTime();
+  pedidoObra[commonAttrs.status] = obtenerStatus().pedido;
+  pedidoObra[commonAttrs.editadoPor] = getLoggedUser().email;
+  pedidoObra[commonAttrs.descripcion] = descripcion;
   pedidoObra["TipoDePedido"] = tipoDePedido;
-  pedidoObra[commonVariables.tarea] = context?.tarea;
+  pedidoObra[commonAttrs.tarea] = context?.tarea;
 
   //entities values must be objects
   pedidoObra[entities.obra] = context?.obra ? { id: context.obra } : null;

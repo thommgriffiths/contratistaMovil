@@ -6,8 +6,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
-  entitiesAttr,
+  commonAttrs,
 } from "../../Core/util/entities";
 
 import styles from "../styles/Editar.style";
@@ -37,7 +36,7 @@ const EditarRubro = ({ currentItem, setNewItem }) => {
               placeholder="Nombre del rubro"
               onChangeText={(text) => setNombre(text)}
               style={styles.input}
-              defaultValue={currentItem?.[entitiesAttr.label]}
+              defaultValue={currentItem?.[commonAttrs.nombre]}
             />
           </View>
         </KeyboardAvoidingView>
@@ -51,9 +50,9 @@ export default EditarRubro;
 const buildRubro = (nombre = null) => {
   let rubro = getEmptyConstructor(entities.rubro);
 
-  rubro[commonVariables.fechaEdicion] = getCurrentDateTime();
-  rubro[commonVariables.editadoPor] = getLoggedUser().email;
+  rubro[commonAttrs.fechaEdicion] = getCurrentDateTime();
+  rubro[commonAttrs.editadoPor] = getLoggedUser().email;
 
-  rubro[entitiesAttr.label] = nombre;
+  rubro[commonAttrs.nombre] = nombre;
   return rubro;
 };

@@ -9,8 +9,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
-  commonVariables,
-  entitiesAttr,
+  commonAttrs,
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
@@ -24,12 +23,12 @@ const CrearObra = ({ navigation }) => {
   const handleCrearObra = async () => {
     let nuevaObra = getEmptyConstructor(entities.obra);
 
-    nuevaObra[entitiesAttr.label] = nombre;
-    nuevaObra[commonVariables.propietario] = propietario;
-    nuevaObra[commonVariables.direccion] = direccion;
+    nuevaObra[commonAttrs.nombre] = nombre;
+    nuevaObra[commonAttrs.propietario] = propietario;
+    nuevaObra[commonAttrs.direccion] = direccion;
 
-    nuevaObra[commonVariables.fechaCreacion] = getCurrentDateTime();
-    nuevaObra[commonVariables.creadoPor] = getLoggedUser().email;
+    nuevaObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
+    nuevaObra[commonAttrs.creadoPor] = getLoggedUser().email;
 
     console.log(nuevaObra);
     await createFSElementAsync(nuevaObra);

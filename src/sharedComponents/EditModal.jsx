@@ -13,6 +13,8 @@ const EditModal = ({ modalParams, setParams }) => {
       setParams({ visible: false, editedItem: modalParams.item.id });
     };
     const finalItem = cleanElement(item);
+    console.log("el nuevo elemento editado es: ");
+    console.log(finalItem);
     updateElement(finalItem, onSuccess);
   };
 
