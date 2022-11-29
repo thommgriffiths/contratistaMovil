@@ -4,7 +4,7 @@ export const entities = {
   obra: "obra",
   rubro: "rubro",
   jornal: "jornal",
-  pedidoReintegro: "pedidoReintegro",
+  pedidoDeReintegro: "pedidoDeReintegro",
   pedidoDeObra: "pedidoDeObra",
 };
 
@@ -63,6 +63,13 @@ export const getEmptyConstructor = (type) => {
         ...attrsObligatorios(entities.jornal),
         ...contextConstructor,
         DiasHombre: null,
+      };
+    case entities.pedidoDeReintegro:
+      return {
+        ...attrsObligatorios(entities.pedidoDeReintegro),
+        ...contextConstructor,
+        Descripcion: null,
+        Monto: null,
       };
     case entities.rubro:
       return {

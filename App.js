@@ -9,6 +9,8 @@ import CrearPedidoDeObra from "./src/pantallas/PedidoDeObra/CrearPedidoDeObra";
 import ConsultarPedidosDeObra from "./src/pantallas/PedidoDeObra/ConsultarPedidosDeObra";
 import ConsultarJornales from "./src/pantallas/Jornal/ConsultarJornales";
 import CrearJornal from "./src/pantallas/Jornal/CrearJornal";
+import ConsultarPedidosDeReintegro from "./src/pantallas/PedidoDeReintegro/ConsultarPedidosDeReintegro";
+import CrearPedidoDeReintegro from "./src/pantallas/PedidoDeReintegro/CrearPedidoDeReintegro";
 
 //Componentes ABM datos maestros
 import ConsultarObras from "./src/pantallas/Obra/ConsultarObras";
@@ -53,6 +55,17 @@ export default function App() {
             options={{ headerShown: false }}
             name="VerJornalesScreen"
             component={ConsultarJornales}
+          />
+
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="CrearPedidoDeReintegroScreen"
+            component={CrearPedidoDeReintegro}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="VerPedidosDeReintegroScreen"
+            component={ConsultarPedidosDeReintegro}
           />
 
           <Stack.Screen

@@ -5,6 +5,7 @@ import DetallePedidoDeObra from "../pantallas/PedidoDeObra/DetallePedidoDeObra";
 import DetalleObra from "../pantallas/Obra/DetalleObra";
 import DetalleRubro from "../pantallas/Rubro/DetalleRubro";
 import DetalleJornal from "../pantallas/Jornal/DetalleJornal";
+import DetallePedidoDeReintegro from "../pantallas/PedidoDeReintegro/DetallePedidoDeReintegro";
 import { entities } from "../Core/util/entities";
 
 const DetailModal = ({ modalParams, setParams }) => {
@@ -16,6 +17,8 @@ const DetailModal = ({ modalParams, setParams }) => {
     switch (type) {
       case entities.pedidoDeObra:
         return <DetallePedidoDeObra item={modalParams.item} />;
+      case entities.pedidoDeReintegro:
+        return <DetallePedidoDeReintegro item={modalParams.item} />;
       case entities.jornal:
         return <DetalleJornal item={modalParams.item} />;
       case entities.obra:

@@ -16,6 +16,9 @@ spanishLabels["Propietario"] = "Propietario";
 //Jornal
 spanishLabels["DiasHombre"] = "Dias hombre";
 
+//Pedido de Reintegro
+spanishLabels["Monto"] = "Monto:";
+
 export const label = (key) => {
   return spanishLabels[key];
 };

@@ -3,6 +3,7 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import EditarPedidoDeObra from "../pantallas/PedidoDeObra/EditarPedidoDeObra";
 import EditarJornal from "../pantallas/Jornal/EditarJornal";
+import EditarPedidoDeReintegro from "../pantallas/PedidoDeReintegro/EditarPedidoDeReintegro";
 import EditarObra from "../pantallas/Obra/EditarObra";
 import EditarRubro from "../pantallas/Rubro/EditarRubro";
 import { updateElement, cleanElement } from "../Core/util/functions";
@@ -26,6 +27,14 @@ const EditModal = ({ modalParams, setParams }) => {
       case entities.pedidoDeObra:
         return (
           <EditarPedidoDeObra
+            currentItem={modalParams.item}
+            setNewItem={setItem}
+          />
+        );
+
+      case entities.pedidoDeReintegro:
+        return (
+          <EditarPedidoDeReintegro
             currentItem={modalParams.item}
             setNewItem={setItem}
           />
