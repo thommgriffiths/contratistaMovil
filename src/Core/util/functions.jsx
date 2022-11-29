@@ -1,10 +1,9 @@
-import { getAllObras } from "../../Managers/DatosMaestros/ObraManager";
-import { getAllRubros } from "../../Managers/DatosMaestros/RubroManager";
 import { tiposPedidosDeObra } from "./mockFunctions";
 import {
   getFSElementById,
   deleteFSElement,
   updateFSElement,
+  getFSCollection,
 } from "../Firebase/FirebaseFirestoreManager";
 import { entities, entitiesAttr, getEmptyConstructor } from "./entities";
 
@@ -89,10 +88,10 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
     case "tiposPedidosDePedidosObra":
       return tiposPedidosDeObra;
     case entities.obra:
-      getAllObras(onSuccess);
+      getFSCollection(entities.obra, onSuccess);
       break;
     case entities.rubro:
-      getAllRubros(onSuccess);
+      getFSCollection(entities.rubro, onSuccess);
       break;
     default:
       console.log("No se encontro la categoria" + type);
