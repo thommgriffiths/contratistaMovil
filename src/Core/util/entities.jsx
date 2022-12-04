@@ -6,6 +6,7 @@ export const entities = {
   jornal: "jornal",
   pedidoDeReintegro: "pedidoDeReintegro",
   pedidoDeObra: "pedidoDeObra",
+  user: "user",
 };
 
 export const commonAttrs = {
@@ -29,6 +30,9 @@ export const commonAttrs = {
   propietario: "Propietario",
   direccion: "Direccion",
   diasHombre: "DiasHombre",
+  apellido: "Apellido",
+  email: "Email",
+  firebaseID: "firebaseID",
 };
 
 //Constructors
@@ -57,6 +61,15 @@ export const getEmptyConstructor = (type) => {
         ...attrsObligatorios(entities.obra),
         Propietario: null,
         Direccion: null,
+      };
+    case entities.user:
+      return {
+        [commonAttrs.type]: type,
+        [commonAttrs.id]: null,
+        [commonAttrs.nombre]: null,
+        [commonAttrs.apellido]: null,
+        [commonAttrs.email]: null,
+        [commonAttrs.firebaseID]: null,
       };
     case entities.jornal:
       return {

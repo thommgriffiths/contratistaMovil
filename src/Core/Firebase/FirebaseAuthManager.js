@@ -23,6 +23,22 @@ export const userSignUp = (email, password, onSuccess) => {
     });
 };
 
+export const userSignUpAsync = async (email, password) => {
+  try {
+    const credential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log("usuario registrado");
+    console.log(credential.user);
+    return credential.user;
+  } catch {
+    alert("Hubo un error intentando registrarse");
+    return null;
+  }
+};
+
 export const userLogin = (email, password, onSuccess) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((credential) => {

@@ -10,11 +10,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { setLoggedUser } from "../Core/util/globalStore";
-import { userSignUp, userLogin } from "../Core/Firebase/FirebaseAuthManager";
+import { userLogin } from "../Core/Firebase/FirebaseAuthManager";
+
+import SignUpUser from "./User/SignUpUser";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerUser, setRegisterUser] = useState(false);
 
   const navigation = useNavigation();
 
@@ -26,7 +29,7 @@ const LoginScreen = () => {
   };
 
   const handleSignUp = () => {
-    userSignUp(email, password, initiateApp);
+    setRegisterUser(true);
   };
 
   const handleLogin = async () => {
@@ -62,6 +65,14 @@ const LoginScreen = () => {
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
+
+      {registerUser && (
+        <SignUpUser
+          email={email}
+          password={password}
+          setOpen={setRegisterUser}
+        />
+      )}
     </KeyboardAvoidingView>
   );
 };
