@@ -9,6 +9,7 @@ import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
+import LoadingComponent from "../../sharedComponents/LoadingComponent";
 import styles from "../styles/Consultar.style";
 
 const ConsultarObras = ({ navigation }) => {
@@ -96,7 +97,7 @@ const ConsultarObras = ({ navigation }) => {
         </View>
 
         <View style={styles.listContainer}>
-          {loading && <Text>Loading</Text>}
+          {loading && <LoadingComponent />}
           {!loading && (
             <FlatList
               data={obras}
