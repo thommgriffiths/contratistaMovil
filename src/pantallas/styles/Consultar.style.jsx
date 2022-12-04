@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 
   titlesAndActions: { flexDirection: "row", justifyContent: "space-between" },
   actions: {
+    flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
   },
@@ -27,6 +28,22 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   actionsAddText: {
+    color: palette.white,
+    fontSize: 35,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  actionsFilter: {
+    backgroundColor: palette.R3,
+    height: 50,
+    borderRadius: 50,
+    margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+  },
+
+  actionsFilterText: {
     color: palette.white,
     fontSize: 35,
     justifyContent: "center",

@@ -124,3 +124,70 @@ export const fuzeItems = (newItem, oldItem) => {
   console.log(fuzedItem);
   return fuzedItem;
 };
+
+export const getNonEmptyKeysAndValues = (object) => {
+  let keyValues = {};
+
+  for (const key in object) {
+    if (object[key] == "" || object[key] == {} || !object[key]) continue;
+
+    keyValues[key] = object[key];
+  }
+
+  return keyValues;
+};
+
+export const createQuery = (object) => {
+  let query = [];
+
+  for (const key in object) {
+    if (object[key] == "" || object[key] == {} || !object[key]) continue;
+
+    let queryObject = {};
+
+    switch (key) {
+      case commonAttrs.type:
+        continue;
+      case commonAttrs.tipoPedidoObra:
+        continue;
+      case commonAttrs.status:
+        continue;
+      case commonAttrs.descripcion:
+        continue;
+      case commonAttrs.fechaCreacion:
+        continue;
+      case commonAttrs.fechaEdicion:
+        continue;
+      case commonAttrs.creadoPor:
+        continue;
+      case commonAttrs.editadoPor:
+        continue;
+      case commonAttrs.nombre:
+        continue;
+
+      case commonAttrs.tarea: {
+        queryObject["parameter"] = commonAttrs.tarea;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case entities.obra: {
+        queryObject["parameter"] = entities.obra;
+        queryObject["operator"] = "==";
+        queryObject["value"] = { [commonAttrs.id]: object[key] };
+        break;
+      }
+
+      case entities.rubro: {
+        queryObject["parameter"] = entities.rubro;
+        queryObject["operator"] = "==";
+        queryObject["value"] = { [commonAttrs.id]: object[key] };
+        break;
+      }
+    }
+    query.push(queryObject);
+  }
+
+  return query;
+};

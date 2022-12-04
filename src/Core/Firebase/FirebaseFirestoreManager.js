@@ -72,23 +72,26 @@ export const updateFSElement = (type, id, element, onSuccess) => {
     });
 };
 
-export const queryFSElements = (type) => {
+export const queryFSElements = async (type, Xclause) => {
   //https://firebase.google.com/docs/firestore/query-data/queries en edge
 
   const colRef = collection(db, type);
 
-  const clause = where(parameter, operator, value);
+  let clauses = [];
+  let elements = [];
 
-  const q = query(colRef, clause);
-
-  onSnapshot(q, (snapshot) => {
-    let elements = [];
-    snapshot.docs.forEach((element) => {
-      elements.push({ ...element.data(), id: element.id });
-    });
-    console.log("Se obtuvieron los resultados de la coleccion: " + type);
-    onSuccess(elements);
+  Xclause.forEach((item) => {
+    clause.push(where(item.parameter, item.operator, item.value));
   });
+
+  const q = query(colRef, ...clauses);
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    elements.push({ ...doc.data(), id: doc.id });
+  });
+
+  return elements;
 };
 
 export const getFSElementById = async (type, id) => {
