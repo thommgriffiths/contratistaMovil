@@ -1,26 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+import React from "react";
 import { palette } from "../Core/colors";
 
 const LoadingComponent = () => {
-  const [dots, setDots] = useState("");
-
-  const LoadingText = "Cargando";
-
-  useEffect(() => {
-    setTimeout(() => {
-      let d = dots;
-      d == " . . ." ? (d = "") : (d += " .");
-      setDots(d);
-    }, 1000);
-  }, [dots]);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        {LoadingText}
-        {dots}
-      </Text>
+      <ActivityIndicator size="large" color={palette.R4} />
     </View>
   );
 };
@@ -30,12 +15,8 @@ export default LoadingComponent;
 const styles = StyleSheet.create({
   container: {
     margin: 30,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: palette.R4,
   },
 });
