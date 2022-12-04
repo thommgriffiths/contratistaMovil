@@ -33,13 +33,17 @@ export const commonAttrs = {
   apellido: "Apellido",
   email: "Email",
   firebaseID: "firebaseID",
+  tipoPedidoObra: "TipoDePedido",
+  status: "Status",
+  descripcion: "Descripcion",
+  monto: "Monto",
 };
 
 //Constructors
 const contextConstructor = {
-  obra: null,
-  rubro: null,
-  tarea: null,
+  [entities.obra]: null,
+  [entities.rubro]: null,
+  [commonAttrs.tarea]: null,
 };
 
 const attrsObligatorios = (type) => {
@@ -59,8 +63,8 @@ export const getEmptyConstructor = (type) => {
     case entities.obra:
       return {
         ...attrsObligatorios(entities.obra),
-        Propietario: null,
-        Direccion: null,
+        [commonAttrs.propietario]: null,
+        [commonAttrs.direccion]: null,
       };
     case entities.user:
       return {
@@ -75,14 +79,14 @@ export const getEmptyConstructor = (type) => {
       return {
         ...attrsObligatorios(entities.jornal),
         ...contextConstructor,
-        DiasHombre: null,
+        [commonAttrs.diasHombre]: null,
       };
     case entities.pedidoDeReintegro:
       return {
         ...attrsObligatorios(entities.pedidoDeReintegro),
         ...contextConstructor,
-        Descripcion: null,
-        Monto: null,
+        [commonAttrs.descripcion]: null,
+        [commonAttrs.monto]: null,
       };
     case entities.rubro:
       return {
@@ -92,9 +96,9 @@ export const getEmptyConstructor = (type) => {
       return {
         ...attrsObligatorios(entities.pedidoDeObra),
         ...contextConstructor,
-        TipoDePedido: null,
-        Status: null,
-        Descripcion: null,
+        [commonAttrs.tipoPedidoObra]: null,
+        [commonAttrs.status]: null,
+        [commonAttrs.descripcion]: null,
       };
   }
 };
