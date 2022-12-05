@@ -6,7 +6,7 @@ import { obtenerDropdownItems } from "../Core/util/functions";
 import BlankInput from "./BlankInput";
 import { palette } from "../Core/colors";
 
-const DropdownSelect = ({ category, placeholder, action, props }) => {
+const DropdownSelect = ({ category, placeholder, action, props, multiple }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(null);
@@ -21,6 +21,12 @@ const DropdownSelect = ({ category, placeholder, action, props }) => {
 
   return items ? (
     <DropDownPicker
+      //multiple={multiple}
+      //min={multiple ? 0 : null}
+      //max={multiple ? 5 : null}
+      multiple={true}
+      min={0}
+      max={5}
       open={open}
       setOpen={setOpen}
       value={value}

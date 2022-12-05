@@ -2,6 +2,7 @@ import { KeyboardAvoidingView, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import ContextoSet from "../../sharedComponents/ContextoSet";
+import ContextoFilter from "../../sharedComponents/ContextoFilter";
 import { createQuery } from "../../Core/util/functions";
 import { commonAttrs } from "../../Core/util/entities";
 
@@ -38,7 +39,7 @@ const FiltrarJornales = ({ setSearchParams }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet action={setContext} noTarea />
+            <ContextoFilter action={console.log} />
 
             <Text style={styles.fieldTitle}>Fechas de Creacion</Text>
 
