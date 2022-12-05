@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { completeElements } from "../../Core/util/functions";
-import { entities } from "../../Core/util/entities";
+import { commonAttrs, entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
 import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
+import FilterModal from "../../sharedComponents/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 import styles from "../styles/Consultar.style";
 
@@ -94,6 +95,18 @@ const ConsultarJornales = ({ navigation }) => {
           <Titles titleText="Jornales" />
           <View style={styles.actions}>
             <Pressable
+              style={styles.actionsFilter}
+              onPress={() => {
+                setModalParams({
+                  visible: true,
+                  actionLabel: "Filter",
+                  item: { [commonAttrs.type]: entities.jornal },
+                });
+              }}
+            >
+              <Text style={styles.actionsFilterText}>Buscar</Text>
+            </Pressable>
+            <Pressable
               style={styles.actionsAdd}
               onPress={() => navigation.replace("CrearJornalScreen")}
             >
@@ -122,6 +135,13 @@ const ConsultarJornales = ({ navigation }) => {
       )}
       {modalParams?.actionLabel == "showDetail" && (
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
+      )}
+      {modalParams?.actionLabel == "Filter" && (
+        <FilterModal
+          modalParams={modalParams}
+          setParams={setModalParams}
+          setElements={setJornales}
+        />
       )}
     </View>
   );

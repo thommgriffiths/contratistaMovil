@@ -12,12 +12,14 @@ import { entities, commonAttrs, getEmptyConstructor } from "./entities";
 //Obtengo fecha y hora en un formato legible y comun
 export const getCurrentDateTime = () => {
   const date = new Date();
+  /*
   const [month, day, year] = [
     date.getMonth(),
     date.getDate(),
     date.getFullYear(),
   ];
-  return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;
+  return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;*/
+  return date.getTime();
 };
 
 export const parseDate = (date) => {
@@ -175,6 +177,23 @@ export const createQuery = (object) => {
         continue;
       case commonAttrs.nombre:
         continue;
+      case commonAttrs.fechaCreacionRango: {
+        if (!object[key]?.startDate) continue;
+        if (!object[key]?.endDate) continue;
+        let startDate = {
+          ["parameter"]: commonAttrs.fechaCreacion,
+          ["operator"]: ">=",
+          ["value"]: object[key]?.startDate,
+        };
+        query.push(startDate);
+        let endDate = {
+          ["parameter"]: commonAttrs.fechaCreacion,
+          ["operator"]: "<=",
+          ["value"]: object[key]?.endDate,
+        };
+        query.push(endDate);
+        continue;
+      }
 
       case commonAttrs.tarea: {
         queryObject["parameter"] = commonAttrs.tarea;

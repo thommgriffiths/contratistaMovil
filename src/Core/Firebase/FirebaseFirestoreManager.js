@@ -81,7 +81,7 @@ export const queryFSElements = async (type, Xclause) => {
   let elements = [];
 
   Xclause.forEach((item) => {
-    clause.push(where(item.parameter, item.operator, item.value));
+    clauses.push(where(item.parameter, item.operator, item.value));
   });
 
   const q = query(colRef, ...clauses);

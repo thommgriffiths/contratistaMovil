@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-native-paper";
-
-import { parseDate } from "../../Core/util/functions";
-
 import { DatePickerModal } from "react-native-paper-dates";
 
-export const RangePicker = () => {
+export const RangePicker = ({ AddRange = () => {} }) => {
   const [range, setRange] = useState({
     startDate: undefined,
     endDate: undefined,
@@ -19,7 +16,11 @@ export const RangePicker = () => {
 
   const onConfirm = ({ startDate, endDate }) => {
     setOpen(false);
-    setRange({ startDate: parseDate(startDate), endDate: parseDate(endDate) });
+    setRange({ startDate, endDate });
+    AddRange({
+      startDate: startDate?.getTime(),
+      endDate: endDate?.getTime(),
+    });
   };
 
   return (

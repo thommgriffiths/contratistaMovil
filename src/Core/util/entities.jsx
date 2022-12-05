@@ -37,6 +37,9 @@ export const commonAttrs = {
   status: "Status",
   descripcion: "Descripcion",
   monto: "Monto",
+
+  //Solo para consultas
+  fechaCreacionRango: "FechaCreacionRango",
 };
 
 //Constructors

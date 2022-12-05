@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
+import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
 import { completeElements } from "../Core/util/functions";
 import LoadingComponent from "./LoadingComponent";
 import { commonAttrs, entities } from "../Core/util/entities";
@@ -28,6 +29,8 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     switch (type) {
       case entities.pedidoDeObra:
         return <FiltrarPedidoDeObra setSearchParams={setSearchParams} />;
+      case entities.jornal:
+        return <FiltrarJornales setSearchParams={setSearchParams} />;
 
       default:
         console.log("No se encontro la categoria" + type);
