@@ -5,7 +5,7 @@ import DropdownSelect from "./DropdownSelect";
 import { palette } from "../Core/colors";
 import { entities, commonAttrs } from "../Core/util/entities";
 
-const SetContextoForm = ({ action, initialValues, isEdit }) => {
+const SetContextoForm = ({ action, initialValues, isEdit, noTarea }) => {
   const [obra, setObra] = useState(null);
   const [rubro, setRubro] = useState(null);
   const [tarea, setTarea] = useState("");
@@ -45,7 +45,7 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
         props={{ stackOrder: 14000 }}
         initialValue={initialValues?.rubro}
       />
-      {isEdit ? (
+      {isEdit && !noTarea && (
         <>
           <Text style={styles.fieldTitle}>Seleccione una tarea</Text>
           <TextInput
@@ -55,7 +55,8 @@ const SetContextoForm = ({ action, initialValues, isEdit }) => {
             style={styles.input}
           />
         </>
-      ) : (
+      )}
+      {!isEdit && !noTarea && (
         <TextInput
           placeholder="Seleccione una Tarea"
           value={tarea}

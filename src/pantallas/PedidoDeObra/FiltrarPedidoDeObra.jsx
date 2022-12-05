@@ -38,7 +38,7 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <SetContextoForm action={setContext} />
+            <SetContextoForm action={setContext} noTarea />
 
             <Text style={styles.fieldTitle}>Tipo de pedido</Text>
             <DropdownSelect
