@@ -1,6 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
+//Docs de react native paper: https://callstack.github.io/react-native-paper/4.0/index.html
+import { registerTranslation, enGB } from "react-native-paper-dates";
 
 import LoginScreen from "./src/pantallas/LoginScreen";
 import HomeScreen from "./src/pantallas/HomeScreen";
@@ -22,6 +24,7 @@ import CrearRubro from "./src/pantallas/Rubro/CrearRubro";
 const Stack = createStackNavigator();
 
 export default function App() {
+  registerTranslation("en", enGB);
   return (
     <PaperProvider>
       <AppWithNavigation />

@@ -7,6 +7,8 @@ import {
 } from "../Firebase/FirebaseFirestoreManager";
 import { entities, commonAttrs, getEmptyConstructor } from "./entities";
 
+//------------------------------------------------------------------------
+//FECHAS
 //Obtengo fecha y hora en un formato legible y comun
 export const getCurrentDateTime = () => {
   const date = new Date();
@@ -16,6 +18,15 @@ export const getCurrentDateTime = () => {
     date.getFullYear(),
   ];
   return `${year}/${month}/${day}-${date.toTimeString().slice(0, 5)}`;
+};
+
+export const parseDate = (date) => {
+  const [month, day, year] = [
+    date.getMonth(),
+    date.getDate(),
+    date.getFullYear(),
+  ];
+  return `${year}/${month}/${day}`;
 };
 
 //------------------------------------------------------------------------
