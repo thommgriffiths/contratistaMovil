@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
-import SetContextoForm from "../../sharedComponents/SetContextoForm";
+import ContextoSet from "../../sharedComponents/ContextoSet";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 import { getCurrentDateTime } from "../../Core/util/functions";
@@ -59,7 +59,7 @@ const CrearPedidoDeObra = ({ navigation }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <SetContextoForm action={SetContext} />
+            <ContextoSet action={SetContext} />
 
             {/* formulario especifico */}
             <DropdownSelect

@@ -5,7 +5,7 @@ import DropdownSelect from "./DropdownSelect";
 import { palette } from "../Core/colors";
 import { entities, commonAttrs } from "../Core/util/entities";
 
-const SetContextoForm = ({ action, initialValues, isEdit, noTarea }) => {
+const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
   const [obra, setObra] = useState(null);
   const [rubro, setRubro] = useState(null);
   const [tarea, setTarea] = useState("");
@@ -68,7 +68,7 @@ const SetContextoForm = ({ action, initialValues, isEdit, noTarea }) => {
   );
 };
 
-export default SetContextoForm;
+export default ContextoSet;
 
 const styles = StyleSheet.create({
   container: {

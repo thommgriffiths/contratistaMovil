@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
-import SetContextoForm from "../../sharedComponents/SetContextoForm";
+import ContextoSet from "../../sharedComponents/ContextoSet";
 
 import { getCurrentDateTime } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
@@ -57,7 +57,7 @@ const CrearJornal = ({ navigation }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <SetContextoForm action={SetContext} />
+            <ContextoSet action={SetContext} />
 
             {/* formulario especifico */}
 

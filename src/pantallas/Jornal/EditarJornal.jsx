@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 
-import SetContextoForm from "../../sharedComponents/SetContextoForm";
+import ContextoSet from "../../sharedComponents/ContextoSet";
 import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
@@ -34,7 +34,7 @@ const EditarJornal = ({ currentItem, setNewItem }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <SetContextoForm
+            <ContextoSet
               action={setContext}
               initialValues={currentItem}
               isEdit

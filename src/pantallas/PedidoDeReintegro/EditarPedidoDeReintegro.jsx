@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 
-import SetContextoForm from "../../sharedComponents/SetContextoForm";
+import ContextoSet from "../../sharedComponents/ContextoSet";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
 import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
 import { obtenerStatus } from "../../Core/util/mockFunctions";
@@ -38,7 +38,7 @@ const EditarPedidoDeReintegro = ({ currentItem, setNewItem }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <SetContextoForm
+            <ContextoSet
               action={setContext}
               initialValues={currentItem}
               isEdit
