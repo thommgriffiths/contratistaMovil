@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-native-paper";
+import React, { useState } from "react";
+import { StyleSheet, Text, Pressable } from "react-native";
 import { DatePickerModal } from "react-native-paper-dates";
+import { parseDate } from "../../Core/util/functions";
+import { palette } from "../../Core/colors";
 
 export const RangePicker = ({ AddRange = () => {} }) => {
   const [range, setRange] = useState({
@@ -23,11 +25,22 @@ export const RangePicker = ({ AddRange = () => {} }) => {
     });
   };
 
+  const DateText = () => {
+    return range.endDate && range.startDate ? (
+      <>
+        <Text>Desde: {parseDate(range.startDate)}</Text>
+        <Text>Hasta: {parseDate(range.endDate)}</Text>
+      </>
+    ) : (
+      <Text>Filtrar por fechas de creación</Text>
+    );
+  };
+
   return (
     <>
-      <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
-        Pick range
-      </Button>
+      <Pressable style={styles.input} onPress={() => setOpen(true)}>
+        <DateText />
+      </Pressable>
       <DatePickerModal
         locale="en"
         mode="range"
@@ -58,3 +71,15 @@ export const RangePicker = ({ AddRange = () => {} }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    backgroundColor: palette.white,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+    borderWidth: 2,
+    borderColor: palette.B1,
+  },
+});

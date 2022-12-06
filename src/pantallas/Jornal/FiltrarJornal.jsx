@@ -40,8 +40,6 @@ const FiltrarJornales = ({ setSearchParams }) => {
           <View style={styles.formWrapper}>
             <ContextoSet action={setContext} noTarea />
 
-            <Text style={styles.fieldTitle}>Fechas de Creacion</Text>
-
             <RangePicker AddRange={setRangoFechaCreacion} />
           </View>
         </KeyboardAvoidingView>
