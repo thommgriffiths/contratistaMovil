@@ -13,6 +13,7 @@ npm-debug.*
 web-build/
 *yarn.lock
 *draft.jsx
+src/pantallas/borradores/*
 
 # macOS
 .DS_Store
