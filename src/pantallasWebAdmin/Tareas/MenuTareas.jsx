@@ -8,14 +8,14 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import Header from "../sharedComponents/Header";
+import Header from "../../sharedComponents/Header";
 
-const HomeScreen = () => {
+const AdminMenuTareas = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header backButton />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
@@ -29,45 +29,30 @@ const HomeScreen = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeObraScreen")}
+            onPress={() => navigation.navigate("AdminPedidosDeReintegroScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Pedidos de Obra</Text>
+            <Text style={styles.menuItemText}>
+              Adicionales contratistas y Reembolsos Arquitectos
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerJornalesScreen")}
+            onPress={() =>
+              navigation.navigate("AdminPedidosDeObraYMaterialesScreen")
+            }
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Jornales</Text>
+            <Text style={styles.menuItemText}>
+              Pedidos de Obra y Pedidos de Materiales
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeReintegroScreen")}
+            onPress={() => navigation.navigate("AdminTodasTareasScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Pedidos de Reintegro</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerObrasScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Obras</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerRubrosScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Rubros</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AdminHomeScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Administrador</Text>
+            <Text style={styles.menuItemText}>Lista Historica</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -75,7 +60,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default AdminMenuTareas;
 
 const styles = StyleSheet.create({
   container: {},

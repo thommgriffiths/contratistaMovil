@@ -20,5 +20,5 @@ spanishLabels["DiasHombre"] = "Dias hombre";
 spanishLabels["Monto"] = "Monto:";
 
 export const label = (key) => {
-  return spanishLabels[key];
+  return spanishLabels[key] ? spanishLabels[key] : key + "ESKEY";
 };

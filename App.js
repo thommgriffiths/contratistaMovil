@@ -21,6 +21,24 @@ import CrearObra from "./src/pantallas/Obra/CrearObra";
 import ConsultarRubros from "./src/pantallas/Rubro/ConsultarRubros";
 import CrearRubro from "./src/pantallas/Rubro/CrearRubro";
 
+//Pantallas administrador
+
+import AdminHome from "./src/pantallasWebAdmin/HomeAdmin";
+import AdminEstadosObra from "./src/pantallasWebAdmin/EstadosObra/EstadosObra";
+import AdminNotificaciones from "./src/pantallasWebAdmin/Notificaciones/Notificaciones";
+import MenuAdministracionSistema from "./src/pantallasWebAdmin/AdministracionDelSistema/MenuAdministracionSistema";
+import AdminReporteRapido from "./src/pantallasWebAdmin/ReporteContratistas/ReporteRapido";
+import AdminMenuTareas from "./src/pantallasWebAdmin/Tareas/MenuTareas";
+import AdminPedidosDeObraYMateriales from "./src/pantallasWebAdmin/Tareas/PedidosObraYMateriales";
+import AdminPedidosDeReintegro from "./src/pantallasWebAdmin/Tareas/PedidosReintegro";
+import AdminTodasTareas from "./src/pantallasWebAdmin/Tareas/TodasTareas";
+
+//Componentes ABM datos maestros para admin
+import AdminConsultarObras from "./src/pantallasWebAdmin/AdministracionDelSistema/Obra/ConsultarObras";
+import AdminCrearObra from "./src/pantallasWebAdmin/AdministracionDelSistema/Obra/CrearObra";
+import AdminConsultarRubros from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/ConsultarRubros";
+import AdminCrearRubro from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/CrearRubro";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -101,87 +119,87 @@ const AppWithNavigation = () => {
             name="VerRubrosScreen"
             component={ConsultarRubros}
           />
+          {/*Aca van las pantallas del administrador */}
+          <>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminHomeScreen"
+              component={AdminHome}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminEstadosObraScreen"
+              component={AdminEstadosObra}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminNotificacionesScreen"
+              component={AdminNotificaciones}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="MenuAdministracionScreen"
+              component={MenuAdministracionSistema}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminReporteRapidoScreen"
+              component={AdminReporteRapido}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminMenuTareasScreen"
+              component={AdminMenuTareas}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminPedidosDeObraYMaterialesScreen"
+              component={AdminPedidosDeObraYMateriales}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminPedidosDeReintegroScreen"
+              component={AdminPedidosDeReintegro}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminTodasTareasScreen"
+              component={AdminTodasTareas}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminCrearObraScreen"
+              component={AdminCrearObra}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminVerObrasScreen"
+              component={AdminConsultarObras}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminCrearRubroScreen"
+              component={AdminCrearRubro}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminVerRubrosScreen"
+              component={AdminConsultarRubros}
+            />
+          </>
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}></Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-/*
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Group>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Login"
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearPedidoDeObraScreen"
-            component={CrearPedidoDeObra}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerPedidosDeObraScreen"
-            component={ConsultarPedidosDeObra}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearJornalScreen"
-            component={CrearJornal}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerJornalesScreen"
-            component={ConsultarJornales}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearPedidoDeReintegroScreen"
-            component={CrearPedidoDeReintegro}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerPedidosDeReintegroScreen"
-            component={ConsultarPedidosDeReintegro}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearObraScreen"
-            component={CrearObra}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerObrasScreen"
-            component={ConsultarObras}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearRubroScreen"
-            component={CrearRubro}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerRubrosScreen"
-            component={ConsultarRubros}
-          />
-        </Stack.Group>
-        <Stack.Group screenOptions={{ presentation: "modal" }}></Stack.Group>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-*/

@@ -221,3 +221,77 @@ export const createQuery = (object) => {
 
   return query;
 };
+
+//---------------------------------------------------------------------------------------------------
+//Funcion que ordena objetos por atributo:
+
+export const sortElementsByCommonAttribute = (arr, attr, asc) => {
+  //Me voy si el attr no esta definido
+  //if (!(Object.values(commonAttrs).includes(attr) || Object.values(entities).includes(attr)))
+  //return console.log("el atributo: " + attr + " no existe en common attrs");
+
+  const value = (e) =>
+    e?.[attr]?.[commonAttrs.nombre]
+      ? e?.[attr]?.[commonAttrs.nombre]
+      : e?.[attr];
+
+  return arr.sort((a, b) => {
+    if (value(a) < value(b)) {
+      return asc ? -1 : 1;
+    } else if (value(a) > value(b)) {
+      return asc ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+};
+
+//--------------------------
+//obtener el inicio y el fin de la semana corriente:
+export const getCurrentWeekDates = () => {
+  var currentDate = new Date();
+  //(0-6, with 0 being Sunday)
+  var dayOfWeek = currentDate.getDay();
+
+  var startDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate() - dayOfWeek
+  );
+  var endDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate() - dayOfWeek + 6
+  );
+
+  return {
+    startDate: startDate.getTime(),
+    endDate: endDate.getTime(),
+  };
+};
+
+//convierte un objeto de objetos a un array de objetos para que sea apto flatlist
+export const objectToArray = (object) => {
+  return Object.keys(object).map((key) => {
+    return {
+      [key]: object[key],
+    };
+  });
+};
+
+export const sumInternalValues = (obj) => {
+  let sum = 0;
+
+  for (const key in obj) {
+    if (typeof obj[key] === "object") {
+      // If the property is an object, recursively call the function on it
+      // and add the result to the sum.
+      sum += sumInternalValues(obj[key]);
+    } else {
+      // Otherwise, add the value of the property to the sum.
+      sum += obj[key];
+    }
+  }
+
+  return sum;
+};
