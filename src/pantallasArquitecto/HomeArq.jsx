@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 
-const HomeScreen = () => {
+const ArqHomeScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -22,66 +22,33 @@ const HomeScreen = () => {
       >
         {/*titulos*/}
         <View style={styles.titlesWrapper}>
-          <Text style={styles.titlesSubtitle}>Contratista</Text>
+          <Text style={styles.titlesSubtitle}>Arquitecto</Text>
           <Text style={styles.titlesTitle}>Menu</Text>
         </View>
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          {/*
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeObraScreen")}
+            onPress={() => navigation.navigate("ArqVerPedidosDeObraScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedidos de Obra</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerJornalesScreen")}
+            onPress={() => navigation.navigate("ValidarJornalesSreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Jornales</Text>
+            <Text style={styles.menuItemText}>Ver y validar jornales</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeReintegroScreen")}
+            onPress={() =>
+              navigation.navigate("ArqVerPedidosDeReintegroScreen")
+            }
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedidos de Reintegro</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerObrasScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Obras</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerRubrosScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Rubros</Text>
-          </TouchableOpacity>
-          */}
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AdminHomeScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Administrador</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("HomeContratista")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Contratista</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ArqHomeScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Arquitecto</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -89,7 +56,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ArqHomeScreen;
 
 const styles = StyleSheet.create({
   container: {},

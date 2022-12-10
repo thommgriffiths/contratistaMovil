@@ -46,6 +46,14 @@ import ContraCrearJornal from "./src/pantallasContratista/Jornal/CrearJornal";
 import ContraConsultarPedidosDeReintegro from "./src/pantallasContratista/PedidoDeReintegro/ConsultarPedidosDeReintegro";
 import ContraCrearPedidoDeReintegro from "./src/pantallasContratista/PedidoDeReintegro/CrearPedidoDeReintegro";
 
+//Pantallas arquitecto
+import ArqHomeScreen from "./src/pantallasArquitecto/HomeArq";
+import ArqValidarJornales from "./src/pantallasArquitecto/Jornal/ConsultarJornales";
+import ArqConsultarPedidosDeReintegro from "./src/pantallasArquitecto/PedidoDeReintegro/ConsultarPedidosDeReintegro";
+import ArqCrearPedidoDeReintegro from "./src/pantallasArquitecto/PedidoDeReintegro/CrearPedidoDeReintegro";
+import ArqCrearPedidoDeObra from "./src/pantallasArquitecto/PedidoDeObra/CrearPedidoDeObra";
+import ArqConsultarPedidosDeObra from "./src/pantallasArquitecto/PedidoDeObra/ConsultarPedidosDeObra";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -233,6 +241,46 @@ const AppWithNavigation = () => {
               name="ContraVerPedidosDeReintegroScreen"
               component={ContraConsultarPedidosDeReintegro}
             />
+          </>
+
+          {/* Pantallas arquitecto */}
+          <>
+            <Stack.Group>
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ArqHomeScreen"
+                component={ArqHomeScreen}
+              />
+
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ValidarJornalesSreen"
+                component={ArqValidarJornales}
+              />
+
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ArqCrearPedidoDeReintegroScreen"
+                component={ArqCrearPedidoDeReintegro}
+              />
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ArqVerPedidosDeReintegroScreen"
+                component={ArqConsultarPedidosDeReintegro}
+              />
+
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ArqCrearPedidosDeObraScreen"
+                component={ArqCrearPedidoDeObra}
+              />
+
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="ArqVerPedidosDeObraScreen"
+                component={ArqConsultarPedidosDeObra}
+              />
+            </Stack.Group>
           </>
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}></Stack.Group>
