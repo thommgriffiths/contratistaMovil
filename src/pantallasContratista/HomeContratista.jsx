@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 
-const HomeScreen = () => {
+const ContratistaHomeScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -28,54 +28,20 @@ const HomeScreen = () => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          {/*
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeObraScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Pedidos de Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerJornalesScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Jornales</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerPedidosDeReintegroScreen")}
+            onPress={() =>
+              navigation.navigate("ContraVerPedidosDeReintegroScreen")
+            }
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedidos de Reintegro</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("VerObrasScreen")}
+            onPress={() => navigation.navigate("ContraVerJornalesScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Obras</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("VerRubrosScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Rubros</Text>
-          </TouchableOpacity>
-          */}
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AdminHomeScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Administrador</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("HomeContratista")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Menu Contratista</Text>
+            <Text style={styles.menuItemText}>Jornales</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -83,7 +49,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ContratistaHomeScreen;
 
 const styles = StyleSheet.create({
   container: {},

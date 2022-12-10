@@ -39,6 +39,13 @@ import AdminCrearObra from "./src/pantallasWebAdmin/AdministracionDelSistema/Obr
 import AdminConsultarRubros from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/ConsultarRubros";
 import AdminCrearRubro from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/CrearRubro";
 
+//Pantallas contratistas
+import HomeContratista from "./src/pantallasContratista/HomeContratista";
+import ContraConsultarJornales from "./src/pantallasContratista/Jornal/ConsultarJornales";
+import ContraCrearJornal from "./src/pantallasContratista/Jornal/CrearJornal";
+import ContraConsultarPedidosDeReintegro from "./src/pantallasContratista/PedidoDeReintegro/ConsultarPedidosDeReintegro";
+import ContraCrearPedidoDeReintegro from "./src/pantallasContratista/PedidoDeReintegro/CrearPedidoDeReintegro";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -195,6 +202,36 @@ const AppWithNavigation = () => {
               options={{ headerShown: false }}
               name="AdminVerRubrosScreen"
               component={AdminConsultarRubros}
+            />
+          </>
+
+          {/* Pantallas contratista */}
+          <>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="HomeContratista"
+              component={HomeContratista}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="ContraCrearJornalScreen"
+              component={ContraCrearJornal}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="ContraVerJornalesScreen"
+              component={ContraConsultarJornales}
+            />
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="ContraCrearPedidoDeReintegroScreen"
+              component={ContraCrearPedidoDeReintegro}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="ContraVerPedidosDeReintegroScreen"
+              component={ContraConsultarPedidosDeReintegro}
             />
           </>
         </Stack.Group>
