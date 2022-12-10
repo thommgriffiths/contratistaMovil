@@ -2,7 +2,7 @@ import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements } from "../../Core/util/functions";
+import { completeElements, MontoTotal } from "../../Core/util/functions";
 import { entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
@@ -104,6 +104,12 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
           </View>
         </View>
 
+        <View style={styles.ListItem}>
+          <View style={styles.ListItemText}>
+            <Text>Monto total: ${MontoTotal(pedidosReintegro)}</Text>
+          </View>
+        </View>
+
         <View style={styles.listContainer}>
           {loading && <LoadingComponent />}
           {!loading && (
@@ -134,10 +140,10 @@ export default ArqConsultarPedidosDeReintegro;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>id: {item.id}</Text>
-      <Text>Monto: {item.Monto}</Text>
-      <Text>obra: {item.obra?.Nombre}</Text>
-      <Text>rubro: {item.rubro?.Nombre}</Text>
+      <Text>Título: {item.Descripcion}</Text>
+      <Text>Obra: {item.obra?.Nombre}</Text>
+      <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text>Monto: ${item.Monto}</Text>
     </>
   );
 };

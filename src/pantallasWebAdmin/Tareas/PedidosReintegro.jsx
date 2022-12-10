@@ -5,6 +5,7 @@ import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManag
 import {
   completeElements,
   sortElementsByCommonAttribute,
+  MontoTotal,
 } from "../../Core/util/functions";
 import { entities, commonAttrs } from "../../Core/util/entities";
 
@@ -145,7 +146,7 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
 
         <View style={styles.ListItem}>
           <View style={styles.ListItemText}>
-            <Text>{Total(pedidosReintegro)}</Text>
+            <Text>Monto total en lista: ${MontoTotal(pedidosReintegro)}</Text>
           </View>
         </View>
 
@@ -192,17 +193,12 @@ export default AdminPedidosDeReintegro;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>id: {item.id}</Text>
-      <Text>Monto: {item.Monto}</Text>
-      <Text>obra: {item.obra?.Nombre}</Text>
-      <Text>rubro: {item.rubro?.Nombre}</Text>
+      <Text>Título: {item.Descripcion}</Text>
+      <Text>Obra: {item.obra?.Nombre}</Text>
+      <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text> </Text>
+      <Text>Pedido por: {item?.[commonAttrs.creadoPor]}</Text>
+      <Text>Monto: $ {item.Monto}</Text>
     </>
   );
-};
-
-const Total = (items) => {
-  if (items == []) return;
-  return items.reduce((total, item) => {
-    return total + parseInt(item.Monto);
-  }, 0);
 };

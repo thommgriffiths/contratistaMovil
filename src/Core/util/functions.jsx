@@ -295,3 +295,10 @@ export const sumInternalValues = (obj) => {
 
   return sum;
 };
+
+export const MontoTotal = (items) => {
+  if (items == []) return;
+  return items.reduce((total, item) => {
+    return total + parseInt(item.Monto);
+  }, 0);
+};
