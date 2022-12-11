@@ -1,9 +1,17 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements, MontoTotal } from "../../Core/util/functions";
-import { entities } from "../../Core/util/entities";
+import {
+  getFSCollectionAsync,
+  queryFSElements,
+} from "../../Core/Firebase/FirebaseFirestoreManager";
+import {
+  completeElements,
+  MontoTotal,
+  createQuery,
+} from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
+import { entities, commonAttrs } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -20,9 +28,15 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
 
   useEffect(() => {
     const loadItems = async () => {
-      const rawElements = await getFSCollectionAsync(
-        entities.pedidoDeReintegro
+      let query = createQuery({
+        [commonAttrs.creadoPor]: getLoggedUser().email,
+      });
+
+      const rawElements = await queryFSElements(
+        entities.pedidoDeReintegro,
+        query
       );
+
       console.log("Los raw elements son: ");
       console.log(rawElements);
       const finalElements = await completeElements(rawElements);

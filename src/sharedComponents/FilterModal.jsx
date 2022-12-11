@@ -3,14 +3,27 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
 import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
 import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
-import { completeElements } from "../Core/util/functions";
+import {
+  completeElements,
+  createQuery as queryBuilder,
+} from "../Core/util/functions";
 import LoadingComponent from "./LoadingComponent";
 import { commonAttrs, entities } from "../Core/util/entities";
 import { queryFSElements } from "../Core/Firebase/FirebaseFirestoreManager";
+import { getLoggedUser } from "../Core/util/globalStore";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
   const Filter = async () => {
     setLoading(true);
+    if (modalParams?.item?.filterUser) {
+      let query = queryBuilder({
+        [commonAttrs.creadoPor]: getLoggedUser().email,
+      });
+      searchParams.push(query[0]);
+    }
+    console.log("search params");
+    console.log(searchParams);
+
     const rawElements = await queryFSElements(
       modalParams?.item?.[commonAttrs.type],
       searchParams
@@ -22,7 +35,7 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     setParams({ visible: false });
   };
 
-  const [searchParams, setSearchParams] = useState({});
+  const [searchParams, setSearchParams] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const createQuery = (type) => {

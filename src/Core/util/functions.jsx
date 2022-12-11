@@ -171,8 +171,12 @@ export const createQuery = (object) => {
         continue;
       case commonAttrs.fechaEdicion:
         continue;
-      case commonAttrs.creadoPor:
-        continue;
+      case commonAttrs.creadoPor: {
+        queryObject["parameter"] = commonAttrs.creadoPor;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
       case commonAttrs.editadoPor:
         continue;
       case commonAttrs.nombre:

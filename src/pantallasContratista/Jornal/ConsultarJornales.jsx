@@ -1,9 +1,13 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements } from "../../Core/util/functions";
+import {
+  getFSCollectionAsync,
+  queryFSElements,
+} from "../../Core/Firebase/FirebaseFirestoreManager";
+import { completeElements, createQuery } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import { getLoggedUser } from "../../Core/util/globalStore";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -21,7 +25,14 @@ const ConsultarJornales = ({ navigation }) => {
 
   useEffect(() => {
     const loadItems = async () => {
-      const rawElements = await getFSCollectionAsync(entities.jornal);
+      let query = createQuery({
+        [commonAttrs.creadoPor]: getLoggedUser().email,
+      });
+      console.log(query);
+
+      const rawElements = await queryFSElements(entities.jornal, query);
+
+      //const rawElements = await getFSCollectionAsync(entities.jornal);
       console.log("Los raw elements son: ");
       console.log(rawElements);
       const finalElements = await completeElements(rawElements);
@@ -100,7 +111,10 @@ const ConsultarJornales = ({ navigation }) => {
                 setModalParams({
                   visible: true,
                   actionLabel: "Filter",
-                  item: { [commonAttrs.type]: entities.jornal },
+                  item: {
+                    [commonAttrs.type]: entities.jornal,
+                    filterUser: true,
+                  },
                 });
               }}
             >
