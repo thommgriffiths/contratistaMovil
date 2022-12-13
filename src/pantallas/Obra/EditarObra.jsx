@@ -67,7 +67,7 @@ const buildObra = (nombre = null, propietario = null, direccion = null) => {
   let obra = getEmptyConstructor(entities.obra);
 
   obra[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  obra[commonAttrs.editadoPor] = getLoggedUser().email;
+  obra[commonAttrs.editadoPor] = getLoggedUser().Email;
 
   obra[commonAttrs.nombre] = nombre;
   obra[commonAttrs.propietario] = propietario;

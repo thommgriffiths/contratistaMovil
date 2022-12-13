@@ -31,7 +31,7 @@ const CrearJornal = ({ navigation }) => {
 
     nuevoJornal[commonAttrs.fechaCreacion] = getCurrentDateTime();
     nuevoJornal[commonAttrs.status] = obtenerStatus().pedido;
-    nuevoJornal[commonAttrs.creadoPor] = getLoggedUser().email;
+    nuevoJornal[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoJornal[commonAttrs.diasHombre] = diasHombre;
     //entities values must be objects
     nuevoJornal[entities.obra] = { id: context.obra };

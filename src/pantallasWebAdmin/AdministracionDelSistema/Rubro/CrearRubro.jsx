@@ -24,7 +24,7 @@ const AdminCrearRubro = ({ navigation }) => {
     newRubro[commonAttrs.nombre] = nombre;
 
     newRubro[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    newRubro[commonAttrs.creadoPor] = getLoggedUser().email;
+    newRubro[commonAttrs.creadoPor] = getLoggedUser().Email;
 
     console.log(newRubro);
     await createFSElementAsync(newRubro);

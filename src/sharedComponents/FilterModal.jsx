@@ -17,7 +17,7 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     setLoading(true);
     if (modalParams?.item?.filterUser) {
       let query = queryBuilder({
-        [commonAttrs.creadoPor]: getLoggedUser().email,
+        [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
       searchParams.push(query[0]);
     }

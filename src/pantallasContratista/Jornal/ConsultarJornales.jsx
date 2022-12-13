@@ -26,7 +26,7 @@ const ConsultarJornales = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       let query = createQuery({
-        [commonAttrs.creadoPor]: getLoggedUser().email,
+        [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
       console.log(query);
 

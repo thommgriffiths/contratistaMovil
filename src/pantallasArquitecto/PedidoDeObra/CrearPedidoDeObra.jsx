@@ -31,7 +31,7 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
 
     nuevoPedidoDeObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
     nuevoPedidoDeObra[commonAttrs.status] = obtenerStatus().pedido;
-    nuevoPedidoDeObra[commonAttrs.creadoPor] = getLoggedUser().email;
+    nuevoPedidoDeObra[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoPedidoDeObra[commonAttrs.descripcion] = descripcion;
     nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
 

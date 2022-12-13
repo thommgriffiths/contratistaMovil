@@ -70,7 +70,7 @@ const buildJornal = (context = null, diasHombre = null) => {
 
   jornal[commonAttrs.fechaEdicion] = getCurrentDateTime();
   jornal[commonAttrs.status] = obtenerStatus().pedido;
-  jornal[commonAttrs.editadoPor] = getLoggedUser().email;
+  jornal[commonAttrs.editadoPor] = getLoggedUser().Email;
   jornal[commonAttrs.diasHombre] = diasHombre;
   jornal[commonAttrs.tarea] = context?.tarea;
 

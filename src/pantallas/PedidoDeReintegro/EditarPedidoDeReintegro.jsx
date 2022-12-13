@@ -82,7 +82,7 @@ const buildPdR = (context = null, monto = null, descripcion = null) => {
 
   pedidoReintegro[commonAttrs.fechaEdicion] = getCurrentDateTime();
   pedidoReintegro[commonAttrs.status] = obtenerStatus().pedido;
-  pedidoReintegro[commonAttrs.editadoPor] = getLoggedUser().email;
+  pedidoReintegro[commonAttrs.editadoPor] = getLoggedUser().Email;
   pedidoReintegro[commonAttrs.descripcion] = descripcion;
   pedidoReintegro["Monto"] = monto;
   pedidoReintegro[commonAttrs.tarea] = context?.tarea;

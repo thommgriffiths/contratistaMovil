@@ -51,7 +51,7 @@ const buildRubro = (nombre = null) => {
   let rubro = getEmptyConstructor(entities.rubro);
 
   rubro[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  rubro[commonAttrs.editadoPor] = getLoggedUser().email;
+  rubro[commonAttrs.editadoPor] = getLoggedUser().Email;
 
   rubro[commonAttrs.nombre] = nombre;
   return rubro;

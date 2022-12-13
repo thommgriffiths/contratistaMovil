@@ -28,7 +28,7 @@ const CrearObra = ({ navigation }) => {
     nuevaObra[commonAttrs.direccion] = direccion;
 
     nuevaObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    nuevaObra[commonAttrs.creadoPor] = getLoggedUser().email;
+    nuevaObra[commonAttrs.creadoPor] = getLoggedUser().Email;
 
     console.log(nuevaObra);
     await createFSElementAsync(nuevaObra);

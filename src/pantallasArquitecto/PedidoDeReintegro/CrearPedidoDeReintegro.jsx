@@ -32,7 +32,7 @@ const ArqCrearPedidoDeReintegro = ({ navigation }) => {
 
     nuevoPedidoDeReintegro[commonAttrs.fechaCreacion] = getCurrentDateTime();
     nuevoPedidoDeReintegro[commonAttrs.status] = obtenerStatus().pedido;
-    nuevoPedidoDeReintegro[commonAttrs.creadoPor] = getLoggedUser().email;
+    nuevoPedidoDeReintegro[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoPedidoDeReintegro[commonAttrs.descripcion] = descripcion;
     nuevoPedidoDeReintegro["Monto"] = monto;
 

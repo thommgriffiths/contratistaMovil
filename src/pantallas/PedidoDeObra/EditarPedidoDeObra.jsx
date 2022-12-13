@@ -74,7 +74,7 @@ const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
 
   pedidoObra[commonAttrs.fechaEdicion] = getCurrentDateTime();
   pedidoObra[commonAttrs.status] = obtenerStatus().pedido;
-  pedidoObra[commonAttrs.editadoPor] = getLoggedUser().email;
+  pedidoObra[commonAttrs.editadoPor] = getLoggedUser().Email;
   pedidoObra[commonAttrs.descripcion] = descripcion;
   pedidoObra["TipoDePedido"] = tipoDePedido;
   pedidoObra[commonAttrs.tarea] = context?.tarea;
