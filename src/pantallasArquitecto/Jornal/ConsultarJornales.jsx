@@ -7,6 +7,7 @@ import { commonAttrs, entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
+import ValidarJornal from "./ValidarJornales";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import FilterModal from "../../sharedComponents/FilterModal";
@@ -62,18 +63,7 @@ const ArqValidarJornales = () => {
             <ShortInfo item={item} />
           </Pressable>
         </View>
-        <View style={styles.ListItemActions}>
-          <Pressable
-            style={styles.ListItemEdit}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Editar",
-                item: item,
-              });
-            }}
-          />
-        </View>
+        <ValidarJornal item={item} />
       </View>
     );
   };

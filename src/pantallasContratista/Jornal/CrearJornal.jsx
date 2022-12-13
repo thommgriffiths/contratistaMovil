@@ -6,12 +6,13 @@ import Botones from "../../sharedComponents/Botones";
 import ContextoSet from "../../sharedComponents/ContextoSet";
 
 import { getCurrentDateTime } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
+//import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
+  jornalStates,
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 
@@ -30,7 +31,7 @@ const CrearJornal = ({ navigation }) => {
     console.log(nuevoJornal);
 
     nuevoJornal[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    nuevoJornal[commonAttrs.status] = obtenerStatus().pedido;
+    nuevoJornal[commonAttrs.status] = jornalStates.pedido;
     nuevoJornal[commonAttrs.creadoPor] = getLoggedUser().email;
     nuevoJornal[commonAttrs.diasHombre] = diasHombre;
     //entities values must be objects

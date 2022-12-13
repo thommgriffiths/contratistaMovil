@@ -42,6 +42,14 @@ export const commonAttrs = {
   fechaCreacionRango: "FechaCreacionRango",
 };
 
+export const jornalStates = {
+  requested: "Pedido",
+  validated: "Validado",
+  rejected: "Rechazado",
+  inReview: "En revision",
+  payed: "Pagado",
+};
+
 //Constructors
 const contextConstructor = {
   [entities.obra]: null,
