@@ -11,6 +11,9 @@ import { useNavigation } from "@react-navigation/native";
 
 import { setLoggedUser } from "../Core/util/globalStore";
 import { userLogin } from "../Core/Firebase/FirebaseAuthManager";
+import { queryFSElements } from "../Core/Firebase/FirebaseFirestoreManager";
+import { commonAttrs, entities } from "../Core/util/entities";
+import { createQuery } from "../Core/util/functions";
 
 import SignUpUser from "./User/SignUpUser";
 
@@ -23,9 +26,27 @@ const LoginScreen = () => {
 
   useEffect(() => {}, []);
 
-  const initiateApp = (user) => {
-    setLoggedUser(user);
+  const setCurrentUser = async (user) => {
+    let query = createQuery({
+      [commonAttrs.email]: user.email,
+    });
+
+    const userData = await queryFSElements(entities.user, query);
+
+    let newUser = userData[0];
+
+    newUser["firebaseData"] = user;
+
+    console.log("Logged user");
+    console.log(newUser);
+    console.log(newUser?.[commonAttrs.email]);
+
+    setLoggedUser(newUser);
     navigation.navigate("Home");
+  };
+
+  const initiateApp = (user) => {
+    setCurrentUser(user);
   };
 
   const handleSignUp = () => {

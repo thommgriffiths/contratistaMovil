@@ -177,6 +177,12 @@ export const createQuery = (object) => {
         queryObject["value"] = object[key];
         break;
       }
+      case commonAttrs.email: {
+        queryObject["parameter"] = commonAttrs.email;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
       case commonAttrs.editadoPor:
         continue;
       case commonAttrs.nombre:
