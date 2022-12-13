@@ -16,6 +16,8 @@ import {
 } from "../../Core/util/entities";
 import { userSignUpAsync } from "../../Core/Firebase/FirebaseAuthManager";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { setLoggedUser } from "../../Core/util/globalStore";
+import LoadingComponent from "../../sharedComponents/LoadingComponent";
 import Botones from "../../sharedComponents/Botones";
 
 import styles from "../styles/Crear.style";
@@ -25,10 +27,13 @@ const SignUpUser = ({ email, password, setOpen }) => {
   const [apellido, setApellido] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
 
   const handleCrearUsuario = async () => {
     if (passwordConfirm != password) return;
+    setLoading(true);
 
     const FBuser = await userSignUpAsync(email, password);
 
@@ -42,6 +47,7 @@ const SignUpUser = ({ email, password, setOpen }) => {
     console.log(newUser);
 
     await createFSElementAsync(newUser);
+    setLoggedUser(newUser);
 
     navigation.replace("Home");
   };
@@ -57,35 +63,38 @@ const SignUpUser = ({ email, password, setOpen }) => {
       <View style={modalStyle.centeredView}>
         <View style={modalStyle.modalView}>
           <View style={styles.body}>
-            <KeyboardAvoidingView behavior="height">
-              {/*Section title*/}
-              <View style={styles.detailTitlesWrapper}>
-                <Text style={styles.detailTitlesTitle}>Registrarse</Text>
-              </View>
+            {!loading && (
+              <KeyboardAvoidingView behavior="height">
+                {/*Section title*/}
+                <View style={styles.detailTitlesWrapper}>
+                  <Text style={styles.detailTitlesTitle}>Registrarse</Text>
+                </View>
 
-              {/*Form */}
-              <View style={styles.formWrapper}>
+                {/*Form */}
+                <View style={styles.formWrapper}>
+                  <TextInput
+                    placeholder="Ingrese su nombre"
+                    value={nombre}
+                    onChangeText={(text) => setNombre(text)}
+                    style={styles.input}
+                  />
+                  <TextInput
+                    placeholder="Ingrese su apellido"
+                    value={apellido}
+                    onChangeText={(text) => setApellido(text)}
+                    style={styles.input}
+                  />
+                </View>
                 <TextInput
-                  placeholder="Ingrese su nombre"
-                  value={nombre}
-                  onChangeText={(text) => setNombre(text)}
+                  placeholder="Reingrese su nueva contraseña"
+                  value={passwordConfirm}
+                  onChangeText={(text) => setPasswordConfirm(text)}
                   style={styles.input}
+                  secureTextEntry
                 />
-                <TextInput
-                  placeholder="Ingrese su apellido"
-                  value={apellido}
-                  onChangeText={(text) => setApellido(text)}
-                  style={styles.input}
-                />
-              </View>
-              <TextInput
-                placeholder="Reingrese su nueva contraseña"
-                value={passwordConfirm}
-                onChangeText={(text) => setPasswordConfirm(text)}
-                style={styles.input}
-                secureTextEntry
-              />
-            </KeyboardAvoidingView>
+              </KeyboardAvoidingView>
+            )}
+            {loading && <LoadingComponent />}
           </View>
 
           <Botones
