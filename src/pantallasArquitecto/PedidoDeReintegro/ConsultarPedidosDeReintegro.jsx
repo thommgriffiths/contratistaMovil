@@ -1,15 +1,14 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
-import {
-  getFSCollectionAsync,
-  queryFSElements,
-} from "../../Core/Firebase/FirebaseFirestoreManager";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   completeElements,
   MontoTotal,
   createQuery,
+  sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
 
@@ -36,11 +35,16 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
         entities.pedidoDeReintegro,
         query
       );
-      const finalElements = await completeElements(rawElements);
+      const completedElements = await completeElements(rawElements);
+      console.log(completedElements);
 
-      console.log("Los final elements son: ");
-      console.log(finalElements);
-      setPedidosReintegro(finalElements);
+      const sortedElements = sortElementsByCommonAttribute(
+        completedElements,
+        commonAttrs.fechaCreacion,
+        false
+      );
+
+      setPedidosReintegro(sortedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -84,7 +88,9 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="edit" size={24} color="black" />
+          </Pressable>
           <Pressable
             style={styles.ListItemDelete}
             onPress={() => {
@@ -94,7 +100,9 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="delete" size={24} color="black" />
+          </Pressable>
         </View>
       </View>
     );
@@ -113,14 +121,16 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
                 navigation.replace("ArqCrearPedidoDeReintegroScreen")
               }
             >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
+              <AntDesign name="pluscircleo" size={24} color="black" />
             </Pressable>
           </View>
         </View>
 
         <View style={styles.ListItem}>
           <View style={styles.ListItemText}>
-            <Text>Monto total: ${MontoTotal(pedidosReintegro)}</Text>
+            <Text style={{ fontWeight: "bold" }}>
+              Monto total: ${MontoTotal(pedidosReintegro)}
+            </Text>
           </View>
         </View>
 

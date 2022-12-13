@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 40,
     margin: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   ListItemDelete: {
     backgroundColor: "red",
@@ -81,6 +83,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 40,
     margin: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

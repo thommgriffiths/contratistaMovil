@@ -22,7 +22,7 @@ export const getCurrentDateTime = () => {
   return date.getTime();
 };
 
-const fechaComun = (fecha) => {
+export const fechaComun = (fecha) => {
   const date = new Date(fecha);
   const [month, day, year] = [
     date.getMonth(),

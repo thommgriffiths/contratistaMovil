@@ -21,6 +21,11 @@ spanishLabels["FechaCreacion"] = "Fecha de carga";
 //Pedido de Reintegro
 spanishLabels["Monto"] = "Monto:";
 
+//Pedido de obra
+spanishLabels["pedidoMateriales"] = "Pedido de Materiales";
+spanishLabels["pedidoDefiniciones"] = "Pedido de Definicion";
+spanishLabels["pedidoPlanos"] = "Pedido plano detalle";
+
 export const label = (key) => {
   return spanishLabels[key] ? spanishLabels[key] : key + "ESKEY";
 };

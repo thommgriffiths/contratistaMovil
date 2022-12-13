@@ -15,7 +15,7 @@ const ArqHomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header backButton />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
@@ -29,17 +29,17 @@ const ArqHomeScreen = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ArqVerPedidosDeObraScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Pedidos de Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("ValidarJornalesSreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver y validar jornales</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ArqVerPedidosDeObraScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Ver y crear pedidos de obra</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

@@ -1,8 +1,13 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements } from "../../Core/util/functions";
+import {
+  completeElements,
+  fechaComun,
+  sortElementsByCommonAttribute,
+} from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
 
 import Header from "../../sharedComponents/Header";
@@ -13,6 +18,7 @@ import DetailModal from "../../sharedComponents/DetailModal";
 import FilterModal from "../../sharedComponents/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 import styles from "../styles/Consultar.style";
+import { label } from "../../Core/util/labels";
 
 const ArqConsultarPedidosDeObra = ({ navigation }) => {
   const [pedidosObra, setPedidosObra] = useState([]);
@@ -22,12 +28,16 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.pedidoDeObra);
-      console.log("Los raw elements son: ");
-      console.log(rawElements);
-      const finalElements = await completeElements(rawElements);
-      console.log("Los final elements son: ");
-      console.log(finalElements);
-      setPedidosObra(finalElements);
+      const completedElements = await completeElements(rawElements);
+      console.log(completedElements);
+
+      const sortedElements = sortElementsByCommonAttribute(
+        completedElements,
+        commonAttrs.fechaCreacion,
+        false
+      );
+
+      setPedidosObra(sortedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -71,7 +81,9 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="edit" size={24} color="black" />
+          </Pressable>
           <Pressable
             style={styles.ListItemDelete}
             onPress={() => {
@@ -81,7 +93,9 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="delete" size={24} color="black" />
+          </Pressable>
         </View>
       </View>
     );
@@ -104,15 +118,13 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
                 });
               }}
             >
-              <Text style={styles.actionsFilterText}>Buscar</Text>
+              <AntDesign name="search1" size={24} color="black" />
             </Pressable>
             <Pressable
               style={styles.actionsAdd}
-              onPress={() =>
-                navigation.replace("ArqCrearPedidoDeReintegroScreen")
-              }
+              onPress={() => navigation.replace("ArqCrearPedidosDeObraScreen")}
             >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
+              <AntDesign name="pluscircleo" size={24} color="black" />
             </Pressable>
           </View>
         </View>
@@ -154,10 +166,11 @@ export default ArqConsultarPedidosDeObra;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>Tipo de pedido: {item.TipoDePedido}</Text>
-      <Text>id: {item.id}</Text>
-      <Text>obra: {item.obra?.Nombre}</Text>
-      <Text>rubro: {item.rubro?.Nombre}</Text>
+      <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
+      <Text>Obra: {item.obra?.Nombre}</Text>
+      <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text>Estado: {item.Status}</Text>
+      <Text>Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}</Text>
     </>
   );
 };

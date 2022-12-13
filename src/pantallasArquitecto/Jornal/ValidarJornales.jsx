@@ -5,6 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { updateElement, getCurrentDateTime } from "../../Core/util/functions";
 import { commonAttrs, jornalStates } from "../../Core/util/entities";
+import { palette } from "../../Core/colors";
 
 const ValidarJornal = ({ item }) => {
   const [selected, setSelected] = useState(null);
@@ -49,7 +50,10 @@ const ValidarJornal = ({ item }) => {
         }}
         style={[
           styles.itemAction,
-          { backgroundColor: selected == jornalStates.inReview ? "white" : "" },
+          {
+            backgroundColor:
+              selected == jornalStates.inReview ? palette.B3 : "",
+          },
         ]}
       >
         <AntDesign name="questioncircleo" size={24} color="yellow" />

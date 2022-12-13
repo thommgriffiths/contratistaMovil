@@ -15,7 +15,7 @@ const ContratistaHomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header backButton />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}

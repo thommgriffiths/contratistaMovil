@@ -1,6 +1,8 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 
+import { AntDesign } from "@expo/vector-icons";
+
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { completeElements } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
@@ -73,7 +75,7 @@ const ArqValidarJornales = () => {
       <Header backButton />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Jornales" />
+          <Titles titleText="Ver y validar jornales" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsFilter}
@@ -85,7 +87,7 @@ const ArqValidarJornales = () => {
                 });
               }}
             >
-              <Text style={styles.actionsFilterText}>Buscar</Text>
+              <AntDesign name="search1" size={24} color="black" />
             </Pressable>
           </View>
         </View>
@@ -102,9 +104,6 @@ const ArqValidarJornales = () => {
           )}
         </View>
       </View>
-      {modalParams?.actionLabel == "Editar" && (
-        <EditModal modalParams={modalParams} setParams={setModalParams} />
-      )}
       {modalParams?.actionLabel == "showDetail" && (
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
       )}
@@ -124,9 +123,9 @@ export default ArqValidarJornales;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>id: {item.id}</Text>
-      <Text>obra: {item.obra?.Nombre}</Text>
-      <Text>rubro: {item.rubro?.Nombre}</Text>
+      <Text>Obra: {item.obra?.Nombre}</Text>
+      <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
     </>
   );
 };
