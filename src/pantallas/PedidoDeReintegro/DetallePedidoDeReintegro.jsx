@@ -12,6 +12,7 @@ const propertiesToDisplay = [
   "obra",
   "rubro",
   "Monto",
+  "FechaCreacion",
 ];
 
 const DetallePedidoDeReintegro = ({ item }) => {

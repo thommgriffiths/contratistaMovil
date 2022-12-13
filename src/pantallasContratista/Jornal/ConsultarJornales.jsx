@@ -1,5 +1,6 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 import {
   getFSCollectionAsync,
@@ -82,7 +83,9 @@ const ConsultarJornales = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="edit" size={24} color="black" />
+          </Pressable>
           <Pressable
             style={styles.ListItemDelete}
             onPress={() => {
@@ -92,7 +95,9 @@ const ConsultarJornales = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="delete" size={24} color="black" />
+          </Pressable>
         </View>
       </View>
     );
@@ -103,7 +108,7 @@ const ConsultarJornales = ({ navigation }) => {
       <Header backButton />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Jornales" />
+          <Titles titleText="Jornales cargados" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsFilter}
@@ -118,13 +123,13 @@ const ConsultarJornales = ({ navigation }) => {
                 });
               }}
             >
-              <Text style={styles.actionsFilterText}>Buscar</Text>
+              <AntDesign name="search1" size={24} color="black" />
             </Pressable>
             <Pressable
               style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearJornalScreen")}
+              onPress={() => navigation.replace("ContraCrearJornalScreen")}
             >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
+              <AntDesign name="pluscircleo" size={24} color="black" />
             </Pressable>
           </View>
         </View>
@@ -166,9 +171,10 @@ export default ConsultarJornales;
 const ShortInfo = ({ item }) => {
   return (
     <>
-      <Text>id: {item.id}</Text>
-      <Text>obra: {item.obra?.Nombre}</Text>
-      <Text>rubro: {item.rubro?.Nombre}</Text>
+      <Text>Obra: {item.obra?.Nombre}</Text>
+      <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
+      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
     </>
   );
 };

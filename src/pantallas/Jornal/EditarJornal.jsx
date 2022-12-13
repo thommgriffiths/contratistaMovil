@@ -39,10 +39,7 @@ const EditarJornal = ({ currentItem, setNewItem }) => {
               initialValues={currentItem}
               isEdit
             />
-
-            <Text style={styles.fieldTitle}>Tipo de jornal</Text>
-
-            <Text style={styles.fieldTitle}>Detalle de jornal</Text>
+            <Text style={styles.fieldTitle}>Cantidad dias hombre</Text>
             <TextInput
               placeholder="Ingrese cantidad dias hombre"
               keyboardType="numeric"

@@ -22,13 +22,23 @@ export const getCurrentDateTime = () => {
   return date.getTime();
 };
 
+const fechaComun = (fecha) => {
+  const date = new Date(fecha);
+  const [month, day, year] = [
+    date.getMonth(),
+    date.getDate(),
+    date.getFullYear(),
+  ];
+  return `${day}/${month + 1}/${year}`;
+};
+
 export const parseDate = (date) => {
   const [month, day, year] = [
     date.getMonth(),
     date.getDate(),
     date.getFullYear(),
   ];
-  return `${year}/${month}/${day}`;
+  return `${year}/${month + 1}/${day}`;
 };
 
 //------------------------------------------------------------------------
@@ -115,10 +125,14 @@ export const formatToDisplay = (item = {}, propertiesToDisplay = []) => {
   let result = [];
   propertiesToDisplay.forEach((key) => {
     if (!item[key]) return;
-
-    entities[key]
-      ? result.push({ key: key, value: item[key][commonAttrs.nombre] })
-      : result.push({ key: key, value: item[key] });
+    if (entities[key]) {
+      result.push({ key: key, value: item[key][commonAttrs.nombre] });
+    } else if (
+      key == commonAttrs.fechaCreacion ||
+      key == commonAttrs.fechaEdicion
+    ) {
+      result.push({ key: key, value: fechaComun(item[key]) });
+    } else result.push({ key: key, value: item[key] });
   });
 
   return result;

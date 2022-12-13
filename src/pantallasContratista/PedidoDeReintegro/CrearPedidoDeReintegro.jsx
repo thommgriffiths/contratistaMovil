@@ -43,7 +43,7 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
 
     console.log(nuevoPedidoDeReintegro);
     await createFSElementAsync(nuevoPedidoDeReintegro);
-    navigation.navigate("VerPedidosDeReintegroScreen");
+    navigation.navigate("ContraVerPedidosDeReintegroScreen");
   };
 
   return (
@@ -95,7 +95,7 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
         onOkFunction={handleCrearPedidoReintegro}
         onOkText={"Crear pedido de reintegro"}
         onCancelFunction={() =>
-          navigation.navigate("VerPedidosDeReintegroScreen")
+          navigation.navigate("ContraVerPedidosDeReintegroScreen")
         }
         onCancelText={"Volver"}
         style={styles.botonera}

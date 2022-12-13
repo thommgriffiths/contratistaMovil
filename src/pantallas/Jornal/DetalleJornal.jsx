@@ -5,7 +5,14 @@ import { label } from "../../Core/util/labels";
 import { formatToDisplay } from "../../Core/util/functions";
 import styles from "../styles/Detalle.style";
 
-const propertiesToDisplay = ["obra", "rubro", "DiasHombre"];
+const propertiesToDisplay = [
+  "obra",
+  "rubro",
+  "tarea",
+  "DiasHombre",
+  "Status",
+  "FechaCreacion",
+];
 
 const DetalleJornal = ({ item }) => {
   const [itemProperties, setItemProperties] = useState([]);

@@ -41,7 +41,7 @@ const CrearJornal = ({ navigation }) => {
 
     console.log(nuevoJornal);
     await createFSElementAsync(nuevoJornal);
-    navigation.navigate("VerJornalesScreen");
+    navigation.navigate("ContraVerJornalesScreen");
   };
 
   return (
@@ -53,7 +53,7 @@ const CrearJornal = ({ navigation }) => {
         <KeyboardAvoidingView behavior="height">
           {/*Section title*/}
           <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>Crear Jornal</Text>
+            <Text style={styles.detailTitlesTitle}>Cargar nuevos jornales</Text>
           </View>
 
           {/*Form */}
@@ -81,7 +81,7 @@ const CrearJornal = ({ navigation }) => {
       <Botones
         onOkFunction={handleCrearJornal}
         onOkText={"Crear jornal"}
-        onCancelFunction={() => navigation.navigate("VerJornalesScreen")}
+        onCancelFunction={() => navigation.navigate("ContraVerJornalesScreen")}
         onCancelText={"Volver"}
         style={styles.botonera}
       />

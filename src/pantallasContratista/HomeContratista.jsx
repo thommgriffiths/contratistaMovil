@@ -29,19 +29,19 @@ const ContratistaHomeScreen = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <TouchableOpacity
+            onPress={() => navigation.navigate("ContraVerJornalesScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Ver y cargar jornales</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() =>
               navigation.navigate("ContraVerPedidosDeReintegroScreen")
             }
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Pedidos de Reintegro</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ContraVerJornalesScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Jornales</Text>
+            <Text style={styles.menuItemText}>Pedir reintegro adicionales</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -15,6 +15,8 @@ spanishLabels["Propietario"] = "Propietario";
 
 //Jornal
 spanishLabels["DiasHombre"] = "Dias hombre";
+spanishLabels["tarea"] = "Tarea";
+spanishLabels["FechaCreacion"] = "Fecha de carga";
 
 //Pedido de Reintegro
 spanishLabels["Monto"] = "Monto:";

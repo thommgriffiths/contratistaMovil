@@ -1,14 +1,13 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
-import {
-  getFSCollectionAsync,
-  queryFSElements,
-} from "../../Core/Firebase/FirebaseFirestoreManager";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   MontoTotal,
   createQuery,
+  sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { entities, commonAttrs } from "../../Core/util/entities";
@@ -36,13 +35,17 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
         entities.pedidoDeReintegro,
         query
       );
-
-      console.log("Los raw elements son: ");
-      console.log(rawElements);
-      const finalElements = await completeElements(rawElements);
+      const completedElements = await completeElements(rawElements);
       console.log("Los final elements son: ");
-      console.log(finalElements);
-      setPedidosReintegro(finalElements);
+      console.log(completedElements);
+
+      const sortedElements = sortElementsByCommonAttribute(
+        completedElements,
+        commonAttrs.fechaCreacion,
+        false
+      );
+
+      setPedidosReintegro(sortedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -86,7 +89,9 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="edit" size={24} color="black" />
+          </Pressable>
           <Pressable
             style={styles.ListItemDelete}
             onPress={() => {
@@ -96,7 +101,9 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <AntDesign name="delete" size={24} color="black" />
+          </Pressable>
         </View>
       </View>
     );
@@ -107,13 +114,15 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
       <Header backButton />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Pedidos de Reintegro" />
+          <Titles titleText="Reintegros Adicionales" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeReintegroScreen")}
+              onPress={() =>
+                navigation.replace("ContraCrearPedidoDeReintegroScreen")
+              }
             >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
+              <AntDesign name="pluscircleo" size={24} color="black" />
             </Pressable>
           </View>
         </View>
@@ -157,7 +166,9 @@ const ShortInfo = ({ item }) => {
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text>Monto: ${item.Monto}</Text>
+
+      <Text style={{ fontWeight: "bold" }}>Monto: ${item.Monto}</Text>
+      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
     </>
   );
 };
