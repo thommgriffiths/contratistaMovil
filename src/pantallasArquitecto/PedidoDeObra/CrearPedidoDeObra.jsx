@@ -42,7 +42,7 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
 
     console.log(nuevoPedidoDeObra);
     await createFSElementAsync(nuevoPedidoDeObra);
-    navigation.navigate("VerPedidosDeObraScreen");
+    navigation.navigate("ArqVerPedidosDeObraScreen");
   };
 
   return (
@@ -84,7 +84,9 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
       <Botones
         onOkFunction={handleCrearPedidoObra}
         onOkText={"Crear pedido de obra"}
-        onCancelFunction={() => navigation.navigate("VerPedidosDeObraScreen")}
+        onCancelFunction={() =>
+          navigation.navigate("ArqVerPedidosDeObraScreen")
+        }
         onCancelText={"Volver"}
         style={styles.botonera}
       />

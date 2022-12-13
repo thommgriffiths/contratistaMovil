@@ -113,27 +113,7 @@ const AdminTodasTareas = ({ navigation }) => {
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Todas Tareas" />
-          <View style={styles.actions}>
-            {/*
-            <Pressable
-              style={styles.actionsFilter}
-              onPress={() => {
-                setModalParams({
-                  visible: true,
-                  actionLabel: "Filter",
-                  item: { [commonAttrs.type]: entities.pedidoDeObra },
-                });
-              }}
-            >
-              <Text style={styles.actionsFilterText}>Buscar</Text>
-            </Pressable>
-            <Pressable
-              style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeObraScreen")}
-            >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
-            </Pressable> */}
-          </View>
+          <View style={styles.actions}></View>
         </View>
 
         <View style={styles.listContainer}>

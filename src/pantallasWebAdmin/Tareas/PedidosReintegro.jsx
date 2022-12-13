@@ -135,12 +135,6 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
             >
               <Text style={styles.actionsAddText}>Ordenar</Text>
             </Pressable>
-            <Pressable
-              style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeReintegroScreen")}
-            >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
-            </Pressable>
           </View>
         </View>
 

@@ -119,12 +119,6 @@ const AdminPedidosDeObraYMateriales = ({ navigation }) => {
             >
               <Text style={styles.actionsFilterText}>Buscar</Text>
             </Pressable>
-            <Pressable
-              style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeObraScreen")}
-            >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
-            </Pressable>
           </View>
         </View>
 

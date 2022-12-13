@@ -109,7 +109,9 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeReintegroScreen")}
+              onPress={() =>
+                navigation.replace("ArqCrearPedidoDeReintegroScreen")
+              }
             >
               <Text style={styles.actionsAddText}>+ nuevo</Text>
             </Pressable>

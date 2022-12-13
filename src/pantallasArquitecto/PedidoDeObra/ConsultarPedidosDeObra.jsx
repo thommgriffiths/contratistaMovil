@@ -108,7 +108,9 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
             </Pressable>
             <Pressable
               style={styles.actionsAdd}
-              onPress={() => navigation.replace("CrearPedidoDeObraScreen")}
+              onPress={() =>
+                navigation.replace("ArqCrearPedidoDeReintegroScreen")
+              }
             >
               <Text style={styles.actionsAddText}>+ nuevo</Text>
             </Pressable>
