@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -20,22 +20,24 @@ const DropdownSelect = ({ category, placeholder, action, props }) => {
   }, [value]);
 
   return items ? (
-    <DropDownPicker
-      open={open}
-      setOpen={setOpen}
-      value={value}
-      setValue={setValue}
-      items={items}
-      setItems={setItems}
-      placeholder={placeholder}
-      showTickIcon={false}
-      style={[styles.input, styles.inputDropdown]}
-      dropDownContainerStyle={styles.dropdown}
-      placeholderStyle={styles.placeholderStyles}
-      listItemLabelStyle={styles.dropdownListItemLabel}
-      selectedItemLabelStyle={styles.dropdownSelectedItemLabel}
-      zIndex={props.stackOrder}
-    />
+    <View style={styles.container}>
+      <DropDownPicker
+        open={open}
+        setOpen={setOpen}
+        value={value}
+        setValue={setValue}
+        items={items}
+        setItems={setItems}
+        placeholder={placeholder}
+        showTickIcon={false}
+        style={styles.input}
+        dropDownContainerStyle={styles.dropdown}
+        placeholderStyle={styles.placeholderStyles}
+        listItemLabelStyle={styles.dropdownListItemLabel}
+        selectedItemLabelStyle={styles.dropdownSelectedItemLabel}
+        zIndex={props.stackOrder}
+      />
+    </View>
   ) : (
     <BlankInput />
   );
@@ -44,7 +46,12 @@ const DropdownSelect = ({ category, placeholder, action, props }) => {
 export default DropdownSelect;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: 5,
+  },
   input: {
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: palette.white,
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -52,9 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderWidth: 2,
     borderColor: palette.B1,
-  },
-  inputDropdown: {
-    flexDirection: "row",
+    height: "100%",
   },
   dropdown: {
     backgroundColor: palette.white,
