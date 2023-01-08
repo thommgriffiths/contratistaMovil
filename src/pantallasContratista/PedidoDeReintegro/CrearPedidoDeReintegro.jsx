@@ -37,8 +37,8 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
     nuevoPedidoDeReintegro["Monto"] = monto;
 
     //entities values must be objects
-    nuevoPedidoDeReintegro[entities.obra] = { id: context.obra };
-    nuevoPedidoDeReintegro[entities.rubro] = { id: context.rubro };
+    nuevoPedidoDeReintegro[entities.obra] = context.obra;
+    nuevoPedidoDeReintegro[entities.rubro] = context.rubro;
     nuevoPedidoDeReintegro[commonAttrs.tarea] = context.tarea;
 
     console.log(nuevoPedidoDeReintegro);

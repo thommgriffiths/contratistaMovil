@@ -36,8 +36,8 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
     nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
 
     //entities values must be objects
-    nuevoPedidoDeObra[entities.obra] = { id: context.obra };
-    nuevoPedidoDeObra[entities.rubro] = { id: context.rubro };
+    nuevoPedidoDeObra[entities.obra] = context.obra;
+    nuevoPedidoDeObra[entities.rubro] = context.rubro;
     nuevoPedidoDeObra[commonAttrs.tarea] = context.tarea;
 
     console.log(nuevoPedidoDeObra);

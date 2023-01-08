@@ -80,8 +80,8 @@ const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   pedidoObra[commonAttrs.tarea] = context?.tarea;
 
   //entities values must be objects
-  pedidoObra[entities.obra] = context?.obra ? { id: context.obra } : null;
-  pedidoObra[entities.rubro] = context?.rubro ? { id: context.rubro } : null;
+  pedidoObra[entities.obra] = context?.obra ? context.obra : null;
+  pedidoObra[entities.rubro] = context?.rubro ? context.rubro : null;
 
   return pedidoObra;
 };

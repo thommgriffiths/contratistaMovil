@@ -61,10 +61,10 @@ export const completeElements = async (elements = []) => {
 
     for (const key in element) {
       if (!entities[key]) continue;
-      if (!element?.[key]?.[commonAttrs.id]) continue;
+      if (!element?.[key]) continue;
 
-      const object = await getFSElementById(key, element[key][commonAttrs.id]);
-      object[commonAttrs.id] = element[key][commonAttrs.id];
+      const object = await getFSElementById(key, element[key]);
+      object[commonAttrs.id] = element[key];
       element[key] = object;
     }
     result.push(element);
@@ -203,13 +203,14 @@ export const createQuery = (object) => {
         continue;
       case commonAttrs.fechaCreacionRango: {
         if (!object[key]?.startDate) continue;
-        if (!object[key]?.endDate) continue;
+
         let startDate = {
           ["parameter"]: commonAttrs.fechaCreacion,
           ["operator"]: ">=",
           ["value"]: object[key]?.startDate,
         };
         query.push(startDate);
+        if (!object[key]?.endDate) continue;
         let endDate = {
           ["parameter"]: commonAttrs.fechaCreacion,
           ["operator"]: "<=",
@@ -229,14 +230,14 @@ export const createQuery = (object) => {
       case entities.obra: {
         queryObject["parameter"] = entities.obra;
         queryObject["operator"] = "==";
-        queryObject["value"] = { [commonAttrs.id]: object[key] };
+        queryObject["value"] = object[key];
         break;
       }
 
       case entities.rubro: {
         queryObject["parameter"] = entities.rubro;
         queryObject["operator"] = "==";
-        queryObject["value"] = { [commonAttrs.id]: object[key] };
+        queryObject["value"] = object[key];
         break;
       }
     }

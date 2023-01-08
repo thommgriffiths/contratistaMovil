@@ -31,12 +31,12 @@ const CrearJornal = ({ navigation }) => {
     console.log(nuevoJornal);
 
     nuevoJornal[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    nuevoJornal[commonAttrs.status] = jornalStates.pedido;
+    nuevoJornal[commonAttrs.status] = jornalStates.requested;
     nuevoJornal[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoJornal[commonAttrs.diasHombre] = diasHombre;
     //entities values must be objects
-    nuevoJornal[entities.obra] = { id: context.obra };
-    nuevoJornal[entities.rubro] = { id: context.rubro };
+    nuevoJornal[entities.obra] = context.obra;
+    nuevoJornal[entities.rubro] = context.rubro;
     nuevoJornal[commonAttrs.tarea] = context.tarea;
 
     console.log(nuevoJornal);

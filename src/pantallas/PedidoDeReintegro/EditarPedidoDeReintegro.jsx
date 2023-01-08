@@ -88,10 +88,8 @@ const buildPdR = (context = null, monto = null, descripcion = null) => {
   pedidoReintegro[commonAttrs.tarea] = context?.tarea;
 
   //entities values must be objects
-  pedidoReintegro[entities.obra] = context?.obra ? { id: context.obra } : null;
-  pedidoReintegro[entities.rubro] = context?.rubro
-    ? { id: context.rubro }
-    : null;
+  pedidoReintegro[entities.obra] = context?.obra ? context.obra : null;
+  pedidoReintegro[entities.rubro] = context?.rubro ? context.rubro : null;
 
   return pedidoReintegro;
 };

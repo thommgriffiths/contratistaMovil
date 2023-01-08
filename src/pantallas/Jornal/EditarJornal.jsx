@@ -72,8 +72,8 @@ const buildJornal = (context = null, diasHombre = null) => {
   jornal[commonAttrs.tarea] = context?.tarea;
 
   //entities values must be objects
-  jornal[entities.obra] = context?.obra ? { id: context.obra } : null;
-  jornal[entities.rubro] = context?.rubro ? { id: context.rubro } : null;
+  jornal[entities.obra] = context?.obra ? context.obra : null;
+  jornal[entities.rubro] = context?.rubro ? context.rubro : null;
 
   return jornal;
 };
