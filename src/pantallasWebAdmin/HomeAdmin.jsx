@@ -43,13 +43,6 @@ const AdminHome = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("AdminNotificacionesScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Notificaciones</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("AdminEstadosObraScreen")}
             style={styles.menuItem}
           >

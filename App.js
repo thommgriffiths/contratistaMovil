@@ -26,7 +26,6 @@ import CrearRubro from "./src/pantallas/Rubro/CrearRubro";
 //Pantallas administrador
 import AdminHome from "./src/pantallasWebAdmin/HomeAdmin";
 import AdminEstadosObra from "./src/pantallasWebAdmin/EstadosObra/EstadosObra";
-import AdminNotificaciones from "./src/pantallasWebAdmin/Notificaciones/Notificaciones";
 import MenuAdministracionSistema from "./src/pantallasWebAdmin/AdministracionDelSistema/MenuAdministracionSistema";
 import AdminReporteRapido from "./src/pantallasWebAdmin/ReporteContratistas/ReporteRapido";
 import AdminMenuTareas from "./src/pantallasWebAdmin/Tareas/MenuTareas";
@@ -81,61 +80,7 @@ const AppWithNavigation = () => {
             name="Home"
             component={HomeScreen}
           />
-          {/*}
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearPedidoDeObraScreen"
-            component={CrearPedidoDeObra}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerPedidosDeObraScreen"
-            component={ConsultarPedidosDeObra}
-          />
 
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearJornalScreen"
-            component={CrearJornal}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerJornalesScreen"
-            component={ConsultarJornales}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearPedidoDeReintegroScreen"
-            component={CrearPedidoDeReintegro}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerPedidosDeReintegroScreen"
-            component={ConsultarPedidosDeReintegro}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearObraScreen"
-            component={CrearObra}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerObrasScreen"
-            component={ConsultarObras}
-          />
-
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="CrearRubroScreen"
-            component={CrearRubro}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="VerRubrosScreen"
-            component={ConsultarRubros}
-          />
           {/*Aca van las pantallas del administrador */}
           <>
             <Stack.Screen
@@ -148,12 +93,6 @@ const AppWithNavigation = () => {
               options={{ headerShown: false }}
               name="AdminEstadosObraScreen"
               component={AdminEstadosObra}
-            />
-
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="AdminNotificacionesScreen"
-              component={AdminNotificaciones}
             />
 
             <Stack.Screen
