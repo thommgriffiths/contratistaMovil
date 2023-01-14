@@ -77,7 +77,7 @@ const AdminReporteRapido = () => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="AdminHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Reporte Rapido Jornales" />

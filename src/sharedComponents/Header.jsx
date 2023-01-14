@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { palette } from "../Core/colors";
 
-const Header = ({ backButton }) => {
+const Header = ({ backButton, backTo }) => {
   const navigation = useNavigation();
 
   return (
@@ -16,6 +16,13 @@ const Header = ({ backButton }) => {
           <View style={styles.profileImage}></View>
           {backButton ? (
             <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <AntDesign name="back" size={24} color="black" />
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
+          {backTo ? (
+            <TouchableOpacity onPress={() => navigation.navigate(backTo)}>
               <AntDesign name="back" size={24} color="black" />
             </TouchableOpacity>
           ) : (

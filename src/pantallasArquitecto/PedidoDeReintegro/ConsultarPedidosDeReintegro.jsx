@@ -110,7 +110,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="ArqHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Pedidos de Reintegro" />

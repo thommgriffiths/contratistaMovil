@@ -102,7 +102,7 @@ const AdminPedidosDeObraYMateriales = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="AdminHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Pedidos de obra" />

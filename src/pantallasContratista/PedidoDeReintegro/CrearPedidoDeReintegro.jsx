@@ -48,7 +48,7 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header style={styles.header} />
+      <Header />
 
       {/* form container*/}
       <View style={styles.body}>

@@ -111,7 +111,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="HomeContratista" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Reintegros Adicionales" />

@@ -15,7 +15,7 @@ const MenuAdministracionSistema = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header backTo="AdminHomeScreen" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}

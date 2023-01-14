@@ -109,7 +109,7 @@ const AdminTodasTareas = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="AdminHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Todas Tareas" />

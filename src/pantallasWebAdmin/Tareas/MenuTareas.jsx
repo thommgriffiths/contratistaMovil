@@ -15,7 +15,7 @@ const AdminMenuTareas = () => {
 
   return (
     <View style={styles.container}>
-      <Header backButton />
+      <Header backTo="AdminHomeScreen" />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
