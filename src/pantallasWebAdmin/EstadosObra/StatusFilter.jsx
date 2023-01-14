@@ -10,11 +10,7 @@ import DropdownSelect from "../../sharedComponents/DropdownSelect";
 import { entities } from "../../Core/util/entities";
 import { palette } from "../../Core/colors";
 
-const StatusFilter = ({
-  open = true,
-  onSearch = () => {},
-  onClean = () => {},
-}) => {
+const StatusFilter = ({ open = true, onSearch = () => {} }) => {
   const [days, setDays] = useState("");
   const [obra, setObra] = useState(0);
 
@@ -46,14 +42,6 @@ const StatusFilter = ({
               style={[localstyles.boton, localstyles.botonOK]}
             >
               <Text style={localstyles.botonOkText}>Buscar</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={localstyles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => onClean()}
-              style={[localstyles.boton, localstyles.botonCancel]}
-            >
-              <Text style={localstyles.botonCancelText}>Limpiar</Text>
             </TouchableOpacity>
           </View>
         </View>
