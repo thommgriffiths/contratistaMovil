@@ -56,7 +56,6 @@ export const userTypes = {
   architect: "Arquitecto",
   contractor: "Contratista",
   admin: "Administrativo",
-  client: "Cliente",
 };
 
 //Constructors

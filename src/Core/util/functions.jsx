@@ -5,7 +5,12 @@ import {
   updateFSElement,
   getFSCollection,
 } from "../Firebase/FirebaseFirestoreManager";
-import { entities, commonAttrs, getEmptyConstructor } from "./entities";
+import {
+  entities,
+  commonAttrs,
+  getEmptyConstructor,
+  userTypes,
+} from "./entities";
 
 //------------------------------------------------------------------------
 //FECHAS
@@ -103,6 +108,17 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
     setItems(itemsForDropdown);
   };
 
+  const objectToDropdown = (object) => {
+    let result = [];
+    for (const key in object) {
+      result.push({
+        value: key,
+        label: object[key],
+      });
+    }
+    return result;
+  };
+
   switch (type) {
     case "tiposPedidosDePedidosObra":
       return tiposPedidosDeObra;
@@ -112,6 +128,8 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
     case entities.rubro:
       getFSCollection(entities.rubro, onSuccess);
       break;
+    case commonAttrs.userType:
+      return objectToDropdown(userTypes);
     default:
       console.log("No se encontro la categoria" + type);
       return [];

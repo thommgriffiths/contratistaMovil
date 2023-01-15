@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { setLoggedUser } from "../Core/util/globalStore";
 import { userLogin } from "../Core/Firebase/FirebaseAuthManager";
 import { queryFSElements } from "../Core/Firebase/FirebaseFirestoreManager";
-import { commonAttrs, entities } from "../Core/util/entities";
+import { commonAttrs, entities, userTypes } from "../Core/util/entities";
 import { createQuery } from "../Core/util/functions";
 
 import SignUpUser from "./User/SignUpUser";
@@ -24,37 +24,37 @@ const LoginScreen = () => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {}, []);
+  const handleLogin = async () => {
+    userLogin(email, password, initiateApp);
+  };
 
-  const setCurrentUser = async (user) => {
+  const initiateApp = async (user) => {
     let query = createQuery({
       [commonAttrs.email]: user.email,
     });
+    const result = await queryFSElements(entities.user, query);
 
-    const userData = await queryFSElements(entities.user, query);
-
-    let newUser = userData[0];
-
+    let newUser = result[0];
     newUser["firebaseData"] = user;
+    console.log("Logged user", newUser);
 
-    console.log("Logged user");
-    console.log(newUser);
-    console.log(newUser?.[commonAttrs.email]);
-
-    setLoggedUser(newUser);
-    navigation.navigate("Home");
-  };
-
-  const initiateApp = (user) => {
-    setCurrentUser(user);
-  };
-
-  const handleSignUp = () => {
-    setRegisterUser(true);
-  };
-
-  const handleLogin = async () => {
-    userLogin(email, password, initiateApp);
+    if (newUser?.[commonAttrs.validated]) {
+      setLoggedUser(newUser);
+      switch (newUser?.[commonAttrs.userType]) {
+        case userTypes.admin:
+          navigation.navigate("AdminHomeScreen");
+          return;
+        case userTypes.contractor:
+          navigation.navigate("HomeContratista");
+          return;
+        case userTypes.architect:
+          navigation.navigate("ArqHomeScreen");
+          return;
+      }
+    } else {
+      alert("Su usuario aun no se encuentra validado");
+      userSignOut(() => {});
+    }
   };
 
   return (
@@ -79,8 +79,9 @@ const LoginScreen = () => {
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
-          onPress={handleSignUp}
+          onPress={() => setRegisterUser(true)}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
