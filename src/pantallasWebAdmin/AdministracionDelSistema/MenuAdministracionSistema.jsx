@@ -40,6 +40,13 @@ const MenuAdministracionSistema = () => {
           >
             <Text style={styles.menuItemText}>Gestionar Rubros</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AdminVerUsuariosScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Gestionar Usuarios</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

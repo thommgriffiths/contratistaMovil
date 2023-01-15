@@ -327,3 +327,15 @@ export const MontoTotal = (items) => {
     return total + parseInt(item.Monto);
   }, 0);
 };
+
+//filtro un conjunto de objetos(items) de tal manera que el valor de un atributo(attrType)
+//este incluido en un array de opciones(allowedValues)
+export const filterByAttributes = (
+  items = [],
+  attrType,
+  allowedValues = []
+) => {
+  return items.filter((item) => {
+    return allowedValues.includes(item?.[attrType]);
+  });
+};

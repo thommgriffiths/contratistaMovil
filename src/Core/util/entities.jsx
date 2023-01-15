@@ -37,6 +37,8 @@ export const commonAttrs = {
   status: "Status",
   descripcion: "Descripcion",
   monto: "Monto",
+  validated: "Validado",
+  userType: "tipoUsuario",
 
   //Solo para consultas
   fechaCreacionRango: "FechaCreacionRango",
@@ -48,6 +50,13 @@ export const jornalStates = {
   rejected: "Rechazado",
   inReview: "En revision",
   payed: "Pagado",
+};
+
+export const userTypes = {
+  architect: "Arquitecto",
+  contractor: "Contratista",
+  admin: "Administrativo",
+  client: "Cliente",
 };
 
 //Constructors

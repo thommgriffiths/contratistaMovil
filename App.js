@@ -22,6 +22,7 @@ import AdminConsultarObras from "./src/pantallasWebAdmin/AdministracionDelSistem
 import AdminCrearObra from "./src/pantallasWebAdmin/AdministracionDelSistema/Obra/CrearObra";
 import AdminConsultarRubros from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/ConsultarRubros";
 import AdminCrearRubro from "./src/pantallasWebAdmin/AdministracionDelSistema/Rubro/CrearRubro";
+import AdminConsultarUsuarios from "./src/pantallasWebAdmin/AdministracionDelSistema/Usuarios/ConsultarUsuarios";
 
 //Pantallas contratistas
 import HomeContratista from "./src/pantallasContratista/HomeContratista";
@@ -135,6 +136,11 @@ const AppWithNavigation = () => {
               options={{ headerShown: false }}
               name="AdminVerRubrosScreen"
               component={AdminConsultarRubros}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AdminVerUsuariosScreen"
+              component={AdminConsultarUsuarios}
             />
           </>
 
