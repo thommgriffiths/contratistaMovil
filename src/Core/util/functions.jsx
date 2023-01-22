@@ -53,7 +53,7 @@ export const deleteElement = (item, onSuccess) => {
 };
 //Firestore CRUD - Update
 export const updateElement = (item, onSuccess) => {
-  updateFSElement(item.type, item.id, item, onSuccess);
+  updateFSElement(item.type, item.id, cleanElement(item), onSuccess);
 };
 
 //------------------------------------------------------------------------
@@ -82,10 +82,8 @@ export const completeElements = async (elements = []) => {
 export const cleanElement = (element) => {
   for (const key in entities) {
     element[entities[key]]
-      ? (element[entities[key]] = {
-          [commonAttrs.id]: element[entities[key]][commonAttrs.id],
-        })
-      : {};
+      ? (element[entities[key]] = element[entities[key]][commonAttrs.id])
+      : "";
   }
   return element;
 };

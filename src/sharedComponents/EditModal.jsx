@@ -6,7 +6,7 @@ import EditarJornal from "../pantallas/Jornal/EditarJornal";
 import EditarPedidoDeReintegro from "../pantallas/PedidoDeReintegro/EditarPedidoDeReintegro";
 import EditarObra from "../pantallas/Obra/EditarObra";
 import EditarRubro from "../pantallas/Rubro/EditarRubro";
-import { updateElement, cleanElement } from "../Core/util/functions";
+import { updateElement } from "../Core/util/functions";
 import { entities } from "../Core/util/entities";
 
 const EditModal = ({ modalParams, setParams }) => {
@@ -14,10 +14,7 @@ const EditModal = ({ modalParams, setParams }) => {
     const onSuccess = () => {
       setParams({ visible: false, editedItem: modalParams.item.id });
     };
-    const finalItem = cleanElement(item);
-    console.log("el nuevo elemento editado es: ");
-    console.log(finalItem);
-    updateElement(finalItem, onSuccess);
+    updateElement(item, onSuccess);
   };
 
   const [item, setItem] = useState({});

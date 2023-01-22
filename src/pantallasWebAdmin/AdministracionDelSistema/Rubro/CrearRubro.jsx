@@ -22,7 +22,6 @@ const AdminCrearRubro = ({ navigation }) => {
     let newRubro = getEmptyConstructor(entities.rubro);
 
     newRubro[commonAttrs.nombre] = nombre;
-
     newRubro[commonAttrs.fechaCreacion] = getCurrentDateTime();
     newRubro[commonAttrs.creadoPor] = getLoggedUser().Email;
 

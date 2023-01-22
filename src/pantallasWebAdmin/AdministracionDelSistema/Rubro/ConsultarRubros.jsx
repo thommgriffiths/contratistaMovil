@@ -1,8 +1,10 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
 import { entities, commonAttrs } from "../../../Core/util/entities";
+import { updateElement } from "../../../Core/util/functions";
 
 import Header from "../../../sharedComponents/Header";
 import Titles from "../../../sharedComponents/Titles";
@@ -10,6 +12,7 @@ import DeleteModal from "../../../sharedComponents/DeleteModal";
 import EditModal from "../../../sharedComponents/EditModal";
 import DetailModal from "../../../sharedComponents/DetailModal";
 import LoadingComponent from "../../../sharedComponents/LoadingComponent";
+import { palette } from "../../../Core/colors";
 import styles from "../../styles/Consultar.style";
 
 const AdminConsultarRubros = ({ navigation }) => {
@@ -56,7 +59,7 @@ const AdminConsultarRubros = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -64,17 +67,25 @@ const AdminConsultarRubros = ({ navigation }) => {
                 item: item,
               });
             }}
-          />
+          >
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
+          </Pressable>
           <Pressable
-            style={styles.ListItemDelete}
+            style={styles.ListItemAction}
             onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Eliminar",
-                item: item,
-              });
+              let uItem = {
+                ...item,
+                [commonAttrs.enabled]: !item[commonAttrs.enabled],
+              };
+              updateElement(uItem, () => setLoading(true));
             }}
-          />
+          >
+            <MaterialIcons
+              name={item[commonAttrs.enabled] ? "near-me" : "near-me-disabled"}
+              size={24}
+              color={item[commonAttrs.enabled] ? "green" : "red"}
+            />
+          </Pressable>
         </View>
       </View>
     );
@@ -91,7 +102,7 @@ const AdminConsultarRubros = ({ navigation }) => {
               style={styles.actionsAdd}
               onPress={() => navigation.replace("CrearRubroScreen")}
             >
-              <Text style={styles.actionsAddText}>+ nuevo</Text>
+              <MaterialIcons name="add" size={30} color="white" />
             </Pressable>
           </View>
         </View>

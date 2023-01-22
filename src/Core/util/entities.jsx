@@ -39,6 +39,7 @@ export const commonAttrs = {
   monto: "Monto",
   validated: "Validado",
   userType: "tipoUsuario",
+  enabled: "Habilitado",
 
   //Solo para consultas
   fechaCreacionRango: "FechaCreacionRango",
@@ -84,6 +85,12 @@ export const getEmptyConstructor = (type) => {
         ...attrsObligatorios(entities.obra),
         [commonAttrs.propietario]: null,
         [commonAttrs.direccion]: null,
+        [commonAttrs.enabled]: true,
+      };
+    case entities.rubro:
+      return {
+        ...attrsObligatorios(entities.rubro),
+        [commonAttrs.enabled]: true,
       };
     case entities.user:
       return {
@@ -106,10 +113,6 @@ export const getEmptyConstructor = (type) => {
         ...contextConstructor,
         [commonAttrs.descripcion]: null,
         [commonAttrs.monto]: null,
-      };
-    case entities.rubro:
-      return {
-        ...attrsObligatorios(entities.rubro),
       };
     case entities.pedidoDeObra:
       return {

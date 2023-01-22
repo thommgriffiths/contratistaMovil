@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
+import { StyleSheet, View, SafeAreaView, Pressable } from "react-native";
 import React from "react";
 
 import { AntDesign } from "@expo/vector-icons";
@@ -15,16 +15,19 @@ const Header = ({ backButton, backTo }) => {
         <View style={styles.headerWrapper}>
           <View style={styles.profileImage}></View>
           {backButton ? (
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Pressable
+              style={styles.iconWrapper}
+              onPress={() => navigation.navigate("Home")}
+            >
               <AntDesign name="back" size={24} color="black" />
-            </TouchableOpacity>
+            </Pressable>
           ) : (
             <></>
           )}
           {backTo ? (
-            <TouchableOpacity onPress={() => navigation.navigate(backTo)}>
+            <Pressable onPress={() => navigation.navigate(backTo)}>
               <AntDesign name="back" size={24} color="black" />
-            </TouchableOpacity>
+            </Pressable>
           ) : (
             <></>
           )}
@@ -48,9 +51,18 @@ const styles = StyleSheet.create({
   },
 
   profileImage: {
-    backgroundColor: palette.B1,
+    backgroundColor: palette.B4,
     width: 40,
     height: 40,
+    borderRadius: 40,
+  },
+
+  iconWrapper: {
+    margin: 5,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: palette.R3,
     borderRadius: 40,
   },
 });

@@ -26,13 +26,12 @@ const AdminCrearObra = ({ navigation }) => {
     nuevaObra[commonAttrs.nombre] = nombre;
     nuevaObra[commonAttrs.propietario] = propietario;
     nuevaObra[commonAttrs.direccion] = direccion;
-
     nuevaObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
     nuevaObra[commonAttrs.creadoPor] = getLoggedUser().Email;
 
     console.log(nuevaObra);
     await createFSElementAsync(nuevaObra);
-    navigation.navigate("VerObrasScreen");
+    navigation.navigate("AdminVerObrasScreen");
   };
 
   return (
