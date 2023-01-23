@@ -17,7 +17,7 @@ const DetailModal = ({ modalParams, setParams }) => {
     switch (type) {
       case entities.pedidoDeObra:
         return <DetallePedidoDeObra item={modalParams.item} />;
-      case entities.pedidoDeReintegro:
+      case entities.pReintegro:
         return <DetallePedidoDeReintegro item={modalParams.item} />;
       case entities.jornal:
         return <DetalleJornal item={modalParams.item} />;

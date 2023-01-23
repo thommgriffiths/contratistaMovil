@@ -1,6 +1,5 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";

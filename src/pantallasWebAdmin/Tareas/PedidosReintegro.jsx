@@ -30,9 +30,7 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
 
   useEffect(() => {
     const loadItems = async () => {
-      const rawElements = await getFSCollectionAsync(
-        entities.pedidoDeReintegro
-      );
+      const rawElements = await getFSCollectionAsync(entities.pReintegro);
       console.log("Los raw elements son: ");
       console.log(rawElements);
       const elements = await completeElements(rawElements);

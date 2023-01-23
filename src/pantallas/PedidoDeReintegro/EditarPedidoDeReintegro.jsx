@@ -1,18 +1,16 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
-import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
 } from "../../Core/util/entities";
-
+import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Editar.style";
+
+import ContextoSet from "../../sharedComponents/ContextoSet";
 
 const EditarPedidoDeReintegro = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
@@ -78,16 +76,13 @@ const EditarPedidoDeReintegro = ({ currentItem, setNewItem }) => {
 export default EditarPedidoDeReintegro;
 
 const buildPdR = (context = null, monto = null, descripcion = null) => {
-  let pedidoReintegro = getEmptyConstructor(entities.pedidoDeReintegro);
+  let pedidoReintegro = getEmptyConstructor(entities.pReintegro);
 
   pedidoReintegro[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  pedidoReintegro[commonAttrs.status] = obtenerStatus().pedido;
   pedidoReintegro[commonAttrs.editadoPor] = getLoggedUser().Email;
   pedidoReintegro[commonAttrs.descripcion] = descripcion;
-  pedidoReintegro["Monto"] = monto;
+  pedidoReintegro[commonAttrs.monto] = monto;
   pedidoReintegro[commonAttrs.tarea] = context?.tarea;
-
-  //entities values must be objects
   pedidoReintegro[entities.obra] = context?.obra ? context.obra : null;
   pedidoReintegro[entities.rubro] = context?.rubro ? context.rubro : null;
 

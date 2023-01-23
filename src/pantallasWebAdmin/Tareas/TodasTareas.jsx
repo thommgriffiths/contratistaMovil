@@ -31,7 +31,7 @@ const AdminTodasTareas = ({ navigation }) => {
     const loadItems = async () => {
       const pedidosDeObra = await getFSCollectionAsync(entities.pedidoDeObra);
       const pedidosDeReintegro = await getFSCollectionAsync(
-        entities.pedidoDeReintegro
+        entities.pReintegro
       );
       const allElementsRaw = [...pedidosDeObra, ...pedidosDeReintegro];
 
@@ -160,7 +160,7 @@ const ShortInfo = ({ item }) => {
         <Text>rubro: {item.rubro?.Nombre}</Text>
       </>
     );
-  if (item[commonAttrs.type] == entities.pedidoDeReintegro)
+  if (item[commonAttrs.type] == entities.pReintegro)
     return (
       <>
         <Text>id: {item.id}</Text>

@@ -41,7 +41,7 @@ const AdminEstadosObra = () => {
     const pedidosObra = await queryFSElements(entities.pedidoDeObra, newQuery);
 
     const pedidosReintegro = await queryFSElements(
-      entities.pedidoDeReintegro,
+      entities.pReintegro,
       newQuery
     );
 
@@ -63,7 +63,7 @@ const AdminEstadosObra = () => {
       case entities.jornal:
         console.log("opcion jornal");
         return <ShortInfoJornal item={item} />;
-      case entities.pedidoDeReintegro:
+      case entities.pReintegro:
         console.log("opcion reintegro");
         return <ShortInfoReintegro item={item} />;
       case entities.pedidoDeObra:

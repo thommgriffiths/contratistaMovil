@@ -29,7 +29,7 @@ const EditModal = ({ modalParams, setParams }) => {
           />
         );
 
-      case entities.pedidoDeReintegro:
+      case entities.pReintegro:
         return (
           <EditarPedidoDeReintegro
             currentItem={modalParams.item}

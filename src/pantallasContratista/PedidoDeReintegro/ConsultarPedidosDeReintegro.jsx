@@ -1,16 +1,18 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { Text, View, FlatList, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   MontoTotal,
   createQuery,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import { entities, commonAttrs } from "../../Core/util/entities";
+import { getLoggedUser } from "../../Core/util/globalStore";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -18,7 +20,6 @@ import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
 
 const ConsultarPedidosDeReintegro = ({ navigation }) => {
   const [pedidosReintegro, setPedidosReintegro] = useState([]);
@@ -31,13 +32,8 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
         [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
 
-      const rawElements = await queryFSElements(
-        entities.pedidoDeReintegro,
-        query
-      );
+      const rawElements = await queryFSElements(entities.pReintegro, query);
       const completedElements = await completeElements(rawElements);
-      console.log("Los final elements son: ");
-      console.log(completedElements);
 
       const sortedElements = sortElementsByCommonAttribute(
         completedElements,
@@ -81,7 +77,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -90,10 +86,10 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="edit" size={24} color="black" />
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
           <Pressable
-            style={styles.ListItemDelete}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -102,7 +98,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="delete" size={24} color="black" />
+            <MaterialIcons name="delete" size={24} color="red" />
           </Pressable>
         </View>
       </View>
@@ -122,7 +118,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
                 navigation.replace("ContraCrearPedidoDeReintegroScreen")
               }
             >
-              <AntDesign name="pluscircleo" size={24} color="black" />
+              <MaterialIcons name="add" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -167,8 +163,12 @@ const ShortInfo = ({ item }) => {
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
 
-      <Text style={{ fontWeight: "bold" }}>Monto: ${item.Monto}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Monto: ${item[commonAttrs.monto]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.PRState]}
+      </Text>
     </>
   );
 };

@@ -31,10 +31,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
         [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
 
-      const rawElements = await queryFSElements(
-        entities.pedidoDeReintegro,
-        query
-      );
+      const rawElements = await queryFSElements(entities.pReintegro, query);
       const completedElements = await completeElements(rawElements);
       console.log(completedElements);
 

@@ -23,9 +23,7 @@ const ArqCrearPedidoDeReintegro = ({ navigation }) => {
   const [descripcion, setDescripcion] = useState("");
 
   const handleCrearPedidoReintegro = async () => {
-    let nuevoPedidoDeReintegro = getEmptyConstructor(
-      entities.pedidoDeReintegro
-    );
+    let nuevoPedidoDeReintegro = getEmptyConstructor(entities.pReintegro);
 
     console.log("pedido de reintegro creado con el empty constructor: ");
     console.log(nuevoPedidoDeReintegro);

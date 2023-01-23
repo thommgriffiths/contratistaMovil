@@ -4,7 +4,7 @@ export const entities = {
   obra: "obra",
   rubro: "rubro",
   jornal: "jornal",
-  pedidoDeReintegro: "pedidoDeReintegro",
+  pReintegro: "pedidoDeReintegro",
   pedidoDeObra: "pedidoDeObra",
   user: "user",
 };
@@ -41,6 +41,7 @@ export const commonAttrs = {
   userType: "tipoUsuario",
   enabled: "Habilitado",
   jornalState: "EstadoJornal",
+  PRState: "EstadoPedidoReintegro",
 
   //Solo para consultas
   fechaCreacionRango: "FechaCreacionRango",
@@ -52,6 +53,14 @@ export const jornalStates = {
   rejected: "Rechazado",
   inReview: "En revision",
   payed: "Pagado",
+};
+
+export const PRStates = {
+  pedido: "Pedido",
+  enRevision: "En Revision",
+  aprobado: "Aprobado",
+  resuelto: "Resuelto",
+  demorado: "Demorado",
 };
 
 export const userTypes = {
@@ -108,9 +117,9 @@ export const getEmptyConstructor = (type) => {
         ...contextConstructor,
         [commonAttrs.diasHombre]: null,
       };
-    case entities.pedidoDeReintegro:
+    case entities.pReintegro:
       return {
-        ...attrsObligatorios(entities.pedidoDeReintegro),
+        ...attrsObligatorios(entities.pReintegro),
         ...contextConstructor,
         [commonAttrs.descripcion]: null,
         [commonAttrs.monto]: null,
