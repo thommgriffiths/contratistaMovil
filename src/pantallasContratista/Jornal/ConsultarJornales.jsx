@@ -100,7 +100,7 @@ const ConsultarJornales = ({ navigation }) => {
       <Header backTo="HomeContratista" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Jornales cargados" />
+          <Titles titleText="Jornales" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsFilter}
@@ -162,13 +162,13 @@ export default ConsultarJornales;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
       <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
       <Text style={{ fontWeight: "bold" }}>
         Estado: {item[commonAttrs.jornalState]}
       </Text>
-    </>
+    </View>
   );
 };

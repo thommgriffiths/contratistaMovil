@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
   },
 
   ListItemText: { flex: 1 },
+  ShortInfo: {
+    paddingHorizontal: 10,
+  },
   ListItemActions: {
     flexDirection: "row",
     alignItems: "center",

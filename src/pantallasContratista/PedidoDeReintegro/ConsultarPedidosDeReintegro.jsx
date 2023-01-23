@@ -110,7 +110,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
       <Header backTo="HomeContratista" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Reintegros Adicionales" />
+          <Titles titleText="Reintegros " />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsAdd}
@@ -158,7 +158,7 @@ export default ConsultarPedidosDeReintegro;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
@@ -169,6 +169,6 @@ const ShortInfo = ({ item }) => {
       <Text style={{ fontWeight: "bold" }}>
         Estado: {item[commonAttrs.PRState]}
       </Text>
-    </>
+    </View>
   );
 };
