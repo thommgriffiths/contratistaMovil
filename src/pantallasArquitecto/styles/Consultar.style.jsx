@@ -19,13 +19,11 @@ const styles = StyleSheet.create({
   },
   actionsAdd: {
     backgroundColor: palette.B3,
-    //width: 50,
-    height: 50,
-    borderRadius: 50,
     margin: 5,
-    justifyContent: "center",
+    padding: 10,
     alignItems: "center",
-    padding: 5,
+    justifyContent: "center",
+    borderRadius: 40,
   },
   actionsAddText: {
     color: palette.white,
@@ -35,12 +33,11 @@ const styles = StyleSheet.create({
   },
   actionsFilter: {
     backgroundColor: palette.R3,
-    height: 50,
-    borderRadius: 50,
     margin: 5,
+    padding: 10,
     justifyContent: "center",
     alignItems: "center",
-    padding: 5,
+    borderRadius: 40,
   },
 
   actionsFilterText: {
@@ -67,6 +64,14 @@ const styles = StyleSheet.create({
   ListItemActions: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  ListItemAction: {
+    margin: 5,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: palette.white,
+    borderRadius: 40,
   },
   ListItemEdit: {
     backgroundColor: palette.B1,

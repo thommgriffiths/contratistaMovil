@@ -1,7 +1,7 @@
-import { View, StyleSheet, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-
+import { View, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { updateElement, getCurrentDateTime } from "../../Core/util/functions";
 import { commonAttrs, jornalStates } from "../../Core/util/entities";
@@ -18,7 +18,7 @@ const ValidarJornal = ({ item }) => {
     let updatedItem = {};
     updatedItem[commonAttrs.id] = item.id;
     updatedItem[commonAttrs.type] = item.type;
-    updatedItem[commonAttrs.status] = newStatus;
+    updatedItem[commonAttrs.jornalState] = newStatus;
     updatedItem[commonAttrs.fechaEdicion] = getCurrentDateTime();
     updatedItem[commonAttrs.editadoPor] = getLoggedUser().Email;
 
@@ -26,48 +26,54 @@ const ValidarJornal = ({ item }) => {
   };
 
   useEffect(() => {
-    setSelected(item?.[commonAttrs.status]);
+    setSelected(item?.[commonAttrs.jornalState]);
   }, []);
 
   return (
     <View style={styles.ListItemActions}>
       <Pressable
-        style={[
-          styles.itemAction,
-          {
-            backgroundColor: selected == jornalStates.validated ? "white" : "",
-          },
-        ]}
+        style={styles.itemAction}
         onPress={() => {
           validateJornal(jornalStates.validated);
         }}
       >
-        <AntDesign name="checkcircleo" size={24} color="green" />
+        <AntDesign
+          name={
+            selected == jornalStates.validated ? "checkcircle" : "checkcircleo"
+          }
+          size={24}
+          color="green"
+        />
       </Pressable>
       <Pressable
+        style={styles.itemAction}
         onPress={() => {
           validateJornal(jornalStates.inReview);
         }}
-        style={[
-          styles.itemAction,
-          {
-            backgroundColor:
-              selected == jornalStates.inReview ? palette.B3 : "",
-          },
-        ]}
       >
-        <AntDesign name="questioncircleo" size={24} color="yellow" />
+        <AntDesign
+          name={
+            selected == jornalStates.inReview
+              ? "exclamationcircle"
+              : "exclamationcircleo"
+          }
+          size={24}
+          color="grey"
+        />
       </Pressable>
       <Pressable
-        style={[
-          styles.itemAction,
-          { backgroundColor: selected == jornalStates.rejected ? "white" : "" },
-        ]}
+        style={styles.itemAction}
         onPress={() => {
           validateJornal(jornalStates.rejected);
         }}
       >
-        <AntDesign name="closecircleo" size={24} color="red" />
+        <AntDesign
+          name={
+            selected == jornalStates.rejected ? "closecircle" : "closecircleo"
+          }
+          size={24}
+          color="red"
+        />
       </Pressable>
     </View>
   );
@@ -80,10 +86,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 5,
+    marginVertical: 5,
+    backgroundColor: palette.white,
+    borderRadius: 10,
   },
   itemAction: {
-    width: 40,
-    height: 40,
+    padding: 5,
+    margin: 5,
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "center",

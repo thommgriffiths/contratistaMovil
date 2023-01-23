@@ -1,22 +1,18 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-
-import { AntDesign } from "@expo/vector-icons";
+import { Text, View, FlatList, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { completeElements } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import styles from "../styles/Consultar.style";
 
+import ValidarJornal from "./ValidarJornales";
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import ValidarJornal from "./ValidarJornales";
-import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import FilterModal from "../../sharedComponents/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
-
-//Las funciones aca deberian ser solo mirar o validar
 
 const ArqValidarJornales = () => {
   const [jornales, setJornales] = useState([]);
@@ -26,12 +22,9 @@ const ArqValidarJornales = () => {
   useEffect(() => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.jornal);
-      console.log("Los raw elements son: ");
-      console.log(rawElements);
-      const finalElements = await completeElements(rawElements);
-      console.log("Los final elements son: ");
-      console.log(finalElements);
-      setJornales(finalElements);
+      const completedElements = await completeElements(rawElements);
+
+      setJornales(completedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -40,10 +33,6 @@ const ArqValidarJornales = () => {
   useEffect(() => {
     console.log(modalParams);
     if (modalParams["deletedItem"] != undefined) {
-      setModalParams({ visible: false });
-      setLoading(true);
-    }
-    if (modalParams["editedItem"] != undefined) {
       setModalParams({ visible: false });
       setLoading(true);
     }
@@ -75,7 +64,7 @@ const ArqValidarJornales = () => {
       <Header backTo="ArqHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Ver y validar jornales" />
+          <Titles titleText="Validar Jornales" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsFilter}
@@ -87,7 +76,7 @@ const ArqValidarJornales = () => {
                 });
               }}
             >
-              <AntDesign name="search1" size={24} color="black" />
+              <MaterialIcons name="filter-list" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -122,10 +111,11 @@ export default ArqValidarJornales;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
+      <Text>Solicitante: {item[commonAttrs.creadoPor]}</Text>
       <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
-    </>
+    </View>
   );
 };

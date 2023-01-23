@@ -32,7 +32,7 @@ const ArqHomeScreen = () => {
             onPress={() => navigation.navigate("ValidarJornalesSreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Ver y validar jornales</Text>
+            <Text style={styles.menuItemText}>Validar Jornales</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
