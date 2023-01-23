@@ -10,6 +10,7 @@ import {
   commonAttrs,
   getEmptyConstructor,
   userTypes,
+  jornalStates,
 } from "./entities";
 
 //------------------------------------------------------------------------
@@ -81,9 +82,9 @@ export const completeElements = async (elements = []) => {
 //Si alguna propiedad del item es entity, deja solo su id
 export const cleanElement = (element) => {
   for (const key in entities) {
-    element[entities[key]]
+    element?.[entities[key]]?.[commonAttrs.id]
       ? (element[entities[key]] = element[entities[key]][commonAttrs.id])
-      : "";
+      : element[entities[key]];
   }
   return element;
 };
@@ -128,6 +129,8 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
       break;
     case commonAttrs.userType:
       return objectToDropdown(userTypes);
+    case commonAttrs.jornalState:
+      return objectToDropdown(jornalStates);
     default:
       console.log("No se encontro la categoria" + type);
       return [];
@@ -238,6 +241,13 @@ export const createQuery = (object) => {
 
       case commonAttrs.tarea: {
         queryObject["parameter"] = commonAttrs.tarea;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case commonAttrs.jornalState: {
+        queryObject["parameter"] = commonAttrs.jornalState;
         queryObject["operator"] = "==";
         queryObject["value"] = object[key];
         break;

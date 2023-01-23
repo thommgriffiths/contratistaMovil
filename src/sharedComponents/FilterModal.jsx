@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
-import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
-import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
 import {
   completeElements,
   createQuery as queryBuilder,
 } from "../Core/util/functions";
-import LoadingComponent from "./LoadingComponent";
 import { commonAttrs, entities } from "../Core/util/entities";
 import { queryFSElements } from "../Core/Firebase/FirebaseFirestoreManager";
 import { getLoggedUser } from "../Core/util/globalStore";
+import { palette } from "../Core/colors";
+
+import LoadingComponent from "./LoadingComponent";
+import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
+import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
   const Filter = async () => {
     setLoading(true);
+
     if (modalParams?.item?.filterUser) {
       let query = queryBuilder({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
       searchParams.push(query[0]);
     }
-    console.log("search params");
-    console.log(searchParams);
 
     const rawElements = await queryFSElements(
       modalParams?.item?.[commonAttrs.type],
@@ -31,7 +32,6 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     const finalElements = await completeElements(rawElements);
 
     setElements(finalElements);
-
     setParams({ visible: false });
   };
 
@@ -66,27 +66,36 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
           {loading ? (
             <LoadingComponent />
           ) : (
-            <>
-              {modalParams.visible &&
-                createQuery(modalParams?.item?.[commonAttrs.type])}
-
-              <View style={style.buttonContainer}>
-                <Pressable
-                  style={[style.button, style.buttonClose]}
-                  onPress={() => {
-                    setParams({ ...modalParams, visible: false });
-                  }}
-                >
-                  <Text style={style.textStyle}>Cancelar</Text>
-                </Pressable>
-                <Pressable
-                  style={[style.button, style.buttonDelete]}
-                  onPress={Filter}
-                >
-                  <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
-                </Pressable>
+            <View>
+              <View style={{ zIndex: 11000 }}>
+                {modalParams.visible &&
+                  createQuery(modalParams?.item?.[commonAttrs.type])}
               </View>
-            </>
+
+              <View style={style.buttonsContainer}>
+                <View style={style.buttonWrapper}>
+                  <Pressable
+                    style={[style.button, style.buttonAction]}
+                    onPress={Filter}
+                  >
+                    <Text style={style.textStyle}>
+                      {modalParams.actionLabel}
+                    </Text>
+                  </Pressable>
+                </View>
+
+                <View style={style.buttonWrapper}>
+                  <Pressable
+                    style={[style.button, style.buttonClose]}
+                    onPress={() => {
+                      setParams({ ...modalParams, visible: false });
+                    }}
+                  >
+                    <Text style={style.textStyle}>Cancelar</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </View>
           )}
         </View>
       </View>
@@ -116,20 +125,30 @@ const style = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  buttonContainer: {
+  buttonsContainer: {
     flexDirection: "row",
+    zIndex: 800,
+    alignItems: "spread",
+    justifyContent: "space-around",
+  },
+  buttonWrapper: {
+    flex: 1,
+    padding: 5,
+    justifyContent: "center",
+    alignItems: "spread",
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 5,
     elevation: 2,
-    marginHorizontal: 10,
+    flex: 1,
+    alignContent: "center",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: palette.B1,
   },
-  buttonDelete: {
-    backgroundColor: "red",
+  buttonAction: {
+    backgroundColor: palette.R4,
   },
   textStyle: {
     color: "white",

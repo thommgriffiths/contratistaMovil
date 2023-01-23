@@ -22,22 +22,20 @@ const DeleteModal = ({ modalParams, setParams }) => {
           </Text>
           <View style={style.buttonContainer}>
             <Pressable
-              style={[style.button, style.buttonClose]}
-              onPress={() => {
-                console.log("presionado cancelar");
-                setParams({ ...modalParams, visible: false });
-                console.log(modalParams);
-              }}
-            >
-              <Text style={style.textStyle}>Cancelar</Text>
-            </Pressable>
-            <Pressable
               style={[style.button, style.buttonDelete]}
               onPress={() => {
                 deleteElement(modalParams.item, onDeleteSuccess);
               }}
             >
               <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
+            </Pressable>
+            <Pressable
+              style={[style.button, style.buttonClose]}
+              onPress={() => {
+                setParams({ ...modalParams, visible: false });
+              }}
+            >
+              <Text style={style.textStyle}>Cancelar</Text>
             </Pressable>
           </View>
         </View>

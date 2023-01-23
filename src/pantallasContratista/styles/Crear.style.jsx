@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: palette.B1,
   },
+  buttonsWrapper: {
+    width: "70%",
+    alignSelf: "center",
+  },
 });
 
 export default styles;

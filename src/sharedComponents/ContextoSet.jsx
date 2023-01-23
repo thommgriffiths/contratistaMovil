@@ -22,31 +22,35 @@ const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
   return (
     <View style={styles.container}>
       {isEdit && <Text style={styles.fieldTitle}>Seleccione Obra</Text>}
-      <DropdownSelect
-        placeholder={
-          isEdit && initialValues
-            ? initialValues[entities.obra]?.Nombre
-            : "Seleccione Obra"
-        }
-        action={setObra}
-        category={entities.obra}
-        props={{ stackOrder: 15000 }}
-        initialValue={initialValues?.obra}
-      />
+      <View style={{ zIndex: 10100 }}>
+        <DropdownSelect
+          placeholder={
+            isEdit && initialValues
+              ? initialValues[entities.obra]?.Nombre
+              : "Seleccione Obra"
+          }
+          action={setObra}
+          category={entities.obra}
+          props={{ stackOrder: 15000 }}
+          initialValue={initialValues?.obra}
+        />
+      </View>
       {isEdit && <Text style={styles.fieldTitle}>Seleccione rubro</Text>}
-      <DropdownSelect
-        placeholder={
-          isEdit && initialValues
-            ? initialValues[entities.rubro]?.Nombre
-            : "Seleccione rubro"
-        }
-        action={setRubro}
-        category={entities.rubro}
-        props={{ stackOrder: 14000 }}
-        initialValue={initialValues?.rubro}
-      />
+      <View style={{ zIndex: 10090 }}>
+        <DropdownSelect
+          placeholder={
+            isEdit && initialValues
+              ? initialValues[entities.rubro]?.Nombre
+              : "Seleccione rubro"
+          }
+          action={setRubro}
+          category={entities.rubro}
+          props={{ stackOrder: 14000 }}
+          initialValue={initialValues?.rubro}
+        />
+      </View>
       {isEdit && !noTarea && (
-        <>
+        <View style={{ zIndex: 10080 }}>
           <Text style={styles.fieldTitle}>Seleccione una tarea</Text>
           <TextInput
             placeholder={initialValues?.tarea}
@@ -54,15 +58,17 @@ const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
             onChangeText={(text) => setTarea(text)}
             style={styles.input}
           />
-        </>
+        </View>
       )}
       {!isEdit && !noTarea && (
-        <TextInput
-          placeholder="Seleccione una Tarea"
-          value={tarea}
-          onChangeText={(text) => setTarea(text)}
-          style={styles.input}
-        />
+        <View style={{ zIndex: 10080 }}>
+          <TextInput
+            placeholder="Seleccione una Tarea"
+            value={tarea}
+            onChangeText={(text) => setTarea(text)}
+            style={styles.input}
+          />
+        </View>
       )}
     </View>
   );
@@ -72,7 +78,7 @@ export default ContextoSet;
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 100000,
+    //zIndex: 100000,
   },
 
   fieldTitle: {

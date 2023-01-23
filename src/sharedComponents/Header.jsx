@@ -25,7 +25,10 @@ const Header = ({ backButton, backTo }) => {
             <></>
           )}
           {backTo ? (
-            <Pressable onPress={() => navigation.navigate(backTo)}>
+            <Pressable
+              style={styles.iconWrapper}
+              onPress={() => navigation.navigate(backTo)}
+            >
               <AntDesign name="back" size={24} color="black" />
             </Pressable>
           ) : (

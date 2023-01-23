@@ -40,6 +40,7 @@ export const commonAttrs = {
   validated: "Validado",
   userType: "tipoUsuario",
   enabled: "Habilitado",
+  jornalState: "EstadoJornal",
 
   //Solo para consultas
   fechaCreacionRango: "FechaCreacionRango",

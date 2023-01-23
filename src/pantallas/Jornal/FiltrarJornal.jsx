@@ -1,16 +1,17 @@
-import { KeyboardAvoidingView, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, View } from "react-native";
+
+import { createQuery } from "../../Core/util/functions";
+import { commonAttrs, jornalStates } from "../../Core/util/entities";
+import styles from "../styles/Editar.style";
 
 import ContextoSet from "../../sharedComponents/ContextoSet";
-import { createQuery } from "../../Core/util/functions";
-import { commonAttrs } from "../../Core/util/entities";
-
 import { RangePicker } from "../../sharedComponents/dateComponents/rangePicker";
-
-import styles from "../styles/Editar.style";
+import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 const FiltrarJornales = ({ setSearchParams }) => {
   const [context, setContext] = useState(null);
+  const [estado, setEstado] = useState(null);
   const [rangoFechaCreacion, setRangoFechaCreacion] = useState({
     startDate: undefined,
     endDate: undefined,
@@ -20,12 +21,13 @@ const FiltrarJornales = ({ setSearchParams }) => {
     const queryParams = {
       ...context,
       [commonAttrs.fechaCreacionRango]: rangoFechaCreacion,
+      [commonAttrs.jornalState]: jornalStates?.[estado],
     };
     const newQuery = createQuery(queryParams);
 
-    //console.log(newQuery);
+    console.log(newQuery);
     setSearchParams(newQuery);
-  }, [context, rangoFechaCreacion]);
+  }, [context, rangoFechaCreacion, estado]);
 
   return (
     <View style={styles.container}>
@@ -38,9 +40,20 @@ const FiltrarJornales = ({ setSearchParams }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet action={setContext} noTarea />
-
-            <RangePicker AddRange={setRangoFechaCreacion} />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet action={setContext} noTarea />
+            </View>
+            <View style={{ zIndex: 10080 }}>
+              <DropdownSelect
+                placeholder="Estado"
+                action={setEstado}
+                category={commonAttrs.jornalState}
+                props={{ stackOrder: 14000 }}
+              />
+            </View>
+            <View style={{ zIndex: 10050 }}>
+              <RangePicker AddRange={setRangoFechaCreacion} />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

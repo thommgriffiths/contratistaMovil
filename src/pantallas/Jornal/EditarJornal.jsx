@@ -1,17 +1,16 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
-import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
 } from "../../Core/util/entities";
-
+import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Editar.style";
+
+import ContextoSet from "../../sharedComponents/ContextoSet";
 
 const EditarJornal = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
@@ -66,12 +65,9 @@ const buildJornal = (context = null, diasHombre = null) => {
   let jornal = getEmptyConstructor(entities.jornal);
 
   jornal[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  jornal[commonAttrs.status] = obtenerStatus().pedido;
   jornal[commonAttrs.editadoPor] = getLoggedUser().Email;
   jornal[commonAttrs.diasHombre] = diasHombre;
   jornal[commonAttrs.tarea] = context?.tarea;
-
-  //entities values must be objects
   jornal[entities.obra] = context?.obra ? context.obra : null;
   jornal[entities.rubro] = context?.rubro ? context.rubro : null;
 

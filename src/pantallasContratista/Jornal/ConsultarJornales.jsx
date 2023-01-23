@@ -1,14 +1,14 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import {
-  getFSCollectionAsync,
-  queryFSElements,
-} from "../../Core/Firebase/FirebaseFirestoreManager";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { completeElements, createQuery } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
 import { getLoggedUser } from "../../Core/util/globalStore";
+import styles from "../styles/Consultar.style";
+import { palette } from "../../Core/colors";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -17,7 +17,6 @@ import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import FilterModal from "../../sharedComponents/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
 
 const ConsultarJornales = ({ navigation }) => {
   const [jornales, setJornales] = useState([]);
@@ -29,17 +28,11 @@ const ConsultarJornales = ({ navigation }) => {
       let query = createQuery({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
-      console.log(query);
 
       const rawElements = await queryFSElements(entities.jornal, query);
+      const completedElements = await completeElements(rawElements);
 
-      //const rawElements = await getFSCollectionAsync(entities.jornal);
-      console.log("Los raw elements son: ");
-      console.log(rawElements);
-      const finalElements = await completeElements(rawElements);
-      console.log("Los final elements son: ");
-      console.log(finalElements);
-      setJornales(finalElements);
+      setJornales(completedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -75,7 +68,7 @@ const ConsultarJornales = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -84,10 +77,10 @@ const ConsultarJornales = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="edit" size={24} color="black" />
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
           <Pressable
-            style={styles.ListItemDelete}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -96,7 +89,7 @@ const ConsultarJornales = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="delete" size={24} color="black" />
+            <MaterialIcons name="delete" size={24} color="red" />
           </Pressable>
         </View>
       </View>
@@ -123,13 +116,13 @@ const ConsultarJornales = ({ navigation }) => {
                 });
               }}
             >
-              <AntDesign name="search1" size={24} color="black" />
+              <MaterialIcons name="filter-list" size={30} color="white" />
             </Pressable>
             <Pressable
               style={styles.actionsAdd}
               onPress={() => navigation.replace("ContraCrearJornalScreen")}
             >
-              <AntDesign name="pluscircleo" size={24} color="black" />
+              <MaterialIcons name="add" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -174,7 +167,9 @@ const ShortInfo = ({ item }) => {
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
       <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.jornalState]}
+      </Text>
     </>
   );
 };

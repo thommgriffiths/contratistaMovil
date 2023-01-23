@@ -1,40 +1,32 @@
 import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import Header from "../../sharedComponents/Header";
-import Botones from "../../sharedComponents/Botones";
-import ContextoSet from "../../sharedComponents/ContextoSet";
-
-import { getCurrentDateTime } from "../../Core/util/functions";
-//import { obtenerStatus } from "../../Core/util/mockFunctions";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
   jornalStates,
 } from "../../Core/util/entities";
+import { getCurrentDateTime } from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-
 import styles from "../styles/Crear.style";
+
+import Header from "../../sharedComponents/Header";
+import Botones from "../../sharedComponents/Botones";
+import ContextoSet from "../../sharedComponents/ContextoSet";
 
 const CrearJornal = ({ navigation }) => {
   const [context, SetContext] = useState(null);
   const [diasHombre, setDiasHombre] = useState("");
 
-  useEffect(() => console.log(diasHombre), [diasHombre]);
-
   const handleCrearJornal = async () => {
     let nuevoJornal = getEmptyConstructor(entities.jornal);
 
-    console.log("jornal creado con el empty constructor: ");
-    console.log(nuevoJornal);
-
     nuevoJornal[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    nuevoJornal[commonAttrs.status] = jornalStates.requested;
+    nuevoJornal[commonAttrs.jornalState] = jornalStates.requested;
     nuevoJornal[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoJornal[commonAttrs.diasHombre] = diasHombre;
-    //entities values must be objects
     nuevoJornal[entities.obra] = context.obra;
     nuevoJornal[entities.rubro] = context.rubro;
     nuevoJornal[commonAttrs.tarea] = context.tarea;
@@ -60,8 +52,6 @@ const CrearJornal = ({ navigation }) => {
           <View style={styles.formWrapper}>
             <ContextoSet action={SetContext} />
 
-            {/* formulario especifico */}
-
             <TextInput
               placeholder="Cantidad de dias hombre"
               value={diasHombre}
@@ -78,13 +68,17 @@ const CrearJornal = ({ navigation }) => {
         </KeyboardAvoidingView>
       </View>
 
-      <Botones
-        onOkFunction={handleCrearJornal}
-        onOkText={"Crear jornal"}
-        onCancelFunction={() => navigation.navigate("ContraVerJornalesScreen")}
-        onCancelText={"Volver"}
-        style={styles.botonera}
-      />
+      <View style={styles.buttonsWrapper}>
+        <Botones
+          onOkFunction={handleCrearJornal}
+          onOkText={"Crear jornal"}
+          onCancelFunction={() =>
+            navigation.navigate("ContraVerJornalesScreen")
+          }
+          onCancelText={"Volver"}
+          style={styles.botonera}
+        />
+      </View>
     </View>
   );
 };

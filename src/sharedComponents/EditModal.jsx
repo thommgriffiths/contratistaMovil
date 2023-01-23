@@ -67,11 +67,19 @@ const EditModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          {modalParams.visible &&
-            Object.keys(modalParams.item).length != 0 &&
-            editItem(modalParams.item.type)}
+          <View style={style.formContainer}>
+            {modalParams.visible &&
+              Object.keys(modalParams.item).length != 0 &&
+              editItem(modalParams.item.type)}
+          </View>
 
           <View style={style.buttonContainer}>
+            <Pressable
+              style={[style.button, style.buttonDelete]}
+              onPress={onEdit}
+            >
+              <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
+            </Pressable>
             <Pressable
               style={[style.button, style.buttonClose]}
               onPress={() => {
@@ -79,12 +87,6 @@ const EditModal = ({ modalParams, setParams }) => {
               }}
             >
               <Text style={style.textStyle}>Cancelar</Text>
-            </Pressable>
-            <Pressable
-              style={[style.button, style.buttonDelete]}
-              onPress={onEdit}
-            >
-              <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
             </Pressable>
           </View>
         </View>
@@ -115,8 +117,12 @@ const style = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  formContainer: {
+    zIndex: 10100,
+  },
   buttonContainer: {
     flexDirection: "row",
+    zIndex: 800,
   },
   button: {
     borderRadius: 20,
