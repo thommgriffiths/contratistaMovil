@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
@@ -28,28 +22,28 @@ const ArqHomeScreen = () => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("ValidarJornalesSreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Validar Jornales</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("ArqVerPedidosDeObraScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Ver y crear pedidos de obra</Text>
-          </TouchableOpacity>
+            <Text style={styles.menuItemText}>Pedidos de Obra</Text>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() =>
               navigation.navigate("ArqVerPedidosDeReintegroScreen")
             }
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>Pedidos de Reintegro</Text>
-          </TouchableOpacity>
+            <Text style={styles.menuItemText}>Solicitud de Reintegro</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

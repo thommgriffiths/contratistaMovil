@@ -24,7 +24,6 @@ export const commonAttrs = {
   id: "id",
   type: "type",
   user: "User",
-  status: "Status",
   descripcion: "Descripcion",
   tarea: "tarea",
   propietario: "Propietario",
@@ -42,6 +41,7 @@ export const commonAttrs = {
   enabled: "Habilitado",
   jornalState: "EstadoJornal",
   PRState: "EstadoPedidoReintegro",
+  POState: "EstadoPedidoObra",
 
   //Solo para consultas
   fechaCreacionRango: "FechaCreacionRango",
@@ -56,6 +56,14 @@ export const jornalStates = {
 };
 
 export const PRStates = {
+  pedido: "Pedido",
+  enRevision: "En Revision",
+  aprobado: "Aprobado",
+  resuelto: "Resuelto",
+  demorado: "Demorado",
+};
+
+export const POStates = {
   pedido: "Pedido",
   enRevision: "En Revision",
   aprobado: "Aprobado",

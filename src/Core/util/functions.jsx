@@ -194,8 +194,12 @@ export const createQuery = (object) => {
     switch (key) {
       case commonAttrs.type:
         continue;
-      case commonAttrs.tipoPedidoObra:
-        continue;
+      case commonAttrs.tipoPedidoObra: {
+        queryObject["parameter"] = commonAttrs.tipoPedidoObra;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
       case commonAttrs.status:
         continue;
       case commonAttrs.descripcion:
@@ -248,6 +252,20 @@ export const createQuery = (object) => {
 
       case commonAttrs.jornalState: {
         queryObject["parameter"] = commonAttrs.jornalState;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case commonAttrs.PRState: {
+        queryObject["parameter"] = commonAttrs.PRState;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case commonAttrs.POState: {
+        queryObject["parameter"] = commonAttrs.POState;
         queryObject["operator"] = "==";
         queryObject["value"] = object[key];
         break;

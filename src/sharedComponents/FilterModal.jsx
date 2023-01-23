@@ -15,9 +15,12 @@ import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
 import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
+  const [searchParams, setSearchParams] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const Filter = async () => {
     setLoading(true);
-
+    console.log("search params", searchParams);
     if (modalParams?.item?.filterUser) {
       let query = queryBuilder({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
@@ -34,9 +37,6 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     setElements(finalElements);
     setParams({ visible: false });
   };
-
-  const [searchParams, setSearchParams] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   const createQuery = (type) => {
     switch (type) {

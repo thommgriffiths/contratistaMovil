@@ -1,14 +1,17 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { Text, View, FlatList, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   fechaComun,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
+import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import { label } from "../../Core/util/labels";
+import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -17,8 +20,6 @@ import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import FilterModal from "../../sharedComponents/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
-import { label } from "../../Core/util/labels";
 
 const ArqConsultarPedidosDeObra = ({ navigation }) => {
   const [pedidosObra, setPedidosObra] = useState([]);
@@ -29,8 +30,6 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.pedidoDeObra);
       const completedElements = await completeElements(rawElements);
-      console.log(completedElements);
-
       const sortedElements = sortElementsByCommonAttribute(
         completedElements,
         commonAttrs.fechaCreacion,
@@ -73,7 +72,7 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -82,10 +81,10 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="edit" size={24} color="black" />
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
           <Pressable
-            style={styles.ListItemDelete}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -94,7 +93,7 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="delete" size={24} color="black" />
+            <MaterialIcons name="delete" size={24} color="red" />
           </Pressable>
         </View>
       </View>
@@ -118,13 +117,13 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
                 });
               }}
             >
-              <AntDesign name="search1" size={24} color="black" />
+              <MaterialIcons name="filter-list" size={30} color="white" />
             </Pressable>
             <Pressable
               style={styles.actionsAdd}
               onPress={() => navigation.replace("ArqCrearPedidosDeObraScreen")}
             >
-              <AntDesign name="pluscircleo" size={24} color="black" />
+              <MaterialIcons name="add" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -165,12 +164,12 @@ export default ArqConsultarPedidosDeObra;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text>Estado: {item.Status}</Text>
+      <Text>Estado: {item[commonAttrs.POState]}</Text>
       <Text>Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}</Text>
-    </>
+    </View>
   );
 };

@@ -1,29 +1,26 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, View } from "react-native";
+
+import { createQuery } from "../../Core/util/functions";
+import { entities, commonAttrs } from "../../Core/util/entities";
+import styles from "../styles/Editar.style";
 
 import ContextoSet from "../../sharedComponents/ContextoSet";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import { createQuery } from "../../Core/util/functions";
-import { entities, commonAttrs } from "../../Core/util/entities";
-
-import styles from "../styles/Editar.style";
 
 const FiltrarPedidoDeObra = ({ setSearchParams }) => {
   const [context, setContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
-  const [descripcion, setDescripcion] = useState("");
 
   useEffect(() => {
     const queryParams = {
       ...context,
       [commonAttrs.tipoPedidoObra]: tipoDePedido,
-      [commonAttrs.descripcion]: descripcion,
-      [commonAttrs.type]: entities.pedidoDeObra,
     };
     const newQuery = createQuery(queryParams);
 
     setSearchParams(newQuery);
-  }, [context, tipoDePedido, descripcion]);
+  }, [context, tipoDePedido]);
 
   return (
     <View style={styles.container}>
@@ -38,23 +35,17 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet action={setContext} noTarea />
-
-            <Text style={styles.fieldTitle}>Tipo de pedido</Text>
-            <DropdownSelect
-              action={setTipoDePedido}
-              category="tiposPedidosDePedidosObra"
-              props={{ stackOrder: 10000 }}
-            />
-
-            <Text style={styles.fieldTitle}>Detalle de pedido</Text>
-            <TextInput
-              placeholder="Detalle del pedido"
-              onChangeText={(text) => {
-                setDescripcion(text);
-              }}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet action={setContext} noTarea />
+            </View>
+            <View style={{ zIndex: 10080 }}>
+              <DropdownSelect
+                action={setTipoDePedido}
+                category="tiposPedidosDePedidosObra"
+                placeholder={"Tipo de Pedido"}
+                props={{ stackOrder: 10000 }}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

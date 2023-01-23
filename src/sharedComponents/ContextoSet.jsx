@@ -41,7 +41,7 @@ const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
           placeholder={
             isEdit && initialValues
               ? initialValues[entities.rubro]?.Nombre
-              : "Seleccione rubro"
+              : "Seleccione Rubro"
           }
           action={setRubro}
           category={entities.rubro}

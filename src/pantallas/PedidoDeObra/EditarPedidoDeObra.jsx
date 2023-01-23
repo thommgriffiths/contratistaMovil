@@ -1,18 +1,17 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
-import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
 } from "../../Core/util/entities";
-
+import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Editar.style";
+
+import ContextoSet from "../../sharedComponents/ContextoSet";
+import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
   const [context, setContext] = useState(null);
@@ -36,30 +35,36 @@ const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet
-              action={setContext}
-              initialValues={currentItem}
-              isEdit
-            />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet
+                action={setContext}
+                initialValues={currentItem}
+                isEdit
+              />
+            </View>
 
-            <Text style={styles.fieldTitle}>Tipo de pedido</Text>
-            <DropdownSelect
-              placeholder={currentItem?.TipoDePedido}
-              action={setTipoDePedido}
-              category="tiposPedidosDePedidosObra"
-              props={{ stackOrder: 10000 }}
-              initialValue={currentItem?.tipoDePedido}
-            />
+            <View style={{ zIndex: 1080 }}>
+              <Text style={styles.fieldTitle}>Tipo de pedido</Text>
+              <DropdownSelect
+                placeholder={currentItem?.TipoDePedido}
+                action={setTipoDePedido}
+                category="tiposPedidosDePedidosObra"
+                props={{ stackOrder: 10000 }}
+                initialValue={currentItem?.tipoDePedido}
+              />
+            </View>
 
-            <Text style={styles.fieldTitle}>Detalle de pedido</Text>
-            <TextInput
-              placeholder="Detalle del pedido"
-              onChangeText={(text) => {
-                setDescripcion(text);
-              }}
-              defaultValue={currentItem?.Descripcion}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 1050 }}>
+              <Text style={styles.fieldTitle}>Detalle de pedido</Text>
+              <TextInput
+                placeholder="Detalle del pedido"
+                onChangeText={(text) => {
+                  setDescripcion(text);
+                }}
+                defaultValue={currentItem?.Descripcion}
+                style={[styles.input, { zIndex: 9000 }]}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -73,13 +78,10 @@ const buildPO = (context = null, tipoDePedido = null, descripcion = null) => {
   let pedidoObra = getEmptyConstructor(entities.pedidoDeObra);
 
   pedidoObra[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  pedidoObra[commonAttrs.status] = obtenerStatus().pedido;
   pedidoObra[commonAttrs.editadoPor] = getLoggedUser().Email;
   pedidoObra[commonAttrs.descripcion] = descripcion;
-  pedidoObra["TipoDePedido"] = tipoDePedido;
+  pedidoObra[commonAttrs.tipoPedidoObra] = tipoDePedido;
   pedidoObra[commonAttrs.tarea] = context?.tarea;
-
-  //entities values must be objects
   pedidoObra[entities.obra] = context?.obra ? context.obra : null;
   pedidoObra[entities.rubro] = context?.rubro ? context.rubro : null;
 

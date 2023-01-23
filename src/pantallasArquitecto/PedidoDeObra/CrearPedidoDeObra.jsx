@@ -1,22 +1,21 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+
+import {
+  entities,
+  getEmptyConstructor,
+  commonAttrs,
+  POStates,
+} from "../../Core/util/entities";
+import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { getCurrentDateTime } from "../../Core/util/functions";
+import { getLoggedUser } from "../../Core/util/globalStore";
+import styles from "../styles/Crear.style";
 
 import Header from "../../sharedComponents/Header";
 import Botones from "../../sharedComponents/Botones";
 import ContextoSet from "../../sharedComponents/ContextoSet";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
-
-import { getCurrentDateTime } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
-import { getLoggedUser } from "../../Core/util/globalStore";
-import {
-  entities,
-  getEmptyConstructor,
-  commonAttrs,
-} from "../../Core/util/entities";
-import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-
-import styles from "../styles/Crear.style";
 
 const ArqCrearPedidoDeObra = ({ navigation }) => {
   const [context, SetContext] = useState(null);
@@ -26,21 +25,15 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
   const handleCrearPedidoObra = async () => {
     let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
 
-    console.log("pedido de obra creado con el empty constructor: ");
-    console.log(nuevoPedidoDeObra);
-
     nuevoPedidoDeObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    nuevoPedidoDeObra[commonAttrs.status] = obtenerStatus().pedido;
+    nuevoPedidoDeObra[commonAttrs.POState] = POStates.pedido;
     nuevoPedidoDeObra[commonAttrs.creadoPor] = getLoggedUser().Email;
     nuevoPedidoDeObra[commonAttrs.descripcion] = descripcion;
-    nuevoPedidoDeObra["TipoDePedido"] = tipoDePedido;
-
-    //entities values must be objects
+    nuevoPedidoDeObra[commonAttrs.tipoPedidoObra] = tipoDePedido;
+    nuevoPedidoDeObra[commonAttrs.tarea] = context.tarea;
     nuevoPedidoDeObra[entities.obra] = context.obra;
     nuevoPedidoDeObra[entities.rubro] = context.rubro;
-    nuevoPedidoDeObra[commonAttrs.tarea] = context.tarea;
 
-    console.log(nuevoPedidoDeObra);
     await createFSElementAsync(nuevoPedidoDeObra);
     navigation.navigate("ArqVerPedidosDeObraScreen");
   };
@@ -59,37 +52,41 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet action={SetContext} />
-
-            {/* formulario especifico */}
-            <DropdownSelect
-              placeholder="Seleccione tipo de pedido"
-              action={setTipoDePedido}
-              category="tiposPedidosDePedidosObra"
-              props={{ stackOrder: 10000 }}
-            />
-
-            <TextInput
-              placeholder="Detalle del pedido"
-              value={descripcion}
-              onChangeText={(text) => {
-                setDescripcion(text);
-              }}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet action={SetContext} />
+            </View>
+            <View style={{ zIndex: 10080 }}>
+              <DropdownSelect
+                placeholder="Seleccione tipo de pedido"
+                action={setTipoDePedido}
+                category="tiposPedidosDePedidosObra"
+                props={{ stackOrder: 10000 }}
+              />
+            </View>
+            <View style={{ zIndex: 10050 }}>
+              <TextInput
+                placeholder="Detalle del pedido"
+                value={descripcion}
+                onChangeText={(text) => {
+                  setDescripcion(text);
+                }}
+                style={[styles.input, { zIndex: 9000 }]}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>
-
-      <Botones
-        onOkFunction={handleCrearPedidoObra}
-        onOkText={"Crear pedido de obra"}
-        onCancelFunction={() =>
-          navigation.navigate("ArqVerPedidosDeObraScreen")
-        }
-        onCancelText={"Volver"}
-        style={styles.botonera}
-      />
+      <View style={styles.buttonsWrapper}>
+        <Botones
+          onOkFunction={handleCrearPedidoObra}
+          onOkText={"Crear pedido de obra"}
+          onCancelFunction={() =>
+            navigation.navigate("ArqVerPedidosDeObraScreen")
+          }
+          onCancelText={"Volver"}
+          style={styles.botonera}
+        />
+      </View>
     </View>
   );
 };
