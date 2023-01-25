@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   //Pantalla
   container: {
     flex: 1,
-    backgroundColor: palette.neutral,
+    backgroundColor: palette.white,
   },
   header: {},
   body: {

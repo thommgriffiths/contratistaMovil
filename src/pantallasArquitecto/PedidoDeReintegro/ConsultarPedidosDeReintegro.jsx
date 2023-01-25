@@ -1,16 +1,18 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { getLoggedUser } from "../../Core/util/globalStore";
 import {
   completeElements,
   MontoTotal,
   createQuery,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -18,7 +20,6 @@ import DeleteModal from "../../sharedComponents/DeleteModal";
 import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
 
 const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
   const [pedidosReintegro, setPedidosReintegro] = useState([]);
@@ -77,7 +78,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -86,10 +87,10 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="edit" size={24} color="black" />
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
           <Pressable
-            style={styles.ListItemDelete}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -98,7 +99,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
               });
             }}
           >
-            <AntDesign name="delete" size={24} color="black" />
+            <MaterialIcons name="delete" size={24} color="red" />
           </Pressable>
         </View>
       </View>
@@ -118,7 +119,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
                 navigation.replace("ArqCrearPedidoDeReintegroScreen")
               }
             >
-              <AntDesign name="pluscircleo" size={24} color="black" />
+              <MaterialIcons name="add" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -164,7 +165,12 @@ const ShortInfo = ({ item }) => {
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text>Monto: ${item.Monto}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Monto: ${item[commonAttrs.monto]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.PRState]}
+      </Text>
     </>
   );
 };
