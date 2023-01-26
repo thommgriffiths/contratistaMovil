@@ -20,6 +20,7 @@ spanishLabels["FechaCreacion"] = "Fecha de carga";
 
 //Pedido de Reintegro
 spanishLabels["Monto"] = "Monto:";
+spanishLabels["EstadoPedidoReintegro"] = "Estado del pedido";
 
 //Pedido de obra
 spanishLabels["pedidoMateriales"] = "Pedido de Materiales";

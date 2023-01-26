@@ -22,7 +22,7 @@ const AdminHome = () => {
       >
         {/*titulos*/}
         <View style={styles.titlesWrapper}>
-          <Text style={styles.titlesSubtitle}>Contratista</Text>
+          <Text style={styles.titlesSubtitle}>Administrador</Text>
           <Text style={styles.titlesTitle}>Menu</Text>
         </View>
 

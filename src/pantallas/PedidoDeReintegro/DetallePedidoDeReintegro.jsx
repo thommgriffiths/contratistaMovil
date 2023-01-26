@@ -6,7 +6,7 @@ import { formatToDisplay } from "../../Core/util/functions";
 import styles from "../styles/Detalle.style";
 
 const propertiesToDisplay = [
-  "Status",
+  "EstadoPedidoReintegro",
   "User",
   "Descripcion",
   "obra",

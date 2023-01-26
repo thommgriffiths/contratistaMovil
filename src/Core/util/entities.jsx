@@ -41,6 +41,7 @@ export const commonAttrs = {
   enabled: "Habilitado",
   jornalState: "EstadoJornal",
   PRState: "EstadoPedidoReintegro",
+  PRComment: "ComentarioPedidoReintegro",
   POState: "EstadoPedidoObra",
 
   //Solo para consultas
@@ -57,10 +58,11 @@ export const jornalStates = {
 
 export const PRStates = {
   pedido: "Pedido",
-  enRevision: "En Revision",
   aprobado: "Aprobado",
-  resuelto: "Resuelto",
-  demorado: "Demorado",
+  enRevision: "En Revision",
+  rechazado: "Rechazado",
+  reembolsado: "Reembolsado",
+  desestimado: "Desestimado",
 };
 
 export const POStates = {

@@ -32,9 +32,7 @@ const AdminMenuTareas = () => {
             onPress={() => navigation.navigate("AdminPedidosDeReintegroScreen")}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>
-              Adicionales contratistas y Reembolsos Arquitectos
-            </Text>
+            <Text style={styles.menuItemText}>Gestion Reembolsos</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -44,7 +42,7 @@ const AdminMenuTareas = () => {
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>
-              Pedidos de Obra y Pedidos de Materiales
+              Pedidos de Obra y Materiales
             </Text>
           </TouchableOpacity>
 

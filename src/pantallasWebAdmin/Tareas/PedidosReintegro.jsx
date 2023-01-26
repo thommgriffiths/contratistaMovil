@@ -1,24 +1,25 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Text, View, FlatList, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   sortElementsByCommonAttribute,
   MontoTotal,
 } from "../../Core/util/functions";
 import { entities, commonAttrs } from "../../Core/util/entities";
+import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import DeleteModal from "../../sharedComponents/DeleteModal";
-import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
 import SortingModal from "../../sharedComponents/SortingModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
+import ActionsModal from "./ActionsModal";
 
-const AdminPedidosDeReintegro = ({ navigation }) => {
+const AdminPedidosDeReintegro = () => {
   const [pedidosReintegro, setPedidosReintegro] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
@@ -31,18 +32,14 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.pReintegro);
-      console.log("Los raw elements son: ");
-      console.log(rawElements);
-      const elements = await completeElements(rawElements);
+      const completedElements = await completeElements(rawElements);
 
       const sortedElements = sortElementsByCommonAttribute(
-        elements,
+        completedElements,
         sortingParams.attr,
         sortingParams.asc
       );
 
-      console.log("Los final elements son: ");
-      console.log(sortedElements);
       setPedidosReintegro(sortedElements);
       setLoading(false);
     };
@@ -51,11 +48,7 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
 
   useEffect(() => {
     console.log(modalParams);
-    if (modalParams["deletedItem"] != undefined) {
-      setModalParams({ visible: false });
-      setLoading(true);
-    }
-    if (modalParams["editedItem"] != undefined) {
+    if (modalParams["affectedItem"] != undefined) {
       setModalParams({ visible: false });
       setLoading(true);
     }
@@ -91,25 +84,17 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemEdit}
+            style={styles.ListItemAction}
             onPress={() => {
               setModalParams({
                 visible: true,
-                actionLabel: "Editar",
+                actionLabel: "Actions",
                 item: item,
               });
             }}
-          />
-          <Pressable
-            style={styles.ListItemDelete}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Eliminar",
-                item: item,
-              });
-            }}
-          />
+          >
+            <MaterialIcons name="edit" size={24} color={palette.B1} />
+          </Pressable>
         </View>
       </View>
     );
@@ -154,14 +139,11 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
           )}
         </View>
       </View>
-      {modalParams?.actionLabel == "Eliminar" && (
-        <DeleteModal modalParams={modalParams} setParams={setModalParams} />
-      )}
-      {modalParams?.actionLabel == "Editar" && (
-        <EditModal modalParams={modalParams} setParams={setModalParams} />
-      )}
       {modalParams?.actionLabel == "showDetail" && (
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
+      )}
+      {modalParams?.actionLabel == "Actions" && (
+        <ActionsModal modalParams={modalParams} setParams={setModalParams} />
       )}
       {modalParams?.actionLabel == "Sort" && (
         <SortingModal
@@ -172,7 +154,7 @@ const AdminPedidosDeReintegro = ({ navigation }) => {
             commonAttrs.fechaCreacion,
             entities.obra,
             entities.rubro,
-            "Monto",
+            commonAttrs.monto,
           ]}
         />
       )}

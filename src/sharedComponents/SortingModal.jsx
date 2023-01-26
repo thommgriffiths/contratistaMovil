@@ -7,6 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import { palette } from "../Core/colors";
+import { AntDesign } from "@expo/vector-icons";
 import { commonAttrs, entities } from "../Core/util/entities";
 
 const SortingModal = ({
@@ -18,10 +19,10 @@ const SortingModal = ({
   const renderItem = ({ item }) => {
     return (
       <View style={style.ListItem}>
-        <Text>{item}</Text>
+        <Text style={style.ListItemText}>{item}</Text>
         <View style={style.order}>
           <Pressable
-            style={{ ...style.choose, backgroundColor: palette.B3 }}
+            style={[style.choose, { backgroundColor: palette.B3 }]}
             onPress={() => {
               setSortingParams({
                 attr: item,
@@ -30,10 +31,10 @@ const SortingModal = ({
               setParams({ visible: false, actionLabel: "Sort" });
             }}
           >
-            <Text style={style.orderText}>Asc</Text>
+            <AntDesign name="caretup" size={20} color="black" />
           </Pressable>
           <Pressable
-            style={{ ...style.choose, backgroundColor: palette.R3 }}
+            style={[style.choose, { backgroundColor: palette.R3 }]}
             onPress={() => {
               setSortingParams({
                 attr: item,
@@ -42,7 +43,7 @@ const SortingModal = ({
               setParams({ visible: false, actionLabel: "Sort" });
             }}
           >
-            <Text style={style.orderText}>Des</Text>
+            <AntDesign name="caretdown" size={20} color="black" />
           </Pressable>
         </View>
       </View>
@@ -60,9 +61,6 @@ const SortingModal = ({
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          <Text style={style.modalText}>
-            Esta seguro que desea {modalParams.actionLabel} este elemento?
-          </Text>
           <FlatList
             data={sortingVariables}
             renderItem={renderItem}
@@ -130,11 +128,15 @@ const style = StyleSheet.create({
     borderColor: palette.B1,
     borderWidth: 2,
   },
-  choose: {
-    width: 30,
-    height: 30,
-    borderRadius: 30,
+  ListItemText: {
+    alignSelf: "center",
     margin: 5,
+  },
+  choose: {
+    //width: 30,
+    //height: 30,
+    borderRadius: 10,
+    margin: 2,
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
