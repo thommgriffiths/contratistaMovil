@@ -1,23 +1,24 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Text, View, FlatList, Pressable } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   sortElementsByCommonAttribute,
+  fechaComun,
 } from "../../Core/util/functions";
+import { label } from "../../Core/util/labels";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import DeleteModal from "../../sharedComponents/DeleteModal";
-import EditModal from "../../sharedComponents/EditModal";
 import DetailModal from "../../sharedComponents/DetailModal";
-import FilterModal from "../../sharedComponents/FilterModal";
+import SortingModal from "../../sharedComponents/SortingModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
 
-const AdminTodasTareas = ({ navigation }) => {
+const AdminTodasTareas = () => {
   const [tareas, setTareas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
@@ -43,9 +44,6 @@ const AdminTodasTareas = ({ navigation }) => {
         sortingParams.asc
       );
 
-      console.log("todos los elementos son: ");
-      console.log(sortedElements);
-
       setTareas(sortedElements);
       setLoading(false);
     };
@@ -54,13 +52,17 @@ const AdminTodasTareas = ({ navigation }) => {
 
   useEffect(() => {
     console.log(modalParams);
-    if (modalParams["deletedItem"] != undefined) {
+    if (modalParams["actionLabel"] == "Sort" && !modalParams?.["visible"]) {
+      console.log("los sorting params son:");
+      console.log(sortingParams);
+      let elements = sortElementsByCommonAttribute(
+        tareas,
+        sortingParams.attr,
+        sortingParams.asc
+      );
+
       setModalParams({ visible: false });
-      setLoading(true);
-    }
-    if (modalParams["editedItem"] != undefined) {
-      setModalParams({ visible: false });
-      setLoading(true);
+      setTareas(elements);
     }
   }, [modalParams]);
 
@@ -80,29 +82,6 @@ const AdminTodasTareas = ({ navigation }) => {
             <ShortInfo item={item} />
           </Pressable>
         </View>
-        {/*
-        <View style={styles.ListItemActions}>
-          <Pressable
-            style={styles.ListItemEdit}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Editar",
-                item: item,
-              });
-            }}
-          />
-          <Pressable
-            style={styles.ListItemDelete}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Eliminar",
-                item: item,
-              });
-            }}
-          />
-          </View>*/}
       </View>
     );
   };
@@ -113,7 +92,19 @@ const AdminTodasTareas = ({ navigation }) => {
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Todas Tareas" />
-          <View style={styles.actions}></View>
+          <View style={styles.actions}>
+            <Pressable
+              style={styles.actionsFilter}
+              onPress={() => {
+                setModalParams({
+                  visible: true,
+                  actionLabel: "Sort",
+                });
+              }}
+            >
+              <MaterialIcons name="filter-list" size={30} color="white" />
+            </Pressable>
+          </View>
         </View>
 
         <View style={styles.listContainer}>
@@ -128,20 +119,19 @@ const AdminTodasTareas = ({ navigation }) => {
           )}
         </View>
       </View>
-      {modalParams?.actionLabel == "Eliminar" && (
-        <DeleteModal modalParams={modalParams} setParams={setModalParams} />
-      )}
-      {modalParams?.actionLabel == "Editar" && (
-        <EditModal modalParams={modalParams} setParams={setModalParams} />
-      )}
       {modalParams?.actionLabel == "showDetail" && (
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
       )}
-      {modalParams?.actionLabel == "Filter" && (
-        <FilterModal
+      {modalParams?.actionLabel == "Sort" && (
+        <SortingModal
           modalParams={modalParams}
           setParams={setModalParams}
-          setElements={setTareas}
+          setSortingParams={setSortingParams}
+          sortingVariables={[
+            commonAttrs.fechaCreacion,
+            entities.obra,
+            entities.rubro,
+          ]}
         />
       )}
     </View>
@@ -153,20 +143,30 @@ export default AdminTodasTareas;
 const ShortInfo = ({ item }) => {
   if (item[commonAttrs.type] == entities.pedidoDeObra)
     return (
-      <>
-        <Text>Tipo de pedido: {item.TipoDePedido}</Text>
-        <Text>id: {item.id}</Text>
-        <Text>obra: {item.obra?.Nombre}</Text>
-        <Text>rubro: {item.rubro?.Nombre}</Text>
-      </>
+      <View style={styles.ShortInfo}>
+        <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
+        <Text>Obra: {item.obra?.Nombre}</Text>
+        <Text>Rubro: {item.rubro?.Nombre}</Text>
+        <Text style={{ fontWeight: "bold" }}>
+          Estado: {item[commonAttrs.POState]}
+        </Text>
+        <Text style={{ fontWeight: "bold" }}>
+          Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}
+        </Text>
+      </View>
     );
   if (item[commonAttrs.type] == entities.pReintegro)
     return (
-      <>
-        <Text>id: {item.id}</Text>
-        <Text>Monto: {item.Monto}</Text>
-        <Text>obra: {item.obra?.Nombre}</Text>
-        <Text>rubro: {item.rubro?.Nombre}</Text>
-      </>
+      <View style={styles.ShortInfo}>
+        <Text>Título: {item.Descripcion}</Text>
+        <Text>Obra: {item.obra?.Nombre}</Text>
+        <Text>Rubro: {item.rubro?.Nombre}</Text>
+        <Text style={{ fontWeight: "bold" }}>
+          Monto: ${item[commonAttrs.monto]}
+        </Text>
+        <Text style={{ fontWeight: "bold" }}>
+          Estado: {item[commonAttrs.PRState]}
+        </Text>
+      </View>
     );
 };

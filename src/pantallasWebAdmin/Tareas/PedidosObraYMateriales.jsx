@@ -158,8 +158,12 @@ const ShortInfo = ({ item }) => {
       <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text>Estado: {item[commonAttrs.POState]}</Text>
-      <Text>Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.POState]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}
+      </Text>
     </View>
   );
 };

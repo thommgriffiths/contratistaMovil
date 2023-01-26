@@ -116,7 +116,7 @@ const AdminPedidosDeReintegro = () => {
                 });
               }}
             >
-              <Text style={styles.actionsAddText}>Ordenar</Text>
+              <MaterialIcons name="filter-list" size={30} color="white" />
             </Pressable>
           </View>
         </View>
@@ -166,13 +166,16 @@ export default AdminPedidosDeReintegro;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text> </Text>
-      <Text>Pedido por: {item?.[commonAttrs.creadoPor]}</Text>
-      <Text>Monto: $ {item.Monto}</Text>
-    </>
+      <Text style={{ fontWeight: "bold" }}>
+        Monto: ${item[commonAttrs.monto]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.PRState]}
+      </Text>
+    </View>
   );
 };
