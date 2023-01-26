@@ -99,37 +99,72 @@ export default AdminEstadosObra;
 
 const ShortInfoPO = ({ item }) => {
   return (
-    <View style={[styles.ListItem, { flexDirection: "column" }]}>
-      <Text>Título: {item.Descripcion}</Text>
+    <View
+      style={[
+        styles.ListItem,
+        {
+          flexDirection: "column",
+          paddingHorizontal: 10,
+          marginHorizontal: 15,
+        },
+      ]}
+    >
+      <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-
-      <Text style={{ fontWeight: "bold" }}>Monto: ${item.Monto}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.POState]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}
+      </Text>
     </View>
   );
 };
 
 const ShortInfoJornal = ({ item }) => {
   return (
-    <View style={[styles.ListItem, { flexDirection: "column" }]}>
+    <View
+      style={[
+        styles.ListItem,
+        {
+          flexDirection: "column",
+          paddingHorizontal: 10,
+          marginHorizontal: 15,
+        },
+      ]}
+    >
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
       <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.jornalState]}
+      </Text>
     </View>
   );
 };
 
 const ShortInfoReintegro = ({ item }) => {
   return (
-    <View style={[styles.ListItem, { flexDirection: "column" }]}>
+    <View
+      style={[
+        styles.ListItem,
+        {
+          flexDirection: "column",
+          paddingHorizontal: 10,
+          marginHorizontal: 15,
+        },
+      ]}
+    >
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
-
-      <Text style={{ fontWeight: "bold" }}>Monto: ${item.Monto}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estado: {item.Status}</Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Monto: ${item[commonAttrs.monto]}
+      </Text>
+      <Text style={{ fontWeight: "bold" }}>
+        Estado: {item[commonAttrs.PRState]}
+      </Text>
     </View>
   );
 };
