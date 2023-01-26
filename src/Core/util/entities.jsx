@@ -67,10 +67,10 @@ export const PRStates = {
 
 export const POStates = {
   pedido: "Pedido",
-  enRevision: "En Revision",
-  aprobado: "Aprobado",
+  enProceso: "En Proceso",
   resuelto: "Resuelto",
   demorado: "Demorado",
+  desestimado: "Desestimado",
 };
 
 export const userTypes = {

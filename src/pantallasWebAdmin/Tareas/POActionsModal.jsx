@@ -1,28 +1,19 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  Modal,
-  Pressable,
-  TextInput,
-  StyleSheet,
-} from "react-native";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
-import { palette } from "../../Core/colors";
-import { commonAttrs, entities, PRStates } from "../../Core/util/entities";
+import { commonAttrs, entities, POStates } from "../../Core/util/entities";
 import { updateElement } from "../../Core/util/functions";
+import { palette } from "../../Core/colors";
 
-const ActionsModal = ({ modalParams, setParams }) => {
-  const [newStatus, setNewStatus] = useState(modalParams.item.PRState);
-  const [comment, setComment] = useState("");
+const POActionsModal = ({ modalParams, setParams }) => {
+  const [newStatus, setNewStatus] = useState(modalParams.item.POState);
 
   const edit = () => {
     let item = {};
     item[commonAttrs.id] = modalParams.item[commonAttrs.id];
-    item[commonAttrs.type] = entities.pReintegro;
-    item[commonAttrs.PRState] = newStatus;
-    item[commonAttrs.PRComment] = comment;
+    item[commonAttrs.type] = entities.pedidoDeObra;
+    item[commonAttrs.POState] = newStatus;
 
     const onUpdateSuccess = () => {
       setParams({ visible: false, affectedItem: modalParams.item.id });
@@ -47,12 +38,44 @@ const ActionsModal = ({ modalParams, setParams }) => {
           <View style={style.actionsContainer}>
             <Pressable
               style={style.action}
-              onPress={() => setNewStatus(PRStates.aprobado)}
+              onPress={() => setNewStatus(POStates.enProceso)}
             >
               <View style={style.iconConatiner}>
                 <AntDesign
                   name={
-                    newStatus == PRStates.aprobado
+                    newStatus == POStates.enProceso ? "play" : "playcircleo"
+                  }
+                  size={24}
+                  color="grey"
+                />
+              </View>
+              <Text style={style.actionLabel}>En proceso</Text>
+            </Pressable>
+
+            <Pressable
+              style={style.action}
+              onPress={() => setNewStatus(POStates.demorado)}
+            >
+              <View style={style.iconConatiner}>
+                <Ionicons
+                  name={
+                    newStatus == POStates.demorado ? "timer" : "timer-outline"
+                  }
+                  size={24}
+                  color="yellow"
+                />
+              </View>
+              <Text style={style.actionLabel}>Demorado</Text>
+            </Pressable>
+
+            <Pressable
+              style={style.action}
+              onPress={() => setNewStatus(POStates.resuelto)}
+            >
+              <View style={style.iconConatiner}>
+                <AntDesign
+                  name={
+                    newStatus == POStates.resuelto
                       ? "checkcircle"
                       : "checkcircleo"
                   }
@@ -60,80 +83,24 @@ const ActionsModal = ({ modalParams, setParams }) => {
                   color="green"
                 />
               </View>
-              <Text style={style.actionLabel}>Aprobar</Text>
+              <Text style={style.actionLabel}>Resuelto</Text>
             </Pressable>
 
             <Pressable
-              style={style.action}
-              onPress={() => setNewStatus(PRStates.enRevision)}
-            >
-              <View style={style.iconConatiner}>
-                <AntDesign
-                  name={
-                    newStatus == PRStates.enRevision
-                      ? "exclamationcircle"
-                      : "exclamationcircleo"
-                  }
-                  size={24}
-                  color="grey"
-                />
-              </View>
-              <Text style={style.actionLabel}>Poner en revision</Text>
-            </Pressable>
-
-            <Pressable
-              style={style.action}
-              onPress={() => setNewStatus(PRStates.rechazado)}
-            >
-              <View style={style.iconConatiner}>
-                <AntDesign
-                  name={
-                    newStatus == PRStates.rechazado
-                      ? "closecircle"
-                      : "closecircleo"
-                  }
-                  size={24}
-                  color="red"
-                />
-              </View>
-              <Text style={style.actionLabel}>Rechazar</Text>
-            </Pressable>
-
-            <Pressable
-              style={style.action}
-              onPress={() => setNewStatus(PRStates.desestimado)}
+              style={[
+                style.action,
+                {
+                  backgroundColor:
+                    newStatus == POStates.desestimado ? "red" : "white",
+                },
+              ]}
+              onPress={() => setNewStatus(POStates.desestimado)}
             >
               <View style={style.iconConatiner}>
                 <AntDesign name="delete" size={24} color="black" />
               </View>
               <Text style={style.actionLabel}>Desestimar</Text>
             </Pressable>
-
-            <Pressable
-              style={style.action}
-              onPress={() => setNewStatus(PRStates.reembolsado)}
-            >
-              <View style={style.iconConatiner}>
-                <MaterialCommunityIcons
-                  name={
-                    newStatus == PRStates.reembolsado
-                      ? "account-cash"
-                      : "account-cash-outline"
-                  }
-                  size={24}
-                  color="green"
-                />
-              </View>
-              <Text style={style.actionLabel}>Reembolsado</Text>
-            </Pressable>
-
-            <View style={style.comment}>
-              <TextInput
-                placeholder="Añadir comentario"
-                onChangeText={(text) => setComment(text)}
-                style={style.input}
-              />
-            </View>
 
             <View style={style.buttonContainer}>
               <Pressable
@@ -160,7 +127,7 @@ const ActionsModal = ({ modalParams, setParams }) => {
   );
 };
 
-export default ActionsModal;
+export default POActionsModal;
 
 const style = StyleSheet.create({
   centeredView: {

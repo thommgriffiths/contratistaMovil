@@ -41,9 +41,7 @@ const AdminMenuTareas = () => {
             }
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>
-              Pedidos de Obra y Materiales
-            </Text>
+            <Text style={styles.menuItemText}>Gestion Pedidos de Obra</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

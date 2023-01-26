@@ -11,11 +11,13 @@ import DropdownSelect from "../../sharedComponents/DropdownSelect";
 const FiltrarPedidoDeObra = ({ setSearchParams }) => {
   const [context, setContext] = useState(null);
   const [tipoDePedido, setTipoDePedido] = useState(null);
+  const [estado, setEstado] = useState(null);
 
   useEffect(() => {
     const queryParams = {
       ...context,
       [commonAttrs.tipoPedidoObra]: tipoDePedido,
+      [commonAttrs.POState]: estado,
     };
     const newQuery = createQuery(queryParams);
 
@@ -43,6 +45,14 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
                 action={setTipoDePedido}
                 category="tiposPedidosDePedidosObra"
                 placeholder={"Tipo de Pedido"}
+                props={{ stackOrder: 10000 }}
+              />
+            </View>
+            <View style={{ zIndex: 10050 }}>
+              <DropdownSelect
+                action={setTipoDePedido}
+                category={commonAttrs.POState}
+                placeholder={"Estado del pedido"}
                 props={{ stackOrder: 10000 }}
               />
             </View>

@@ -17,7 +17,7 @@ import Titles from "../../sharedComponents/Titles";
 import DetailModal from "../../sharedComponents/DetailModal";
 import SortingModal from "../../sharedComponents/SortingModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import ActionsModal from "./ActionsModal";
+import PRActionsModal from "./PRActionsModal";
 
 const AdminPedidosDeReintegro = () => {
   const [pedidosReintegro, setPedidosReintegro] = useState([]);
@@ -143,7 +143,7 @@ const AdminPedidosDeReintegro = () => {
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
       )}
       {modalParams?.actionLabel == "Actions" && (
-        <ActionsModal modalParams={modalParams} setParams={setModalParams} />
+        <PRActionsModal modalParams={modalParams} setParams={setModalParams} />
       )}
       {modalParams?.actionLabel == "Sort" && (
         <SortingModal

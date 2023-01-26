@@ -11,6 +11,7 @@ import {
   getEmptyConstructor,
   userTypes,
   jornalStates,
+  POStates,
 } from "./entities";
 
 //------------------------------------------------------------------------
@@ -131,6 +132,8 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
       return objectToDropdown(userTypes);
     case commonAttrs.jornalState:
       return objectToDropdown(jornalStates);
+    case commonAttrs.POState:
+      return objectToDropdown(POStates);
     default:
       console.log("No se encontro la categoria" + type);
       return [];
