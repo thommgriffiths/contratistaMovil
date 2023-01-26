@@ -23,6 +23,7 @@ import { AdminReporteRapido as mockData } from "../../Core/util/mockData";
 const AdminReporteRapido = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [rawItems, setRawItems] = useState([]);
 
   const [filter, setFilter] = useState([
     entities.obra,
@@ -37,43 +38,89 @@ const AdminReporteRapido = () => {
       let queryObject = {
         [commonAttrs.fechaCreacionRango]: getCurrentWeekDates(),
       };
-      console.log(queryObject);
       let query = createQuery(queryObject);
 
-      console.log(query);
-
       const rawElements = await queryFSElements(entities.jornal, query);
-
       const completedElements = await completeElements(rawElements);
 
-      
-
-      const datos = consolidarJornales(
-        completedElements,
-        ...filter,
-        commonAttrs.diasHombre
-      );
-
-      setData(datos);
-
-      console.log("Los final elements son: ");
-      console.log(completedElements);
-      setJornales(completedElements);
-      setLoading(false);
+      setRawItems(completedElements);
     };
-    loading ? loadItems() : {};*/
-
-    if (loading) {
-      const completedElements = mockData.jornalesSemana;
-      const datos = consolidarJornales(
-        completedElements,
-        ...filter,
-        commonAttrs.diasHombre
-      );
-      setData(objectToArray(datos));
-      setLoading(false);
-    }
+    if (loading) loadItems();*/
+    if (loading) setRawItems(mockData.jornalesSemana);
   }, [loading]);
+
+  useEffect(() => {
+    const datos = consolidarJornales(
+      rawItems,
+      ...filter,
+      commonAttrs.diasHombre
+    );
+    setData(objectToArray(datos));
+    setLoading(false);
+  }, [rawItems, filter]);
+
+  const Tree = () => {
+    return (
+      <View style={localStyles.treeContainer}>
+        <Pressable
+          style={[
+            localStyles.treeButton,
+            {
+              backgroundColor:
+                filter[0] == entities.obra
+                  ? palette.R3
+                  : filter[1] == entities.obra
+                  ? palette.R1
+                  : "white",
+            },
+          ]}
+          onPress={() => setFirst(entities.obra)}
+        >
+          <Text>Obra</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            localStyles.treeButton,
+            {
+              backgroundColor:
+                filter[0] == commonAttrs.creadoPor
+                  ? palette.R3
+                  : filter[1] == commonAttrs.creadoPor
+                  ? palette.R1
+                  : "white",
+            },
+          ]}
+          onPress={() => setFirst(commonAttrs.creadoPor)}
+        >
+          <Text>Contratista</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            localStyles.treeButton,
+            {
+              backgroundColor:
+                filter[0] == entities.rubro
+                  ? palette.R3
+                  : filter[1] == entities.rubro
+                  ? palette.R1
+                  : "white",
+            },
+          ]}
+          onPress={() => setFirst(entities.rubro)}
+        >
+          <Text>Rubro</Text>
+        </Pressable>
+      </View>
+    );
+  };
+
+  const setFirst = (value) => {
+    let arr = [...filter];
+    let fi = arr.indexOf(value);
+    arr.splice(fi, 1);
+    arr.splice(0, 0, value);
+    setFilter(arr);
+  };
 
   return (
     <View style={styles.container}>
@@ -81,6 +128,7 @@ const AdminReporteRapido = () => {
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Reporte Rapido Jornales" />
+          <Tree />
         </View>
 
         <View style={styles.listContainer}>
@@ -126,3 +174,18 @@ const consolidarJornales = (objects, first, second, third, value) => {
 
   return result;
 };
+
+const localStyles = StyleSheet.create({
+  treeContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  treeButton: {
+    margin: 5,
+    padding: 5,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: palette.R4,
+  },
+});

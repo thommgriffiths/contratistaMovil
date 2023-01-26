@@ -108,8 +108,10 @@ const localStyles = StyleSheet.create({
     fontSize: 35,
   },
   innercontainer: {
-    backgroundColor: palette.B4,
+    backgroundColor: palette.white,
     borderRadius: 10,
+    borderColor: palette.B2,
+    borderWidth: 2,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginVertical: 5,
