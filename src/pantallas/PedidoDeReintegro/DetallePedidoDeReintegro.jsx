@@ -11,6 +11,7 @@ const propertiesToDisplay = [
   "Descripcion",
   "obra",
   "rubro",
+  "ComentarioPedidoReintegro",
   "Monto",
   "FechaCreacion",
 ];
