@@ -79,6 +79,12 @@ export const userTypes = {
   admin: "Administrativo",
 };
 
+export const POTypes = {
+  pedidoMateriales: "Pedido de Materiales",
+  pedidoDefiniciones: "Pedido de Definicion",
+  pedidoPlanos: "Pedido plano detalle",
+};
+
 //Constructors
 const contextConstructor = {
   [entities.obra]: null,

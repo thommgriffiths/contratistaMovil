@@ -9,7 +9,6 @@ import {
 } from "../../Core/util/entities";
 import { createFSElementAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { getCurrentDateTime } from "../../Core/util/functions";
-import { obtenerStatus } from "../../Core/util/mockFunctions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Crear.style";
 

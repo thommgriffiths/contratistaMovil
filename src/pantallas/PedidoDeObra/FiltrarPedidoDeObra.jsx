@@ -43,7 +43,7 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
             <View style={{ zIndex: 10080 }}>
               <DropdownSelect
                 action={setTipoDePedido}
-                category="tiposPedidosDePedidosObra"
+                category={commonAttrs.tipoPedidoObra}
                 placeholder={"Tipo de Pedido"}
                 props={{ stackOrder: 10000 }}
               />

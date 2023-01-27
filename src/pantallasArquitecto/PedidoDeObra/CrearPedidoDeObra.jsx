@@ -59,7 +59,7 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
               <DropdownSelect
                 placeholder="Seleccione tipo de pedido"
                 action={setTipoDePedido}
-                category="tiposPedidosDePedidosObra"
+                category={commonAttrs.tipoPedidoObra}
                 props={{ stackOrder: 10000 }}
               />
             </View>

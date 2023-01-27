@@ -1,10 +1,8 @@
-import { tiposPedidosDeObra } from "./mockFunctions";
 import {
   getFSElementById,
   deleteFSElement,
   updateFSElement,
   getFSCollection,
-  queryFSElementsAndThen,
   queryFSElements,
 } from "../Firebase/FirebaseFirestoreManager";
 import {
@@ -14,6 +12,7 @@ import {
   userTypes,
   jornalStates,
   POStates,
+  POTypes,
 } from "./entities";
 
 //------------------------------------------------------------------------
@@ -147,10 +146,7 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
   });
 
   switch (type) {
-    case "tiposPedidosDePedidosObra":
-      return tiposPedidosDeObra;
     case entities.obra:
-      console.log("entre a obra");
       queryFSElements(entities.obra, enabledQuery).then(onSuccess);
       break;
     case entities.rubro:
@@ -162,6 +158,8 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
       return objectToDropdown(jornalStates);
     case commonAttrs.POState:
       return objectToDropdown(POStates);
+    case commonAttrs.tipoPedidoObra:
+      return objectToDropdown(POTypes);
     default:
       console.log("No se encontro la categoria" + type);
       return [];
