@@ -33,25 +33,29 @@ const EditarJornal = ({ currentItem, setNewItem }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet
-              action={setContext}
-              initialValues={currentItem}
-              isEdit
-            />
-            <Text style={styles.fieldTitle}>Cantidad dias hombre</Text>
-            <TextInput
-              placeholder="Ingrese cantidad dias hombre"
-              keyboardType="numeric"
-              onChangeText={(text) => {
-                if (+text || text == "") setDiasHombre(text);
-                else {
-                  setDiasHombre("");
-                  alert("Valor invalido, reingreselo");
-                }
-              }}
-              defaultValue={currentItem?.DiasHombre}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet
+                action={setContext}
+                initialValues={currentItem}
+                isEdit
+              />
+            </View>
+            <View style={{ zIndex: 10080 }}>
+              <Text style={styles.fieldTitle}>Cantidad dias hombre</Text>
+              <TextInput
+                placeholder="Ingrese cantidad dias hombre"
+                keyboardType="numeric"
+                onChangeText={(text) => {
+                  if (+text || text == "") setDiasHombre(text);
+                  else {
+                    setDiasHombre("");
+                    alert("Valor invalido, reingreselo");
+                  }
+                }}
+                defaultValue={currentItem?.DiasHombre}
+                style={[styles.input, { zIndex: 9000 }]}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

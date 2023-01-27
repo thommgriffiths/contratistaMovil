@@ -1,24 +1,21 @@
-import { Text, View, FlatList, Pressable, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Text, View, FlatList, Pressable, StyleSheet } from "react-native";
 
-import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import {
   completeElements,
   getCurrentWeekDates,
   createQuery,
   objectToArray,
-  sumInternalValues,
 } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
-import styles from "../styles/Consultar.style";
-import { palette } from "../../Core/colors";
-
 import { renderCapsule } from "./renderCapsule";
-import { AdminReporteRapido as mockData } from "../../Core/util/mockData";
 
 const AdminReporteRapido = () => {
   const [data, setData] = useState([]);
@@ -32,9 +29,7 @@ const AdminReporteRapido = () => {
   ]);
 
   useEffect(() => {
-    /*
     const loadItems = async () => {
-     
       let queryObject = {
         [commonAttrs.fechaCreacionRango]: getCurrentWeekDates(),
       };
@@ -44,9 +39,10 @@ const AdminReporteRapido = () => {
       const completedElements = await completeElements(rawElements);
 
       setRawItems(completedElements);
+      console.log("completedElements", completedElements);
+      setLoading(false);
     };
-    if (loading) loadItems();*/
-    if (loading) setRawItems(mockData.jornalesSemana);
+    if (loading) loadItems();
   }, [loading]);
 
   useEffect(() => {
@@ -56,7 +52,6 @@ const AdminReporteRapido = () => {
       commonAttrs.diasHombre
     );
     setData(objectToArray(datos));
-    setLoading(false);
   }, [rawItems, filter]);
 
   const Tree = () => {
@@ -132,8 +127,9 @@ const AdminReporteRapido = () => {
         </View>
 
         <View style={styles.listContainer}>
-          {loading && <LoadingComponent />}
-          {!loading && (
+          {loading ? (
+            <LoadingComponent />
+          ) : (
             <FlatList
               data={data}
               renderItem={renderCapsule}

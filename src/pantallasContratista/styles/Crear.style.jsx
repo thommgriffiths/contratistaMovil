@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingHorizontal: 20,
     marginBottom: 20,
+    zIndex: 100000,
   },
   botonera: {},
 
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   buttonsWrapper: {
     width: "70%",
     alignSelf: "center",
+    zIndex: 1,
   },
 });
 
