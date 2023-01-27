@@ -104,9 +104,21 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
 
   const onSuccess = (respuesta) => {
     let itemsForDropdown = [];
+
     respuesta.forEach((item) =>
       itemsForDropdown.push(prepareForDropdown(item))
     );
+
+    itemsForDropdown.sort((a, b) => {
+      if (a.label < b.label) {
+        return -1;
+      } else if (a.label > b.label) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
     setItems(itemsForDropdown);
   };
 
@@ -118,7 +130,16 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
         label: object[key],
       });
     }
-    return result;
+
+    return result.sort((a, b) => {
+      if (a.label < b.label) {
+        return -1;
+      } else if (a.label > b.label) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   };
 
   const enabledQuery = createQuery({
