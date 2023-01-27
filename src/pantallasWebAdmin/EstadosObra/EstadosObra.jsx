@@ -1,89 +1,66 @@
-import { FlatList, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
-import styles from "../styles/Consultar.style";
-import Header from "../../sharedComponents/Header";
-import Titles from "../../sharedComponents/Titles";
-import StatusFilter from "./StatusFilter";
-import { commonAttrs, entities } from "../../Core/util/entities";
-import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { FlatList, View } from "react-native";
+
 import {
   createQuery,
   completeElements,
   sortElementsByCommonAttribute,
+  filterByAttributes,
 } from "../../Core/util/functions";
-import LoadingComponent from "../../sharedComponents/LoadingComponent";
+import { commonAttrs, entities } from "../../Core/util/entities";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import styles from "../styles/Consultar.style";
 
-//Aca voy a listar todas las obras (uso el mismo que consultar obras)
-//y al hacer click pongo todo lo que paso con X contesto las ultimas 2 semanas
-//Traigo tareas, jornales y tareas arquitectos ordenados por fechas de las ultimas dos semanas
-//Esto es como ver actividades por obra
+import LoadingComponent from "../../sharedComponents/LoadingComponent";
+import Header from "../../sharedComponents/Header";
+import Titles from "../../sharedComponents/Titles";
+import StatusFilter from "./StatusFilter";
+import TypesFilter from "./TypesFilter";
+import renderItem from "./renderItem";
+
+const defaultFilter = [
+  entities.jornal,
+  entities.pedidoDeObra,
+  entities.pReintegro,
+];
 
 const AdminEstadosObra = () => {
   const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState(defaultFilter);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const onSearch = async (o, dias) => {
+  const search = async (o, dias) => {
     setLoading(true);
-
-    let now = Date.now();
-
-    let diasEnMilisegundos = dias * 24 * 60 * 60 * 1000;
-
-    let newQuery = createQuery({
-      [entities.obra]: o,
-      [commonAttrs.fechaCreacionRango]: {
-        startDate: now - diasEnMilisegundos,
-      },
-    });
-
-    const jornales = await queryFSElements(entities.jornal, newQuery);
-
-    const pedidosObra = await queryFSElements(entities.pedidoDeObra, newQuery);
-
-    const pedidosReintegro = await queryFSElements(
-      entities.pReintegro,
-      newQuery
-    );
-
-    const rawElements = [...jornales, ...pedidosObra, ...pedidosReintegro];
-
-    const completedElements = await completeElements(rawElements);
-
-    const sortedElements = sortElementsByCommonAttribute(
-      completedElements,
-      commonAttrs.fechaCreacion,
-      false
-    );
-    setItems(sortedElements);
+    const values = await onSearch(o, dias);
+    setItems(values);
+    let filteredElements = filterByAttributes(values, commonAttrs.type, filter);
+    setFilteredItems(filteredElements);
     setLoading(false);
   };
 
-  const renderItem = ({ item }) => {
-    switch (item.type) {
-      case entities.jornal:
-        console.log("opcion jornal");
-        return <ShortInfoJornal item={item} />;
-      case entities.pReintegro:
-        console.log("opcion reintegro");
-        return <ShortInfoReintegro item={item} />;
-      case entities.pedidoDeObra:
-        console.log("opcion pedido de obra");
-        return <ShortInfoPO item={item} />;
-    }
-  };
+  useEffect(() => {
+    let filteredElements = filterByAttributes(items, commonAttrs.type, filter);
+    setFilteredItems(filteredElements);
+  }, [filter]);
+
   return (
     <View style={styles.container}>
       <Header backTo="AdminHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Estados de obra" />
+          <TypesFilter action={setFilter} filter={filter} />
         </View>
-        <StatusFilter open={true} onSearch={onSearch} />
+        <View style={styles.filterContainer}>
+          <StatusFilter open={true} onSearch={search} />
+        </View>
+
         <View style={styles.listContainer}>
           {loading && <LoadingComponent />}
           {!loading && (
             <FlatList
-              data={items}
+              data={filteredItems}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               style={styles.List}
@@ -97,74 +74,27 @@ const AdminEstadosObra = () => {
 
 export default AdminEstadosObra;
 
-const ShortInfoPO = ({ item }) => {
-  return (
-    <View
-      style={[
-        styles.ListItem,
-        {
-          flexDirection: "column",
-          paddingHorizontal: 10,
-          marginHorizontal: 15,
-        },
-      ]}
-    >
-      <Text>Tipo de pedido: {label(item.TipoDePedido)}</Text>
-      <Text>Obra: {item.obra?.Nombre}</Text>
-      <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>
-        Estado: {item[commonAttrs.POState]}
-      </Text>
-      <Text style={{ fontWeight: "bold" }}>
-        Fecha pedido: {fechaComun(item?.[commonAttrs.fechaCreacion])}
-      </Text>
-    </View>
-  );
-};
+const onSearch = async (o, dias) => {
+  const now = Date.now();
+  const diasEnMilisegundos = dias * 24 * 60 * 60 * 1000;
+  const newQuery = createQuery({
+    [entities.obra]: o,
+    [commonAttrs.fechaCreacionRango]: {
+      startDate: now - diasEnMilisegundos,
+    },
+  });
 
-const ShortInfoJornal = ({ item }) => {
-  return (
-    <View
-      style={[
-        styles.ListItem,
-        {
-          flexDirection: "column",
-          paddingHorizontal: 10,
-          marginHorizontal: 15,
-        },
-      ]}
-    >
-      <Text>Obra: {item.obra?.Nombre}</Text>
-      <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>Dias hombre: {item.DiasHombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>
-        Estado: {item[commonAttrs.jornalState]}
-      </Text>
-    </View>
-  );
-};
+  const jornales = await queryFSElements(entities.jornal, newQuery);
+  const pedidosObra = await queryFSElements(entities.pedidoDeObra, newQuery);
+  const pedidosReintegro = await queryFSElements(entities.pReintegro, newQuery);
 
-const ShortInfoReintegro = ({ item }) => {
-  return (
-    <View
-      style={[
-        styles.ListItem,
-        {
-          flexDirection: "column",
-          paddingHorizontal: 10,
-          marginHorizontal: 15,
-        },
-      ]}
-    >
-      <Text>Título: {item.Descripcion}</Text>
-      <Text>Obra: {item.obra?.Nombre}</Text>
-      <Text>Rubro: {item.rubro?.Nombre}</Text>
-      <Text style={{ fontWeight: "bold" }}>
-        Monto: ${item[commonAttrs.monto]}
-      </Text>
-      <Text style={{ fontWeight: "bold" }}>
-        Estado: {item[commonAttrs.PRState]}
-      </Text>
-    </View>
+  const allElements = [...jornales, ...pedidosObra, ...pedidosReintegro];
+  const completedElements = await completeElements(allElements);
+  const sortedElements = sortElementsByCommonAttribute(
+    completedElements,
+    commonAttrs.fechaCreacion,
+    false
   );
+
+  return sortedElements;
 };

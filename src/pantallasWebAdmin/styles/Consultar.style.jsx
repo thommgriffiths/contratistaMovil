@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     backgroundColor: palette.white,
     flex: 1,
   },
+  filterContainer: {
+    zIndex: 10000,
+  },
   body: {
     paddingHorizontal: 20,
     marginBottom: 20,
@@ -47,7 +50,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  listContainer: {},
+  listContainer: {
+    zIndex: 100,
+  },
 
   List: {},
   ListItem: {
@@ -59,6 +64,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: palette.B1,
     borderWidth: 2,
+  },
+
+  ListItemVertical: {
+    justifyContent: "space-between",
+    padding: 5,
+    backgroundColor: palette.neutral,
+    marginVertical: 5,
+    borderRadius: 10,
+    borderColor: palette.B1,
+    borderWidth: 2,
+    flexDirection: "column",
+    paddingHorizontal: 10,
+    marginHorizontal: 15,
   },
 
   ListItemText: { flex: 1 },

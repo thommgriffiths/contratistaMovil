@@ -1,14 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
 import React, { useState } from "react";
-import DropdownSelect from "../../sharedComponents/DropdownSelect";
+import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
+
 import { entities } from "../../Core/util/entities";
 import { palette } from "../../Core/colors";
+
+import DropdownSelect from "../../sharedComponents/DropdownSelect";
 
 const StatusFilter = ({ open = true, onSearch = () => {} }) => {
   const [days, setDays] = useState("");
@@ -30,19 +26,25 @@ const StatusFilter = ({ open = true, onSearch = () => {} }) => {
             <TextInput
               placeholder="Dias hacia atrás"
               value={days}
-              onChangeText={(text) => setDays(text)}
+              onChangeText={(text) => {
+                if (+text || text == "") setDays(text);
+                else {
+                  setDays("");
+                  alert("Solo se permiten números");
+                }
+              }}
               style={localstyles.input}
             />
           </View>
           <View style={localstyles.buttonContainer}>
-            <TouchableOpacity
+            <Pressable
               onPress={() => {
                 onSearch(obra, days);
               }}
               style={[localstyles.boton, localstyles.botonOK]}
             >
               <Text style={localstyles.botonOkText}>Buscar</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </>
@@ -84,17 +86,8 @@ const localstyles = StyleSheet.create({
   botonOK: {
     backgroundColor: palette.white,
   },
-  botonCancel: {
-    backgroundColor: palette.B1,
-  },
-
   botonOkText: {
     color: palette.B1,
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  botonCancelText: {
-    color: palette.white,
     fontWeight: "700",
     fontSize: 16,
   },
