@@ -51,7 +51,7 @@ const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
       </View>
       {isEdit && !noTarea && (
         <View style={{ zIndex: 10080 }}>
-          <Text style={styles.fieldTitle}>Descripción de la tarea</Text>
+          <Text style={styles.fieldTitle}>Tarea Afectada</Text>
           <TextInput
             placeholder={initialValues?.tarea}
             defaultValue={tarea}
@@ -63,7 +63,7 @@ const ContextoSet = ({ action, initialValues, isEdit, noTarea }) => {
       {!isEdit && !noTarea && (
         <View style={{ zIndex: 10080 }}>
           <TextInput
-            placeholder="Descripción de la tarea"
+            placeholder="Tarea Afectada"
             value={tarea}
             onChangeText={(text) => setTarea(text)}
             style={styles.input}

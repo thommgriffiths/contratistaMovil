@@ -22,6 +22,7 @@ const StatusFilter = ({ open = true, onSearch = () => {} }) => {
               props={{ stackOrder: 15000 }}
             />
           </View>
+          <View style={localstyles.separator}></View>
           <View style={localstyles.inputContainer}>
             <TextInput
               placeholder="Dias hacia atrás"
@@ -36,6 +37,7 @@ const StatusFilter = ({ open = true, onSearch = () => {} }) => {
               style={localstyles.input}
             />
           </View>
+          <View style={localstyles.separator}></View>
           <View style={localstyles.buttonContainer}>
             <Pressable
               onPress={() => {
@@ -59,9 +61,10 @@ const localstyles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
   },
-  dropDownContainer: { flex: 6, paddingHorizontal: 15 },
-  inputContainer: { flex: 6, paddingHorizontal: 15 },
-  buttonContainer: { flex: 3, paddingHorizontal: 15 },
+  dropDownContainer: { flex: 2 },
+  inputContainer: { flex: 2 },
+  buttonContainer: { flex: 1 },
+  separator: { width: 25 },
   input: {
     backgroundColor: palette.white,
     paddingHorizontal: 15,
