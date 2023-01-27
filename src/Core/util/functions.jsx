@@ -4,6 +4,8 @@ import {
   deleteFSElement,
   updateFSElement,
   getFSCollection,
+  queryFSElementsAndThen,
+  queryFSElements,
 } from "../Firebase/FirebaseFirestoreManager";
 import {
   entities,
@@ -119,14 +121,19 @@ export const obtenerDropdownItems = (type, setItems = () => {}) => {
     return result;
   };
 
+  const enabledQuery = createQuery({
+    [commonAttrs.enabled]: true,
+  });
+
   switch (type) {
     case "tiposPedidosDePedidosObra":
       return tiposPedidosDeObra;
     case entities.obra:
-      getFSCollection(entities.obra, onSuccess);
+      console.log("entre a obra");
+      queryFSElements(entities.obra, enabledQuery).then(onSuccess);
       break;
     case entities.rubro:
-      getFSCollection(entities.rubro, onSuccess);
+      queryFSElements(entities.rubro, enabledQuery).then(onSuccess);
       break;
     case commonAttrs.userType:
       return objectToDropdown(userTypes);
@@ -269,6 +276,13 @@ export const createQuery = (object) => {
 
       case commonAttrs.POState: {
         queryObject["parameter"] = commonAttrs.POState;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case commonAttrs.enabled: {
+        queryObject["parameter"] = commonAttrs.enabled;
         queryObject["operator"] = "==";
         queryObject["value"] = object[key];
         break;
