@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   //Pantalla
   container: {
     flex: 1,
-    backgroundColor: palette.neutral,
+    backgroundColor: palette.white,
   },
   header: {},
   body: {
@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
 
   //Form Section - Cuerpo
   formWrapper: {},
+  buttonsWrapper: {
+    zIndex: 50,
+    width: "70%",
+    alignSelf: "center",
+  },
   input: {
     backgroundColor: palette.white,
     paddingHorizontal: 15,

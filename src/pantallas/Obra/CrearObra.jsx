@@ -70,14 +70,15 @@ const CrearObra = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </View>
-
-      <Botones
-        onOkFunction={handleCrearObra}
-        onOkText={"Crear obra"}
-        onCancelFunction={() => navigation.navigate("VerObrasScreen")}
-        onCancelText={"Cancelar"}
-        style={styles.botonera}
-      />
+      <View style={styles.buttonsWrapper}>
+        <Botones
+          onOkFunction={handleCrearObra}
+          onOkText={"Crear obra"}
+          onCancelFunction={() => navigation.navigate("VerObrasScreen")}
+          onCancelText={"Cancelar"}
+          style={styles.botonera}
+        />
+      </View>
     </View>
   );
 };

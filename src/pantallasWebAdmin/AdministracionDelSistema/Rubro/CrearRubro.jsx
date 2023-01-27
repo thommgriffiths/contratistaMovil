@@ -51,14 +51,15 @@ const AdminCrearRubro = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </View>
-
-      <Botones
-        onOkFunction={handleCrearRubro}
-        onOkText={"Crear rubro"}
-        onCancelFunction={() => navigation.navigate("AdminVerRubrosScreen")}
-        onCancelText={"Cancelar"}
-        style={styles.botonera}
-      />
+      <View style={styles.buttonsWrapper}>
+        <Botones
+          onOkFunction={handleCrearRubro}
+          onOkText={"Crear rubro"}
+          onCancelFunction={() => navigation.navigate("AdminVerRubrosScreen")}
+          onCancelText={"Cancelar"}
+          style={styles.botonera}
+        />
+      </View>
     </View>
   );
 };
