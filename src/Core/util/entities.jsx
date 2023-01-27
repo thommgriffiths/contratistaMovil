@@ -82,7 +82,7 @@ export const userTypes = {
 export const POTypes = {
   pedidoMateriales: "Pedido de Materiales",
   pedidoDefiniciones: "Pedido de Definicion",
-  pedidoPlanos: "Pedido plano detalle",
+  pedidoPlanos: "Pedido de Plano Detalle",
 };
 
 //Constructors

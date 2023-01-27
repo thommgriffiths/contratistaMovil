@@ -25,7 +25,7 @@ spanishLabels["EstadoPedidoReintegro"] = "Estado del pedido";
 //Pedido de obra
 spanishLabels["pedidoMateriales"] = "Pedido de Materiales";
 spanishLabels["pedidoDefiniciones"] = "Pedido de Definicion";
-spanishLabels["pedidoPlanos"] = "Pedido plano detalle";
+spanishLabels["pedidoPlanos"] = "Pedido de Plano Detalle";
 
 export const label = (key) => {
   return spanishLabels[key] ? spanishLabels[key] : key + "ESKEY";
