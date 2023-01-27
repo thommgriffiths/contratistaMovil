@@ -1,19 +1,18 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 
-import Header from "../../../sharedComponents/Header";
-import Botones from "../../../sharedComponents/Botones";
-
-import { getCurrentDateTime } from "../../../Core/util/functions";
-import { getLoggedUser } from "../../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
 } from "../../../Core/util/entities";
 import { createFSElementAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
-
+import { getCurrentDateTime } from "../../../Core/util/functions";
+import { getLoggedUser } from "../../../Core/util/globalStore";
 import styles from "../../styles/Crear.style";
+
+import Header from "../../../sharedComponents/Header";
+import Botones from "../../../sharedComponents/Botones";
 
 const AdminCrearRubro = ({ navigation }) => {
   const [nombre, setNombre] = useState("");
@@ -25,9 +24,8 @@ const AdminCrearRubro = ({ navigation }) => {
     newRubro[commonAttrs.fechaCreacion] = getCurrentDateTime();
     newRubro[commonAttrs.creadoPor] = getLoggedUser().Email;
 
-    console.log(newRubro);
     await createFSElementAsync(newRubro);
-    navigation.navigate("VerRubrosScreen");
+    navigation.navigate("AdminVerRubrosScreen");
   };
 
   return (
@@ -57,7 +55,7 @@ const AdminCrearRubro = ({ navigation }) => {
       <Botones
         onOkFunction={handleCrearRubro}
         onOkText={"Crear rubro"}
-        onCancelFunction={() => navigation.navigate("VerRubrosScreen")}
+        onCancelFunction={() => navigation.navigate("AdminVerRubrosScreen")}
         onCancelText={"Cancelar"}
         style={styles.botonera}
       />

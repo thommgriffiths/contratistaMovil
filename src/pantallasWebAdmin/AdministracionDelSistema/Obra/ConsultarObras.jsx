@@ -5,15 +5,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
 import { updateElement } from "../../../Core/util/functions";
 import { commonAttrs, entities } from "../../../Core/util/entities";
+import styles from "../../styles/Consultar.style";
+import { palette } from "../../../Core/colors";
 
 import Header from "../../../sharedComponents/Header";
 import Titles from "../../../sharedComponents/Titles";
-import DeleteModal from "../../../sharedComponents/DeleteModal";
 import EditModal from "../../../sharedComponents/EditModal";
-import DetailModal from "../../../sharedComponents/DetailModal";
 import LoadingComponent from "../../../sharedComponents/LoadingComponent";
-import styles from "../../styles/Consultar.style";
-import { palette } from "../../../Core/colors";
 
 const AdminConsultarObras = ({ navigation }) => {
   const [obras, setObras] = useState([]);
@@ -46,17 +44,7 @@ const AdminConsultarObras = ({ navigation }) => {
     return (
       <View style={styles.ListItem}>
         <View style={styles.ListItemText}>
-          <Pressable
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "showDetail",
-                item: item,
-              });
-            }}
-          >
-            <ShortInfo item={item} />
-          </Pressable>
+          <ShortInfo item={item} />
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
@@ -71,6 +59,7 @@ const AdminConsultarObras = ({ navigation }) => {
           >
             <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
+
           <Pressable
             style={styles.ListItemAction}
             onPress={() => {
@@ -120,14 +109,8 @@ const AdminConsultarObras = ({ navigation }) => {
           )}
         </View>
       </View>
-      {modalParams?.actionLabel == "Eliminar" && (
-        <DeleteModal modalParams={modalParams} setParams={setModalParams} />
-      )}
       {modalParams?.actionLabel == "Editar" && (
         <EditModal modalParams={modalParams} setParams={setModalParams} />
-      )}
-      {modalParams?.actionLabel == "showDetail" && (
-        <DetailModal modalParams={modalParams} setParams={setModalParams} />
       )}
     </View>
   );
@@ -137,11 +120,11 @@ export default AdminConsultarObras;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
-      <Text>id: {item.id}</Text>
-      <Text>Nombre: {item?.Nombre}</Text>
+    <View style={styles.shortInfo}>
+      <Text style={styles.strongText}>Nombre: {item?.Nombre}</Text>
       <Text>Direccion: {item?.Direccion}</Text>
       <Text>Propietario: {item?.Propietario}</Text>
-    </>
+      <Text>id: {item.id}</Text>
+    </View>
   );
 };

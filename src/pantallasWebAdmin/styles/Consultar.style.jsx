@@ -88,6 +88,13 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     margin: 5,
   },
+  shortInfo: {
+    paddingHorizontal: 5,
+  },
+  strongText: {
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+  },
 });
 
 export default styles;

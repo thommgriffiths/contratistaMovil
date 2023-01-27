@@ -1,19 +1,18 @@
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 
-import Header from "../../../sharedComponents/Header";
-import Botones from "../../../sharedComponents/Botones";
-
-import { getCurrentDateTime } from "../../../Core/util/functions";
-import { getLoggedUser } from "../../../Core/util/globalStore";
 import {
   entities,
   getEmptyConstructor,
   commonAttrs,
 } from "../../../Core/util/entities";
 import { createFSElementAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
-
+import { getCurrentDateTime } from "../../../Core/util/functions";
+import { getLoggedUser } from "../../../Core/util/globalStore";
 import styles from "../../styles/Crear.style";
+
+import Header from "../../../sharedComponents/Header";
+import Botones from "../../../sharedComponents/Botones";
 
 const AdminCrearObra = ({ navigation }) => {
   const [nombre, setNombre] = useState("");
@@ -29,7 +28,6 @@ const AdminCrearObra = ({ navigation }) => {
     nuevaObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
     nuevaObra[commonAttrs.creadoPor] = getLoggedUser().Email;
 
-    console.log(nuevaObra);
     await createFSElementAsync(nuevaObra);
     navigation.navigate("AdminVerObrasScreen");
   };
@@ -73,7 +71,7 @@ const AdminCrearObra = ({ navigation }) => {
       <Botones
         onOkFunction={handleCrearObra}
         onOkText={"Crear obra"}
-        onCancelFunction={() => navigation.navigate("VerObrasScreen")}
+        onCancelFunction={() => navigation.navigate("AdminVerObrasScreen")}
         onCancelText={"Cancelar"}
         style={styles.botonera}
       />
