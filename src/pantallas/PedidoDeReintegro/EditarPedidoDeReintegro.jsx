@@ -36,36 +36,42 @@ const EditarPedidoDeReintegro = ({ currentItem, setNewItem }) => {
 
           {/*Form */}
           <View style={styles.formWrapper}>
-            <ContextoSet
-              action={setContext}
-              initialValues={currentItem}
-              isEdit
-            />
+            <View style={{ zIndex: 10100 }}>
+              <ContextoSet
+                action={setContext}
+                initialValues={currentItem}
+                isEdit
+              />
+            </View>
 
-            <Text style={styles.fieldTitle}>Detalle de pedido</Text>
-            <TextInput
-              placeholder="Detalle del pedido"
-              onChangeText={(text) => {
-                setDescripcion(text);
-              }}
-              defaultValue={currentItem?.Descripcion}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 1080 }}>
+              <Text style={styles.fieldTitle}>Detalle de pedido</Text>
+              <TextInput
+                placeholder="Detalle del pedido"
+                onChangeText={(text) => {
+                  setDescripcion(text);
+                }}
+                defaultValue={currentItem?.Descripcion}
+                style={[styles.input, { zIndex: 9000 }]}
+              />
+            </View>
 
-            <Text style={styles.fieldTitle}>Monto</Text>
-            <TextInput
-              placeholder="Ingrese el monto del reintegro"
-              keyboardType="numeric"
-              onChangeText={(text) => {
-                if (+text || text == "") setMonto(text);
-                else {
-                  setMonto("");
-                  alert("Valor invalido, reingreselo");
-                }
-              }}
-              defaultValue={currentItem?.Monto}
-              style={[styles.input, { zIndex: 9000 }]}
-            />
+            <View style={{ zIndex: 1050 }}>
+              <Text style={styles.fieldTitle}>Monto</Text>
+              <TextInput
+                placeholder="Ingrese el monto del reintegro"
+                keyboardType="numeric"
+                onChangeText={(text) => {
+                  if (+text || text == "") setMonto(text);
+                  else {
+                    setMonto("");
+                    alert("Valor invalido, reingreselo");
+                  }
+                }}
+                defaultValue={currentItem?.Monto}
+                style={[styles.input, { zIndex: 9000 }]}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>
