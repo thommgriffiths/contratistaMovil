@@ -13,6 +13,7 @@ import {
   jornalStates,
   POStates,
   POTypes,
+  PRStates,
 } from "./entities";
 
 //------------------------------------------------------------------------
@@ -289,14 +290,14 @@ export const createQuery = (object) => {
       case commonAttrs.PRState: {
         queryObject["parameter"] = commonAttrs.PRState;
         queryObject["operator"] = "==";
-        queryObject["value"] = object[key];
+        queryObject["value"] = PRStates[object[key]];
         break;
       }
 
       case commonAttrs.POState: {
         queryObject["parameter"] = commonAttrs.POState;
         queryObject["operator"] = "==";
-        queryObject["value"] = object[key];
+        queryObject["value"] = POStates[object[key]];
         break;
       }
 

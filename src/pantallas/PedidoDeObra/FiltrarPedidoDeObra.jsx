@@ -22,7 +22,7 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
     const newQuery = createQuery(queryParams);
 
     setSearchParams(newQuery);
-  }, [context, tipoDePedido]);
+  }, [context, tipoDePedido, estado]);
 
   return (
     <View style={styles.container}>
@@ -50,7 +50,7 @@ const FiltrarPedidoDeObra = ({ setSearchParams }) => {
             </View>
             <View style={{ zIndex: 10050 }}>
               <DropdownSelect
-                action={setTipoDePedido}
+                action={setEstado}
                 category={commonAttrs.POState}
                 placeholder={"Estado del pedido"}
                 props={{ stackOrder: 10000 }}
