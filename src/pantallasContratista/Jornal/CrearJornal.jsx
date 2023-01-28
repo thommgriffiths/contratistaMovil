@@ -21,6 +21,11 @@ const CrearJornal = ({ navigation }) => {
   const [diasHombre, setDiasHombre] = useState("");
 
   const handleCrearJornal = async () => {
+    if (!context.obra || !context.rubro || !context.tarea || !diasHombre) {
+      alert("Debe completar todos los campos");
+      return;
+    }
+
     let nuevoJornal = getEmptyConstructor(entities.jornal);
 
     nuevoJornal[commonAttrs.fechaCreacion] = getCurrentDateTime();

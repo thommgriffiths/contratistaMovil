@@ -2,12 +2,17 @@ import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import {
+  completeElements,
+  createQuery,
+  sortElementsByCommonAttribute,
+  getCurrentDateTime,
+} from "../../Core/util/functions";
+import { commonAttrs, entities, jornalStates } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements, createQuery } from "../../Core/util/functions";
-import { commonAttrs, entities } from "../../Core/util/entities";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import styles from "../styles/Consultar.style";
 import { palette } from "../../Core/colors";
+import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
@@ -17,7 +22,14 @@ import DetailModal from "../../sharedComponents/Modals/DetailModal";
 import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
+const diasEnMilisegundos = 15 * 24 * 60 * 60 * 1000;
+const rangoFechaCreacion = {
+  startDate: getCurrentDateTime() - diasEnMilisegundos,
+  endDate: undefined,
+};
+
 const ConsultarJornales = ({ navigation }) => {
+  const [rawJornales, setRawJornales] = useState([]);
   const [jornales, setJornales] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
@@ -26,16 +38,31 @@ const ConsultarJornales = ({ navigation }) => {
     const loadItems = async () => {
       let query = createQuery({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
+        [commonAttrs.fechaCreacionRango]: rangoFechaCreacion,
       });
 
       const rawElements = await queryFSElements(entities.jornal, query);
       const completedElements = await completeElements(rawElements);
 
-      setJornales(completedElements);
+      setRawJornales(completedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
   }, [loading]);
+
+  useEffect(() => {
+    const filteredElements = rawJornales.filter((element) => {
+      return element[commonAttrs.jornalState] != jornalStates.payed;
+    });
+
+    const sortedElements = sortElementsByCommonAttribute(
+      filteredElements,
+      commonAttrs.fechaCreacion,
+      false
+    );
+
+    setJornales(sortedElements);
+  }, [rawJornales]);
 
   useEffect(() => {
     console.log(modalParams);
@@ -50,6 +77,7 @@ const ConsultarJornales = ({ navigation }) => {
   }, [modalParams]);
 
   const renderJornal = ({ item }) => {
+    let editDisabled = item[commonAttrs.jornalState] != jornalStates.requested;
     return (
       <View style={styles.ListItem}>
         <View style={styles.ListItemText}>
@@ -67,7 +95,13 @@ const ConsultarJornales = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemAction}
+            style={[
+              styles.ListItemAction,
+              {
+                backgroundColor: editDisabled ? palette.neutral : palette.white,
+              },
+            ]}
+            disabled={editDisabled}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -151,7 +185,7 @@ const ConsultarJornales = ({ navigation }) => {
         <FilterModal
           modalParams={modalParams}
           setParams={setModalParams}
-          setElements={setJornales}
+          setElements={setRawJornales}
         />
       )}
     </View>
