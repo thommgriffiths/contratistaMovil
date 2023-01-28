@@ -15,8 +15,8 @@ import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import DetailModal from "../../sharedComponents/DetailModal";
-import FilterModal from "../../sharedComponents/FilterModal";
+import DetailModal from "../../sharedComponents/Modals/DetailModal";
+import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import POActionsModal from "./POActionsModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 

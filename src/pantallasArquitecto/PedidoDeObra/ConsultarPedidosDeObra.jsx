@@ -15,10 +15,10 @@ import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import DeleteModal from "../../sharedComponents/DeleteModal";
-import EditModal from "../../sharedComponents/EditModal";
-import DetailModal from "../../sharedComponents/DetailModal";
-import FilterModal from "../../sharedComponents/FilterModal";
+import DeleteModal from "../../sharedComponents/Modals/DeleteModal";
+import EditModal from "../../sharedComponents/Modals/EditModal";
+import DetailModal from "../../sharedComponents/Modals/DetailModal";
+import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
 const ArqConsultarPedidosDeObra = ({ navigation }) => {

@@ -10,7 +10,7 @@ import { palette } from "../../../Core/colors";
 
 import Header from "../../../sharedComponents/Header";
 import Titles from "../../../sharedComponents/Titles";
-import EditModal from "../../../sharedComponents/EditModal";
+import EditModal from "../../../sharedComponents/Modals/EditModal";
 import LoadingComponent from "../../../sharedComponents/LoadingComponent";
 
 const AdminConsultarObras = ({ navigation }) => {

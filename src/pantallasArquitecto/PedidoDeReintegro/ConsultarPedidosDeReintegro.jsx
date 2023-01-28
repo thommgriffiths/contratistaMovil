@@ -16,9 +16,9 @@ import styles from "../styles/Consultar.style";
 
 import Header from "../../sharedComponents/Header";
 import Titles from "../../sharedComponents/Titles";
-import DeleteModal from "../../sharedComponents/DeleteModal";
-import EditModal from "../../sharedComponents/EditModal";
-import DetailModal from "../../sharedComponents/DetailModal";
+import DeleteModal from "../../sharedComponents/Modals/DeleteModal";
+import EditModal from "../../sharedComponents/Modals/EditModal";
+import DetailModal from "../../sharedComponents/Modals/DetailModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
 const ArqConsultarPedidosDeReintegro = ({ navigation }) => {

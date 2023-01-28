@@ -1,9 +1,35 @@
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
-import { deleteElement } from "../Core/util/functions";
+import { useEffect } from "react";
 
-const DeleteModal = ({ modalParams, setParams }) => {
-  const onDeleteSuccess = () => {
-    setParams({ visible: false, deletedItem: modalParams.item.id });
+import DetallePedidoDeObra from "../../pantallas/PedidoDeObra/DetallePedidoDeObra";
+import DetalleObra from "../../pantallas/Obra/DetalleObra";
+import DetalleRubro from "../../pantallas/Rubro/DetalleRubro";
+import DetalleJornal from "../../pantallas/Jornal/DetalleJornal";
+import DetallePedidoDeReintegro from "../../pantallas/PedidoDeReintegro/DetallePedidoDeReintegro";
+import { entities } from "../../Core/util/entities";
+
+const DetailModal = ({ modalParams, setParams }) => {
+  useEffect(() => {
+    console.log(modalParams);
+  }, []);
+
+  const showDetails = (type) => {
+    switch (type) {
+      case entities.pedidoDeObra:
+        return <DetallePedidoDeObra item={modalParams.item} />;
+      case entities.pReintegro:
+        return <DetallePedidoDeReintegro item={modalParams.item} />;
+      case entities.jornal:
+        return <DetalleJornal item={modalParams.item} />;
+      case entities.obra:
+        return <DetalleObra item={modalParams.item} />;
+      case entities.rubro:
+        return <DetalleRubro item={modalParams.item} />;
+      default:
+        console.log("No se encontro la categoria" + type);
+        setParams({ ...modalParams, visible: false });
+        return false;
+    }
   };
 
   return (
@@ -17,25 +43,16 @@ const DeleteModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          <Text style={style.modalText}>
-            Esta seguro que desea {modalParams.actionLabel} este elemento?
-          </Text>
+          {modalParams.item.type && showDetails(modalParams.item.type)}
+
           <View style={style.buttonContainer}>
-            <Pressable
-              style={[style.button, style.buttonDelete]}
-              onPress={() => {
-                deleteElement(modalParams.item, onDeleteSuccess);
-              }}
-            >
-              <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
-            </Pressable>
             <Pressable
               style={[style.button, style.buttonClose]}
               onPress={() => {
                 setParams({ ...modalParams, visible: false });
               }}
             >
-              <Text style={style.textStyle}>Cancelar</Text>
+              <Text style={style.textStyle}>Volver</Text>
             </Pressable>
           </View>
         </View>
@@ -92,4 +109,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default DeleteModal;
+export default DetailModal;

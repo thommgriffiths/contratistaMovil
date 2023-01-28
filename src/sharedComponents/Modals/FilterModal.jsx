@@ -4,15 +4,15 @@ import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 import {
   completeElements,
   createQuery as queryBuilder,
-} from "../Core/util/functions";
-import { commonAttrs, entities } from "../Core/util/entities";
-import { queryFSElements } from "../Core/Firebase/FirebaseFirestoreManager";
-import { getLoggedUser } from "../Core/util/globalStore";
-import { palette } from "../Core/colors";
+} from "../../Core/util/functions";
+import { commonAttrs, entities } from "../../Core/util/entities";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
+import { getLoggedUser } from "../../Core/util/globalStore";
+import { palette } from "../../Core/colors";
 
-import LoadingComponent from "./LoadingComponent";
-import FiltrarJornales from "../pantallas/Jornal/FiltrarJornal";
-import FiltrarPedidoDeObra from "../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
+import LoadingComponent from "../LoadingComponent";
+import FiltrarJornales from "../../pantallas/Jornal/FiltrarJornal";
+import FiltrarPedidoDeObra from "../../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
   const [searchParams, setSearchParams] = useState([]);

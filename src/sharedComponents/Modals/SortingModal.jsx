@@ -6,9 +6,9 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import { palette } from "../Core/colors";
+import { palette } from "../../Core/colors";
 import { AntDesign } from "@expo/vector-icons";
-import { commonAttrs, entities } from "../Core/util/entities";
+import { commonAttrs, entities } from "../../Core/util/entities";
 
 const SortingModal = ({
   modalParams,
