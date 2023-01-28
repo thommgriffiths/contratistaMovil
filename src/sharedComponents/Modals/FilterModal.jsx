@@ -11,8 +11,8 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import { palette } from "../../Core/colors";
 
 import LoadingComponent from "../LoadingComponent";
-import FiltrarJornales from "../../pantallas/Jornal/FiltrarJornal";
-import FiltrarPedidoDeObra from "../../pantallas/PedidoDeObra/FiltrarPedidoDeObra";
+import FiltrarJornales from "../../sharedScreens/Jornal/FiltrarJornal";
+import FiltrarPedidoDeObra from "../../sharedScreens/PedidoDeObra/FiltrarPedidoDeObra";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
   const [searchParams, setSearchParams] = useState([]);

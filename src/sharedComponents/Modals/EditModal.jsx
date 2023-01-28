@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 
-import EditarPedidoDeObra from "../../pantallas/PedidoDeObra/EditarPedidoDeObra";
-import EditarJornal from "../../pantallas/Jornal/EditarJornal";
-import EditarPedidoDeReintegro from "../../pantallas/PedidoDeReintegro/EditarPedidoDeReintegro";
-import EditarObra from "../../pantallas/Obra/EditarObra";
-import EditarRubro from "../../pantallas/Rubro/EditarRubro";
+import EditarPedidoDeObra from "../../sharedScreens/PedidoDeObra/EditarPedidoDeObra";
+import EditarJornal from "../../sharedScreens/Jornal/EditarJornal";
+import EditarPedidoDeReintegro from "../../sharedScreens/PedidoDeReintegro/EditarPedidoDeReintegro";
+import EditarObra from "../../sharedScreens/Obra/EditarObra";
+import EditarRubro from "../../sharedScreens/Rubro/EditarRubro";
 import { updateElement } from "../../Core/util/functions";
 import { entities } from "../../Core/util/entities";
 

@@ -4,8 +4,8 @@ import { Provider as PaperProvider } from "react-native-paper";
 //Docs de react native paper: https://callstack.github.io/react-native-paper/4.0/index.html
 import { registerTranslation, enGB } from "react-native-paper-dates";
 
-import LoginScreen from "./src/pantallas/LoginScreen";
-import HomeScreen from "./src/pantallas/HomeScreen";
+import LoginScreen from "./src/sharedScreens/LoginScreen";
+import HomeScreen from "./src/sharedScreens/HomeScreen";
 
 //Pantallas administrador
 import AdminHome from "./src/pantallasWebAdmin/HomeAdmin";

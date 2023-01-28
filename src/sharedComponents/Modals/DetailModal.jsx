@@ -1,11 +1,11 @@
 import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
 import { useEffect } from "react";
 
-import DetallePedidoDeObra from "../../pantallas/PedidoDeObra/DetallePedidoDeObra";
-import DetalleObra from "../../pantallas/Obra/DetalleObra";
-import DetalleRubro from "../../pantallas/Rubro/DetalleRubro";
-import DetalleJornal from "../../pantallas/Jornal/DetalleJornal";
-import DetallePedidoDeReintegro from "../../pantallas/PedidoDeReintegro/DetallePedidoDeReintegro";
+import DetallePedidoDeObra from "../../sharedScreens/PedidoDeObra/DetallePedidoDeObra";
+import DetalleObra from "../../sharedScreens/Obra/DetalleObra";
+import DetalleRubro from "../../sharedScreens/Rubro/DetalleRubro";
+import DetalleJornal from "../../sharedScreens/Jornal/DetalleJornal";
+import DetallePedidoDeReintegro from "../../sharedScreens/PedidoDeReintegro/DetallePedidoDeReintegro";
 import { entities } from "../../Core/util/entities";
 
 const DetailModal = ({ modalParams, setParams }) => {
