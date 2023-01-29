@@ -7,6 +7,7 @@ import {
   createQuery,
   getLastNDaysRange,
   sortElementsByCommonAttribute,
+  updateElement,
 } from "../../Core/util/functions";
 import { commonAttrs, entities, jornalStates } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
@@ -88,36 +89,56 @@ const ConsultarJornales = ({ navigation }) => {
           </Pressable>
         </View>
         <View style={styles.ListItemActions}>
-          <Pressable
-            style={[
-              styles.ListItemAction,
-              {
-                backgroundColor: editDisabled ? palette.neutral : palette.white,
-              },
-            ]}
-            disabled={editDisabled}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Editar",
-                item: item,
-              });
-            }}
-          >
-            <MaterialIcons name="edit" size={24} color={palette.B1} />
-          </Pressable>
-          <Pressable
-            style={styles.ListItemAction}
-            onPress={() => {
-              setModalParams({
-                visible: true,
-                actionLabel: "Eliminar",
-                item: item,
-              });
-            }}
-          >
-            <MaterialIcons name="delete" size={24} color="red" />
-          </Pressable>
+          {item[commonAttrs.jornalState] == jornalStates.validated ? (
+            <Pressable
+              style={styles.ListItemRecieved}
+              onPress={() => {
+                let uItem = {
+                  ...item,
+                  [commonAttrs.jornalState]: jornalStates.payed,
+                };
+                updateElement(uItem, () => setLoading(true));
+              }}
+            >
+              <MaterialIcons name="money-off" size={24} color="green" />
+              <Text>Recibido</Text>
+            </Pressable>
+          ) : (
+            <>
+              <Pressable
+                style={[
+                  styles.ListItemAction,
+                  {
+                    backgroundColor: editDisabled
+                      ? palette.neutral
+                      : palette.white,
+                  },
+                ]}
+                disabled={editDisabled}
+                onPress={() => {
+                  setModalParams({
+                    visible: true,
+                    actionLabel: "Editar",
+                    item: item,
+                  });
+                }}
+              >
+                <MaterialIcons name="edit" size={24} color={palette.B1} />
+              </Pressable>
+              <Pressable
+                style={styles.ListItemAction}
+                onPress={() => {
+                  setModalParams({
+                    visible: true,
+                    actionLabel: "Eliminar",
+                    item: item,
+                  });
+                }}
+              >
+                <MaterialIcons name="delete" size={24} color="red" />
+              </Pressable>
+            </>
+          )}
         </View>
       </View>
     );

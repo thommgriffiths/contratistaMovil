@@ -79,6 +79,15 @@ const styles = StyleSheet.create({
     backgroundColor: palette.white,
     borderRadius: 40,
   },
+  ListItemRecieved: {
+    flexDirection: "row",
+    margin: 5,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: palette.white,
+    borderRadius: 40,
+  },
   ListItemEdit: {
     backgroundColor: palette.B1,
     width: 40,
