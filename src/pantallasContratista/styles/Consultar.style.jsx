@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
   },
 
   ListItemText: { flex: 1 },
+  montoLabel: {
+    paddingHorizontal: 10,
+  },
   ShortInfo: {
     paddingHorizontal: 10,
   },

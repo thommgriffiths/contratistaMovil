@@ -22,6 +22,17 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
   const [descripcion, setDescripcion] = useState("");
 
   const handleCrearPedidoReintegro = async () => {
+    if (
+      !context.obra ||
+      !context.rubro ||
+      !context.tarea ||
+      monto != "" ||
+      descripcion != ""
+    ) {
+      alert("Complete todos los campos");
+      return;
+    }
+
     let newPedidoReintegro = getEmptyConstructor(entities.pReintegro);
 
     newPedidoReintegro[commonAttrs.fechaCreacion] = getCurrentDateTime();
@@ -73,7 +84,7 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
                 if (+text || text == "") setMonto(text);
                 else {
                   setMonto("");
-                  alert("Valor invalido, reingreselo");
+                  alert("Solo puede ingresar numeros enteros");
                 }
               }}
               style={styles.input}

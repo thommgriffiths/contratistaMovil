@@ -64,7 +64,7 @@ const CrearJornal = ({ navigation }) => {
                 if (+text || text == "") setDiasHombre(text);
                 else {
                   setDiasHombre("");
-                  alert("Valor invalido, reingreselo");
+                  alert("Solo puede ingresar numeros enteros");
                 }
               }}
               style={styles.input}

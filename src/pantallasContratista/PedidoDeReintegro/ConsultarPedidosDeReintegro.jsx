@@ -8,7 +8,7 @@ import {
   createQuery,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
-import { entities, commonAttrs } from "../../Core/util/entities";
+import { entities, commonAttrs, PRStates } from "../../Core/util/entities";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { palette } from "../../Core/colors";
@@ -35,8 +35,12 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
       const rawElements = await queryFSElements(entities.pReintegro, query);
       const completedElements = await completeElements(rawElements);
 
+      const filteredElements = completedElements.filter((element) => {
+        return element[commonAttrs.PRState] != PRStates.reembolsado;
+      });
+
       const sortedElements = sortElementsByCommonAttribute(
-        completedElements,
+        filteredElements,
         commonAttrs.fechaCreacion,
         false
       );
@@ -60,6 +64,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
   }, [modalParams]);
 
   const renderPedidoReintegro = ({ item }) => {
+    let editDisabled = item[commonAttrs.PRState] != PRStates.pedido;
     return (
       <View style={styles.ListItem}>
         <View style={styles.ListItemText}>
@@ -77,7 +82,13 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemAction}
+            style={[
+              styles.ListItemAction,
+              {
+                backgroundColor: editDisabled ? palette.neutral : palette.white,
+              },
+            ]}
+            disabled={editDisabled}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -124,7 +135,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
 
         <View style={styles.ListItem}>
-          <View style={styles.ListItemText}>
+          <View style={styles.montoLabel}>
             <Text>Monto total: ${MontoTotal(pedidosReintegro)}</Text>
           </View>
         </View>
