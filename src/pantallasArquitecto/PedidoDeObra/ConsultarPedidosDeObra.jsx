@@ -7,8 +7,9 @@ import {
   fechaComun,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
+import { commonAttrs, entities, POStates } from "../../Core/util/entities";
 import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { commonAttrs, entities } from "../../Core/util/entities";
+import { getLoggedUser } from "../../Core/util/globalStore";
 import { label } from "../../Core/util/labels";
 import { palette } from "../../Core/colors";
 import styles from "../styles/Consultar.style";
@@ -22,6 +23,7 @@ import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
 const ArqConsultarPedidosDeObra = ({ navigation }) => {
+  const [pedidosObraRaw, setPedidosObraRaw] = useState([]);
   const [pedidosObra, setPedidosObra] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
@@ -30,17 +32,26 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
     const loadItems = async () => {
       const rawElements = await getFSCollectionAsync(entities.pedidoDeObra);
       const completedElements = await completeElements(rawElements);
-      const sortedElements = sortElementsByCommonAttribute(
-        completedElements,
-        commonAttrs.fechaCreacion,
-        false
-      );
 
-      setPedidosObra(sortedElements);
+      setPedidosObraRaw(completedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
   }, [loading]);
+
+  useEffect(() => {
+    const filteredElements = pedidosObraRaw.filter((item) => {
+      return item.POState != POStates.resuelto;
+    });
+
+    const sortedElements = sortElementsByCommonAttribute(
+      filteredElements,
+      commonAttrs.fechaCreacion,
+      false
+    );
+
+    setPedidosObra(sortedElements);
+  }, [pedidosObraRaw]);
 
   useEffect(() => {
     console.log(modalParams);
@@ -55,6 +66,12 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
   }, [modalParams]);
 
   const renderPedidoObra = ({ item }) => {
+    let editDisabled =
+      !(
+        item[commonAttrs.POState] == POStates.pedido ||
+        item[commonAttrs.POState] == POStates.demorado
+      ) || item[commonAttrs.creadoPor] != getLoggedUser().Email;
+
     return (
       <View style={styles.ListItem}>
         <View style={styles.ListItemText}>
@@ -72,7 +89,13 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemAction}
+            style={[
+              styles.ListItemAction,
+              {
+                backgroundColor: editDisabled ? palette.neutral : palette.white,
+              },
+            ]}
+            disabled={editDisabled}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -84,7 +107,13 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
             <MaterialIcons name="edit" size={24} color={palette.B1} />
           </Pressable>
           <Pressable
-            style={styles.ListItemAction}
+            style={[
+              styles.ListItemAction,
+              {
+                backgroundColor: editDisabled ? palette.neutral : palette.white,
+              },
+            ]}
+            disabled={editDisabled}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -153,7 +182,7 @@ const ArqConsultarPedidosDeObra = ({ navigation }) => {
         <FilterModal
           modalParams={modalParams}
           setParams={setModalParams}
-          setElements={setPedidosObra}
+          setElements={setPedidosObraRaw}
         />
       )}
     </View>

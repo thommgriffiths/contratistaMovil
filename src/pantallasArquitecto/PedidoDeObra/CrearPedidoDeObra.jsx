@@ -23,6 +23,15 @@ const ArqCrearPedidoDeObra = ({ navigation }) => {
   const [descripcion, setDescripcion] = useState("");
 
   const handleCrearPedidoObra = async () => {
+    if (
+      !context.obra ||
+      !context.rubro ||
+      !context.tarea ||
+      !tipoDePedido ||
+      !descripcion
+    )
+      return alert("Complete todos los campos");
+
     let nuevoPedidoDeObra = getEmptyConstructor(entities.pedidoDeObra);
 
     nuevoPedidoDeObra[commonAttrs.fechaCreacion] = getCurrentDateTime();
