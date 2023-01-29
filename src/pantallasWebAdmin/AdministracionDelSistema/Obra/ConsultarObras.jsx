@@ -2,9 +2,12 @@ import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
-import { updateElement } from "../../../Core/util/functions";
+import {
+  updateElement,
+  sortElementsByCommonAttribute,
+} from "../../../Core/util/functions";
 import { commonAttrs, entities } from "../../../Core/util/entities";
+import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
 import styles from "../../styles/Consultar.style";
 import { palette } from "../../../Core/colors";
 
@@ -21,8 +24,14 @@ const AdminConsultarObras = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       const elements = await getFSCollectionAsync(entities.obra);
-      setObras(elements);
-      console.log(elements);
+
+      const sortedElements = sortElementsByCommonAttribute(
+        elements,
+        commonAttrs.nombre,
+        true
+      );
+
+      setObras(sortedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -30,10 +39,6 @@ const AdminConsultarObras = ({ navigation }) => {
 
   useEffect(() => {
     console.log(modalParams);
-    if (modalParams["deletedItem"] != undefined) {
-      setModalParams({ visible: false });
-      setLoading(true);
-    }
     if (modalParams["editedItem"] != undefined) {
       setModalParams({ visible: false });
       setLoading(true);
@@ -83,7 +88,7 @@ const AdminConsultarObras = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backTo="AdminHomeScreen" />
+      <Header backTo="MenuAdministracionScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Obras" />

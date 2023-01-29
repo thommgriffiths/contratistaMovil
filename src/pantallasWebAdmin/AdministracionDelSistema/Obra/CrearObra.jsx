@@ -20,6 +20,9 @@ const AdminCrearObra = ({ navigation }) => {
   const [propietario, setPropietario] = useState("");
 
   const handleCrearObra = async () => {
+    if (nombre === "" || direccion === "" || propietario === "")
+      return alert("Todos los campos son obligatorios");
+
     let nuevaObra = getEmptyConstructor(entities.obra);
 
     nuevaObra[commonAttrs.nombre] = nombre;

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
+import {
+  updateElement,
+  sortElementsByCommonAttribute,
+} from "../../../Core/util/functions";
 import { entities, commonAttrs } from "../../../Core/util/entities";
-import { updateElement } from "../../../Core/util/functions";
+import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
 import { palette } from "../../../Core/colors";
 import styles from "../../styles/Consultar.style";
 
@@ -21,7 +24,12 @@ const AdminConsultarRubros = ({ navigation }) => {
   useEffect(() => {
     const loadItems = async () => {
       const elements = await getFSCollectionAsync(entities.rubro);
-      setRubros(elements);
+      const sortedElements = sortElementsByCommonAttribute(
+        elements,
+        commonAttrs.nombre,
+        true
+      );
+      setRubros(sortedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
@@ -77,7 +85,7 @@ const AdminConsultarRubros = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header backTo="AdminHomeScreen" />
+      <Header backTo="MenuAdministracionScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Rubros" />

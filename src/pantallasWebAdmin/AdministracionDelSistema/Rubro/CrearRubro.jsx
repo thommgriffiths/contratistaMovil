@@ -18,6 +18,7 @@ const AdminCrearRubro = ({ navigation }) => {
   const [nombre, setNombre] = useState("");
 
   const handleCrearRubro = async () => {
+    if (nombre === "") return alert("Complete el nombre del rubro");
     let newRubro = getEmptyConstructor(entities.rubro);
 
     newRubro[commonAttrs.nombre] = nombre;

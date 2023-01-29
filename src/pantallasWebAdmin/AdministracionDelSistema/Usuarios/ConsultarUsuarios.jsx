@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 
 import { getFSCollectionAsync } from "../../../Core/Firebase/FirebaseFirestoreManager";
 import { entities, commonAttrs, userTypes } from "../../../Core/util/entities";
-import { filterByAttributes } from "../../../Core/util/functions";
+import {
+  filterByAttributes,
+  sortElementsByCommonAttribute,
+} from "../../../Core/util/functions";
 
 import Header from "../../../sharedComponents/Header";
 import Titles from "../../../sharedComponents/Titles";
@@ -28,10 +31,15 @@ const AdminConsultarUsuarios = () => {
   useEffect(() => {
     const loadItems = async () => {
       const elements = await getFSCollectionAsync(entities.user);
-      setUsers(elements);
+      const sortedElements = sortElementsByCommonAttribute(
+        elements,
+        commonAttrs.apellido,
+        true
+      );
+      setUsers(sortedElements);
 
       let filteredUsrs = filterByAttributes(
-        elements,
+        sortedElements,
         commonAttrs.userType,
         filter
       );
@@ -48,7 +56,7 @@ const AdminConsultarUsuarios = () => {
 
   return (
     <View style={styles.container}>
-      <Header backTo="AdminHomeScreen" />
+      <Header backTo="MenuAdministracionScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Gestion de usuarios" />

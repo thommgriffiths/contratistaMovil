@@ -32,7 +32,7 @@ const TypesFilter = ({ action, filter }) => {
           onPress={() => addOrPop(entities.pReintegro)}
           selected={filter.includes(entities.pReintegro)}
         >
-          Pedidos de Reembolso
+          Reembolsos
         </Chip>
       </View>
       <View style={localStyles.chipContainer}>
