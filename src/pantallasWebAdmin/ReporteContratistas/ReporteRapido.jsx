@@ -4,10 +4,11 @@ import { Text, View, FlatList, Pressable, StyleSheet } from "react-native";
 import {
   completeElements,
   getCurrentWeekDates,
+  getLastNDaysRange,
   createQuery,
   objectToArray,
 } from "../../Core/util/functions";
-import { commonAttrs, entities } from "../../Core/util/entities";
+import { commonAttrs, entities, jornalStates } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { palette } from "../../Core/colors";
 import styles from "../styles/Consultar.style";
@@ -31,7 +32,8 @@ const AdminReporteRapido = () => {
   useEffect(() => {
     const loadItems = async () => {
       let queryObject = {
-        [commonAttrs.fechaCreacionRango]: getCurrentWeekDates(),
+        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(15),
+        [commonAttrs.jornalState]: jornalStates.validated,
       };
       let query = createQuery(queryObject);
 
