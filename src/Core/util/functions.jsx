@@ -50,6 +50,14 @@ export const parseDate = (date) => {
   return `${year}/${month + 1}/${day}`;
 };
 
+export const getLastNDaysRange = (n) => {
+  const today = new Date().getTime();
+  const lastNDays = today - n * 24 * 60 * 60 * 1000;
+  return {
+    startDate: lastNDays,
+    endDate: undefined,
+  };
+};
 //------------------------------------------------------------------------
 //Firestore CRUD - Delete
 export const deleteElement = (item, onSuccess) => {

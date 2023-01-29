@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { getFSCollectionAsync } from "../../Core/Firebase/FirebaseFirestoreManager";
-import { completeElements } from "../../Core/util/functions";
-import { commonAttrs, entities } from "../../Core/util/entities";
+import {
+  completeElements,
+  getLastNDaysRange,
+  createQuery,
+  sortElementsByCommonAttribute,
+} from "../../Core/util/functions";
+import { commonAttrs, entities, jornalStates } from "../../Core/util/entities";
+import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import styles from "../styles/Consultar.style";
 
 import ValidarJornal from "./ValidarJornales";
@@ -15,27 +20,44 @@ import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
 const ArqValidarJornales = () => {
+  const [rawJornales, setRawJornales] = useState([]);
   const [jornales, setJornales] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalParams, setModalParams] = useState({ visible: false, item: {} });
 
   useEffect(() => {
     const loadItems = async () => {
-      const rawElements = await getFSCollectionAsync(entities.jornal);
+      let query = createQuery({
+        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(15),
+      });
+
+      console.log("query", query);
+
+      const rawElements = await queryFSElements(entities.jornal, query);
       const completedElements = await completeElements(rawElements);
 
-      setJornales(completedElements);
+      setRawJornales(completedElements);
       setLoading(false);
     };
     loading ? loadItems() : {};
   }, [loading]);
 
   useEffect(() => {
+    const filteredElements = rawJornales.filter((element) => {
+      return element[commonAttrs.jornalState] != jornalStates.payed;
+    });
+
+    const sortedElements = sortElementsByCommonAttribute(
+      filteredElements,
+      commonAttrs.fechaCreacion,
+      false
+    );
+
+    setJornales(sortedElements);
+  }, [rawJornales]);
+
+  useEffect(() => {
     console.log(modalParams);
-    if (modalParams["deletedItem"] != undefined) {
-      setModalParams({ visible: false });
-      setLoading(true);
-    }
   }, [modalParams]);
 
   const renderJornal = ({ item }) => {
@@ -100,7 +122,7 @@ const ArqValidarJornales = () => {
         <FilterModal
           modalParams={modalParams}
           setParams={setModalParams}
-          setElements={setJornales}
+          setElements={setRawJornales}
         />
       )}
     </View>

@@ -5,8 +5,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import {
   completeElements,
   createQuery,
+  getLastNDaysRange,
   sortElementsByCommonAttribute,
-  getCurrentDateTime,
 } from "../../Core/util/functions";
 import { commonAttrs, entities, jornalStates } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
@@ -22,12 +22,6 @@ import DetailModal from "../../sharedComponents/Modals/DetailModal";
 import FilterModal from "../../sharedComponents/Modals/FilterModal";
 import LoadingComponent from "../../sharedComponents/LoadingComponent";
 
-const diasEnMilisegundos = 15 * 24 * 60 * 60 * 1000;
-const rangoFechaCreacion = {
-  startDate: getCurrentDateTime() - diasEnMilisegundos,
-  endDate: undefined,
-};
-
 const ConsultarJornales = ({ navigation }) => {
   const [rawJornales, setRawJornales] = useState([]);
   const [jornales, setJornales] = useState([]);
@@ -38,7 +32,7 @@ const ConsultarJornales = ({ navigation }) => {
     const loadItems = async () => {
       let query = createQuery({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
-        [commonAttrs.fechaCreacionRango]: rangoFechaCreacion,
+        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(15),
       });
 
       const rawElements = await queryFSElements(entities.jornal, query);
