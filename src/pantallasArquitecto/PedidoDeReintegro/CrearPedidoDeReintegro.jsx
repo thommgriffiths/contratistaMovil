@@ -22,10 +22,21 @@ const ArqCrearPedidoDeReintegro = ({ navigation }) => {
   const [descripcion, setDescripcion] = useState("");
 
   const handleCrearPedidoReintegro = async () => {
+    if (
+      !context.obra ||
+      !context.rubro ||
+      !context.tarea ||
+      monto == "" ||
+      descripcion == ""
+    ) {
+      alert("Complete todos los campos");
+      return;
+    }
+
     let newPedidoReintegro = getEmptyConstructor(entities.pReintegro);
 
     newPedidoReintegro[commonAttrs.fechaCreacion] = getCurrentDateTime();
-    newPedidoReintegro[commonAttrs.status] = PRStates.pedido;
+    newPedidoReintegro[commonAttrs.PRState] = PRStates.pedido;
     newPedidoReintegro[commonAttrs.creadoPor] = getLoggedUser().Email;
     newPedidoReintegro[commonAttrs.descripcion] = descripcion;
     newPedidoReintegro[commonAttrs.monto] = monto;
@@ -73,7 +84,7 @@ const ArqCrearPedidoDeReintegro = ({ navigation }) => {
                 if (+text || text == "") setMonto(text);
                 else {
                   setMonto("");
-                  alert("Valor invalido, reingreselo");
+                  alert("Solo puede ingresar numeros enteros");
                 }
               }}
               style={styles.input}

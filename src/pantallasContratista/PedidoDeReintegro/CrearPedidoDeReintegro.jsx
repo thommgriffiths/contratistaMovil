@@ -26,8 +26,8 @@ const CrearPedidoDeReintegro = ({ navigation }) => {
       !context.obra ||
       !context.rubro ||
       !context.tarea ||
-      monto != "" ||
-      descripcion != ""
+      monto == "" ||
+      descripcion == ""
     ) {
       alert("Complete todos los campos");
       return;

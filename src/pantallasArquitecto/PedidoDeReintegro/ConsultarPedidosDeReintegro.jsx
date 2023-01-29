@@ -1,5 +1,5 @@
-import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Text, View, FlatList, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import {
@@ -8,9 +8,9 @@ import {
   createQuery,
   sortElementsByCommonAttribute,
 } from "../../Core/util/functions";
+import { commonAttrs, entities, PRStates } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { getLoggedUser } from "../../Core/util/globalStore";
-import { commonAttrs, entities } from "../../Core/util/entities";
 import { palette } from "../../Core/colors";
 import styles from "../styles/Consultar.style";
 
@@ -34,10 +34,13 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
 
       const rawElements = await queryFSElements(entities.pReintegro, query);
       const completedElements = await completeElements(rawElements);
-      console.log(completedElements);
+
+      const filteredElements = completedElements.filter((element) => {
+        return element[commonAttrs.PRState] != PRStates.reembolsado;
+      });
 
       const sortedElements = sortElementsByCommonAttribute(
-        completedElements,
+        filteredElements,
         commonAttrs.fechaCreacion,
         false
       );
@@ -61,6 +64,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
   }, [modalParams]);
 
   const renderPedidoReintegro = ({ item }) => {
+    let editDisabled = item[commonAttrs.PRState] != PRStates.pedido;
     return (
       <View style={styles.ListItem}>
         <View style={styles.ListItemText}>
@@ -78,7 +82,13 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
         <View style={styles.ListItemActions}>
           <Pressable
-            style={styles.ListItemAction}
+            style={[
+              styles.ListItemAction,
+              {
+                backgroundColor: editDisabled ? palette.neutral : palette.white,
+              },
+            ]}
+            disabled={editDisabled}
             onPress={() => {
               setModalParams({
                 visible: true,
@@ -111,7 +121,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
       <Header backTo="ArqHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
-          <Titles titleText="Pedidos de Reintegro" />
+          <Titles titleText="Reembolsos" />
           <View style={styles.actions}>
             <Pressable
               style={styles.actionsAdd}
@@ -125,7 +135,7 @@ const ArqConsultarPedidosDeReintegro = ({ navigation }) => {
         </View>
 
         <View style={styles.ListItem}>
-          <View style={styles.ListItemText}>
+          <View style={styles.montoLabel}>
             <Text style={{ fontWeight: "bold" }}>
               Monto total: ${MontoTotal(pedidosReintegro)}
             </Text>
@@ -161,16 +171,17 @@ export default ArqConsultarPedidosDeReintegro;
 
 const ShortInfo = ({ item }) => {
   return (
-    <>
+    <View style={styles.ShortInfo}>
       <Text>Título: {item.Descripcion}</Text>
       <Text>Obra: {item.obra?.Nombre}</Text>
       <Text>Rubro: {item.rubro?.Nombre}</Text>
+
       <Text style={{ fontWeight: "bold" }}>
         Monto: ${item[commonAttrs.monto]}
       </Text>
       <Text style={{ fontWeight: "bold" }}>
         Estado: {item[commonAttrs.PRState]}
       </Text>
-    </>
+    </View>
   );
 };
