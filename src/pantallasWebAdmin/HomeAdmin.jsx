@@ -23,17 +23,17 @@ const AdminHome = () => {
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
           <Pressable
-            onPress={() => navigation.navigate("AdminMenuTareasScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Tareas</Text>
-          </Pressable>
-
-          <Pressable
             onPress={() => navigation.navigate("AdminReporteRapidoScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Reporte Rapido Contratistas</Text>
+          </Pressable>
+
+          <Pressable
+            onPress={() => navigation.navigate("AdminMenuTareasScreen")}
+            style={styles.menuItem}
+          >
+            <Text style={styles.menuItemText}>Gestionar Pedidos</Text>
           </Pressable>
 
           <Pressable

@@ -102,7 +102,7 @@ const AdminPedidosDeReintegro = () => {
 
   return (
     <View style={styles.container}>
-      <Header backTo="AdminHomeScreen" />
+      <Header backTo="AdminMenuTareasScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
           <Titles titleText="Pedidos de Reintegro" />

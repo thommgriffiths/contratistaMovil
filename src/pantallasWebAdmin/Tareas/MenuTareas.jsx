@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../sharedComponents/Header";
@@ -22,34 +16,27 @@ const AdminMenuTareas = () => {
       >
         {/*titulos*/}
         <View style={styles.titlesWrapper}>
-          <Text style={styles.titlesSubtitle}>Contratista</Text>
-          <Text style={styles.titlesTitle}>Menu</Text>
+          <Text style={styles.titlesSubtitle}>Administrador</Text>
+          <Text style={styles.titlesTitle}>Gestion Pedidos</Text>
         </View>
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("AdminPedidosDeReintegroScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Gestion Reembolsos</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() =>
               navigation.navigate("AdminPedidosDeObraYMaterialesScreen")
             }
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Gestion Pedidos de Obra</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AdminTodasTareasScreen")}
-            style={styles.menuItem}
-          >
-            <Text style={styles.menuItemText}>Lista Historica</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </View>
