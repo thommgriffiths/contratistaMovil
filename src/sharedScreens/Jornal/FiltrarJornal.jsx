@@ -6,8 +6,8 @@ import { commonAttrs, jornalStates } from "../../Core/util/entities";
 import styles from "../styles/Editar.style";
 
 import ContextoSet from "../../sharedComponents/ContextoSet";
-import { RangePicker } from "../../sharedComponents/dateComponents/rangePicker";
 import DropdownSelect from "../../sharedComponents/DropdownSelect";
+import RangePicker from "../../sharedComponents/dateComponents/RangePicker";
 
 const FiltrarJornales = ({ setSearchParams }) => {
   const [context, setContext] = useState(null);

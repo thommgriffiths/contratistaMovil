@@ -4,7 +4,7 @@ import { DatePickerModal } from "react-native-paper-dates";
 import { parseDate } from "../../Core/util/functions";
 import { palette } from "../../Core/colors";
 
-export const RangePicker = ({ AddRange = () => {} }) => {
+const RangePicker = ({ AddRange = () => {} }) => {
   const [range, setRange] = useState({
     startDate: undefined,
     endDate: undefined,
@@ -71,6 +71,8 @@ export const RangePicker = ({ AddRange = () => {} }) => {
     </>
   );
 };
+
+export default RangePicker;
 
 const styles = StyleSheet.create({
   input: {
