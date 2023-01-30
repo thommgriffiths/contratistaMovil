@@ -1,12 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../sharedComponents/Header";
 
-const AdminMenuTareas = () => {
-  const navigation = useNavigation();
-
+const AdminMenuTareas = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header backTo="AdminHomeScreen" />

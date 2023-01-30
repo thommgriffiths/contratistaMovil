@@ -6,13 +6,10 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
-
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header />

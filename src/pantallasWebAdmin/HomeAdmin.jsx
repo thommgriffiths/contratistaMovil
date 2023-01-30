@@ -1,12 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 
-const AdminHome = () => {
-  const navigation = useNavigation();
-
+const AdminHome = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header backButton />

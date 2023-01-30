@@ -1,12 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import Header from "../sharedComponents/Header";
 
-const ArqHomeScreen = () => {
-  const navigation = useNavigation();
-
+const ArqHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header backButton />

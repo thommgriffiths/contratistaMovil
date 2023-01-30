@@ -6,8 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 
 import { setLoggedUser } from "../Core/util/globalStore";
 import { userLogin } from "../Core/Firebase/FirebaseAuthManager";
@@ -17,12 +16,10 @@ import { createQuery } from "../Core/util/functions";
 
 import SignUpUser from "./User/SignUpUser";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerUser, setRegisterUser] = useState(false);
-
-  const navigation = useNavigation();
 
   const handleLogin = async () => {
     userLogin(email, password, initiateApp);
