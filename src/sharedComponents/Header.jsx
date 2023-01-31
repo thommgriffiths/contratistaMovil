@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: palette.R1,
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 30,
     alignItems: "center",
-    paddingBottom: 30,
+    paddingBottom: 20,
   },
 
   profileImage: {
