@@ -18,7 +18,7 @@ const DropDownSelectMobile = ({
 }) => {
   const [loading, setLoading] = useState(remote);
   const [elements, setElements] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState("");
 
   useEffect(() => {
     if (remote) {
