@@ -1,3 +1,4 @@
+import { palette } from "../colors";
 import {
   getFSElementById,
   deleteFSElement,
@@ -427,4 +428,83 @@ export const filterByAttributes = (
   return items.filter((item) => {
     return allowedValues.includes(item?.[attrType]);
   });
+};
+
+//-------------------------------------------------
+export const pickerPrepareLocal = (object, placeholder, defaultValue) => {
+  let result = [];
+  let defaultKey = "";
+
+  for (const key in object) {
+    defaultValue === object[key] && (defaultKey = key);
+    result.push({
+      value: key,
+      label: object[key],
+    });
+  }
+
+  result.sort((a, b) => {
+    if (a.label < b.label) {
+      return -1;
+    } else if (a.label > b.label) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  if (placeholder)
+    result.unshift({ value: null, label: placeholder, color: "grey" });
+  if (defaultValue) {
+    result = result.filter((item) => item.label !== defaultValue);
+    result.unshift({
+      value: defaultKey,
+      label: defaultValue,
+      color: palette.B1,
+    });
+  }
+
+  return result;
+};
+
+export const pickerPrepareRemote = async (type, placeholder, defaultValue) => {
+  const enabledQuery = createQuery({
+    [commonAttrs.enabled]: true,
+  });
+
+  const elements = await queryFSElements(type, enabledQuery);
+
+  let result = [];
+  let defaultLabel = "";
+
+  elements.forEach((element) => {
+    defaultValue === element.id && (defaultLabel = element[commonAttrs.nombre]);
+    result.push({
+      value: element.id,
+      label: element[commonAttrs.nombre],
+    });
+  });
+
+  result.sort((a, b) => {
+    if (a.label < b.label) {
+      return -1;
+    } else if (a.label > b.label) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+
+  if (placeholder)
+    result.unshift({ value: null, label: placeholder, color: "grey" });
+  if (defaultValue) {
+    result = result.filter((item) => item.value !== defaultValue);
+    result.unshift({
+      value: defaultValue,
+      label: defaultLabel,
+      color: palette.B1,
+    });
+  }
+
+  return result;
 };
