@@ -1,96 +1,109 @@
 import React, { useState, useEffect } from "react";
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 
-import {
-  entities,
-  getEmptyConstructor,
-  commonAttrs,
-} from "../../Core/util/entities";
-import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
+import { entities, commonAttrs } from "../../Core/util/entities";
+import { getCurrentDateTime } from "../../Core/util/functions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Editar.style";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
+import DropDownSelectMobile from "../../sharedComponents/DropDownSelectMobile";
 
 const EditarPedidoDeReintegro = ({ currentItem, setNewItem }) => {
-  const [context, setContext] = useState(null);
+  const [obra, setObra] = useState(null);
+  const [rubro, setRubro] = useState(null);
+  const [tarea, setTarea] = useState("");
   const [monto, setMonto] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
   useEffect(() => {
-    const newItem = buildPdR(context, monto, descripcion);
-    const fuzedItem = fuzeItems(newItem, currentItem);
-    setNewItem(fuzedItem);
-  }, [context, monto, descripcion]);
+    let newPR = {};
+
+    if (obra) newPR[entities.obra] = obra;
+    if (rubro) newPR[entities.rubro] = rubro;
+    if (tarea) newPR[commonAttrs.tarea] = tarea;
+    if (descripcion) newPR[commonAttrs.descripcion] = descripcion;
+    if (monto) newPR[commonAttrs.monto] = monto;
+
+    if (Object.keys(newPR).length > 0) {
+      newPR[commonAttrs.id] = currentItem[commonAttrs.id];
+      newPR[commonAttrs.type] = entities.pReintegro;
+      newPR[commonAttrs.fechaEdicion] = getCurrentDateTime();
+      newPR[commonAttrs.editadoPor] = getLoggedUser().Email;
+      setNewItem(newPR);
+    }
+  }, [obra, rubro, tarea, monto, descripcion]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.body}>
-        <KeyboardAvoidingView behavior="height">
-          {/*Title*/}
-          <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>
-              Editar Pedido de Reintegro
-            </Text>
-          </View>
+      <View style={styles.titlesWrapper}>
+        <Text style={styles.titlesText}>Editar Pedido de Reintegro</Text>
+      </View>
 
-          {/*Form */}
-          <View style={styles.formWrapper}>
-            <View style={{ zIndex: 10100 }}>
-              <ContextoSet
-                action={setContext}
-                initialValues={currentItem}
-                isEdit
-              />
-            </View>
+      <View style={styles.formWrapper}>
+        <Text style={styles.fieldTitle}>Seleccione una obra</Text>
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.obra}
+            remote
+            set={(value) => setObra(value)}
+            defaultValue={currentItem?.[entities.obra][commonAttrs.id]}
+          />
+        </View>
+        <Text style={styles.fieldTitle}>Seleccione un rubro</Text>
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.rubro}
+            remote
+            set={(value) => setRubro(value)}
+            defaultValue={currentItem?.[entities.rubro][commonAttrs.id]}
+          />
+        </View>
+        <Text style={styles.fieldTitle}>Describa la tarea afectada</Text>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            placeholder={currentItem?.[commonAttrs.tarea]}
+            value={tarea}
+            onChangeText={(text) => {
+              setTarea(text);
+            }}
+            style={styles.textInput}
+            placeholderTextColor="grey"
+          />
+        </View>
+        <Text style={styles.fieldTitle}>Justificacion del reintegro</Text>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            placeholder={currentItem?.[commonAttrs.descripcion]}
+            value={descripcion}
+            onChangeText={(text) => {
+              setDescripcion(text);
+            }}
+            style={styles.textInput}
+            placeholderTextColor="grey"
+          />
+        </View>
 
-            <View style={{ zIndex: 1080 }}>
-              <Text style={styles.fieldTitle}>Detalle de pedido</Text>
-              <TextInput
-                placeholder="Detalle del pedido"
-                onChangeText={(text) => {
-                  setDescripcion(text);
-                }}
-                defaultValue={currentItem?.Descripcion}
-                style={[styles.input, { zIndex: 9000 }]}
-              />
-            </View>
+        <Text style={styles.fieldTitle}>Monto del reintegro</Text>
 
-            <View style={{ zIndex: 1050 }}>
-              <Text style={styles.fieldTitle}>Monto</Text>
-              <TextInput
-                placeholder="Ingrese el monto del reintegro"
-                keyboardType="numeric"
-                onChangeText={(text) => {
-                  if (+text || text == "") setMonto(text);
-                  else {
-                    setMonto("");
-                    alert("Valor invalido, reingreselo");
-                  }
-                }}
-                defaultValue={currentItem?.Monto}
-                style={[styles.input, { zIndex: 9000 }]}
-              />
-            </View>
-          </View>
-        </KeyboardAvoidingView>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            placeholder={currentItem?.[commonAttrs.monto]}
+            value={monto}
+            keyboardType="numeric"
+            onChangeText={(text) => {
+              if (+text || text == "") setMonto(text);
+              else {
+                setMonto("");
+                alert("Solo puede ingresar numeros enteros");
+              }
+            }}
+            style={styles.textInput}
+            placeholderTextColor="grey"
+          />
+        </View>
       </View>
     </View>
   );
 };
 
 export default EditarPedidoDeReintegro;
-
-const buildPdR = (context = null, monto = null, descripcion = null) => {
-  let pedidoReintegro = getEmptyConstructor(entities.pReintegro);
-
-  pedidoReintegro[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  pedidoReintegro[commonAttrs.editadoPor] = getLoggedUser().Email;
-  pedidoReintegro[commonAttrs.descripcion] = descripcion;
-  pedidoReintegro[commonAttrs.monto] = monto;
-  pedidoReintegro[commonAttrs.tarea] = context?.tarea;
-  pedidoReintegro[entities.obra] = context?.obra ? context.obra : null;
-  pedidoReintegro[entities.rubro] = context?.rubro ? context.rubro : null;
-
-  return pedidoReintegro;
-};

@@ -1,79 +1,93 @@
 import React, { useState, useEffect } from "react";
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 
-import {
-  entities,
-  getEmptyConstructor,
-  commonAttrs,
-} from "../../Core/util/entities";
-import { getCurrentDateTime, fuzeItems } from "../../Core/util/functions";
+import { entities, commonAttrs } from "../../Core/util/entities";
+import { getCurrentDateTime } from "../../Core/util/functions";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import styles from "../styles/Editar.style";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
+import DropDownSelectMobile from "../../sharedComponents/DropDownSelectMobile";
 
 const EditarJornal = ({ currentItem, setNewItem }) => {
-  const [context, setContext] = useState(null);
+  const [obra, setObra] = useState(null);
+  const [rubro, setRubro] = useState(null);
+  const [tarea, setTarea] = useState("");
   const [diasHombre, setDiasHombre] = useState("");
 
   useEffect(() => {
-    const newItem = buildJornal(context, diasHombre);
-    const fuzedItem = fuzeItems(newItem, currentItem);
-    setNewItem(fuzedItem);
-  }, [context, diasHombre]);
+    let newJornal = {};
+
+    if (obra) newJornal[entities.obra] = obra;
+    if (rubro) newJornal[entities.rubro] = rubro;
+    if (tarea) newJornal[commonAttrs.tarea] = tarea;
+    if (diasHombre) newJornal[commonAttrs.diasHombre] = diasHombre;
+
+    if (Object.keys(newJornal).length > 0) {
+      newJornal[commonAttrs.id] = currentItem[commonAttrs.id];
+      newJornal[commonAttrs.type] = entities.jornal;
+      newJornal[commonAttrs.fechaEdicion] = getCurrentDateTime();
+      newJornal[commonAttrs.editadoPor] = getLoggedUser().Email;
+      setNewItem(newJornal);
+    }
+  }, [obra, rubro, tarea, diasHombre]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.body}>
-        <KeyboardAvoidingView behavior="height">
-          {/*Title*/}
-          <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>Editar Jornal</Text>
-          </View>
+      <View style={styles.titlesWrapper}>
+        <Text style={styles.titlesText}>Editar Jornal</Text>
+      </View>
 
-          {/*Form */}
-          <View style={styles.formWrapper}>
-            <View style={{ zIndex: 10100 }}>
-              <ContextoSet
-                action={setContext}
-                initialValues={currentItem}
-                isEdit
-              />
-            </View>
-            <View style={{ zIndex: 10080 }}>
-              <Text style={styles.fieldTitle}>Cantidad dias hombre</Text>
-              <TextInput
-                placeholder="Ingrese cantidad dias hombre"
-                keyboardType="numeric"
-                onChangeText={(text) => {
-                  if (+text || text == "") setDiasHombre(text);
-                  else {
-                    setDiasHombre("");
-                    alert("Valor invalido, reingreselo");
-                  }
-                }}
-                defaultValue={currentItem?.DiasHombre}
-                style={[styles.input, { zIndex: 9000 }]}
-              />
-            </View>
-          </View>
-        </KeyboardAvoidingView>
+      <View style={styles.formWrapper}>
+        <Text style={styles.fieldTitle}>Seleccione una obra</Text>
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.obra}
+            remote
+            set={(value) => setObra(value)}
+            defaultValue={currentItem?.[entities.obra][commonAttrs.id]}
+          />
+        </View>
+        <Text style={styles.fieldTitle}>Seleccione un rubro</Text>
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.rubro}
+            remote
+            set={(value) => setRubro(value)}
+            defaultValue={currentItem?.[entities.rubro][commonAttrs.id]}
+          />
+        </View>
+        <Text style={styles.fieldTitle}>Describa la tarea afectada</Text>
+        <View style={styles.inputWrapper}>
+          <TextInput
+            placeholder={currentItem?.[commonAttrs.tarea]}
+            value={tarea}
+            onChangeText={(text) => {
+              setTarea(text);
+            }}
+            style={styles.textInput}
+            placeholderTextColor="grey"
+          />
+        </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.fieldTitle}>Cantidad dias hombre</Text>
+          <TextInput
+            placeholder={currentItem?.[commonAttrs.diasHombre]}
+            value={diasHombre}
+            onChangeText={(text) => {
+              if (+text || text == "") setDiasHombre(text);
+              else {
+                setDiasHombre("");
+                alert("Valor invalido, reingreselo");
+              }
+            }}
+            style={styles.textInput}
+            placeholderTextColor="grey"
+            keyboardType="numeric"
+          />
+        </View>
       </View>
     </View>
   );
 };
 
 export default EditarJornal;
-
-const buildJornal = (context = null, diasHombre = null) => {
-  let jornal = getEmptyConstructor(entities.jornal);
-
-  jornal[commonAttrs.fechaEdicion] = getCurrentDateTime();
-  jornal[commonAttrs.editadoPor] = getLoggedUser().Email;
-  jornal[commonAttrs.diasHombre] = diasHombre;
-  jornal[commonAttrs.tarea] = context?.tarea;
-  jornal[entities.obra] = context?.obra ? context.obra : null;
-  jornal[entities.rubro] = context?.rubro ? context.rubro : null;
-
-  return jornal;
-};

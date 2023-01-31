@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
+import { View, Modal, ScrollView, StyleSheet } from "react-native";
+
+import { updateElement } from "../../Core/util/functions";
+import { entities } from "../../Core/util/entities";
+import { palette } from "../../Core/colors";
 
 import EditarPedidoDeObra from "../../sharedScreens/PedidoDeObra/EditarPedidoDeObra";
 import EditarJornal from "../../sharedScreens/Jornal/EditarJornal";
 import EditarPedidoDeReintegro from "../../sharedScreens/PedidoDeReintegro/EditarPedidoDeReintegro";
 import EditarObra from "../../sharedScreens/Obra/EditarObra";
 import EditarRubro from "../../sharedScreens/Rubro/EditarRubro";
-import { updateElement } from "../../Core/util/functions";
-import { entities } from "../../Core/util/entities";
+import LoadingComponent from "../LoadingComponent";
+import ModalButtons from "./ModalButtons";
 
 const EditModal = ({ modalParams, setParams }) => {
+  const [item, setItem] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const onEdit = () => {
+    setLoading(true);
     const onSuccess = () => {
       setParams({ visible: false, editedItem: modalParams.item.id });
     };
     updateElement(item, onSuccess);
   };
-
-  const [item, setItem] = useState({});
 
   const editItem = (type) => {
     switch (type) {
@@ -67,28 +73,33 @@ const EditModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          <View style={style.formContainer}>
-            {modalParams.visible &&
-              Object.keys(modalParams.item).length != 0 &&
-              editItem(modalParams.item.type)}
-          </View>
+          {loading ? (
+            <View style={{}}>
+              <LoadingComponent />
+            </View>
+          ) : (
+            <ScrollView
+              style={style.scrolllView}
+              contentContainerStyle={style.scrolllViewContentContainer}
+            >
+              <View style={style.formContainer}>
+                {modalParams.visible &&
+                  Object.keys(modalParams.item).length != 0 &&
+                  editItem(modalParams.item.type)}
+              </View>
 
-          <View style={style.buttonContainer}>
-            <Pressable
-              style={[style.button, style.buttonDelete]}
-              onPress={onEdit}
-            >
-              <Text style={style.textStyle}>{modalParams.actionLabel}</Text>
-            </Pressable>
-            <Pressable
-              style={[style.button, style.buttonClose]}
-              onPress={() => {
-                setParams({ ...modalParams, visible: false });
-              }}
-            >
-              <Text style={style.textStyle}>Cancelar</Text>
-            </Pressable>
-          </View>
+              <View style={style.buttonsWrapper}>
+                <ModalButtons
+                  onOkAction={onEdit}
+                  onOkText={modalParams.actionLabel}
+                  onCancelAction={() => {
+                    setParams({ ...modalParams, visible: false });
+                  }}
+                  onCancelText="Cancelar"
+                />
+              </View>
+            </ScrollView>
+          )}
         </View>
       </View>
     </Modal>
@@ -100,13 +111,11 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    margin: 10,
   },
   modalView: {
-    margin: 20,
-    backgroundColor: "white",
+    backgroundColor: palette.white,
     borderRadius: 20,
-    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -117,33 +126,15 @@ const style = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  formContainer: {
-    zIndex: 10100,
+  scrolllView: {
+    margin: 10,
+    flexGrow: 0,
   },
-  buttonContainer: {
-    flexDirection: "row",
-    zIndex: 800,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    marginHorizontal: 10,
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  buttonDelete: {
-    backgroundColor: "red",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  scrolllViewContentContainer: {},
+  formContainer: {},
+  buttonsWrapper: {
+    marginTop: 10,
+    marginBottom: 5,
   },
 });
 

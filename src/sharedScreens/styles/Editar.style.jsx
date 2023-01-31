@@ -2,32 +2,34 @@ import { StyleSheet } from "react-native";
 import { palette } from "../../Core/colors";
 
 const styles = StyleSheet.create({
-  //Pantalla
-  container: {},
-  header: {},
-  body: {
-    marginBottom: 20,
+  container: {
+    backgroundColor: palette.white,
   },
 
-  //Form Section - Titulos
-  detailTitlesWrapper: {},
-  detailTitlesTitle: {
+  //container
+  titlesWrapper: {},
+  formWrapper: {},
+
+  //titlesWrapper
+  titlesText: {
     fontSize: 32,
     color: palette.textDark,
     paddingVertical: 5,
   },
 
-  //Form Section - Cuerpo
-  formWrapper: {},
+  //formWrapper
   fieldTitle: {
     marginTop: 10,
   },
-  input: {
-    backgroundColor: palette.white,
+  inputWrapper: {
+    marginVertical: 5,
+    justifyContent: "center",
+  },
+  textInput: {
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 12,
+    fontSize: 16,
     borderRadius: 10,
-    marginTop: 5,
     borderWidth: 2,
     borderColor: palette.B1,
   },
