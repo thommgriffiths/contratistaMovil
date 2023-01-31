@@ -1,5 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, Pressable, View } from "react-native";
+
+import { palette } from "../Core/colors";
 
 const Botones = ({
   onOkFunction,
@@ -9,66 +11,46 @@ const Botones = ({
 }) => {
   return (
     <View style={styles.botonera}>
-      <View style={styles.botonOkWrapper}>
-        <TouchableOpacity onPress={onOkFunction} style={styles.botonOK}>
-          <Text style={styles.botonOkText}>{onOkText}</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.botonCancelWrapper}>
-        <TouchableOpacity onPress={onCancelFunction} style={styles.botonCancel}>
-          <Text style={styles.botonCancelText}>{onCancelText}</Text>
-        </TouchableOpacity>
-      </View>
+      <Pressable onPress={onOkFunction} style={styles.botonOK}>
+        <Text style={styles.botonOkText}>{onOkText}</Text>
+      </Pressable>
+
+      <Pressable onPress={onCancelFunction} style={styles.botonCancel}>
+        <Text style={styles.botonCancelText}>{onCancelText}</Text>
+      </Pressable>
     </View>
   );
 };
 
 export default Botones;
 
-const colors = {
-  B1: "#1984c5",
-  B2: "#22a7f0",
-  B3: "#63bff0",
-  B4: "#a7d5ed",
-  neutral: "#e2e2e2",
-  R1: "#e1a692",
-  R2: "#de6e56",
-  R3: "#e14b31",
-  R4: "#c23728",
-  white: "white",
-};
-
 const styles = StyleSheet.create({
-  botonera: { flex: 1 },
-  botonOkWrapper: { paddingHorizontal: 20, paddingVertical: 10 },
+  botonera: {},
   botonOK: {
-    backgroundColor: colors.white,
+    backgroundColor: palette.white,
     width: "100%",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginTop: 5,
-    borderColor: colors.B1,
+    borderColor: palette.B1,
     borderWidth: 2,
+    marginVertical: 5,
   },
   botonOkText: {
-    color: colors.B1,
+    color: palette.B1,
     fontWeight: "700",
     fontSize: 16,
   },
-  botonCancelWrapper: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
   botonCancel: {
-    backgroundColor: colors.B1,
+    backgroundColor: palette.B1,
     width: "100%",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+    marginVertical: 5,
   },
   botonCancelText: {
-    color: colors.white,
+    color: palette.white,
     fontWeight: "700",
     fontSize: 16,
   },
