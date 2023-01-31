@@ -47,18 +47,16 @@ const styles = StyleSheet.create({
 
   //formWrapper
   inputWrapper: {
-    marginTop: 10,
-    paddingHorizontal: 5,
+    marginVertical: 5,
     justifyContent: "center",
-    backgroundColor: palette.white,
+  },
+  textInput: {
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    fontSize: 16,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: palette.B1,
-  },
-  textInput: {
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    fontSize: 16,
   },
 });
 
