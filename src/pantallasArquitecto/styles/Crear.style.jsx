@@ -2,44 +2,63 @@ import { StyleSheet } from "react-native";
 import { palette } from "../../Core/colors";
 
 const styles = StyleSheet.create({
-  //Pantalla
   container: {
     flex: 1,
     backgroundColor: palette.white,
+    borderColor: "blue",
+    borderWidth: 2,
   },
-  header: {},
+
+  //container
+  headerWrapper: {},
   body: {
-    marginTop: 30,
+    flex: 1,
+    alignContent: "stretch",
     paddingHorizontal: 20,
-    marginBottom: 20,
+    backgroundColor: palette.white,
+    borderColor: "green",
+    borderWidth: 2,
   },
-  botonera: {},
+  bodyContentContainer: {
+    flexGrow: 1,
+    justifyContent: "space-between",
+    flexDirection: "column",
+  },
 
-  // Form Section
+  //body
+  bodytop: { flex: 1, justifyContent: "flex-start" },
+  bodybottom: { flex: 1, justifyContent: "flex-end" },
 
-  //Form Section - Titulos
-  detailTitlesWrapper: {},
-  detailTitlesTitle: {
+  //bodytop
+  titlesWrapper: {},
+  formWrapper: {},
+
+  //bodybottom
+  buttonsWrapper: {
+    alignSelf: "center",
+  },
+
+  //titlesWrapper
+  titlesText: {
     fontSize: 32,
     color: palette.textDark,
     paddingVertical: 5,
   },
 
-  //Form Section - Cuerpo
-  formWrapper: {},
-  buttonsWrapper: {
-    zIndex: 50,
-    width: "70%",
-    alignSelf: "center",
-  },
-  input: {
+  //formWrapper
+  inputWrapper: {
+    marginTop: 10,
+    paddingHorizontal: 5,
+    justifyContent: "center",
     backgroundColor: palette.white,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
     borderRadius: 10,
-    marginTop: 5,
     borderWidth: 2,
     borderColor: palette.B1,
+  },
+  textInput: {
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+    fontSize: 16,
   },
 });
 
