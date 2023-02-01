@@ -8,7 +8,7 @@ import { getLoggedUser } from "../../Core/util/globalStore";
 import { palette } from "../../Core/colors";
 
 import FiltrarJornales from "../../sharedScreens/Jornal/FiltrarJornal";
-import FiltrarPedidoDeObra from "../../sharedScreens/PedidoDeObra/FiltrarPedidoDeObraMobile";
+import FiltrarPedidoDeObra from "../../sharedScreens/PedidoDeObra/FiltrarPedidoDeObra";
 import LoadingComponent from "../LoadingComponent";
 import ModalButtons from "./ModalButtons";
 
