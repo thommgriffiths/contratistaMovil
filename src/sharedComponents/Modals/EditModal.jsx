@@ -73,33 +73,33 @@ const EditModal = ({ modalParams, setParams }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          {loading ? (
-            <View style={{}}>
+          <ScrollView
+            style={style.scrolllView}
+            contentContainerStyle={style.scrolllViewContentContainer}
+          >
+            {loading ? (
               <LoadingComponent />
-            </View>
-          ) : (
-            <ScrollView
-              style={style.scrolllView}
-              contentContainerStyle={style.scrolllViewContentContainer}
-            >
-              <View style={style.formContainer}>
-                {modalParams.visible &&
-                  Object.keys(modalParams.item).length != 0 &&
-                  editItem(modalParams.item.type)}
-              </View>
+            ) : (
+              <>
+                <View style={style.formContainer}>
+                  {modalParams.visible &&
+                    Object.keys(modalParams.item).length != 0 &&
+                    editItem(modalParams.item.type)}
+                </View>
 
-              <View style={style.buttonsWrapper}>
-                <ModalButtons
-                  onOkAction={onEdit}
-                  onOkText={modalParams.actionLabel}
-                  onCancelAction={() => {
-                    setParams({ ...modalParams, visible: false });
-                  }}
-                  onCancelText="Cancelar"
-                />
-              </View>
-            </ScrollView>
-          )}
+                <View style={style.buttonsWrapper}>
+                  <ModalButtons
+                    onOkAction={onEdit}
+                    onOkText={modalParams.actionLabel}
+                    onCancelAction={() => {
+                      setParams({ ...modalParams, visible: false });
+                    }}
+                    onCancelText="Cancelar"
+                  />
+                </View>
+              </>
+            )}
+          </ScrollView>
         </View>
       </View>
     </Modal>
