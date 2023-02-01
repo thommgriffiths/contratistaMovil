@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
     height: 1,
     marginVertical: 3,
   },
-  List: {},
+  List: {
+    flexGrow: 0,
+  },
 });
 
 export default styles;
