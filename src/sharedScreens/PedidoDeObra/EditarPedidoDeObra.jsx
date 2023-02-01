@@ -75,7 +75,6 @@ const EditarPedidoDeObra = ({ currentItem, setNewItem }) => {
         <View style={styles.inputWrapper}>
           <DropDownSelectMobile
             options={POTypes}
-            remote
             set={(value) => setTipoDePedido(value)}
             defaultValue={currentItem?.[commonAttrs.tipoPedidoObra]}
           />
