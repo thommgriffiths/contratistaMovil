@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: palette.white,
-    borderColor: "blue",
-    borderWidth: 2,
   },
 
   //container
@@ -15,9 +13,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "stretch",
     paddingHorizontal: 20,
-    backgroundColor: palette.white,
-    borderColor: "green",
-    borderWidth: 2,
   },
   bodyContentContainer: {
     flexGrow: 1,
