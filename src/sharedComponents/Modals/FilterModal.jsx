@@ -60,32 +60,34 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
     >
       <View style={style.centeredView}>
         <View style={style.modalView}>
-          {loading ? (
-            <View style={style.loadingContainer}>
-              <LoadingComponent />
-            </View>
-          ) : (
-            <ScrollView
-              style={style.scrolllView}
-              contentContainerStyle={style.scrolllViewContentContainer}
-            >
-              <View style={style.formContainer}>
-                {modalParams.visible &&
-                  switchFilter(modalParams?.item?.[commonAttrs.type])}
+          <ScrollView
+            style={style.scrolllView}
+            contentContainerStyle={style.scrolllViewContentContainer}
+          >
+            {loading ? (
+              <View style={style.loadingContainer}>
+                <LoadingComponent />
               </View>
+            ) : (
+              <>
+                <View style={style.formContainer}>
+                  {modalParams.visible &&
+                    switchFilter(modalParams?.item?.[commonAttrs.type])}
+                </View>
 
-              <View style={style.buttonsWrapper}>
-                <ModalButtons
-                  onOkAction={Filter}
-                  onOkText={modalParams.actionLabel}
-                  onCancelAction={() => {
-                    setParams({ ...modalParams, visible: false });
-                  }}
-                  onCancelText="Cancelar"
-                />
-              </View>
-            </ScrollView>
-          )}
+                <View style={style.buttonsWrapper}>
+                  <ModalButtons
+                    onOkAction={Filter}
+                    onOkText={modalParams.actionLabel}
+                    onCancelAction={() => {
+                      setParams({ ...modalParams, visible: false });
+                    }}
+                    onCancelText="Cancelar"
+                  />
+                </View>
+              </>
+            )}
+          </ScrollView>
         </View>
       </View>
     </Modal>
