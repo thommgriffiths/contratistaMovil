@@ -3,12 +3,13 @@ import { palette } from "../../Core/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: palette.white,
     flex: 1,
+    backgroundColor: palette.white,
   },
   body: {
+    flex: 1,
+    alignContent: "stretch",
     paddingHorizontal: 20,
-    marginBottom: 20,
   },
 
   titlesAndActions: { flexDirection: "row", justifyContent: "space-between" },
@@ -46,7 +47,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  listContainer: {},
+  listContainer: {
+    flex: 1,
+  },
 
   List: {},
   ListItem: {

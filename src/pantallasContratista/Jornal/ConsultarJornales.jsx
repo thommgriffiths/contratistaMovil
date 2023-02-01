@@ -1,5 +1,6 @@
 import { Text, View, FlatList, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import {
@@ -101,7 +102,7 @@ const ConsultarJornales = ({ navigation }) => {
               }}
             >
               <MaterialIcons name="money-off" size={24} color="green" />
-              <Text>Recibido</Text>
+              <Text>Firmar Recibo</Text>
             </Pressable>
           ) : (
             <>
@@ -145,7 +146,7 @@ const ConsultarJornales = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header backTo="HomeContratista" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
@@ -203,7 +204,7 @@ const ConsultarJornales = ({ navigation }) => {
           setElements={setRawJornales}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

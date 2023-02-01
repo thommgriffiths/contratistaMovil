@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import {
@@ -82,7 +83,7 @@ const ArqValidarJornales = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header backTo="ArqHomeScreen" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
@@ -125,7 +126,7 @@ const ArqValidarJornales = () => {
           setElements={setRawJornales}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import {
@@ -117,7 +118,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header backTo="HomeContratista" />
       <View style={styles.body}>
         <View style={styles.titlesAndActions}>
@@ -161,7 +162,7 @@ const ConsultarPedidosDeReintegro = ({ navigation }) => {
       {modalParams?.actionLabel == "showDetail" && (
         <DetailModal modalParams={modalParams} setParams={setModalParams} />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
