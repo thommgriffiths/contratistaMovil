@@ -48,6 +48,11 @@ export const commonAttrs = {
   fechaCreacionRango: "FechaCreacionRango",
 };
 
+export const queryAttrs = {
+  fechaCreacionInicio: "FechaCreacionInicio",
+  fechaCreacionFin: "FechaCreacionFin",
+};
+
 export const jornalStates = {
   requested: "Pedido",
   validated: "Validado",

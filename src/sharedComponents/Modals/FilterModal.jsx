@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Text, View, Modal, Pressable, StyleSheet } from "react-native";
+import { View, Modal, ScrollView, StyleSheet } from "react-native";
 
-import {
-  completeElements,
-  createQuery as queryBuilder,
-} from "../../Core/util/functions";
+import { completeElements, createQuery } from "../../Core/util/functions";
 import { commonAttrs, entities } from "../../Core/util/entities";
 import { queryFSElements } from "../../Core/Firebase/FirebaseFirestoreManager";
 import { getLoggedUser } from "../../Core/util/globalStore";
 import { palette } from "../../Core/colors";
 
-import LoadingComponent from "../LoadingComponent";
 import FiltrarJornales from "../../sharedScreens/Jornal/FiltrarJornal";
-import FiltrarPedidoDeObra from "../../sharedScreens/PedidoDeObra/FiltrarPedidoDeObra";
+import FiltrarPedidoDeObra from "../../sharedScreens/PedidoDeObra/FiltrarPedidoDeObraMobile";
+import LoadingComponent from "../LoadingComponent";
+import ModalButtons from "./ModalButtons";
 
 const FilterModal = ({ modalParams, setParams, setElements }) => {
   const [searchParams, setSearchParams] = useState([]);
@@ -20,9 +18,9 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
 
   const Filter = async () => {
     setLoading(true);
-    console.log("search params", searchParams);
+
     if (modalParams?.item?.filterUser) {
-      let query = queryBuilder({
+      let query = createQuery({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
       });
       searchParams.push(query[0]);
@@ -32,19 +30,18 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
       modalParams?.item?.[commonAttrs.type],
       searchParams
     );
-    const finalElements = await completeElements(rawElements);
+    const completedElements = await completeElements(rawElements);
 
-    setElements(finalElements);
+    setElements(completedElements);
     setParams({ visible: false });
   };
 
-  const createQuery = (type) => {
+  const switchFilter = (type) => {
     switch (type) {
       case entities.pedidoDeObra:
         return <FiltrarPedidoDeObra setSearchParams={setSearchParams} />;
       case entities.jornal:
         return <FiltrarJornales setSearchParams={setSearchParams} />;
-
       default:
         console.log("No se encontro la categoria" + type);
         setParams({ ...modalParams, visible: false });
@@ -64,38 +61,30 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
       <View style={style.centeredView}>
         <View style={style.modalView}>
           {loading ? (
-            <LoadingComponent />
-          ) : (
-            <View>
-              <View style={{ zIndex: 11000 }}>
-                {modalParams.visible &&
-                  createQuery(modalParams?.item?.[commonAttrs.type])}
-              </View>
-
-              <View style={style.buttonsContainer}>
-                <View style={style.buttonWrapper}>
-                  <Pressable
-                    style={[style.button, style.buttonAction]}
-                    onPress={Filter}
-                  >
-                    <Text style={style.textStyle}>
-                      {modalParams.actionLabel}
-                    </Text>
-                  </Pressable>
-                </View>
-
-                <View style={style.buttonWrapper}>
-                  <Pressable
-                    style={[style.button, style.buttonClose]}
-                    onPress={() => {
-                      setParams({ ...modalParams, visible: false });
-                    }}
-                  >
-                    <Text style={style.textStyle}>Cancelar</Text>
-                  </Pressable>
-                </View>
-              </View>
+            <View style={style.loadingContainer}>
+              <LoadingComponent />
             </View>
+          ) : (
+            <ScrollView
+              style={style.scrolllView}
+              contentContainerStyle={style.scrolllViewContentContainer}
+            >
+              <View style={style.formContainer}>
+                {modalParams.visible &&
+                  switchFilter(modalParams?.item?.[commonAttrs.type])}
+              </View>
+
+              <View style={style.buttonsWrapper}>
+                <ModalButtons
+                  onOkAction={Filter}
+                  onOkText={modalParams.actionLabel}
+                  onCancelAction={() => {
+                    setParams({ ...modalParams, visible: false });
+                  }}
+                  onCancelText="Cancelar"
+                />
+              </View>
+            </ScrollView>
           )}
         </View>
       </View>
@@ -108,13 +97,11 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    margin: 10,
   },
   modalView: {
-    margin: 20,
-    backgroundColor: "white",
+    backgroundColor: palette.white,
     borderRadius: 20,
-    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -125,39 +112,16 @@ const style = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  buttonsContainer: {
-    flexDirection: "row",
-    zIndex: 800,
-    alignItems: "spread",
-    justifyContent: "space-around",
+  loadingContainer: {},
+  scrolllView: {
+    margin: 10,
+    flexGrow: 0,
   },
-  buttonWrapper: {
-    flex: 1,
-    padding: 5,
-    justifyContent: "center",
-    alignItems: "spread",
-  },
-  button: {
-    borderRadius: 20,
-    padding: 5,
-    elevation: 2,
-    flex: 1,
-    alignContent: "center",
-  },
-  buttonClose: {
-    backgroundColor: palette.B1,
-  },
-  buttonAction: {
-    backgroundColor: palette.R4,
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  scrolllViewContentContainer: {},
+  formContainer: {},
+  buttonsWrapper: {
+    marginTop: 10,
+    marginBottom: 5,
   },
 });
 

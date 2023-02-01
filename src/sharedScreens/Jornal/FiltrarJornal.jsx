@@ -1,61 +1,86 @@
 import React, { useState, useEffect } from "react";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
+import {
+  commonAttrs,
+  entities,
+  jornalStates,
+  queryAttrs,
+} from "../../Core/util/entities";
 import { createQuery } from "../../Core/util/functions";
-import { commonAttrs, jornalStates } from "../../Core/util/entities";
 import styles from "../styles/Editar.style";
 
-import ContextoSet from "../../sharedComponents/ContextoSet";
-import DropdownSelect from "../../sharedComponents/DropdownSelect";
-import RangePicker from "../../sharedComponents/dateComponents/RangePicker";
+import DropDownSelectMobile from "../../sharedComponents/DropDownSelectMobile";
+import DateInput from "../../sharedComponents/dateComponents/DateInput";
 
 const FiltrarJornales = ({ setSearchParams }) => {
-  const [context, setContext] = useState(null);
+  const [obra, setObra] = useState(null);
+  const [rubro, setRubro] = useState(null);
   const [estado, setEstado] = useState(null);
-  const [rangoFechaCreacion, setRangoFechaCreacion] = useState({
-    startDate: undefined,
-    endDate: undefined,
-  });
+  const [fechaInicio, setFechaInicio] = useState(null);
+  const [fechaFin, setFechaFin] = useState(null);
 
   useEffect(() => {
     const queryParams = {
-      ...context,
-      [commonAttrs.fechaCreacionRango]: rangoFechaCreacion,
+      [entities.obra]: obra,
+      [entities.rubro]: rubro,
       [commonAttrs.jornalState]: jornalStates?.[estado],
+      [queryAttrs.fechaCreacionInicio]: fechaInicio,
+      [queryAttrs.fechaCreacionFin]: fechaFin,
     };
     const newQuery = createQuery(queryParams);
 
-    console.log(newQuery);
     setSearchParams(newQuery);
-  }, [context, rangoFechaCreacion, estado]);
+  }, [obra, rubro, estado, fechaInicio, fechaFin]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.body}>
-        <KeyboardAvoidingView behavior="height">
-          {/*Title*/}
-          <View style={styles.detailTitlesWrapper}>
-            <Text style={styles.detailTitlesTitle}>Filtrar Jornales</Text>
-          </View>
+      <View style={styles.titlesWrapper}>
+        <Text style={styles.titlesText}>Filtrar Jornales</Text>
+      </View>
 
-          {/*Form */}
-          <View style={styles.formWrapper}>
-            <View style={{ zIndex: 10100 }}>
-              <ContextoSet action={setContext} noTarea />
-            </View>
-            <View style={{ zIndex: 10080 }}>
-              <DropdownSelect
-                placeholder="Estado"
-                action={setEstado}
-                category={commonAttrs.jornalState}
-                props={{ stackOrder: 14000 }}
-              />
-            </View>
-            <View style={{ zIndex: 10050 }}>
-              <RangePicker AddRange={setRangoFechaCreacion} />
-            </View>
-          </View>
-        </KeyboardAvoidingView>
+      <View style={styles.formWrapper}>
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.obra}
+            placeholder="Seleccione una obra"
+            remote
+            set={(value) => setObra(value)}
+          />
+        </View>
+
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={entities.rubro}
+            placeholder="Seleccione un rubro"
+            remote
+            set={(value) => setRubro(value)}
+          />
+        </View>
+
+        <View style={styles.inputWrapper}>
+          <DropDownSelectMobile
+            options={jornalStates}
+            placeholder="Seleccione estado"
+            set={(value) => setEstado(value)}
+          />
+        </View>
+
+        <View style={styles.inputWrapper}>
+          <DateInput
+            placeholder="Fecha de inicio"
+            set={setFechaInicio}
+            decorator="Desde: "
+          />
+        </View>
+
+        <View style={styles.inputWrapper}>
+          <DateInput
+            placeholder="Fecha de fin"
+            set={setFechaFin}
+            decorator="Hasta: "
+          />
+        </View>
       </View>
     </View>
   );

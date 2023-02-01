@@ -9,6 +9,7 @@ import {
 import {
   entities,
   commonAttrs,
+  queryAttrs,
   getEmptyConstructor,
   userTypes,
   jornalStates,
@@ -222,6 +223,7 @@ export const getNonEmptyKeysAndValues = (object) => {
   return keyValues;
 };
 
+//Funcion para crear querys dinamicas de firestore
 export const createQuery = (object) => {
   let query = [];
 
@@ -233,12 +235,7 @@ export const createQuery = (object) => {
     switch (key) {
       case commonAttrs.type:
         continue;
-      case commonAttrs.tipoPedidoObra: {
-        queryObject["parameter"] = commonAttrs.tipoPedidoObra;
-        queryObject["operator"] = "==";
-        queryObject["value"] = object[key];
-        break;
-      }
+
       case commonAttrs.status:
         continue;
       case commonAttrs.descripcion:
@@ -247,6 +244,16 @@ export const createQuery = (object) => {
         continue;
       case commonAttrs.fechaEdicion:
         continue;
+      case commonAttrs.editadoPor:
+        continue;
+      case commonAttrs.nombre:
+        continue;
+      case commonAttrs.tipoPedidoObra: {
+        queryObject["parameter"] = commonAttrs.tipoPedidoObra;
+        queryObject["operator"] = "==";
+        queryObject["value"] = object[key];
+        break;
+      }
       case commonAttrs.creadoPor: {
         queryObject["parameter"] = commonAttrs.creadoPor;
         queryObject["operator"] = "==";
@@ -259,10 +266,6 @@ export const createQuery = (object) => {
         queryObject["value"] = object[key];
         break;
       }
-      case commonAttrs.editadoPor:
-        continue;
-      case commonAttrs.nombre:
-        continue;
       case commonAttrs.fechaCreacionRango: {
         if (!object[key]?.startDate) continue;
 
@@ -280,6 +283,20 @@ export const createQuery = (object) => {
         };
         query.push(endDate);
         continue;
+      }
+
+      case queryAttrs.fechaCreacionInicio: {
+        queryObject["parameter"] = commonAttrs.fechaCreacion;
+        queryObject["operator"] = ">=";
+        queryObject["value"] = object[key];
+        break;
+      }
+
+      case queryAttrs.fechaCreacionFin: {
+        queryObject["parameter"] = commonAttrs.fechaCreacion;
+        queryObject["operator"] = "<=";
+        queryObject["value"] = object[key];
+        break;
       }
 
       case commonAttrs.tarea: {
