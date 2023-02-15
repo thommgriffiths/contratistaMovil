@@ -1,8 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider as PaperProvider } from "react-native-paper";
-//Docs de react native paper: https://callstack.github.io/react-native-paper/4.0/index.html
-import { registerTranslation, enGB } from "react-native-paper-dates";
 
 import { LogBox } from "react-native";
 LogBox.ignoreAllLogs();
@@ -29,12 +26,7 @@ import ArqConsultarPedidosDeObra from "./src/pantallasArquitecto/PedidoDeObra/Co
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  registerTranslation("en", enGB);
-  return (
-    <PaperProvider>
-      <AppWithNavigation />
-    </PaperProvider>
-  );
+  return <AppWithNavigation />;
 }
 
 const AppWithNavigation = () => {
