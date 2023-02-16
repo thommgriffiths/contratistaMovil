@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import React, { useState } from "react";
@@ -73,16 +73,16 @@ const LoginScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+        <Pressable onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           onPress={() => setRegisterUser(true)}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {registerUser && (

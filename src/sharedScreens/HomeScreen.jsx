@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React from "react";
 
 import Header from "../sharedComponents/Header";
@@ -24,26 +18,26 @@ const HomeScreen = ({ navigation }) => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("HomeContratista")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Menu Contratista</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("ArqHomeScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Menu Arquitecto</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("AdminHomeScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Menu Administrador</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

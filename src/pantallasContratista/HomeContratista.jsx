@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -26,21 +20,21 @@ const ContratistaHomeScreen = ({ navigation }) => {
 
         {/*Botonera Menu */}
         <View style={styles.menuWrapper}>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate("ContraVerJornalesScreen")}
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Ver y cargar jornales</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() =>
               navigation.navigate("ContraVerPedidosDeReintegroScreen")
             }
             style={styles.menuItem}
           >
             <Text style={styles.menuItemText}>Pedir reintegro adicionales</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
