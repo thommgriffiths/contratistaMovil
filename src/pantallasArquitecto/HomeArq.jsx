@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Header from "../sharedComponents/Header";
 
 const ArqHomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header backButton />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -43,7 +44,7 @@ const ArqHomeScreen = ({ navigation }) => {
           </Pressable>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,9 +1,10 @@
-import { StyleSheet, View, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView, Pressable } from "react-native";
 import React from "react";
 
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+import { getLoggedUser } from "../Core/util/globalStore";
 import { palette } from "../Core/colors";
 
 const Header = ({ backButton, backTo }) => {
@@ -13,7 +14,9 @@ const Header = ({ backButton, backTo }) => {
     <>
       <SafeAreaView>
         <View style={styles.headerWrapper}>
-          <View style={styles.profileImage}></View>
+          <View style={styles.profileImage}>
+            <Text style={styles.profileText}>{getLoggedUser().Email}</Text>
+          </View>
           {backButton ? (
             <Pressable
               style={styles.iconWrapper}
@@ -48,16 +51,20 @@ const styles = StyleSheet.create({
     backgroundColor: palette.R1,
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 20,
     alignItems: "center",
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
 
   profileImage: {
     backgroundColor: palette.B4,
-    width: 40,
+    paddingHorizontal: 10,
     height: 40,
     borderRadius: 40,
+    justifyContent: "center",
+  },
+  profileText: {
+    textAlign: "center",
   },
 
   iconWrapper: {

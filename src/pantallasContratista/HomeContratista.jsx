@@ -6,12 +6,13 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Header from "../sharedComponents/Header";
 
 const ContratistaHomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header backButton />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -42,7 +43,7 @@ const ContratistaHomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
