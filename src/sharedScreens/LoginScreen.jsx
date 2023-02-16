@@ -1,12 +1,6 @@
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  Pressable,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TextInput, Pressable, View } from "react-native";
 import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { setLoggedUser } from "../Core/util/globalStore";
 import { userLogin } from "../Core/Firebase/FirebaseAuthManager";
@@ -55,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="height">
+    <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -92,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
           setOpen={setRegisterUser}
         />
       )}
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
