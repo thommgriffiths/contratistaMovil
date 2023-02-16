@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 
+  confirmationBody: {
+    padding: 20,
+  },
+
   // cosas viejas
   button: {
     backgroundColor: "#0782F9",

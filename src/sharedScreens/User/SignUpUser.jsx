@@ -60,8 +60,8 @@ const SignUpUser = ({ email, password, setOpen }) => {
 
   const ConfirmationMessage = () => {
     return (
-      <View>
-        <Text style={styles.text}>Su usuario a sido creado con éxito.</Text>
+      <View style={styles.confirmationBody}>
+        <Text style={styles.text}>Su usuario a sido creado con éxito!</Text>
         <Text style={styles.text}>Aguarde validacion del administrador.</Text>
         <Pressable
           onPress={() => navigation.replace("Login")}
