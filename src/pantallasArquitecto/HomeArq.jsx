@@ -7,7 +7,7 @@ import Header from "../sharedComponents/Header";
 const ArqHomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header backButton />
+      <Header />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
