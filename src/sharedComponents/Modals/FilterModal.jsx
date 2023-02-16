@@ -78,7 +78,7 @@ const FilterModal = ({ modalParams, setParams, setElements }) => {
                 <View style={style.buttonsWrapper}>
                   <ModalButtons
                     onOkAction={Filter}
-                    onOkText={modalParams.actionLabel}
+                    onOkText="Filtrar"
                     onCancelAction={() => {
                       setParams({ ...modalParams, visible: false });
                     }}

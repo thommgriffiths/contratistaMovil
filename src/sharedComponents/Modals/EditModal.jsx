@@ -90,7 +90,7 @@ const EditModal = ({ modalParams, setParams }) => {
                 <View style={style.buttonsWrapper}>
                   <ModalButtons
                     onOkAction={onEdit}
-                    onOkText={modalParams.actionLabel}
+                    onOkText="Editar"
                     onCancelAction={() => {
                       setParams({ ...modalParams, visible: false });
                     }}
