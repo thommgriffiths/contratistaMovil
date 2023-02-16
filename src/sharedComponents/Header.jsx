@@ -1,22 +1,29 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, SafeAreaView, Pressable } from "react-native";
-import React from "react";
-
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { getLoggedUser } from "../Core/util/globalStore";
 import { palette } from "../Core/colors";
 
+import LogOutModal from "../sharedScreens/User/LogOutModal";
+
 const Header = ({ backButton, backTo }) => {
   const navigation = useNavigation();
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
       <SafeAreaView>
+        <LogOutModal open={modalOpen} setOpen={setModalOpen} />
         <View style={styles.headerWrapper}>
-          <View style={styles.profileImage}>
+          <Pressable
+            onPress={() => setModalOpen(true)}
+            style={styles.profileImage}
+          >
             <Text style={styles.profileText}>{getLoggedUser().Email}</Text>
-          </View>
+          </Pressable>
           {backButton ? (
             <Pressable
               style={styles.iconWrapper}
