@@ -34,7 +34,7 @@ const ConsultarJornales = ({ navigation }) => {
     const loadItems = async () => {
       let query = createQuery({
         [commonAttrs.creadoPor]: getLoggedUser().Email,
-        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(15),
+        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(45),
       });
 
       const rawElements = await queryFSElements(entities.jornal, query);

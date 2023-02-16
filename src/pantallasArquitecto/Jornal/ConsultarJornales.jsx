@@ -29,7 +29,7 @@ const ArqValidarJornales = () => {
   useEffect(() => {
     const loadItems = async () => {
       let query = createQuery({
-        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(15),
+        [commonAttrs.fechaCreacionRango]: getLastNDaysRange(45),
       });
 
       console.log("query", query);
